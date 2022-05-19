@@ -14,7 +14,9 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <Link href="/">school!</Link>
+          Welcome to <Link href="/">
+            <a>school!</a>
+          </Link>
         </h1>
 
         <p className={styles.description}>
@@ -23,10 +25,14 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <Link href="/quiz" className={styles.card}>
-            <h2>Quiz sandbox &rarr;</h2>
-            <p>For testing purposes</p>
-          </Link>
+          <div className={styles.card}>
+            <Link href="/quiz" >
+              <div>
+                <h2>Quiz sandbox &rarr;</h2>
+                <p>For testing purposes</p>
+              </div>
+            </Link>
+          </div>
 
           <a href="https://nextjs.org/learn" className={styles.card}>
             <h2>Learn &rarr;</h2>

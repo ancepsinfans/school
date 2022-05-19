@@ -1,7 +1,7 @@
 import React from "react";
 import MCButton from '../MCButton'
 import styles from '../../../styles/Question.module.css'
-import uuid from 'uuid'
+import uuid from 'react-uuid'
 
 
 const MCQuiz = (props) => {
