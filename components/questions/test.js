@@ -3,6 +3,10 @@ const questions = [
         desc: "How many days are in a year?",
         options: [331, 232, 34, 234, 365, 327, 348],
         correct: 365,
+        feedback: {
+            good: 'oh yes',
+            bad: 'meh',
+        },
     },
     {
         desc: "How many days are in a week?",
@@ -13,6 +17,10 @@ const questions = [
         desc: 'How many fingers you got, boi?',
         options: [2, 7, 8, 10],
         correct: 8,
+        feedback: {
+            good: 'oh yes',
+            bad: 'meh',
+        },
     },
 ];
 

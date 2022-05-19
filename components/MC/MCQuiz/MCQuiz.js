@@ -4,35 +4,34 @@ import styles from '../../../styles/Question.module.css'
 
 
 const MCQuiz = (props) => {
-  const [answer1, setAnswer1] = React.useState('');
+  const [answer, setAnswer] = React.useState('');
   const [attempts, setAttempts] = React.useState(0)
 
   const renderFeedback = (data) => {
-    if (data === props.question[props.questionNumber - 1].correct) {
-      return 'yes!'
+    if (data === props.question[props.questionNumber].correct) {
+      return (props.question[props.questionNumber].hasOwnProperty('feedback') ? props.question[props.questionNumber].feedback.good : 'Yes!')
     } else if (data === '') {
       return ''
     } else {
-      return 'nopers'
+      return (props.question[props.questionNumber].hasOwnProperty('feedback') ? props.question[props.questionNumber].feedback.bad : 'negatory')
     }
-
   }
 
   const parentOnClick = (ans) => {
-    setAnswer1(ans)
+    setAnswer(ans)
     setAttempts(attempts + 1)
   }
 
   return (
     <div className={styles.question}>
-      <h2>{props.question[props.questionNumber - 1].desc}</h2>
+      <h2>{props.question[props.questionNumber].desc}</h2>
       <ol>
-        {props.question[props.questionNumber - 1].options.map((ans) => {
+        {props.question[props.questionNumber].options.map((ans) => {
           return (
             <li className={`${styles.questionItem}`}>
               <MCButton
                 ans={ans}
-                correct={props.question[props.questionNumber - 1].correct}
+                correct={props.question[props.questionNumber].correct}
                 onClick={() => parentOnClick(ans)}
                 name={ans}
               />
@@ -40,7 +39,7 @@ const MCQuiz = (props) => {
           )
         })}
       </ol>
-      <span>{renderFeedback(answer1)}</span>
+      <span>{renderFeedback(answer)}</span>
       <br />
       <p>attempts: {attempts}</p>
     </div>

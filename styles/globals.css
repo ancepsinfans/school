@@ -3,6 +3,8 @@
   --accent-red: #be586c;
   --accent-brown: #be7758;
   --accent-blue: #589fbe;
+  --accent-yellow: #F6BD60;
+  --accent-white: #FAE0C6;
 }
 
 /*
@@ -69,5 +71,5 @@ p, h1, h2, h3, h4, h5, h6, li, dl, dt, blockquote {
 }
 
 a {
-  color: var(--accent-brown);
+  color: var(--accent-red);
 }
