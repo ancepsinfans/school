@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import MCQuiz from "../components/MC/MCQuiz/MCQuiz";
 import questions from '../components/questions/test'
@@ -9,7 +10,7 @@ const Quiz = () => {
 
     return (
         <>
-            <h2><a href='/'>&larr; Go back</a></h2>
+            <h2><Link href='/'>&larr; Go back</Link></h2>
 
 
             {questions.map((e, idx) => {
