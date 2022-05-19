@@ -1,6 +1,7 @@
 import React from "react";
 import MCButton from '../MCButton'
 import styles from '../../../styles/Question.module.css'
+import uuid from 'uuid'
 
 
 const MCQuiz = (props) => {
@@ -28,7 +29,7 @@ const MCQuiz = (props) => {
       <ol>
         {props.question[props.questionNumber].options.map((ans) => {
           return (
-            <li className={`${styles.questionItem}`}>
+            <li key={uuid()} className={`${styles.questionItem}`}>
               <MCButton
                 ans={ans}
                 correct={props.question[props.questionNumber].correct}
