@@ -1,6 +1,8 @@
 import React from "react";
 import styles from '../styles/Question.module.css'
 import constants from "../styles/constants";
+import MCButton from "../components/MC/MCButton/MCButton";
+
 
 const questions = [
     {
@@ -12,7 +14,7 @@ const questions = [
 
 const Quiz = () => {
     const [answer1, setAnswer1] = React.useState('');
-    const [btnColor, setBtnColor] = React.useState(constants.accentBrown)
+    const [attempts, setAttempts] = React.useState(0)
 
     const renderFeedback = (data) => {
         if (data === questions[0].correct) {
@@ -25,27 +27,31 @@ const Quiz = () => {
 
     }
 
-    function clickHandler(ans) {
-
-        if (ans === questions[0].correct) {
-            setBtnColor(constants.accentBlue)
-            setAnswer1(ans)
-        } else {
-            setBtnColor(constants.accentRed)
-            setAnswer1(ans)
-        }
-
+    const parentOnClick = (ans) => {
+        setAnswer1(ans)
+        setAttempts(attempts + 1)
     }
 
     return (
         <div className={styles.question}>
             <h2>{questions[0].desc}</h2>
             <ol>
-                {questions[0].options.map(ans => {
-                    return (<li className={styles.questionItem}><button id={ans} style={{ backgroundColor: btnColor }} className={styles.answerButton} onClick={() => clickHandler(ans)}>{ans}</button></li>)
+                {questions[0].options.map((ans) => {
+                    return (
+                        <li className={`${styles.questionItem}`}>
+                            <MCButton
+                                ans={ans}
+                                correct={questions[0].correct}
+                                onClick={() => parentOnClick(ans)}
+                                name={ans}
+                            />
+                        </li>
+                    )
                 })}
             </ol>
-            <p>{renderFeedback(answer1)}</p>
+            <span>{renderFeedback(answer1)}</span>
+            <br />
+            <p>attempts: {attempts}</p>
         </div>
     )
 };
