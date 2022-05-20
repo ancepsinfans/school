@@ -41,7 +41,7 @@ const TextInput = (props) => {
       <br />
       <span>{(showFeedback ? renderFeedback(value) : null)}</span>
       <br />
-      <p>attemps: {attempts}</p>
+      <p>attempts: {attempts}</p>
     </div>
   );
 };
