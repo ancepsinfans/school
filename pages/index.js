@@ -33,8 +33,11 @@ export default function Home({ isConnected }) {
         )}
 
         {user ? (
-          <div>
-            Welcome {user.name}! <a href='/api/auth/logout'>Logout</a>
+          <div style={{ textAlign: 'center' }}>
+            <br />
+            Welcome {user.name}!
+            <br />
+            <a href='/api/auth/logout'>Logout</a>
           </div>
         ) : (
           <a href='/api/auth/login'>Login</a>
