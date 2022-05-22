@@ -3,8 +3,11 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import clientPromise from '../lib/mongodb'
+import { useUser } from '@auth0/nextjs-auth0'
 
 export default function Home({ isConnected }) {
+  const { user } = useUser()
+
   return (
     <div className={styles.container}>
       <Head>
@@ -27,6 +30,14 @@ export default function Home({ isConnected }) {
             You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
             for instructions.
           </h2>
+        )}
+
+        {user ? (
+          <div>
+            Welcome {user.name}! <a href='/api/auth/logout'>Logout</a>
+          </div>
+        ) : (
+          <a href='/api/auth/login'>Login</a>
         )}
 
         <p className={styles.description}>
