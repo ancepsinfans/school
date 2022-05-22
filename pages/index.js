@@ -37,10 +37,15 @@ export default function Home({ isConnected }) {
             <br />
             Welcome {user.name}!
             <br />
-            <a href='/api/auth/logout'>Logout</a>
+            <Link href='/api/auth/logout'>
+              <a>Logout</a>
+            </Link>
+
           </div>
         ) : (
-          <a href='/api/auth/login'>Login</a>
+          <Link href='/api/auth/login'>
+            <a>Logout</a>
+          </Link>
         )}
 
         <p className={styles.description}>
