@@ -19,7 +19,7 @@ export default function Home({ isConnected }) {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <Link href="/">
-            <a>school!</a>
+            <a style={{ textDecoration: 'none', cursor: 'text' }}>school!</a>
           </Link>
         </h1>
 

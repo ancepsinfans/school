@@ -7,6 +7,18 @@ const TextInput = (props) => {
   const [attempts, setAttempts] = React.useState(0)
   const [showFeedback, setShowFeedback] = React.useState(false)
 
+  async function answerSender(data) {
+    const response = await fetch('/api/mongo', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      header: {
+        "Content-Type":
+          "application/json",
+      },
+    })
+    alert('?')
+  }
+
   const renderFeedback = (data) => {
     if (data.toString() == props.question[props.questionNumber].correct.toString()) {
       return (props.question[props.questionNumber].hasOwnProperty('feedback') ? props.question[props.questionNumber].feedback.good : 'Yes!')
@@ -17,9 +29,10 @@ const TextInput = (props) => {
     }
   }
 
-  const parentOnClick = () => {
+  const parentOnClick = (ans) => {
     setShowFeedback(true)
     setAttempts(attempts + 1)
+    answerSender(ans)
   }
 
   return (
@@ -34,7 +47,7 @@ const TextInput = (props) => {
       <button
         className={styles.answerButton}
         style={{ backgroundColor: constants.accentBrown }}
-        onClick={parentOnClick}
+        onClick={() => parentOnClick(value)}
       >
         Check
       </button>
