@@ -12,8 +12,8 @@ const MCButton = (props) => {
   return (
     <button
       className={styles.answerButton}
-      style={{ backgroundColor: btnColor }}
-      onClick={() => {  clickHandler(props.ans, props.correct); props.onClick(props.ans) }}
+      style={{ backgroundColor: props.color }}
+      onClick={() => {  props.onClick(props.ans) }}
     >
       {props.ans}
     </button>

@@ -2,12 +2,32 @@ import React from "react";
 import styles from '../../../styles/Question.module.css'
 import uuid from 'react-uuid'
 import constants from "../../../styles/constants";
-import MCButton from "../MCButton/MCButton";
 
 
 const MCQuiz = (props) => {
+  const MCButton = (props) => {
+    const [btnColor, setBtnColor] = React.useState(constants.accentBrown)
+  
+    const clickHandler = (ans, correct) => {
+      setBtnColor(ans === correct ? constants.accentBlue : constants.accentRed)
+      setAnswer(ans)
+      setAttempts(attempts+1)
+    }
+  
+    return (
+      <button
+        className={styles.answerButton}
+        style={{ backgroundColor: btnColor }}
+        onClick={() => {  clickHandler(props.ans, props.correct) }}
+      >
+        {props.ans}
+      </button>
+    )
+  };
+  
   const [answer, setAnswer] = React.useState('');
   const [attempts, setAttempts] = React.useState(0)
+  const [color, setColor] = React.useState(constants.accentBrown)
 
   const renderFeedback = (data) => {
     if (data === props.question[props.questionNumber].correct) {
@@ -45,7 +65,7 @@ const MCQuiz = (props) => {
                 {ans}
               </button> */}
               <MCButton
-                onClick={parentOnClick}
+                onClick={()=>parentOnClick(ans)}
                 ans={ans}
                 correct={props.question[props.questionNumber].correct}
               >
