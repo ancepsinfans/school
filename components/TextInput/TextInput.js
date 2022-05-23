@@ -1,26 +1,23 @@
 import React from "react";
 import styles from '../../styles/Question.module.css'
 import constants from "../../styles/constants";
+import axios from "axios";
+
 
 const TextInput = (props) => {
   const [value, setValue] = React.useState('')
   const [attempts, setAttempts] = React.useState(0)
   const [showFeedback, setShowFeedback] = React.useState(false)
 
-  async function answerSender(data, correct) {
-    const payload = JSON.stringify({
+  async function answerSender(data, correct, user) {
+    const payload = {
       answer: data,
       correct: correct.toString(),
-    })
+      user: (user ? user : 'unregistered')
+    }
     console.log(payload)
-    const response = await fetch('/api/mongo', {
-      method: 'POST',
-      body: payload,
-      header: {
-        "Content-Type":
-          "application/json",
-      },
-    });
+
+    const response = await axios.post('/api/textAnswer', payload)
 
   }
 
@@ -51,7 +48,11 @@ const TextInput = (props) => {
       <button
         className={styles.answerButton}
         style={{ backgroundColor: constants.accentBrown }}
-        onClick={() => answerSender(value, props.question[props.questionNumber].correct)}
+        onClick={() => answerSender(
+          value,
+          props.question[props.questionNumber].correct,
+          props.user,
+        )}
       >
         Check
       </button>
