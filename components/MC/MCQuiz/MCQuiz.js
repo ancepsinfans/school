@@ -5,29 +5,13 @@ import constants from "../../../styles/constants";
 
 
 const MCQuiz = (props) => {
-  const MCButton = (props) => {
-    const [btnColor, setBtnColor] = React.useState(constants.accentBrown)
-  
-    const clickHandler = (ans, correct) => {
-      setBtnColor(ans === correct ? constants.accentBlue : constants.accentRed)
-      setAnswer(ans)
-      setAttempts(attempts+1)
-    }
-  
-    return (
-      <button
-        className={styles.answerButton}
-        style={{ backgroundColor: btnColor }}
-        onClick={() => {  clickHandler(props.ans, props.correct) }}
-      >
-        {props.ans}
-      </button>
-    )
-  };
-  
+
+
   const [answer, setAnswer] = React.useState('');
   const [attempts, setAttempts] = React.useState(0)
-  const [color, setColor] = React.useState(constants.accentBrown)
+  const [color, setColor] = React.useState(
+    () => new Array(props.question[props.questionNumber].options.length).fill(constants.accentBrown)
+  )
 
   const renderFeedback = (data) => {
     if (data === props.question[props.questionNumber].correct) {
@@ -39,38 +23,44 @@ const MCQuiz = (props) => {
     }
   }
 
-  const parentOnClick = (ans) => {
+  const colorHandler = (ans, corr, i) => {
+    let temp_colors = [...color]
+    let temp_element = { ...temp_colors[i] }
+    temp_element = ans === corr ? constants.accentBlue : constants.accentRed
+    temp_colors[i] = temp_element
+    setColor(temp_colors)
+  }
+
+  const parentOnClick = (ans, correct, i) => {
     setAnswer(ans)
     setAttempts(attempts + 1)
+    colorHandler(ans, correct, i)
+
   }
 
   return (
     <div className={styles.question}>
       <h2>{props.question[props.questionNumber].desc}</h2>
       <ol>
-        {props.question[props.questionNumber].options.map((ans) => {
-          // const [color, setColor] = React.useState(constants.accentBrown)
-          // const parentOnClick = (ans, correct) => {
-          //   setAnswer(ans)
-          //   setAttempts(attempts + 1)
-          //   ans === correct ? setColor(constants.accentBlue) : setColor(constants.accentRed)
-          // }
+        {props.question[props.questionNumber].options.map((ans, i) => {
+
+
           return (
             <li key={uuid()} className={styles.questionItem}>
-              {/* <button
+              <button
                 className={styles.answerButton}
-                style={{ backgroundColor: color }}
-                onClick={() => parentOnClick(ans, props.question[props.questionNumber].correct)}
+                style={{ backgroundColor: color[i] }}
+                onClick={() => parentOnClick(ans, props.question[props.questionNumber].correct, i)}
               >
                 {ans}
-              </button> */}
-              <MCButton
-                onClick={()=>parentOnClick(ans)}
+              </button>
+              {/* <MCButton
+                onClick={parentOnClick}
                 ans={ans}
                 correct={props.question[props.questionNumber].correct}
               >
                 {ans}
-                </MCButton>
+              </MCButton> */}
             </li>
           )
         })}

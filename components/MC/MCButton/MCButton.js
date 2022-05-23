@@ -13,7 +13,7 @@ const MCButton = (props) => {
     <button
       className={styles.answerButton}
       style={{ backgroundColor: props.color }}
-      onClick={() => {  props.onClick(props.ans) }}
+      onClick={props.onClick}
     >
       {props.ans}
     </button>
