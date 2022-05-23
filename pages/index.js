@@ -44,7 +44,7 @@ export default function Home({ isConnected }) {
           </div>
         ) : (
           <Link href='/api/auth/login'>
-            <a>Logout</a>
+            <a>Login</a>
           </Link>
         )}
 

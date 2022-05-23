@@ -2,6 +2,7 @@ import React from "react";
 import styles from '../../../styles/Question.module.css'
 import uuid from 'react-uuid'
 import constants from "../../../styles/constants";
+import MCButton from "../MCButton/MCButton";
 
 
 const MCQuiz = (props) => {
@@ -18,28 +19,38 @@ const MCQuiz = (props) => {
     }
   }
 
-
+  const parentOnClick = (ans) => {
+    setAnswer(ans)
+    setAttempts(attempts + 1)
+  }
 
   return (
     <div className={styles.question}>
       <h2>{props.question[props.questionNumber].desc}</h2>
       <ol>
         {props.question[props.questionNumber].options.map((ans) => {
-          const [color, setColor] = React.useState(constants.accentBrown)
-          const parentOnClick = (ans, correct) => {
-            setAnswer(ans)
-            setAttempts(attempts + 1)
-            ans === correct ? setColor(constants.accentBlue) : setColor(constants.accentRed)
-          }
+          // const [color, setColor] = React.useState(constants.accentBrown)
+          // const parentOnClick = (ans, correct) => {
+          //   setAnswer(ans)
+          //   setAttempts(attempts + 1)
+          //   ans === correct ? setColor(constants.accentBlue) : setColor(constants.accentRed)
+          // }
           return (
             <li key={uuid()} className={styles.questionItem}>
-              <button
+              {/* <button
                 className={styles.answerButton}
                 style={{ backgroundColor: color }}
                 onClick={() => parentOnClick(ans, props.question[props.questionNumber].correct)}
               >
                 {ans}
-              </button>
+              </button> */}
+              <MCButton
+                onClick={parentOnClick}
+                ans={ans}
+                correct={props.question[props.questionNumber].correct}
+              >
+                {ans}
+                </MCButton>
             </li>
           )
         })}
