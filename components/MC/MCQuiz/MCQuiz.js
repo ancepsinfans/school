@@ -46,8 +46,9 @@ const MCQuiz = (props) => {
 
 
           return (
-            <li key={uuid()} className={styles.questionItem}>
+            <li key={`${i}_${ans}`} className={styles.questionItem}>
               <button
+                key={i}
                 className={styles.answerButton}
                 style={{ backgroundColor: color[i] }}
                 onClick={() => parentOnClick(ans, props.question[props.questionNumber].correct, i)}

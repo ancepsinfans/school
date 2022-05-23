@@ -15,7 +15,7 @@ const Quiz = () => {
 
             {questions.map((e, idx) => {
                 return (
-                    <>
+                    <div key={`${idx}_${e}`}>
                         <MCQuiz
                             question={questions}
                             questionNumber={idx}
@@ -23,7 +23,7 @@ const Quiz = () => {
                         <TextInput
                             question={questions}
                             questionNumber={idx} />
-                    </>
+                    </div>
                 )
             })}
 
