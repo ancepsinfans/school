@@ -10,6 +10,9 @@ const AddQ = () => {
   const [good, setGood] = React.useState('')
   const [bad, setBad] = React.useState('')
 
+  const splitter = (data) => {
+    return data.split(', ')
+  }
 
   return (
     <div className={styles.input}>
@@ -21,7 +24,7 @@ const AddQ = () => {
       <h4>options</h4>
       <input
         style={{ backgroundColor: constants.accentWhite }}
-        onChange={(e) => { setOptions(e.target.value) }}
+        onChange={(e) => { setOptions(splitter(e.target.value)) }}
       />
       <h4>correct</h4>
       <input
@@ -52,18 +55,19 @@ const AddQ = () => {
       >
         submit
       </button>
-      <p>
+      <div>
         {desc}
         <br />
-        {options}
-        <br />
+        <ul>
+          {options.map(el => { return (<li>{el}</li>) })}
+        </ul>
         {correct}
         <br />
         {good}
         <br />
         {bad}
 
-      </p>
+      </div>
     </div>
   );
 };
