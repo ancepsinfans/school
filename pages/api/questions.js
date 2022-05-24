@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import connectDB from "../../middleware/mongodb";
 import Question from "../../models/questions/Questions";
-import Question from "../../models/questions/Questions";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {

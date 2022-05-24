@@ -2,7 +2,6 @@ import React from "react";
 import constants from "../styles/constants";
 import questionSender, { questionGetter } from "../models/questions/helpers";
 import styles from '../styles/Question.module.css'
-import { questionGetter } from "../models/questions/helpers";
 
 const AddQ = () => {
   const [desc, setDesc] = React.useState('')
