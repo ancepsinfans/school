@@ -3,14 +3,12 @@ import constants from "../styles/constants";
 import questionSender from "../models/questions/helpers";
 import styles from '../styles/Question.module.css'
 
-const [desc, setDesc] = React.useState('')
-const [options, setOptions] = React.useState([''])
-const [correct, setCorrect] = React.useState('')
-const [good, setGood] = React.useState('')
-const [bad, setBad] = React.useState('')
-
-const addQ = () => {
-
+const AddQ = () => {
+  const [desc, setDesc] = React.useState('')
+  const [options, setOptions] = React.useState([''])
+  const [correct, setCorrect] = React.useState('')
+  const [good, setGood] = React.useState('')
+  const [bad, setBad] = React.useState('')
 
 
   return (
@@ -70,4 +68,10 @@ const addQ = () => {
   );
 };
 
-export default addQ
+const AddPage = () => {
+  return (
+    <AddQ />
+  )
+}
+
+export default AddPage
