@@ -59,7 +59,7 @@ const AddQ = () => {
         {desc}
         <br />
         <ul>
-          {options.map(el => { return (<li>{el}</li>) })}
+          {options.map((el, i) => { return (<li key={i}>{el}</li>) })}
         </ul>
         {correct}
         <br />
