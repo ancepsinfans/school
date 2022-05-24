@@ -17,7 +17,7 @@ async function questionSender(desc, options, correct, good, bad) {
 }
 
 async function questionGetter() {
-    await axios.get('/api/questions')
+    return await axios.get('/api/questions')
 }
 
 
