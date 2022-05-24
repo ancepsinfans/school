@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 var Schema = mongoose.Schema
 
-var answer = new Schema({
+var quizAnswer = new Schema({
     user: {
         type: String,
         required: true
@@ -32,6 +32,6 @@ var answer = new Schema({
 
 mongoose.models = {}
 
-var Answer = mongoose.model('Answer', answer)
+var QuizAnswer = mongoose.model('QuizAnswer', quizAnswer)
 
-export default Answer
+export default QuizAnswer

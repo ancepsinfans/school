@@ -1,20 +1,20 @@
 import connectDB from "../../middleware/mongodb";
-import Answer from "../../models/answer/Answer";
+import QuizAnswer from "../../models/answer/quizAnswer";
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
-    const { user, ans, correct, type, attempt } = req.body
-    if (user && ans && correct) {
+    const { user, answer, correct, type, attempt } = req.body
+    if (user && answer && correct) {
       try {
-        var answer = new Answer({
+        var quizAnswer = new QuizAnswer({
           user,
-          ans,
+          answer,
           correct,
           type,
           attempt
         })
 
-        var answercreated = await answer.save()
+        var answercreated = await quizAnswer.save()
         return res.status(200).send(answercreated)
       } catch (error) {
         return res.status(500).send(error.message)
