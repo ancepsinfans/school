@@ -19,7 +19,7 @@ var textAnswer = new Schema({
         required: true
     },
     attempt: {
-        type: String,
+        type: Number,
         required: true
     },
     timestamp: {

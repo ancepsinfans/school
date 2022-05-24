@@ -33,9 +33,15 @@ const TextInput = (props) => {
     }
   }
 
-  const parentOnClick = () => {
+  const parentOnClick = (val, cor, user, atts) => {
     setShowFeedback(true)
     setAttempts(attempts + 1)
+    answerSender(
+      val,
+      cor,
+      user,
+      atts
+    )
   }
 
   return (
@@ -50,11 +56,11 @@ const TextInput = (props) => {
       <button
         className={styles.answerButton}
         style={{ backgroundColor: constants.accentBrown }}
-        onClick={() => answerSender(
+        onClick={() => parentOnClick(
           value,
           props.question[props.questionNumber].correct,
           props.user,
-          attempts,
+          attempts
         )}
       >
         Check
