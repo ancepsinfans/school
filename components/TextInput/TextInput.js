@@ -15,7 +15,7 @@ const TextInput = (props) => {
       correct: correct.toString(),
       user: (user ? user : 'unregistered'),
       type: 'text input',
-      attempt: attempts.toString()
+      attempt: (attempts + 1).toString()
     }
     console.log(payload)
 
