@@ -1,7 +1,8 @@
 import React from "react";
 import constants from "../styles/constants";
-import questionSender from "../models/questions/helpers";
+import questionSender, { questionGetter } from "../models/questions/helpers";
 import styles from '../styles/Question.module.css'
+import { questionGetter } from "../models/questions/helpers";
 
 const AddQ = () => {
   const [desc, setDesc] = React.useState('')
@@ -10,6 +11,8 @@ const AddQ = () => {
   const [good, setGood] = React.useState('')
   const [bad, setBad] = React.useState('')
 
+
+  const [q, setQ] = React.useState([''])
   const splitter = (data) => {
     return data.split(', ')
   }
@@ -67,6 +70,10 @@ const AddQ = () => {
         <br />
         {bad}
 
+      </div>
+      <div>
+        <button onClick={questionGetter}>get it</button>
+        <span>{q.desc}</span>
       </div>
     </div>
   );

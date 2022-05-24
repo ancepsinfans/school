@@ -1,4 +1,6 @@
+import mongoose from "mongoose";
 import connectDB from "../../middleware/mongodb";
+import Question from "../../models/questions/Questions";
 import Question from "../../models/questions/Questions";
 
 const handler = async (req, res) => {
@@ -22,6 +24,9 @@ const handler = async (req, res) => {
         } else {
             res.status(422).send('data_incomplete')
         }
+    } else if (req.method === 'GET') {
+        const question = mongoose.model('Question', Question)
+        await question.find()
     } else {
         res.status(422).send('method not supported')
     }
