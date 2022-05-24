@@ -1,7 +1,7 @@
 import React from "react";
-import styles from '../../../styles/Question.module.css'
+import styles from '../../styles/Question.module.css'
 import uuid from 'react-uuid'
-import constants from "../../../styles/constants";
+import constants from '../../styles/constants'
 
 
 const MCQuiz = (props) => {
@@ -50,18 +50,11 @@ const MCQuiz = (props) => {
               <button
                 key={i}
                 className={styles.answerButton}
-                style={{ backgroundColor: color[i] }}
+                style={{ backgroundColor: color[i], color: 'black' }}
                 onClick={() => parentOnClick(ans, props.question[props.questionNumber].correct, i)}
               >
                 {ans}
               </button>
-              {/* <MCButton
-                onClick={parentOnClick}
-                ans={ans}
-                correct={props.question[props.questionNumber].correct}
-              >
-                {ans}
-              </MCButton> */}
             </li>
           )
         })}

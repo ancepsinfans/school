@@ -21,7 +21,7 @@ export default function Home({ isConnected }) {
             <a style={{ textDecoration: 'none', cursor: 'text' }}>school!</a>
           </Link>
         </h1>
-
+          
         {/* {isConnected ? (
           <h2 className="subtitle">You are connected to MongoDB</h2>
         ) : (

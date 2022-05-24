@@ -86,6 +86,7 @@
   max-width: 300px;
   min-width: 300px;
   min-height: 190px;
+  cursor: pointer;
 }
 
 .card:hover,

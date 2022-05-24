@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import MCQuiz from "../components/MC/MCQuiz/MCQuiz";
+import MCQuiz from "../components/MCQuiz";
 import questions from '../components/questions/test'
-import TextInput from "../components/TextInput/TextInput";
+import TextInput from "../components/TextInput";
 import { useUser } from '@auth0/nextjs-auth0'
 
 
