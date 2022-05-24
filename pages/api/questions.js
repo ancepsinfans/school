@@ -24,9 +24,13 @@ const handler = async (req, res) => {
             res.status(422).send('data_incomplete')
         }
     } else if (req.method === 'GET') {
-        const question = mongoose.model('Question', Question)
-        await question.findOne()
-        return res
+        try {
+            const qs = await Question.find({})
+            res.status(200).send(qs)
+        }
+        catch (error) {
+            res.status(500).send('oops')
+        }
     } else {
         res.status(422).send('method not supported')
     }

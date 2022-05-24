@@ -16,10 +16,5 @@ async function questionSender(desc, options, correct, good, bad) {
 
 }
 
-async function questionGetter() {
-    return await axios.get('/api/questions')
-}
-
 
 export default questionSender
-export { questionGetter }

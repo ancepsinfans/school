@@ -1,20 +1,16 @@
 import React from "react";
 import constants from "../styles/constants";
-import questionSender, { questionGetter } from "../models/questions/helpers";
+import questionSender from "../models/questions/helpers";
 import styles from '../styles/Question.module.css'
+import Question from "../models/questions/Questions";
+import connectDB from "../middleware/mongodb";
 
-const AddQ = () => {
+const AddQ = ({ qs }) => {
   const [desc, setDesc] = React.useState('')
   const [options, setOptions] = React.useState([''])
   const [correct, setCorrect] = React.useState('')
   const [good, setGood] = React.useState('')
   const [bad, setBad] = React.useState('')
-
-
-  const [q, setQ] = React.useState([''])
-  const splitter = (data) => {
-    return data.split(', ')
-  }
 
   return (
     <div className={styles.input}>
@@ -71,17 +67,31 @@ const AddQ = () => {
 
       </div>
       <div>
-        <button onClick={questionGetter}>get it</button>
-        <span>{q.desc}</span>
+        {qs.map((q) => {
+          return (
+            <div key={q._id}>
+              <h4>{q.desc}</h4>
+              <p>{q.correct}</p>
+            </div>
+          )
+        })}
       </div>
     </div>
   );
 };
 
-const AddPage = () => {
-  return (
-    <AddQ />
-  )
+
+export async function getServerSideProps(req, res) {
+  await connectDB();
+
+  const result = await Question.find({});
+  const qs = result.map((doc) => {
+    const q = doc.toObject();
+    q._id = q._id.toString();
+    return q;
+  });
+  return { props: { qs: qs } };
 }
 
-export default AddPage
+
+export default AddQ
