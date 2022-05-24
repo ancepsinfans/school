@@ -1,11 +1,9 @@
 import React from "react";
 import styles from '../../styles/Question.module.css'
-import uuid from 'react-uuid'
 import constants from '../../styles/constants'
-
+import answerSender from "../../models/answer/helpers";
 
 const MCQuiz = (props) => {
-
 
   const [answer, setAnswer] = React.useState('');
   const [attempts, setAttempts] = React.useState(0)
@@ -35,7 +33,13 @@ const MCQuiz = (props) => {
     setAnswer(ans)
     setAttempts(attempts + 1)
     colorHandler(ans, correct, i)
-
+    answerSender(
+      'mc quiz',
+      ans,
+      correct,
+      props.user,
+      attempts + 1
+    )
   }
 
   return (
@@ -50,7 +54,7 @@ const MCQuiz = (props) => {
               <button
                 key={i}
                 className={styles.answerButton}
-                style={{ backgroundColor: color[i], color: 'black' }}
+                style={{ backgroundColor: color[i] }}
                 onClick={() => parentOnClick(ans, props.question[props.questionNumber].correct, i)}
               >
                 {ans}

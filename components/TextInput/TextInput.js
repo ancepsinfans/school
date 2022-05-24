@@ -23,7 +23,7 @@ const TextInput = (props) => {
     setShowFeedback(true)
     setAttempts(attempts + 1)
     answerSender(
-      'text input2',
+      'text input',
       val,
       cor,
       user,
