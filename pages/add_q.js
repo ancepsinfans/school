@@ -1,9 +1,8 @@
 import React from "react";
 import constants from "../styles/constants";
-import questionSender from "../models/questions/helpers";
+import questionSender, { questionGetter } from "../models/questions/helpers";
 import styles from '../styles/Question.module.css'
-import Question from "../models/questions/Questions";
-import connectDB from "../middleware/mongodb";
+
 
 const AddQ = ({ qs }) => {
   const [desc, setDesc] = React.useState('')
@@ -11,6 +10,8 @@ const AddQ = ({ qs }) => {
   const [correct, setCorrect] = React.useState('')
   const [good, setGood] = React.useState('')
   const [bad, setBad] = React.useState('')
+
+  const [data, setData] = React.useState([''])
 
   return (
     <div className={styles.input}>
@@ -66,32 +67,12 @@ const AddQ = ({ qs }) => {
         {bad}
 
       </div>
-      <div>
-        {qs.map((q) => {
-          return (
-            <div key={q._id}>
-              <h4>{q.desc}</h4>
-              <p>{q.correct}</p>
-            </div>
-          )
-        })}
-      </div>
+      <button onClick={() => setData(questionGetter)}>get</button>
+      <h2>{data.desc ? 'd' : 'n'}</h2>
     </div>
   );
 };
 
-
-export async function getServerSideProps(req, res) {
-  await connectDB();
-
-  const result = await Question.find({});
-  const qs = result.map((doc) => {
-    const q = doc.toObject();
-    q._id = q._id.toString();
-    return q;
-  });
-  return { props: { qs: qs } };
-}
 
 
 export default AddQ

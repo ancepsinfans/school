@@ -16,5 +16,11 @@ async function questionSender(desc, options, correct, good, bad) {
 
 }
 
+async function questionGetter() {
+    const response = await axios.get('/api/questions')
+    console.log(response)
+    return response
+}
 
 export default questionSender
+export { questionGetter }
