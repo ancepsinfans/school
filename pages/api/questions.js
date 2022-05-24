@@ -25,7 +25,8 @@ const handler = async (req, res) => {
         }
     } else if (req.method === 'GET') {
         const question = mongoose.model('Question', Question)
-        await question.find()
+        await question.findOne()
+        return res
     } else {
         res.status(422).send('method not supported')
     }
