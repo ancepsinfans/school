@@ -68,7 +68,7 @@ const AddQ = ({ qs }) => {
 
       </div>
       <button onClick={() => setData(questionGetter)}>get</button>
-      <h2>{data[0].desc ? 'd' : 'n'}</h2>
+      <h2>{data[0] ? 'd' : 'n'}</h2>
     </div>
   );
 };
