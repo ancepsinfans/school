@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
-import clientPromise from '../lib/mongodb'
 import { useUser } from '@auth0/nextjs-auth0'
 
 export default function Home({ isConnected }) {
@@ -22,15 +21,6 @@ export default function Home({ isConnected }) {
             <a style={{ textDecoration: 'none', cursor: 'text' }}>school!</a>
           </Link>
         </h1>
-
-        {isConnected ? (
-          <h2 className="subtitle">You are connected to MongoDB</h2>
-        ) : (
-          <h2 className="subtitle">
-            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-            for instructions.
-          </h2>
-        )}
 
         {user ? (
           <div style={{ textAlign: 'center' }}>
