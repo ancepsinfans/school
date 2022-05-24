@@ -2,6 +2,7 @@ import React from "react";
 import constants from "../styles/constants";
 import questionSender, { questionGetter } from "../models/questions/helpers";
 import styles from '../styles/Question.module.css'
+import axios from "axios";
 
 
 const AddQ = ({ qs }) => {
@@ -10,8 +11,17 @@ const AddQ = ({ qs }) => {
   const [correct, setCorrect] = React.useState('')
   const [good, setGood] = React.useState('')
   const [bad, setBad] = React.useState('')
-
   const [data, setData] = React.useState([''])
+
+  async function getter() {
+    return await axios.get('/api/questions')
+  }
+  const handler = () => {
+    const response = getter();
+    setData(response)
+
+  }
+
 
   return (
     <div className={styles.input}>
@@ -67,7 +77,7 @@ const AddQ = ({ qs }) => {
         {bad}
 
       </div>
-      <button onClick={() => setData(questionGetter)}>get</button>
+      <button onClick={handler}>get</button>
       <h2>{data[0] ? 'd' : 'n'}</h2>
     </div>
   );
