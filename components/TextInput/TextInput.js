@@ -19,15 +19,15 @@ const TextInput = (props) => {
     }
   }
 
-  const parentOnClick = (val, cor, user, atts) => {
+  const parentOnClick = (val, cor) => {
     setShowFeedback(true)
     setAttempts(attempts + 1)
     answerSender(
       'text input',
       val,
       cor,
-      user,
-      atts
+      props.user,
+      attempts
     )
   }
 
@@ -46,8 +46,6 @@ const TextInput = (props) => {
         onClick={() => parentOnClick(
           value,
           props.question[props.questionNumber].correct,
-          props.user,
-          attempts
         )}
       >
         Check

@@ -38,7 +38,7 @@ const MCQuiz = (props) => {
       ans,
       correct,
       props.user,
-      attempts + 1
+      attempts
     )
   }
 

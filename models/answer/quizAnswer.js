@@ -27,7 +27,7 @@ var quizAnswer = new Schema({
         default: Date.now
     }
 }, {
-    collection: 'answers-test'
+    collection: 'answers'
 })
 
 mongoose.models = {}
