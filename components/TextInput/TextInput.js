@@ -1,27 +1,13 @@
 import React from "react";
 import styles from '../../styles/Question.module.css'
 import constants from "../../styles/constants";
-import axios from "axios";
+import answerSender from "../../models/answer/helpers";
 
 
 const TextInput = (props) => {
   const [value, setValue] = React.useState('')
   const [attempts, setAttempts] = React.useState(0)
   const [showFeedback, setShowFeedback] = React.useState(false)
-
-  async function answerSender(data, correct, user, attempts) {
-    const payload = {
-      answer: data,
-      correct: correct.toString(),
-      user: (user ? user : 'unregistered'),
-      type: 'text input',
-      attempt: (attempts + 1).toString()
-    }
-    console.log(payload)
-
-    const response = await axios.post('/api/textAnswer', payload)
-
-  }
 
   const renderFeedback = (data) => {
     if (data.toString() == props.question[props.questionNumber].correct.toString()) {
@@ -37,6 +23,7 @@ const TextInput = (props) => {
     setShowFeedback(true)
     setAttempts(attempts + 1)
     answerSender(
+      'text input2',
       val,
       cor,
       user,
