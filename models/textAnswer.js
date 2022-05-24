@@ -18,6 +18,8 @@ var textAnswer = new Schema({
         type: Date,
         default: Date.now
     }
+}, {
+    collection: 'answers-test'
 })
 
 mongoose.models = {}
