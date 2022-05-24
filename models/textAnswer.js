@@ -14,10 +14,20 @@ var textAnswer = new Schema({
         type: String,
         required: true
     },
+    type: {
+        type: String,
+        required: true
+    },
+    attempt: {
+        type: String,
+        required: true
+    },
     timestamp: {
         type: Date,
         default: Date.now
     }
+}, {
+    collection: 'answers-test'
 })
 
 mongoose.models = {}

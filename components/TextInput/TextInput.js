@@ -9,11 +9,13 @@ const TextInput = (props) => {
   const [attempts, setAttempts] = React.useState(0)
   const [showFeedback, setShowFeedback] = React.useState(false)
 
-  async function answerSender(data, correct, user) {
+  async function answerSender(data, correct, user, attempts) {
     const payload = {
       answer: data,
       correct: correct.toString(),
-      user: (user ? user : 'unregistered')
+      user: (user ? user : 'unregistered'),
+      type: 'text input',
+      attempt: attempts.toString()
     }
     console.log(payload)
 
@@ -52,6 +54,7 @@ const TextInput = (props) => {
           value,
           props.question[props.questionNumber].correct,
           props.user,
+          attempts,
         )}
       >
         Check

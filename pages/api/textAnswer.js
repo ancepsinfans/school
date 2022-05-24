@@ -3,13 +3,15 @@ import TextAnswer from "../../models/textAnswer";
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
-    const { user, answer, correct } = req.body
+    const { user, answer, correct, type, attempt } = req.body
     if (user && answer && correct) {
       try {
         var textAnswer = new TextAnswer({
           user,
           answer,
-          correct
+          correct,
+          type,
+          attempt
         })
 
         var answercreated = await textAnswer.save()
