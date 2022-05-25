@@ -2,10 +2,8 @@ import React from "react";
 import constants from "../styles/constants";
 import questionSender from "../models/questions/helpers";
 import styles from '../styles/Question.module.css'
-import axios from "axios";
 
-
-const AddQ = ({ qs }) => {
+const AddQ = () => {
 
 
   const [desc, setDesc] = React.useState('')
@@ -81,18 +79,8 @@ const AddQ = ({ qs }) => {
 };
 
 
-export const getServerSideProps = async () => {
-  try {
-    const res = await axios.get('/api/questions')
 
-    return {
-      props: {
-        qs: res.data,
-      },
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
+
+
 
 export default AddQ

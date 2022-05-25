@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-var Schema = mongoose.Schema
 
-var question = new Schema({
+
+
+const question = new mongoose.Schema({
     desc: {
         type: String,
         required: true
@@ -28,8 +29,5 @@ var question = new Schema({
     collection: 'questions'
 })
 
-mongoose.models = {}
 
-var Question = mongoose.model('Question', question)
-
-export default Question
+export default mongoose.models.Question || mongoose.model('Question', question)
