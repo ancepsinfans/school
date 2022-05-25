@@ -7,6 +7,8 @@ const connectDB = handler => async (req, res) => {
     await mongoose.connect(process.env.MONGODB_URI, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
+        authSource: 'admin',
+        ssl: true,
         dbName: 'school'
     })
     return handler(req, res)
