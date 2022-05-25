@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { useUser } from '@auth0/nextjs-auth0'
 
+
 export default function Home({ isConnected }) {
   const { user } = useUser()
 
@@ -21,15 +22,7 @@ export default function Home({ isConnected }) {
             <a style={{ textDecoration: 'none', cursor: 'text' }}>school!</a>
           </Link>
         </h1>
-          
-        {/* {isConnected ? (
-          <h2 className="subtitle">You are connected to MongoDB</h2>
-        ) : (
-          <h2 className="subtitle">
-            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-            for instructions.
-          </h2>
-        )} */}
+
 
         {user ? (
           <div style={{ textAlign: 'center' }}>
@@ -47,10 +40,7 @@ export default function Home({ isConnected }) {
           </Link>
         )}
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+
 
         <div className={styles.grid}>
           <div className={styles.card}>

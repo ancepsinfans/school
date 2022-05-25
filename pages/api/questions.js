@@ -4,15 +4,18 @@ import Question from "../../models/questions/Questions";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
-        const { desc, options, correct, good, bad } = req.body
+        const { desc, options, correct, good, bad, sphere } = req.body
         if (desc && options && correct) {
             try {
                 var question = new Question({
-                    desc,
-                    options,
-                    correct,
-                    good,
-                    bad
+                    desc: desc,
+                    options: options,
+                    correct: correct,
+                    sphere: sphere,
+                    feedback: {
+                        good: good,
+                        bad: bad
+                    }
                 })
 
                 var questioncreated = await question.save()

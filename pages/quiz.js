@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import MCQuiz from "../components/MCQuiz";
-import questions from '../components/questions/test'
 import TextInput from "../components/TextInput";
 import { useUser } from '@auth0/nextjs-auth0'
 import connectMongo from "../middleware/connectMongo";
@@ -11,7 +10,7 @@ export const getServerSideProps = async () => {
     try {
         await connectMongo()
 
-        const qs = await Question.find()
+        const qs = await Question.find({ sphere: 'bs' })
 
         return {
             props: {

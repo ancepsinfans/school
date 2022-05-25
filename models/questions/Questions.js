@@ -14,6 +14,10 @@ var question = new Schema({
         type: String,
         required: true
     },
+    sphere: {
+        type: String,
+        required: true
+    },
     feedback: {
         good: {
             type: String,
