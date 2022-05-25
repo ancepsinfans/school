@@ -10,7 +10,7 @@ async function answerSender(type, data, correct, user, attempts) {
     }
     console.log(payload)
 
-    const response = await axios.post('/api/postAnswer', payload)
+    const response = await axios.post(`/api/postAnswer`, payload)
 
 }
 

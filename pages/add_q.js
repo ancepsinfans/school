@@ -1,26 +1,24 @@
 import React from "react";
 import constants from "../styles/constants";
-import questionSender, { questionGetter } from "../models/questions/helpers";
+import questionSender from "../models/questions/helpers";
 import styles from '../styles/Question.module.css'
 import axios from "axios";
 
 
 const AddQ = ({ qs }) => {
+
+
   const [desc, setDesc] = React.useState('')
   const [options, setOptions] = React.useState([''])
   const [correct, setCorrect] = React.useState('')
   const [good, setGood] = React.useState('')
   const [bad, setBad] = React.useState('')
-  const [data, setData] = React.useState([''])
 
-  async function getter() {
-    return await axios.get('/api/questions')
-  }
-  const handler = () => {
-    const response = getter();
-    setData(response)
 
+  const splitter = (data) => {
+    return data.split(', ')
   }
+
 
 
   return (
@@ -77,12 +75,24 @@ const AddQ = ({ qs }) => {
         {bad}
 
       </div>
-      <button onClick={handler}>get</button>
-      <h2>{data[0] ? 'd' : 'n'}</h2>
+
     </div>
   );
 };
 
 
+export const getServerSideProps = async () => {
+  try {
+    const res = await axios.get('/api/questions')
+
+    return {
+      props: {
+        qs: res.data,
+      },
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export default AddQ

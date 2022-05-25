@@ -12,15 +12,9 @@ async function questionSender(desc, options, correct, good, bad) {
     }
     console.log(payload)
 
-    const response = await axios.post('/api/questions', payload)
+    const response = await axios.post(`/api/questions`, payload)
 
 }
 
-async function questionGetter() {
-    const response = await axios.get('/api/questions')
-    console.log(response)
-    return response
-}
 
 export default questionSender
-export { questionGetter }
