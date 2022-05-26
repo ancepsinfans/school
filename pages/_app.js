@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/output.css'
 import React from 'react'
 import { UserProvider } from '@auth0/nextjs-auth0'
 
