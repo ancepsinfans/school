@@ -1,11 +1,11 @@
 const constants = {
-    mainColor: '#acd8c3',
-    accentRed: '#ff6f69',
-    accentBrown: '#be7758',
-    accentBlue: '#4282B3',
-    accentYellow: '#ffcc5c',
-    accentWhite: '#ffeead',
+    mainColor: '#4ECDC4',
+    accentRed: '#FF6B6B',
+    accentBrown: '#423629',
+    accentGreen: '#0C977E',
+    accentYellow: '#FFE66D',
+    accentWhite: '#F7FFF7',
+    accentBlack: '#292F36'
 }
-
 
 export default constants

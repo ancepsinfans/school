@@ -5,6 +5,7 @@ import TextInput from "../components/TextInput";
 import { useUser } from '@auth0/nextjs-auth0'
 import connectMongo from "../middleware/connectMongo";
 import Question from "../models/questions/Questions";
+import { Button } from "@chakra-ui/react";
 
 export const getServerSideProps = async () => {
     try {
@@ -28,7 +29,7 @@ const Quiz = ({ qs }) => {
     const { user } = useUser()
     return (
         <>
-            <h2><Link href='/'>&larr; Go back</Link></h2>
+            <Button colorScheme='blackAlpha' size='md'>&larr; Go back</Button>
 
 
             {qs.map((e, idx) => {

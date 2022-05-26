@@ -42,7 +42,7 @@ const TextInput = (props) => {
       <br />
       <button
         className={styles.answerButton}
-        style={{ backgroundColor: constants.accentBrown }}
+        style={{ backgroundColor: constants.accentYellow }}
         onClick={() => parentOnClick(
           value,
           props.question[props.questionNumber].correct,

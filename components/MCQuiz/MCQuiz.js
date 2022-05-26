@@ -8,7 +8,7 @@ const MCQuiz = (props) => {
   const [answer, setAnswer] = React.useState('');
   const [attempts, setAttempts] = React.useState(0)
   const [color, setColor] = React.useState(
-    () => new Array(props.question[props.questionNumber].options.length).fill(constants.accentBrown)
+    () => new Array(props.question[props.questionNumber].options.length).fill(constants.accentYellow)
   )
 
   const renderFeedback = (data) => {
@@ -24,7 +24,7 @@ const MCQuiz = (props) => {
   const colorHandler = (ans, corr, i) => {
     let temp_colors = [...color]
     let temp_element = { ...temp_colors[i] }
-    temp_element = ans === corr ? constants.accentBlue : constants.accentRed
+    temp_element = ans === corr ? constants.accentGreen : constants.accentRed
     temp_colors[i] = temp_element
     setColor(temp_colors)
   }
