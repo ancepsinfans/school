@@ -78,7 +78,7 @@
   background-color: var(--accent-blue);
   padding: 1.5rem;
   text-align: left;
-  color: inherit;
+  color: black !important;
   text-decoration: none;
   border: 1px solid black;
   border-radius: 10px;

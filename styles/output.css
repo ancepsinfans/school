@@ -56,6 +56,7 @@ body {
   /* 1 */
   line-height: inherit;
   /* 2 */
+  background-color: #58beaa !important;
 }
 
 /*
@@ -101,7 +102,7 @@ Reset links to optimize for opt-in styling instead of opt-out.
 */
 
 a {
-  color: inherit;
+  color: #be586c !important;
   text-decoration: inherit;
 }
 

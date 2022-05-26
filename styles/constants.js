@@ -1,10 +1,10 @@
 const constants = {
-    mainColor: '#58beaa',
-    accentRed: '#be586c',
+    mainColor: '#acd8c3',
+    accentRed: '#ff6f69',
     accentBrown: '#be7758',
-    accentBlue: '#589fbe',
-    accentYellow: '#F6BD60',
-    accentWhite: '#FAE0C6',
+    accentBlue: '#4282B3',
+    accentYellow: '#ffcc5c',
+    accentWhite: '#ffeead',
 }
 
 

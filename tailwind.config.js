@@ -4,11 +4,16 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    fontFamily: {
-      display: ['Blaka Hollow', 'sans-serif'],
-      body: ['Blaka Hollow', 'sans-serif'],
+    extend: {
+      colors: {
+        'main-color': 'var(--main-color)',
+        'accent-red': 'var(--accent-red)',
+        'accent-blue': 'var(--accent-blue)',
+        'accent-yellow': 'var(--accent-yellow)',
+        'accent-brown': 'var(--accent-brown)',
+        'accent-white': 'var(--accent-white)',
+      }
     },
-    extend: {},
   },
   plugins: [
     require('tailwindcss'),

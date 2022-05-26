@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --main-color: #58beaa;
-  --accent-red: #be586c;
+  --main-color: #acd8c3;
+  --accent-red: #ff6f69;
   --accent-brown: #be7758;
-  --accent-blue: #589fbe;
-  --accent-yellow: #F6BD60;
-  --accent-white: #FAE0C6;
+  --accent-blue: #4282B3;
+  --accent-yellow: #ffcc5c;
+  --accent-white: #ffeead;
 }
 
 /*
@@ -75,5 +75,5 @@ p, h1, h2, h3, h4, h5, h6, li, dl, dt, blockquote {
 }
 
 a {
-  color: var(--accent-red);
+  color: var(--accent-red) !important;
 }
