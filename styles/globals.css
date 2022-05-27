@@ -4,12 +4,13 @@
 
 :root {
   --main-color: #4ECDC4;
-  --accent-red: #FF6B6B;
-  --accent-brown: #423629;
-  --accent-green: #0C977E;
+  --accent-red: #cd4e57;
+  --accent-brown: #cdc44e;
+  --accent-green: #96cd4e;
   --accent-yellow: #FFE66D;
   --accent-white: #F7FFF7;
   --accent-black: #292F36;
+  --accent-purple: #854ecd;
 }
 
 /*

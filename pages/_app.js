@@ -1,9 +1,21 @@
 import '../styles/globals.css'
 import React from 'react'
 import { UserProvider } from '@auth0/nextjs-auth0'
-import { Box, ChakraProvider, extendTheme } from "@chakra-ui/react"
+import { ChakraProvider, extendTheme } from "@chakra-ui/react"
+import constants from '../styles/constants'
 
-const colors = {
+const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        bg: constants.mainColor,
+        color: 'black',
+      },
+      a: {
+        color: 'teal.500'
+      }
+    },
+  },
   brand: {
     1: '#58beaa',
     2: '#be586c',
@@ -12,16 +24,14 @@ const colors = {
     5: '#F6BD60',
     6: '#FAE0C6',
   }
-}
+})
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider theme={extendTheme({ colors })}>
-      <Box bg='brand.1'>
-        <UserProvider>
-          <Component {...pageProps} />
-        </UserProvider>
-      </Box>
+    <ChakraProvider theme={theme}>
+      <UserProvider>
+        <Component {...pageProps} />
+      </UserProvider>
     </ChakraProvider>
   )
 }

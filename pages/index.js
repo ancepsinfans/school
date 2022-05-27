@@ -12,6 +12,7 @@ export default function Home() {
       <Head>
         <title>School</title>
         <meta name="description" content="Because education can be better" />
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -24,9 +25,10 @@ export default function Home() {
         </h1>
 
         {user ? (
-          <div style={{ textAlign: 'center' }}>
+          <div
+            style={{ textAlign: 'center' }}>
             <br />
-            Welcome {user.name}!
+            <span className='underline'>Welcome {user.name}!</span>
             <br />
             <Link href='/api/auth/logout'>
               <a>Logout</a>

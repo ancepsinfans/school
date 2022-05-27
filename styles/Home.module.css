@@ -75,7 +75,7 @@
 
 .card {
   margin: 1rem;
-  background-color: var(--accent-green);
+  background-color: var(--accent-yellow);
   padding: 1.5rem;
   text-align: left;
   color: black !important;
@@ -92,7 +92,7 @@
 .card:hover,
 .card:focus,
 .card:active {
-  background-color: var(--accent-red);
+  background-color: var(--accent-white);
   border-color: black;
 }
 

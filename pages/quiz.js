@@ -7,6 +7,7 @@ import connectMongo from "../middleware/connectMongo";
 import Question from "../models/questions/Questions";
 import { Button } from "@chakra-ui/react";
 
+
 export const getServerSideProps = async () => {
     try {
         await connectMongo()
@@ -28,8 +29,14 @@ export const getServerSideProps = async () => {
 const Quiz = ({ qs }) => {
     const { user } = useUser()
     return (
-        <>
-            <Button colorScheme='blackAlpha' size='md'>&larr; Go back</Button>
+        <div className="static">
+            <div className="top-5 left-5 absolute">
+                <Button colorScheme='whiteAlpha' size='lg'>
+                    <Link href='/'>
+                        &larr; Go back
+                    </Link>
+                </Button>
+            </div>
 
 
             {qs.map((e, idx) => {
@@ -48,7 +55,7 @@ const Quiz = ({ qs }) => {
                 )
             })}
 
-        </>
+        </div>
     )
 };
 

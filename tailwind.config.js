@@ -8,10 +8,12 @@ module.exports = {
       colors: {
         'main-color': 'var(--main-color)',
         'accent-red': 'var(--accent-red)',
-        'accent-blue': 'var(--accent-blue)',
+        'accent-green': 'var(--accent-green)',
         'accent-yellow': 'var(--accent-yellow)',
         'accent-brown': 'var(--accent-brown)',
         'accent-white': 'var(--accent-white)',
+        'accent-black': 'var(--accent-black)',
+        'accent-purple': 'var(--accent-purple)',
       }
     },
   },
