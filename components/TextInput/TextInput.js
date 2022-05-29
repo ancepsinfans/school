@@ -35,14 +35,14 @@ const TextInput = (props) => {
     <div className={styles.input}>
       <h2>{props.question[props.questionNumber].desc}</h2>
       <input
-        style={{ backgroundColor: constants.accentWhite }}
+        style={{ backgroundColor: constants.alertYellow90 }}
         onChange={(e) => { setValue(e.target.value); setShowFeedback(false) }}
 
       />
       <br />
       <button
         className={styles.answerButton}
-        style={{ backgroundColor: constants.accentYellow }}
+        style={{ backgroundColor: constants.primaryMain }}
         onClick={() => parentOnClick(
           value,
           props.question[props.questionNumber].correct,

@@ -10,8 +10,9 @@
 
 .answerButton {
     width: 15%;
-    border: 1px solid black;
-    color: black;
+    border: 1px solid var(--blackMain);
+    border-radius: 12px;
+    color: var(--blackMain);
     border-radius: 5px;
     margin: 5px;
     height: 25px;

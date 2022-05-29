@@ -16,7 +16,7 @@
   display: flex;
   flex: 1;
   padding: 2rem 0;
-  border-top: 1px solid var(--accent-green);
+  border-top: 1px solid var(--accentBlueMain);
   justify-content: center;
   align-items: center;
 }
@@ -29,7 +29,7 @@
 }
 
 .title a {
-  color: var(--accent-red);
+  color: var(--accentRedMain);
   text-decoration: none;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .code {
-  background: var(--accent-white);
+  background: var(--black60);
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
@@ -75,13 +75,13 @@
 
 .card {
   margin: 1rem;
-  background-color: var(--accent-yellow);
+  background-color: var(--primary65);
   padding: 1.5rem;
   text-align: left;
-  color: black !important;
+  color: var(--blackMain) !important;
   text-decoration: none;
-  border: 1px solid black;
-  border-radius: 10px;
+  border: 2px solid var(--accentBlue40);
+  border-radius: 12px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 300px;
   min-width: 300px;
@@ -92,8 +92,8 @@
 .card:hover,
 .card:focus,
 .card:active {
-  background-color: var(--accent-white);
-  border-color: black;
+  background-color: var(--primaryMain);
+  border-color: var(--accentBlueMain);
 }
 
 .card h2 {

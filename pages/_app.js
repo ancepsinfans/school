@@ -8,22 +8,15 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: constants.mainColor,
-        color: 'black',
+        bg: constants.primary80,
+        color: constants.blackMain,
       },
       a: {
-        color: 'teal.500'
+        color: constants.accentRedMain
       }
     },
   },
-  brand: {
-    1: '#58beaa',
-    2: '#be586c',
-    3: '#be7758',
-    4: '#589fbe',
-    5: '#F6BD60',
-    6: '#FAE0C6',
-  }
+
 })
 
 function MyApp({ Component, pageProps }) {
