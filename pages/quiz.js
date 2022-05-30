@@ -30,29 +30,28 @@ const Quiz = ({ qs }) => {
     const { user } = useUser()
     return (
         <>
-        <NavBarController type={'other'} />
-        <br/>
-        <br/>
+            <NavBarController type={'other'} />
 
-        <div>
 
-            {qs.map((e, idx) => {
-                return (
-                    <div key={`${idx}_${e}`}>
-                        <MCQuiz
-                            user={user ? user.name : 'unregistered'}
-                            question={qs}
-                            questionNumber={idx}
-                        />
-                        <TextInput
-                            user={user ? user.name : 'unregistered'}
-                            question={qs}
-                            questionNumber={idx} />
-                    </div>
-                )
-            })}
+            <div>
 
-        </div>
+                {qs.map((e, idx) => {
+                    return (
+                        <div key={`${idx}_${e}`}>
+                            <MCQuiz
+                                user={user ? user.name : 'unregistered'}
+                                question={qs}
+                                questionNumber={idx}
+                            />
+                            <TextInput
+                                user={user ? user.name : 'unregistered'}
+                                question={qs}
+                                questionNumber={idx} />
+                        </div>
+                    )
+                })}
+
+            </div>
         </>
     )
 };

@@ -116,15 +116,26 @@
   height: 76px;
   width: 100%;
   left: 0px;
-  position: absolute;
-  background: #53D2C9;
+  background: var(--primaryMain);
   border-bottom: 3px solid var(--accentBlue40);
+  border-left: 3px solid var(--accentBlue40);
+  border-right: 3px solid var(--accentBlue40);
   display: grid;
-
-  grid-template-areas: 
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 0;
+  grid-template-areas:
     "back void login"
   ;
-  grid-template-columns: 20% 1fr 15%;
+  grid-template-columns: 20% 1fr 20%;
+
+}
+
+.Other {
+  height: 60px !important;
+  border-left: none;
+  border-right: none;
 }
 
 #back {
@@ -136,21 +147,50 @@
 .Back {
   text-decoration: none;
   font-size: x-large;
-  margin: 15px 15px;
+  position: absolute;
+  padding-top: 10px;
+  left: 3%;
+  top: 15%;
+  font-weight: 700;
 }
 
 #login {
   grid-area: login;
 }
 
+#void {
+  grid-area: void;
+
+}
+
+.Void {
+  position: absolute;
+  top: 20%;
+  left: 37%;
+  padding: 5px;
+  padding-top: 10px;
+}
+
+
 .Login {
-  text-align: right;
-  padding-right: 10px;
   text-decoration-line: none;
   vertical-align: middle;
   padding-top: 5px;
   font-size: 1.25rem;
-  color: #292f36;
+  color: var(--BlackMain);
+  position: absolute;
+  left: 90%;
+  top: 20%;
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px;
+}
+
+.Login:hover {
+  background-color: var(--accentBlue50);
+  border: 1px solid var(--accentBlue40);
+  transition: 1s;
+  border-radius: 12px;
 }
 
 @media (max-width: 600px) {

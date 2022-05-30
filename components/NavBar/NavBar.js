@@ -7,55 +7,65 @@ import styles from '../../styles/Home.module.css'
 
 
 const NavBarH = () => {
-  const {user } = useUser()
+  const { user } = useUser()
 
   return (
-    <div className={styles.NavBar}>
-      <div id='login' className={styles.Login}>
-      {user ? (
-        <>
-            <div>Welcome {user.name}!</div>
-            <Link href='/api/auth/logout'>
+    <header className={styles.NavBar}>
+      <div id='back'>
+
+      </div>
+
+      <div id='void'>
+        <span className={styles.Void}>{user ? `Welcome ${user.name}!` : null}</span>
+      </div>
+
+      <div>
+        {user ? (
+          <>
+            <Link id='login' href='/api/auth/logout'>
               <a className={styles.Login}>Logout</a>
             </Link>
-            </>
-          
+          </>
+
         ) : (
-          <Link href='/api/auth/login'>
+          <Link id='login' href='/api/auth/login'>
             <a className={styles.Login}>Login</a>
           </Link>
         )}
       </div>
-    </div>
+    </header>
   )
 }
 
-export const NavBarO =() => {
-  const {user } = useUser()
+export const NavBarO = () => {
+  const { user } = useUser()
 
   return (
-    <div className={styles.NavBar}>
+    <header className={`${styles.NavBar} ${styles.Other}`}>
       <div id='back'>
-      <Link href='/'>
-        <a className={styles.Back}>School</a>
+        <Link href='/'>
+          <a className={styles.Back}>School</a>
         </Link>
-        </div>
-      <div className={styles.Login}>
-      {user ? (
-        <div id="login">
-            <div>Welcome {user.name}!</div>
-            <Link href='/api/auth/logout'>
+      </div>
+      <div id='void'>
+        <span className={styles.Void}>{user ? `Welcome ${user.name}!` : null}</span>
+      </div>
+
+      <div>
+        {user ? (
+          <>
+            <Link id='login' href='/api/auth/logout'>
               <a className={styles.Login}>Logout</a>
             </Link>
-            </div>
-          
+          </>
+
         ) : (
-          <Link id="login" href='/api/auth/login'>
+          <Link id='login' href='/api/auth/login'>
             <a className={styles.Login}>Login</a>
           </Link>
         )}
       </div>
-    </div>
+    </header>
   )
 }
 

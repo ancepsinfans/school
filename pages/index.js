@@ -24,25 +24,9 @@ export default function Home() {
             <a style={{ textDecoration: 'none', cursor: 'text' }}>school!</a>
           </Link>
         </h1>
-{/* 
-        {user ? (
-          <div
-            style={{ textAlign: 'center' }}>
-            <br />
-            <span className='underline'>Welcome {user.name}!</span>
-            <br />
-            <Link href='/api/auth/logout'>
-              <a>Logout</a>
-            </Link>
 
-          </div>
-        ) : (
-          <Link href='/api/auth/login'>
-            <a>Login</a>
-          </Link>
-        )} */}
-
-
+        <br />
+        <br />
         <div className={styles.grid}>
           <div className={styles.card}>
             <Link href="/quiz" >
@@ -90,19 +74,7 @@ export default function Home() {
           </span>
         </a>
       </footer>
-      {/* <style jsx global>{`
-  html,
-  body {
-    padding: 0;
-    margin: 0;
-    font-family: Lobster;
-  }
 
-  * {
-    box-sizing: border-box;
-  }
-`}</style> */}
     </div>
   )
 }
-

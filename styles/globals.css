@@ -1,5 +1,3 @@
-
-
 :root {
   --accentBlue40: #0588C7;
   --accentBlue45: #0599E0;
@@ -70,6 +68,7 @@
 html, body {
   height: 100%;
   background-color: var(--primary80);
+  font-family: 'Vollkorn', serif;
 }
 
 /*
