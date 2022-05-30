@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { useUser } from '@auth0/nextjs-auth0'
-import NavBar from '../components/NavBar/NavBar'
+import NavBarController from '../components/NavBar'
 
 export default function Home() {
   const { user } = useUser()
@@ -17,14 +17,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <NavBar />
+      <NavBarController type={'home'} />
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <Link href="/">
             <a style={{ textDecoration: 'none', cursor: 'text' }}>school!</a>
           </Link>
         </h1>
-
+{/* 
         {user ? (
           <div
             style={{ textAlign: 'center' }}>
@@ -40,7 +40,7 @@ export default function Home() {
           <Link href='/api/auth/login'>
             <a>Login</a>
           </Link>
-        )}
+        )} */}
 
 
         <div className={styles.grid}>

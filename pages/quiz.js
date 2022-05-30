@@ -5,7 +5,7 @@ import TextInput from "../components/TextInput";
 import { useUser } from '@auth0/nextjs-auth0'
 import connectMongo from "../middleware/connectMongo";
 import Question from "../models/questions/Questions";
-import { Button } from "@chakra-ui/react";
+import NavBarController from '../components/NavBar'
 
 
 export const getServerSideProps = async () => {
@@ -29,15 +29,12 @@ export const getServerSideProps = async () => {
 const Quiz = ({ qs }) => {
     const { user } = useUser()
     return (
-        <div className="static">
-            <div className="top-5 left-5 absolute">
-                <Button colorScheme='whiteAlpha' size='lg'>
-                    <Link href='/'>
-                        &larr; Go back
-                    </Link>
-                </Button>
-            </div>
+        <>
+        <NavBarController type={'other'} />
+        <br/>
+        <br/>
 
+        <div>
 
             {qs.map((e, idx) => {
                 return (
@@ -56,6 +53,7 @@ const Quiz = ({ qs }) => {
             })}
 
         </div>
+        </>
     )
 };
 

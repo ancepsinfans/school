@@ -1,28 +1,62 @@
 import React from "react";
-import styled from 'styled-components';
 import constants from "../../styles/constants";
+import { useUser } from "@auth0/nextjs-auth0";
+import Link from "next/link";
+import styles from '../../styles/Home.module.css'
 
-const NavBar = () => {
+
+
+const NavBarH = () => {
+  const {user } = useUser()
+
   return (
-    <Bar>
-      <Text>Login</Text>
-    </Bar>
+    <div className={styles.NavBar}>
+      <div id='login' className={styles.Login}>
+      {user ? (
+        <>
+            <div>Welcome {user.name}!</div>
+            <Link href='/api/auth/logout'>
+              <a className={styles.Login}>Logout</a>
+            </Link>
+            </>
+          
+        ) : (
+          <Link href='/api/auth/login'>
+            <a className={styles.Login}>Login</a>
+          </Link>
+        )}
+      </div>
+    </div>
   )
 }
 
-const Bar = styled.div`
-  height: 76px;
-  width: 100%;
-  left: 0px;
-  position: absolute;
-  background: #53D2C9;
-`
-const Text = styled.div`
-  text-align: right;
-  padding-right: 10px;
-  padding-top: 10px;
-  font-size: 32px;
-  font-family: Jaini;
-  color: #292f36;
-`
-export default NavBar
+export const NavBarO =() => {
+  const {user } = useUser()
+
+  return (
+    <div className={styles.NavBar}>
+      <div id='back'>
+      <Link href='/'>
+        <a className={styles.Back}>School</a>
+        </Link>
+        </div>
+      <div className={styles.Login}>
+      {user ? (
+        <div id="login">
+            <div>Welcome {user.name}!</div>
+            <Link href='/api/auth/logout'>
+              <a className={styles.Login}>Logout</a>
+            </Link>
+            </div>
+          
+        ) : (
+          <Link id="login" href='/api/auth/login'>
+            <a className={styles.Login}>Login</a>
+          </Link>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default NavBarH

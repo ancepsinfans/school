@@ -112,6 +112,47 @@
   margin-left: 0.5rem;
 }
 
+.NavBar {
+  height: 76px;
+  width: 100%;
+  left: 0px;
+  position: absolute;
+  background: #53D2C9;
+  border-bottom: 3px solid var(--accentBlue40);
+  display: grid;
+
+  grid-template-areas: 
+    "back void login"
+  ;
+  grid-template-columns: 20% 1fr 15%;
+}
+
+#back {
+  grid-area: back;
+
+
+}
+
+.Back {
+  text-decoration: none;
+  font-size: x-large;
+  margin: 15px 15px;
+}
+
+#login {
+  grid-area: login;
+}
+
+.Login {
+  text-align: right;
+  padding-right: 10px;
+  text-decoration-line: none;
+  vertical-align: middle;
+  padding-top: 5px;
+  font-size: 1.25rem;
+  color: #292f36;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
