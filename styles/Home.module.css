@@ -70,7 +70,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 1000px;
 }
 
 .card {
@@ -81,8 +81,14 @@
   color: var(--blackMain) !important;
   text-decoration: none;
   border: 2px solid var(--accentBlue40);
+
+  box-shadow: 1px 2px 2px hsl(220deg 60% 50% / 0.2),
+    2px 4px 4px hsl(176deg 58% 45% / 0.2),
+    4px 8px 8px hsl(176deg 58% 45% / 0.2),
+    8px 16px 16px hsl(176deg 58% 45% / 0.2),
+    16px 32px 32px hsl(176deg 58% 45% / 0.2);
   border-radius: 12px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: .95s;
   max-width: 300px;
   min-width: 300px;
   min-height: 190px;
@@ -94,6 +100,9 @@
 .card:active {
   background-color: var(--primaryMain);
   border-color: var(--accentBlueMain);
+  box-shadow:
+    0.5px 1px 1px hsl(176deg 58% 45% / 0.7);
+  transition: .5s;
 }
 
 .card h2 {
@@ -115,82 +124,45 @@
 .NavBar {
   height: 76px;
   width: 100%;
-  left: 0px;
   background: var(--primaryMain);
   border-bottom: 3px solid var(--accentBlue40);
-  border-left: 3px solid var(--accentBlue40);
-  border-right: 3px solid var(--accentBlue40);
-  display: grid;
-  position: -webkit-sticky;
-  /* Safari */
-  position: sticky;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  justify-content: space-around;
+  left: 0;
   top: 0;
-  grid-template-areas:
-    "back void login"
-  ;
-  grid-template-columns: 20% 1fr 20%;
-
 }
 
-.Other {
-  height: 60px !important;
-  border-left: none;
-  border-right: none;
+.NavBar.Other {
+  position: sticky;
+  height: 50px;
 }
 
-#back {
-  grid-area: back;
-
-
-}
 
 .Back {
   text-decoration: none;
   font-size: x-large;
-  position: absolute;
-  padding-top: 10px;
-  left: 3%;
-  top: 15%;
+
   font-weight: 700;
-}
-
-#login {
-  grid-area: login;
-}
-
-#void {
-  grid-area: void;
-
-}
-
-.Void {
-  position: absolute;
-  top: 20%;
-  left: 37%;
-  padding: 5px;
-  padding-top: 10px;
 }
 
 
 .Login {
   text-decoration-line: none;
-  vertical-align: middle;
-  padding-top: 5px;
   font-size: 1.25rem;
   color: var(--BlackMain);
-  position: absolute;
-  left: 90%;
-  top: 20%;
   padding: 5px;
   border-radius: 12px;
-  border: 1px;
+  background-color: var(--accentBlue60);
+  border: 1px solid var(--accentBlue40);
+  transition: .75s;
 }
 
 .Login:hover {
   background-color: var(--accentBlue50);
-  border: 1px solid var(--accentBlue40);
-  transition: 1s;
-  border-radius: 12px;
+  border: 1px solid var(--blackMain);
+  transition: .5s;
 }
 
 @media (max-width: 600px) {

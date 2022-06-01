@@ -11,15 +11,15 @@ const NavBarH = () => {
 
   return (
     <header className={styles.NavBar}>
-      <div id='back'>
+      <div className={styles.NavItem} id='back'>
 
       </div>
 
-      <div id='void'>
+      <div className={styles.NavItem} id='void'>
         <span className={styles.Void}>{user ? `Welcome ${user.name}!` : null}</span>
       </div>
 
-      <div>
+      <div className={styles.NavItem}>
         {user ? (
           <>
             <Link id='login' href='/api/auth/logout'>
@@ -42,16 +42,16 @@ export const NavBarO = () => {
 
   return (
     <header className={`${styles.NavBar} ${styles.Other}`}>
-      <div id='back'>
+      <div className={styles.NavItem} id='back'>
         <Link href='/'>
           <a className={styles.Back}>School</a>
         </Link>
       </div>
-      <div id='void'>
+      <div className={styles.NavItem} id='void'>
         <span className={styles.Void}>{user ? `Welcome ${user.name}!` : null}</span>
       </div>
 
-      <div>
+      <div className={styles.NavItem}>
         {user ? (
           <>
             <Link id='login' href='/api/auth/logout'>

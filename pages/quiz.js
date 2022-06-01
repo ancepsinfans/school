@@ -6,6 +6,7 @@ import { useUser } from '@auth0/nextjs-auth0'
 import connectMongo from "../middleware/connectMongo";
 import Question from "../models/questions/Questions";
 import NavBarController from '../components/NavBar'
+import styles from '../styles/Question.module.css'
 
 
 export const getServerSideProps = async () => {
@@ -33,7 +34,7 @@ const Quiz = ({ qs }) => {
             <NavBarController type={'other'} />
 
 
-            <div>
+            <main className={styles.MainContainer}>
 
                 {qs.map((e, idx) => {
                     return (
@@ -51,7 +52,7 @@ const Quiz = ({ qs }) => {
                     )
                 })}
 
-            </div>
+            </main>
         </>
     )
 };

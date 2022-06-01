@@ -28,37 +28,32 @@ export default function Home() {
         <br />
         <br />
         <div className={styles.grid}>
-          <div className={styles.card}>
-            <Link href="/quiz" >
-              <div>
-                <h2>Quiz sandbox &rarr;</h2>
-                <p>For testing purposes</p>
-              </div>
-            </Link>
-          </div>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+          <a href="/quiz" className={styles.card}>
+            <h2>Quiz sandbox &rarr;</h2>
           </a>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
+          <a href="/search" className={styles.card}>
+            <h2>Search tester &rarr;</h2>
           </a>
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+          <a href="/add_q" className={styles.card}>
+            <h2>Adding questions &rarr;</h2>
           </a>
+
+          <a href="" className={styles.card}>
+            <h2>Placeholder</h2>
+          </a>
+
+          <a href="" className={styles.card}>
+            <h2>Placeholder</h2>
+
+          </a>
+
+          <a href="" className={styles.card}>
+            <h2>Placeholder</h2>
+          </a>
+
         </div>
       </main>
 
