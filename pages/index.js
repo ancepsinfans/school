@@ -25,8 +25,6 @@ export default function Home() {
           </Link>
         </h1>
 
-        <br />
-        <br />
         <div className={styles.grid}>
 
           <a href="/quiz" className={styles.card}>
