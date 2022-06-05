@@ -46,7 +46,7 @@ export default function Profile({ user, ans }) {
       <NavBar />
       <Main>
         <ImageNameBox>
-          <Image src={user.picture} width={50} height={50} />
+          <Image src={user.picture} width={50} height={50} alt="avatar"/>
           <h2>{user.name}</h2>
         </ImageNameBox>
         <h3>{user['email']}</h3>
