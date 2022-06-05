@@ -63,7 +63,7 @@ const AddQ = () => {
       <br />
       <button
         className={styles.answerButton}
-        style={{ backgroundColor: constants.accentBrown }}
+        style={{ backgroundColor: constants.accentPurple85 }}
         onClick={() => {
           questionSender(
             desc,

@@ -4,9 +4,16 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { useUser } from '@auth0/nextjs-auth0'
 import NavBarController from '../components/NavBar'
+import { getDomainLocale } from 'next/dist/shared/lib/router/router'
+
+
 
 export default function Home() {
   const { user } = useUser()
+
+  const isNotAdmin = () => {
+    user.email === 'zachary.r.bullard@gmail.com' ? null : `${styles.admin}`
+  }
 
   return (
     <div className={styles.container}>
@@ -35,13 +42,13 @@ export default function Home() {
                 </div>
               </Link>
 
-              <Link href='/search'>
+              <Link className={isNotAdmin} href='/search'>
                 <div className={styles.card} >
                   <h2>Search MVP &rarr;</h2>
                 </div>
               </Link>
 
-              <Link href='/add_q'>
+              <Link className={isNotAdmin} href='/add_q'>
                 <div className={styles.card} >
                   <h2>Add questions &rarr;</h2>
                 </div>

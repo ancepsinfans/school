@@ -173,3 +173,7 @@
     flex-direction: column;
   }
 }
+
+.admin {
+  display: none;
+}

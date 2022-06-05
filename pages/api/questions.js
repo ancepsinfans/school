@@ -12,10 +12,8 @@ const handler = async (req, res) => {
                     options: options,
                     correct: correct,
                     sphere: sphere,
-                    feedback: {
-                        good: good,
-                        bad: bad
-                    }
+                    good: good,
+                    bad: bad
                 })
 
                 var questioncreated = await question.save()

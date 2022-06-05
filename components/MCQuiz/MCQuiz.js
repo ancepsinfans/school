@@ -13,11 +13,11 @@ const MCQuiz = (props) => {
 
   const renderFeedback = (data) => {
     if (data === props.question[props.questionNumber].correct) {
-      return (props.question[props.questionNumber].hasOwnProperty('feedback') ? props.question[props.questionNumber].feedback.good : 'Yes!')
+      return (props.question[props.questionNumber].good)
     } else if (data === '') {
       return ''
     } else {
-      return (props.question[props.questionNumber].hasOwnProperty('feedback') ? props.question[props.questionNumber].feedback.bad : 'negatory')
+      return (props.question[props.questionNumber].bad)
     }
   }
 

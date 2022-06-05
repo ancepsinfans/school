@@ -23,15 +23,13 @@ var question = new Schema({
         type: String,
         default: uuid().toString()
     },
-    feedback: {
-        good: {
-            type: String,
-            default: 'Great!'
-        },
-        bad: {
-            type: String,
-            default: 'Not this'
-        }
+    good: {
+        type: String,
+        default: 'Great!'
+    },
+    bad: {
+        type: String,
+        default: 'Not this'
     }
 }, {
     collection: 'questions'

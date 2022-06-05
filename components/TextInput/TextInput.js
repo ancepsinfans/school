@@ -11,15 +11,15 @@ const TextInput = (props) => {
 
   const renderFeedback = (data) => {
     if (data.toString() == props.question[props.questionNumber].correct.toString()) {
-      return (props.question[props.questionNumber].hasOwnProperty('feedback') ? props.question[props.questionNumber].feedback.good : 'Yes!')
+      return (props.question[props.questionNumber].good)
     } else if (data === '') {
       return ''
     } else {
-      return (props.question[props.questionNumber].hasOwnProperty('feedback') ? props.question[props.questionNumber].feedback.bad : 'negatory')
+      return (props.question[props.questionNumber].bad)
     }
   }
 
-  const parentOnClick = (val, cor, id) => {
+  const parentOnClick = (val, cor, id, sphere) => {
     setShowFeedback(true)
     setAttempts(attempts + 1)
     answerSender(
@@ -28,7 +28,7 @@ const TextInput = (props) => {
       cor,
       props.user,
       attempts,
-      id
+      id, sphere
     )
   }
 
@@ -47,7 +47,8 @@ const TextInput = (props) => {
         onClick={() => parentOnClick(
           value,
           props.question[props.questionNumber].correct,
-          props.question[props.questionNumber].id
+          props.question[props.questionNumber].id,
+          props.question[props.questionNumber].sphere
         )}
       >
         Check
