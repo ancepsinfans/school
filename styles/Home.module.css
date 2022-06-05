@@ -33,14 +33,10 @@
   text-decoration: none;
 }
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
+
 
 .title {
-  margin: 0;
+  margin: 50px;
   line-height: 1.15;
   font-size: 4rem;
 }
@@ -82,13 +78,14 @@
   text-decoration: none;
   border: 2px solid var(--accentBlue40);
 
-  box-shadow: 1px 2px 2px hsl(220deg 60% 50% / 0.2),
+  box-shadow:
+    1px 2px 2px hsl(220deg 60% 50% / 0.2),
     2px 4px 4px hsl(176deg 58% 45% / 0.2),
-    4px 8px 8px hsl(176deg 58% 45% / 0.2),
-    8px 16px 16px hsl(176deg 58% 45% / 0.2),
-    16px 32px 32px hsl(176deg 58% 45% / 0.2);
+    4px 8px 8px hsl(176deg 58% 45% / 0.2);
+  /* 8px 16px 16px hsl(176deg 58% 45% / 0.2),
+    16px 32px 32px hsl(176deg 58% 45% / 0.2); */
   border-radius: 12px;
-  transition: .95s;
+  transition: .75s ease-out;
   max-width: 300px;
   min-width: 300px;
   min-height: 190px;
@@ -102,7 +99,7 @@
   border-color: var(--accentBlueMain);
   box-shadow:
     0.5px 1px 1px hsl(176deg 58% 45% / 0.7);
-  transition: .5s;
+  transition: .25s ease-in;
 }
 
 .card h2 {
@@ -131,6 +128,7 @@
   position: fixed;
   justify-content: space-around;
   left: 0;
+  z-index: 2;
   top: 0;
 }
 
@@ -139,6 +137,10 @@
   height: 50px;
 }
 
+.Void {
+  text-decoration: none;
+  color: var(--blackMain);
+}
 
 .Back {
   text-decoration: none;
@@ -157,6 +159,7 @@
   background-color: var(--accentBlue60);
   border: 1px solid var(--accentBlue40);
   transition: .75s;
+  cursor: pointer;
 }
 
 .Login:hover {

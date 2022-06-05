@@ -22,6 +22,14 @@ var quizAnswer = new Schema({
         type: Number,
         required: true
     },
+    id: {
+        type: String,
+        required: true
+    },
+    sphere: {
+        type: String,
+        required: true
+    },
     timestamp: {
         type: Date,
         default: Date.now

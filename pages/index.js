@@ -25,37 +25,56 @@ export default function Home() {
           </Link>
         </h1>
 
-        <br />
-        <br />
         <div className={styles.grid}>
 
-          <a href="/quiz" className={styles.card}>
-            <h2>Quiz sandbox &rarr;</h2>
-          </a>
+          {user ?
+            <>
+              <Link href='/quiz'>
+                <div className={styles.card} >
+                  <h2>Quiz sandbox &rarr;</h2>
+                </div>
+              </Link>
 
-          <a href="/search" className={styles.card}>
-            <h2>Search tester &rarr;</h2>
-          </a>
+              <Link href='/search'>
+                <div className={styles.card} >
+                  <h2>Search MVP &rarr;</h2>
+                </div>
+              </Link>
 
-          <a href="/add_q" className={styles.card}>
-            <h2>Adding questions &rarr;</h2>
-          </a>
+              <Link href='/add_q'>
+                <div className={styles.card} >
+                  <h2>Add questions &rarr;</h2>
+                </div>
+              </Link>
 
-          <a href="" className={styles.card}>
-            <h2>Placeholder</h2>
-          </a>
+              <Link href=''>
+                <div className={styles.card} >
+                  <h2>Placeholder</h2>
+                </div>
+              </Link>
 
-          <a href="" className={styles.card}>
-            <h2>Placeholder</h2>
+              <Link href=''>
+                <div className={styles.card} >
+                  <h2>Placeholder</h2>
+                </div>
+              </Link>
 
-          </a>
-
-          <a href="" className={styles.card}>
-            <h2>Placeholder</h2>
-          </a>
+              <Link href=''>
+                <div className={styles.card} >
+                  <h2>Placeholder</h2>
+                </div>
+              </Link>
+            </>
+            :
+            <div className={styles.card} >
+              <Link href='/api/auth/login'>
+                <h2>You should login first</h2>
+              </Link>
+            </div>
+          }
 
         </div>
-      </main>
+      </main >
 
       <footer className={styles.footer}>
         <a
@@ -70,6 +89,6 @@ export default function Home() {
         </a>
       </footer>
 
-    </div>
+    </div >
   )
 }

@@ -5,6 +5,9 @@ const nextConfig = {
 
 module.exports = {
   nextConfig,
+  images: {
+    domains: ['s.gravatar.com'],
+  },
   env: {
     mongodburl: process.env.MONGODB_URI
   }

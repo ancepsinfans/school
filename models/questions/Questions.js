@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import uuid from "react-uuid";
 var Schema = mongoose.Schema
 
 var question = new Schema({
@@ -17,6 +18,10 @@ var question = new Schema({
     sphere: {
         type: String,
         required: true
+    },
+    id: {
+        type: String,
+        default: uuid().toString()
     },
     feedback: {
         good: {

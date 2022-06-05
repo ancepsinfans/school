@@ -29,7 +29,7 @@ const MCQuiz = (props) => {
     setColor(temp_colors)
   }
 
-  const parentOnClick = (ans, correct, i) => {
+  const parentOnClick = (ans, correct, id, sphere, i) => {
     setAnswer(ans)
     setAttempts(attempts + 1)
     colorHandler(ans, correct, i)
@@ -38,7 +38,9 @@ const MCQuiz = (props) => {
       ans,
       correct,
       props.user,
-      attempts
+      attempts,
+      id,
+      sphere
     )
   }
 
@@ -55,7 +57,13 @@ const MCQuiz = (props) => {
                 key={i}
                 className={styles.answerButton}
                 style={{ backgroundColor: color[i] }}
-                onClick={() => parentOnClick(ans, props.question[props.questionNumber].correct, i)}
+                onClick={() => parentOnClick(
+                  ans,
+                  props.question[props.questionNumber].correct,
+                  props.question[props.questionNumber].id,
+                  props.question[props.questionNumber].sphere,
+                  i
+                )}
               >
                 {ans}
               </button>

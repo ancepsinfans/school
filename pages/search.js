@@ -4,7 +4,11 @@ import { InstantSearch, SearchBox, Hits, Highlight } from 'react-instantsearch-d
 import constants from '../styles/constants'
 
 const searchClient = algoliasearch('XM133ZTQ4M', '492228cc413ae93a87eee5940daa2c2d');
-const Hit = ({ hit }) => (
+
+import { withPageAuthRequired } from '@auth0/nextjs-auth0'
+
+
+const Hit = ({ hit, user }) => (
   <>
     <a href={`http://datapracticum.gatsbyjs.io${hit.slug}`} style={{ color: constants.blackMain, textDecoration: 'none' }}>
       <h3>
@@ -13,7 +17,7 @@ const Hit = ({ hit }) => (
       <p>
         <Snippet attribute='excerpt' hit={hit} tagName='mark' />
       </p>
-    </a >
+    </a>
     <br />
   </>
 );
@@ -26,3 +30,4 @@ const App = () => (
 );
 
 export default App
+export const getServerSideProps = withPageAuthRequired()

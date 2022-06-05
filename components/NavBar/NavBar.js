@@ -15,9 +15,9 @@ const NavBarH = () => {
 
       </div>
 
-      <div className={styles.NavItem} id='void'>
-        <span className={styles.Void}>{user ? `Welcome ${user.name}!` : null}</span>
-      </div>
+      <Link href='/profile' className={styles.NavItem} id='void'>
+        <a className={styles.Void}>{user ? `Welcome ${user.name}!` : null}</a>
+      </Link>
 
       <div className={styles.NavItem}>
         {user ? (
@@ -37,6 +37,8 @@ const NavBarH = () => {
   )
 }
 
+
+
 export const NavBarO = () => {
   const { user } = useUser()
 
@@ -48,7 +50,9 @@ export const NavBarO = () => {
         </Link>
       </div>
       <div className={styles.NavItem} id='void'>
-        <span className={styles.Void}>{user ? `Welcome ${user.name}!` : null}</span>
+        <Link href='/profile'>
+          <span className='username' style={{ fontWeight: '500' }}>{user ? `${user.name}` : null}</span>
+        </Link>
       </div>
 
       <div className={styles.NavItem}>

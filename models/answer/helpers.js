@@ -1,12 +1,14 @@
 import axios from 'axios'
 
-async function answerSender(type, data, correct, user, attempts) {
+async function answerSender(type, data, correct, user, attempts, id, sphere) {
     const payload = {
         answer: data,
         correct: correct.toString(),
         user: (user ? user : 'unregistered'),
         type: type,
-        attempt: (attempts + 1).toString()
+        attempt: (attempts + 1).toString(),
+        id: id,
+        sphere: sphere,
     }
     console.log(payload)
 

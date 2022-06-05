@@ -3,7 +3,7 @@ import QuizAnswer from "../../models/answer/quizAnswer";
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
-    const { user, answer, correct, type, attempt } = req.body
+    const { user, answer, correct, type, attempt, id, sphere } = req.body
     if (user && answer && correct) {
       try {
         var quizAnswer = new QuizAnswer({
@@ -11,7 +11,9 @@ const handler = async (req, res) => {
           answer,
           correct,
           type,
-          attempt
+          attempt,
+          id,
+          sphere
         })
 
         var answercreated = await quizAnswer.save()

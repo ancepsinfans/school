@@ -6,6 +6,7 @@ import { useUser } from '@auth0/nextjs-auth0'
 import connectMongo from "../middleware/connectMongo";
 import Question from "../models/questions/Questions";
 import NavBarController from '../components/NavBar'
+import uuid from "react-uuid";
 import styles from '../styles/Question.module.css'
 
 
@@ -40,12 +41,12 @@ const Quiz = ({ qs }) => {
                     return (
                         <div key={`${idx}_${e}`}>
                             <MCQuiz
-                                user={user ? user.name : 'unregistered'}
+                                user={user ? user.email : 'unregistered'}
                                 question={qs}
                                 questionNumber={idx}
                             />
                             <TextInput
-                                user={user ? user.name : 'unregistered'}
+                                user={user ? user.email : 'unregistered'}
                                 question={qs}
                                 questionNumber={idx} />
                         </div>
