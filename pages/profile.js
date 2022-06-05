@@ -55,14 +55,14 @@ export default function Profile({ user, ans }) {
         <p>Total questions answered: {Object.keys(questionTypes).length}</p>
         <p>Total attempts: {totalAttempts}</p>
         <p>Percent correct: {(numCorrect / totalAttempts * 100).toFixed(2)}%</p>
-        <ul>{Object.entries(questionTypes).map(([key, value]) => {
+        <ul>{Object.entries(questionTypes).map(([key, value], idx) => {
 
           return (
-            <li>question: {key}
+            <li key={idx}>question: {key}
               <ol>
-                {Object.entries(value).map(([k, v]) => {
+                {Object.entries(value).map(([k, v],idx) => {
                   return (
-                    <li>{k} -- {v}</li>
+                    <li key={idx}>{k} -- {v}</li>
                   )
                 })}
               </ol>
