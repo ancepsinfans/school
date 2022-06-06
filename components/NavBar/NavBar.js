@@ -9,14 +9,14 @@ import styles from '../../styles/Home.module.css'
 const NavBarH = () => {
   const { user } = useUser()
 
+
   return (
     <header className={styles.NavBar}>
       <div className={styles.NavItem} id='back'>
 
       </div>
-
-      <Link href='/profile' className={styles.NavItem} id='void'>
-        <a className={styles.Void}>{user ? `Welcome ${user.name}!` : null}</a>
+      <Link href='/profile' className={styles.NavItem} >
+        <a className={styles.Void}>{user ? `${user.name}` : null}</a>
       </Link>
 
       <div className={styles.NavItem}>
@@ -49,11 +49,11 @@ export const NavBarO = () => {
           <a className={styles.Back}>School</a>
         </Link>
       </div>
-      <div className={styles.NavItem} id='void'>
-        <Link href='/profile'>
-          <span className='username' style={{ fontWeight: '500' }}>{user ? `${user.name}` : null}</span>
-        </Link>
-      </div>
+
+      <Link href='/profile' className={styles.NavItem}>
+        <a className={styles.Void} style={{ fontWeight: '500' }}>{user ? `${user.name}` : null}</a>
+      </Link>
+
 
       <div className={styles.NavItem}>
         {user ? (

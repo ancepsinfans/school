@@ -4,23 +4,23 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { useUser } from '@auth0/nextjs-auth0'
 import NavBarController from '../components/NavBar'
-import { getDomainLocale } from 'next/dist/shared/lib/router/router'
+import styled from '@emotion/styled'
 
 
 
 export default function Home() {
   const { user } = useUser()
 
-  const isNotAdmin = () => {
-    user.email === 'zachary.r.bullard@gmail.com' ? null : `${styles.admin}`
-  }
+  const isAdmin = (
+    user && user.email == 'zachary.r.bullard@gmail.com' ? `${styles.Admin}` : `${styles.admin}`
+  )
+
 
   return (
     <div className={styles.container}>
       <Head>
         <title>School</title>
         <meta name="description" content="Because education can be better" />
-
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -31,32 +31,42 @@ export default function Home() {
             <a style={{ textDecoration: 'none', cursor: 'text' }}>school!</a>
           </Link>
         </h1>
-
+        <div className={styles.Intro}>
+          <p>Knowledge should be accessible.</p>
+          <p>Here you'll find a collection of interesting things.</p>
+          <p>The topics will vary, but the through-line is that these things are meant to spark curiosity.</p>
+        </div>
         <div className={styles.grid}>
 
           {user ?
             <>
-              <Link href='/quiz'>
-                <div className={styles.card} >
-                  <h2>Quiz sandbox &rarr;</h2>
-                </div>
-              </Link>
+              <div className={user ? isAdmin : null}>
+                <Link href='/quiz'>
+                  <div className={styles.card} >
+                    <h2>Quiz sandbox &rarr;</h2>
+                  </div>
+                </Link>
+              </div>
 
-              <Link className={isNotAdmin} href='/search'>
-                <div className={styles.card} >
-                  <h2>Search MVP &rarr;</h2>
-                </div>
-              </Link>
+              <div className={user ? isAdmin : null}>
+                <Link href='/search'>
+                  <div className={styles.card} >
+                    <h2>Search MVP &rarr;</h2>
+                  </div>
+                </Link>
+              </div>
 
-              <Link className={isNotAdmin} href='/add_q'>
-                <div className={styles.card} >
-                  <h2>Add questions &rarr;</h2>
-                </div>
-              </Link>
+              <div className={user ? isAdmin : null}>
+                <Link href='/add_q'>
+                  <div className={styles.card} >
+                    <h2>Add questions &rarr;</h2>
+                  </div>
+                </Link>
+              </div>
 
-              <Link href=''>
+              <Link href='/literature'>
                 <div className={styles.card} >
-                  <h2>Placeholder</h2>
+                  <h2>Literature &rarr;</h2>
                 </div>
               </Link>
 

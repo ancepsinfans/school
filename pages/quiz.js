@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 import MCQuiz from "../components/MCQuiz";
 import TextInput from "../components/TextInput";
