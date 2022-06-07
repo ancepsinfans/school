@@ -14,22 +14,25 @@ const Literature = () => {
 
                 <h2 className={styles.title}>Literature</h2>
                 <div className={styles.Intro}>
-                    <p>asdf</p>
+                    <p>Remedial course in literature</p>
                 </div>
                 <div className={styles.grid}>
-                    <Link href=''>
+                    <Link href='/literature/intro'>
                         <div className={styles.card} >
-                            <h2>Placeholder</h2>
+                            <h2>Intro &rarr;</h2>
+                            <p>Course overview</p>
                         </div>
                     </Link>
-                    <Link href=''>
+                    <Link href='/literature/explication'>
                         <div className={styles.card} >
-                            <h2>Placeholder</h2>
+                            <h2>Explication &rarr;</h2>
+                            <p>How to ask questions when you read</p>
                         </div>
                     </Link>
-                    <Link href=''>
+                    <Link href='/literature/close-reading'>
                         <div className={styles.card} >
-                            <h2>Placeholder</h2>
+                            <h2>Close reading &rarr;</h2>
+                            <p>Breaking down a story and getting blood from the turnip</p>
                         </div>
                     </Link>
                 </div>

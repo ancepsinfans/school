@@ -168,7 +168,6 @@
 .Login:hover {
   background-color: var(--accentBlue50);
   border: 1px solid var(--blackMain);
-  max-width: 130px;
   transition: .5s;
   text-align: center;
 }

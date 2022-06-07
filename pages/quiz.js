@@ -4,8 +4,7 @@ import TextInput from "../components/TextInput";
 import { useUser } from '@auth0/nextjs-auth0'
 import connectMongo from "../middleware/connectMongo";
 import Question from "../models/questions/Questions";
-import NavBarController from '../components/NavBar'
-import uuid from "react-uuid";
+import NavBar from '../components/NavBar'
 import styles from '../styles/Question.module.css'
 
 
@@ -31,11 +30,8 @@ const Quiz = ({ qs }) => {
     const { user } = useUser()
     return (
         <>
-            <NavBarController type={'other'} />
-
-
+            <NavBar/>
             <main className={styles.MainContainer}>
-
                 {qs.map((e, idx) => {
                     return (
                         <div key={`${idx}_${e}`}>
