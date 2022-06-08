@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar'
 import Image from 'next/image';
 import connectMongo from "../middleware/connectMongo";
 import QuizAnswer from "../models/answer/quizAnswer";
+import StudentProgress from '../models/progress/Progress'
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { useUser } from '@auth0/nextjs-auth0'
 
@@ -40,7 +41,8 @@ const SubHeading = styled.h3`
 `
 
 
-export default function Profile({ user, ans }) {
+export default function Profile({ user, ans, progress }) {
+  /* Answers logic */
   let numCorrect = 0
   let totalAttempts = 0
   let attemptList = {}
@@ -67,6 +69,13 @@ export default function Profile({ user, ans }) {
     questionTypes[e.sphere]['type'].push(e.type)
     questionTypes[e.sphere]['total_attempts'] += 1
     questionTypes[e.sphere][e.id] += 1
+  })
+
+  /* Progress logic */
+  let progressSpheres = new Set()
+
+  progress.map((e, idx) => {
+    progressSpheres.add(e.sphere)
   })
 
   return (
@@ -99,7 +108,14 @@ export default function Profile({ user, ans }) {
         </Stats>
         <Stats>
           <SubHeading>Progress</SubHeading>
-          <p>Under construction...</p>
+          <ul>
+            {progress.map((e,idx) => {
+              let d = new Date(e.timestamp)
+              return (
+                <ListItem key={idx}>{e.page.split('/')[2]}--{d.toDateString()}</ListItem>
+              )
+            })}
+          </ul>
         </Stats>
       </Main>
     </>
@@ -117,10 +133,12 @@ export const getServerSideProps = withPageAuthRequired({
       await connectMongo()
 
       const ans = await QuizAnswer.find({ user: auth0user.user.email })
+      const progress = await StudentProgress.find({user: auth0user.user.email})
 
       return {
         props: {
-          ans: JSON.parse(JSON.stringify(ans))
+          ans: JSON.parse(JSON.stringify(ans)),
+          progress: JSON.parse(JSON.stringify(progress))
         }
       }
     } catch (error) {

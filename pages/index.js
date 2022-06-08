@@ -4,8 +4,6 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { useUser } from '@auth0/nextjs-auth0'
 import NavBarController from '../components/NavBar'
-import styled from '@emotion/styled'
-
 
 
 export default function Home() {
@@ -44,14 +42,6 @@ export default function Home() {
                 <Link href='/quiz'>
                   <div className={styles.card} >
                     <h2>Quiz sandbox &rarr;</h2>
-                  </div>
-                </Link>
-              </div>
-
-              <div className={user ? isAdmin : null}>
-                <Link href='/search'>
-                  <div className={styles.card} >
-                    <h2>Search MVP &rarr;</h2>
                   </div>
                 </Link>
               </div>
