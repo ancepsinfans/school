@@ -9,7 +9,6 @@ import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { useUser } from '@auth0/nextjs-auth0'
 
 
-
 const Main = styled.div`
   margin: 5% 5%;
 `
@@ -41,7 +40,7 @@ const SubHeading = styled.h3`
 `
 
 
-export default function Profile({ user, ans, progress }) {
+export default function Profile({ user, ans, progress, subs }) {
   /* Answers logic */
   let numCorrect = 0
   let totalAttempts = 0
@@ -78,6 +77,10 @@ export default function Profile({ user, ans, progress }) {
     progressSpheres.add(e.sphere)
   })
 
+  progressSpheres = Array.from(progressSpheres)
+
+
+
   return (
     <>
       <NavBar />
@@ -107,15 +110,40 @@ export default function Profile({ user, ans, progress }) {
           )}</ul>
         </Stats>
         <Stats>
+          <ul>{subs.map((e, idx) => {
+            return (
+              <ListItem key={idx}>
+                {e.split('/')[1].slice(0, -3)}
+              </ListItem>
+            )
+          })}</ul>
+        </Stats>
+        <Stats>
           <SubHeading>Progress</SubHeading>
+          {/* <p>{progressSpheres}</p> */}
           <ul>
-            {progress.map((e,idx) => {
-              let d = new Date(e.timestamp)
+            {progressSpheres.map((e, idx) => {
               return (
-                <ListItem key={idx}>{e.page.split('/')[2]}--{d.toDateString()}</ListItem>
+                <ListItem key={idx}>{e}
+                  <ul style={{ padding: '0 20px' }}>
+                    {progress.map((e, idx) => {
+                      let d = new Date(e.timestamp)
+                      return (
+                        <ListItem key={idx}>{e.page.split('/')[2]}: {d.toLocaleDateString(
+                          'en-US',
+                          {
+                            month: 'short',
+                            day: '2-digit'
+                          }
+                        )}</ListItem>
+                      )
+                    })}
+                  </ul>
+                </ListItem>
               )
             })}
           </ul>
+
         </Stats>
       </Main>
     </>
@@ -125,7 +153,36 @@ export default function Profile({ user, ans, progress }) {
 // You can optionally pass your own `getServerSideProps` function into
 // `withPageAuthRequired` and the props will be merged with the `user` prop
 export const getServerSideProps = withPageAuthRequired({
+
   getServerSideProps: async ({ req, res }) => {
+    const fs = require('fs');
+    const path = require('path')
+    const dir = './pages'
+    const dirs = []
+
+    fs.readdir(dir, (err, files) => {
+      if (err) {
+        throw err;
+      }
+
+      files.forEach(file => {
+        if (!file.includes('.') && file !== 'api') {
+          console.log(file)
+          fs.readdir(path.join(dir, file), (err, files_sub) => {
+            if (err) {
+              throw err;
+            }
+
+            files_sub.forEach(file_sub => {
+              dirs.push(path.join(file, file_sub))
+            })
+          })
+        }
+      })
+
+    })
+
+
     const auth0user = getSession(req, res)
     console.log(auth0user.user)
 
@@ -133,12 +190,13 @@ export const getServerSideProps = withPageAuthRequired({
       await connectMongo()
 
       const ans = await QuizAnswer.find({ user: auth0user.user.email })
-      const progress = await StudentProgress.find({user: auth0user.user.email})
+      const progress = await StudentProgress.find({ user: auth0user.user.email })
 
       return {
         props: {
           ans: JSON.parse(JSON.stringify(ans)),
-          progress: JSON.parse(JSON.stringify(progress))
+          progress: JSON.parse(JSON.stringify(progress)),
+          subs: dirs
         }
       }
     } catch (error) {
@@ -149,3 +207,4 @@ export const getServerSideProps = withPageAuthRequired({
     }
   }
 });
+
