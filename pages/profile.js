@@ -6,7 +6,6 @@ import connectMongo from "../middleware/connectMongo";
 import QuizAnswer from "../models/answer/quizAnswer";
 import StudentProgress from '../models/progress/Progress'
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import { useUser } from '@auth0/nextjs-auth0'
 
 
 const Main = styled.div`
@@ -72,12 +71,30 @@ export default function Profile({ user, ans, progress, subs }) {
 
   /* Progress logic */
   let progressSpheres = new Set()
+  let spheresPageCount = {}
+  let masterPageCount = {}
 
   progress.map((e, idx) => {
+    const [a, b] = e.page.split('/').slice(1)
+    spheresPageCount[a] = []
     progressSpheres.add(e.sphere)
   })
 
   progressSpheres = Array.from(progressSpheres)
+
+  progress.map((e, idx) => {
+    const [a, b] = e.page.split('/').slice(1)
+    spheresPageCount[a].push(b)
+  })
+
+  subs.map((e, idx) => {
+    const [a, b] = e.split('/')
+    masterPageCount[a] = []
+  })
+  subs.map((e, idx) => {
+    const [a, b] = e.split('/')
+    masterPageCount[a].push(b.slice(0, -3))
+  })
 
 
 
@@ -109,22 +126,14 @@ export default function Profile({ user, ans, progress, subs }) {
           }
           )}</ul>
         </Stats>
-        <Stats>
-          <ul>{subs.map((e, idx) => {
-            return (
-              <ListItem key={idx}>
-                {e.split('/')[1].slice(0, -3)}
-              </ListItem>
-            )
-          })}</ul>
-        </Stats>
+
         <Stats>
           <SubHeading>Progress</SubHeading>
           {/* <p>{progressSpheres}</p> */}
           <ul>
             {progressSpheres.map((e, idx) => {
               return (
-                <ListItem key={idx}>{e}
+                <ListItem key={idx}>{e} - {(spheresPageCount[e].length / masterPageCount[e].length * 100).toFixed(0)}% completed
                   <ul style={{ padding: '0 20px' }}>
                     {progress.map((e, idx) => {
                       let d = new Date(e.timestamp)
@@ -200,7 +209,9 @@ export const getServerSideProps = withPageAuthRequired({
         }
       }
     } catch (error) {
+      console.log('oops')
       console.log(error)
+
       return {
         notFound: true
       }
