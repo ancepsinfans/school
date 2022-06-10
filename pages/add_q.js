@@ -8,6 +8,25 @@ const Input = styled.div`
     margin: 0%;
     text-align: center;
 `
+
+const AnswerButton = styled.button`
+& {
+    width: 15%;
+    border: 1px solid var(--blackMain);
+    border-radius: 12px;
+    color: var(--blackMain);
+    border-radius: 5px;
+    margin: 5px;
+    height: 25px;
+}
+
+&:hover {
+    border: none;
+    width: calc(15% + 2px);
+    height: calc(25px + 0px);
+}
+`
+
 const AddQ = () => {
 
 
@@ -66,8 +85,7 @@ const AddQ = () => {
         onChange={(e) => { setBad(e.target.value); setIsSuccess(false) }}
       />
       <br />
-      <button
-        className={styles.answerButton}
+      <AnswerButton
         style={{ backgroundColor: constants.accentPurple85 }}
         onClick={() => {
           questionSender(
@@ -82,7 +100,7 @@ const AddQ = () => {
         }}
       >
         submit
-      </button>
+      </AnswerButton>
       <div>
         {isSuccess ? "Done!" : null}
         <br />
