@@ -1,39 +1,97 @@
 import React from "react";
-import constants from "../../styles/constants";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
-import styles from '../../styles/Home.module.css'
+import styled from "@emotion/styled";
 
+const NavBar = styled.header`
+  height: 76px;
+  width: 100%;
+  background: var(--primaryMain);
+  border-bottom: 3px solid var(--accentBlue40);
+  align-items: center;
+  display: flex;
+  position: fixed;
+  justify-content: space-around;
+  left: 0;
+  z-index: 2;
+  top: 0;
+`
 
+const NavBarOther = styled.header`
+  position: sticky;
+  height: 50px;
+  width: 100%;
+  background: var(--primaryMain);
+  border-bottom: 3px solid var(--accentBlue40);
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  z-index: 2;
+  top: 0;
+`
+
+const UserName = styled.a`
+  text-decoration: none;
+  color: var(--blackMain);
+  font-weight: 500;
+  font-size: large;
+  padding: 5px;
+`
+
+const Login = styled.a`
+& {
+  text-decoration-line: none;
+  font-size: 1.25rem;
+  color: var(--blackMain);
+  padding: 5px;
+  border-radius: 12px;
+  background-color: var(--accentBlue60);
+  border: 1px solid var(--accentBlue40);
+  transition: .75s;
+  cursor: pointer;
+}
+
+&:hover {
+  background-color: var(--accentBlue50);
+  border: 1px solid var(--blackMain);
+  transition: .5s;
+  text-align: center;
+}
+`
+const Back = styled.a`
+  text-decoration: none;
+  font-size: x-large;
+  font-weight: 700;
+`
 
 const NavBarH = () => {
   const { user } = useUser()
 
 
   return (
-    <header className={styles.NavBar}>
-      <div className={styles.NavItem} id='back'>
-
+    <NavBar>
+      <div>
       </div>
-      <Link href='/profile' className={styles.NavItem} >
-        <a className={styles.Void}>{user ? `${user.name}` : null}</a>
+      <Link href='/profile'>
+        <UserName>{user ? `${user.name}` : null}</UserName>
       </Link>
 
-      <div className={styles.NavItem}>
+      <div>
         {user ? (
           <>
             <Link id='login' href='/api/auth/logout'>
-              <a className={styles.Login}>Logout</a>
+              <Login>Logout</Login>
             </Link>
           </>
 
         ) : (
           <Link id='login' href='/api/auth/login'>
-            <a className={styles.Login}>Login</a>
+            <Login>Login</Login>
           </Link>
         )}
       </div>
-    </header>
+    </NavBar>
   )
 }
 
@@ -43,33 +101,33 @@ export const NavBarO = () => {
   const { user } = useUser()
 
   return (
-    <header className={`${styles.NavBar} ${styles.Other}`}>
-      <div className={styles.NavItem} id='back'>
+    <NavBarOther>
+      <div>
         <Link href='/'>
-          <a className={styles.Back}>School</a>
+          <Back>School</Back>
         </Link>
       </div>
 
-      <Link href='/profile' className={styles.NavItem}>
-        <a className={styles.Void} style={{ fontWeight: '500' }}>{user ? `${user.name}` : null}</a>
+      <Link href='/profile'>
+        <UserName>{user ? `${user.name}` : null}</UserName>
       </Link>
 
 
-      <div className={styles.NavItem}>
+      <div>
         {user ? (
           <>
             <Link id='login' href='/api/auth/logout'>
-              <a className={styles.Login}>Logout</a>
+              <Login>Logout</Login>
             </Link>
           </>
 
         ) : (
           <Link id='login' href='/api/auth/login'>
-            <a className={styles.Login}>Login</a>
+            <Login>Login</Login>
           </Link>
         )}
       </div>
-    </header>
+    </NavBarOther>
   )
 }
 

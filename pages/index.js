@@ -1,103 +1,77 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import Link from 'next/link'
+
 import { useUser } from '@auth0/nextjs-auth0'
-import NavBarController from '../components/NavBar'
+import GridCard from '../components/GridCard'
+import Grid from '../components/Grid'
+import MainContainer from '../components/MainContainer'
+import constants from '../styles/constants'
 
 
 export default function Home() {
   const { user } = useUser()
-
   const isAdmin = (
-    user && user.email == 'zachary.r.bullard@gmail.com' ? `${styles.Admin}` : `${styles.admin}`
+    user && user.email == 'zachary.r.bullard@gmail.com' ? null : 'none'
   )
 
-
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>School</title>
-        <meta name="description" content="Because education can be better" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <NavBarController type={'home'} />
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <Link href="/">
-            <a style={{ textDecoration: 'none', cursor: 'text' }}>school!</a>
-          </Link>
-        </h1>
-        <div className={styles.Intro}>
+    <MainContainer
+      navType='home'
+      titleText={
+        <>
+          Welcome to <span style={{ color: constants.accentRedMain }}>school!</span>
+        </>
+      }
+      introText={
+        <>
           <p>Knowledge should be accessible.</p>
           <p>Here you'll find a collection of interesting things.</p>
           <p>The topics will vary, but the through-line is that these things are meant to spark curiosity.</p>
-        </div>
-        <div className={styles.grid}>
+        </>
+      }
+    >
 
-          {user ?
-            <>
-              <div className={user ? isAdmin : null}>
-                <Link href='/quiz'>
-                  <div className={styles.card} >
-                    <h2>Quiz sandbox &rarr;</h2>
-                  </div>
-                </Link>
-              </div>
 
-              <div className={user ? isAdmin : null}>
-                <Link href='/add_q'>
-                  <div className={styles.card} >
-                    <h2>Add questions &rarr;</h2>
-                  </div>
-                </Link>
-              </div>
+      <Grid>
 
-              <Link href='/literature'>
-                <div className={styles.card} >
-                  <h2>Literature &rarr;</h2>
-                </div>
-              </Link>
+        {user ?
+          <>
 
-              <Link href=''>
-                <div className={styles.card} >
-                  <h2>Placeholder</h2>
-                </div>
-              </Link>
+            <GridCard
+              isAdmin={isAdmin}
+              link='/quiz'
+              title='Quiz sandbox'
+            />
 
-              <Link href=''>
-                <div className={styles.card} >
-                  <h2>Placeholder</h2>
-                </div>
-              </Link>
-            </>
-            :
-            <Link href='/api/auth/login'>
-            <div className={styles.card} >
-              
-                <h2>You should login first</h2>
-            </div>
-            </Link>
+            <GridCard
+              isAdmin={isAdmin}
+              link='/add_q'
+              title='Add questions'
+            />
 
-          }
+            <GridCard
+              link='/literature'
+              title='Literature'
+            />
 
-        </div>
-      </main >
+            <GridCard
+              link=''
+              title='Placeholder'
+            />
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+            <GridCard
+              link=''
+              title='Placeholder'
+            />
 
-    </div >
+          </>
+          :
+          <GridCard
+            link='/api/auth/login'
+            title='You should login first'
+          />
+
+        }
+
+      </Grid>
+    </MainContainer>
   )
 }

@@ -4,9 +4,7 @@ import TextInput from "../components/TextInput";
 import { useUser } from '@auth0/nextjs-auth0'
 import connectMongo from "../middleware/connectMongo";
 import Question from "../models/questions/Questions";
-import NavBar from '../components/NavBar'
-import styles from '../styles/Question.module.css'
-
+import MainContainer from "../components/MainContainer";
 
 export const getServerSideProps = async () => {
     try {
@@ -29,27 +27,26 @@ export const getServerSideProps = async () => {
 const Quiz = ({ qs }) => {
     const { user } = useUser()
     return (
-        <>
-            <NavBar/>
-            <main className={styles.MainContainer}>
-                {qs.map((e, idx) => {
-                    return (
-                        <div key={`${idx}_${e}`}>
-                            <MCQuiz
-                                user={user ? user.email : 'unregistered'}
-                                question={qs}
-                                questionNumber={idx}
-                            />
-                            <TextInput
-                                user={user ? user.email : 'unregistered'}
-                                question={qs}
-                                questionNumber={idx} />
-                        </div>
-                    )
-                })}
-
-            </main>
-        </>
+        <MainContainer
+            titleText='Quiz Sandbox'
+            noFlex={true}
+        >
+            {qs.map((e, idx) => {
+                return (
+                    <div key={`${idx}_${e}`}>
+                        <MCQuiz
+                            user={user ? user.email : 'unregistered'}
+                            question={qs}
+                            questionNumber={idx}
+                        />
+                        <TextInput
+                            user={user ? user.email : 'unregistered'}
+                            question={qs}
+                            questionNumber={idx} />
+                    </div>
+                )
+            })}
+        </MainContainer>
     )
 };
 

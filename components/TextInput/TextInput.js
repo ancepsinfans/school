@@ -1,8 +1,30 @@
 import React from "react";
-import styles from '../../styles/Question.module.css'
 import constants from "../../styles/constants";
 import answerSender from "../../models/answer/helpers";
+import styled from "@emotion/styled";
 
+const Input = styled.div`
+    padding: 5px 5px;
+    margin: 0%;
+    text-align: center;
+`
+const AnswerButton = styled.button`
+& {
+    width: 15%;
+    border: 1px solid var(--blackMain);
+    border-radius: 12px;
+    color: var(--blackMain);
+    border-radius: 5px;
+    margin: 5px;
+    height: 25px;
+}
+
+&:hover {
+    border: none;
+    width: calc(15% + 2px);
+    height: calc(25px + 0px);
+}
+`
 
 const TextInput = (props) => {
   const [value, setValue] = React.useState('')
@@ -33,7 +55,7 @@ const TextInput = (props) => {
   }
 
   return (
-    <div className={styles.input}>
+    <Input>
       <h2>{props.question[props.questionNumber].desc}</h2>
       <input
         style={{ backgroundColor: constants.alertYellow90 }}
@@ -41,8 +63,7 @@ const TextInput = (props) => {
 
       />
       <br />
-      <button
-        className={styles.answerButton}
+      <AnswerButton
         style={{ backgroundColor: constants.primaryMain }}
         onClick={() => parentOnClick(
           value,
@@ -52,12 +73,12 @@ const TextInput = (props) => {
         )}
       >
         Check
-      </button>
+      </AnswerButton>
       <br />
       <span>{(showFeedback ? renderFeedback(value) : null)}</span>
       <br />
       <p>attempts: {attempts}</p>
-    </div>
+    </Input>
   );
 };
 

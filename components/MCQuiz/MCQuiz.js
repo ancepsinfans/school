@@ -1,7 +1,30 @@
 import React from "react";
-import styles from '../../styles/Question.module.css'
 import constants from '../../styles/constants'
 import answerSender from "../../models/answer/helpers";
+import styled from "@emotion/styled";
+
+const Question = styled.div`
+  padding: 5px 5px;
+  margin: 0%;
+  text-align: center;
+`
+const AnswerButton = styled.button`
+& {
+    width: 15%;
+    border: 1px solid var(--blackMain);
+    border-radius: 12px;
+    color: var(--blackMain);
+    border-radius: 5px;
+    margin: 5px;
+    height: 25px;
+}
+
+&:hover {
+    border: none;
+    width: calc(15% + 2px);
+    height: calc(25px + 0px);
+}
+`
 
 const MCQuiz = (props) => {
 
@@ -45,17 +68,16 @@ const MCQuiz = (props) => {
   }
 
   return (
-    <div className={styles.question}>
+    <Question>
       <h2>{props.question[props.questionNumber].desc}</h2>
       <ol>
         {props.question[props.questionNumber].options.map((ans, i) => {
 
 
           return (
-            <li key={`${i}_${ans}`} className={styles.questionItem}>
-              <button
+            <li key={`${i}_${ans}`} style={{ listStyle: 'none' }}>
+              <AnswerButton
                 key={i}
-                className={styles.answerButton}
                 style={{ backgroundColor: color[i] }}
                 onClick={() => parentOnClick(
                   ans,
@@ -66,7 +88,7 @@ const MCQuiz = (props) => {
                 )}
               >
                 {ans}
-              </button>
+              </AnswerButton>
             </li>
           )
         })}
@@ -74,7 +96,7 @@ const MCQuiz = (props) => {
       <span>{renderFeedback(answer)}</span>
       <br />
       <p>attempts: {attempts}</p>
-    </div>
+    </Question>
   )
 }
 
