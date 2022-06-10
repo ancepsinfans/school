@@ -2,6 +2,7 @@ import React from "react";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import styled from "@emotion/styled";
+import BlueButton from "../BlueButton";
 
 const NavBar = styled.header`
   height: 76px;
@@ -39,26 +40,6 @@ const UserName = styled.a`
   padding: 5px;
 `
 
-const Login = styled.a`
-& {
-  text-decoration-line: none;
-  font-size: 1.25rem;
-  color: var(--blackMain);
-  padding: 5px;
-  border-radius: 12px;
-  background-color: var(--accentBlue60);
-  border: 1px solid var(--accentBlue40);
-  transition: .75s;
-  cursor: pointer;
-}
-
-&:hover {
-  background-color: var(--accentBlue50);
-  border: 1px solid var(--blackMain);
-  transition: .5s;
-  text-align: center;
-}
-`
 const Back = styled.a`
   text-decoration: none;
   font-size: x-large;
@@ -79,16 +60,20 @@ const NavBarH = () => {
 
       <div>
         {user ? (
-          <>
-            <Link id='login' href='/api/auth/logout'>
-              <Login>Logout</Login>
-            </Link>
-          </>
+          <BlueButton
+            id='logout'
+            link='/api/auth/logout'
+          >
+            Logout
+          </BlueButton>
 
         ) : (
-          <Link id='login' href='/api/auth/login'>
-            <Login>Login</Login>
-          </Link>
+          <BlueButton
+            id='login'
+            link='/api/auth/login'
+          >
+            Login
+          </BlueButton>
         )}
       </div>
     </NavBar>
@@ -115,16 +100,20 @@ export const NavBarO = () => {
 
       <div>
         {user ? (
-          <>
-            <Link id='login' href='/api/auth/logout'>
-              <Login>Logout</Login>
-            </Link>
-          </>
+          <BlueButton
+            id='logout'
+            link='/api/auth/logout'
+          >
+            Logout
+          </BlueButton>
 
         ) : (
-          <Link id='login' href='/api/auth/login'>
-            <Login>Login</Login>
-          </Link>
+          <BlueButton
+            id='login'
+            link='/api/auth/login'
+          >
+            Login
+          </BlueButton>
         )}
       </div>
     </NavBarOther>

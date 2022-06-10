@@ -1,20 +1,19 @@
 import React from "react";
 import Link from "next/link";
-import styles from '../../styles/Home.module.css'
 import progressSender from '../../models/progress/helpers'
+import BlueButton from "../BlueButton";
 
 function NextLessonButton({ link, text, user, sphere, path }) {
   return (
-    <Link href={link}>
-      <button
-        className={styles.Login}
-        onClick={() => progressSender(
-          user,
-          sphere,
-          path
-        )}
-      >{text} &rarr;</button>
-    </Link>
+    <BlueButton link={link}
+      onClick={() => progressSender(
+        user,
+        sphere,
+        path
+      )}
+    >
+      {text} &rarr;
+    </BlueButton>
   );
 }
 

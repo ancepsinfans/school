@@ -22,7 +22,7 @@ const Title = styled.h1`
   text-align: center;
   margin: 30px auto;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: ${props => props.smallTitle ? '2.5rem' : '4rem'};
 `
 
 const Intro = styled.div`
@@ -31,14 +31,15 @@ const Intro = styled.div`
   max-width: 850px;
   text-align: center
 `
+
 const Footer = styled.footer`
-& {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid var(--accentBlueMain);
-  justify-content: center;
-  align-items: center;
+  & {
+    display: flex;
+    flex: 1;
+    padding: 2rem 0;
+    border-top: 1px solid var(--accentBlueMain);
+    justify-content: center;
+    align-items: center;
 }
 
 & a {
@@ -51,7 +52,7 @@ const Footer = styled.footer`
 `
 
 
-const MainContainer = ({ navType, titleText, introText, noFlex, children }) => {
+const MainContainer = ({ navType, titleText, introText, noFlex, smallTitle, children }) => {
   return (
     <>
       <NavBarController type={navType} />
@@ -63,7 +64,9 @@ const MainContainer = ({ navType, titleText, introText, noFlex, children }) => {
         </Head>
         <MainContent noFlex={noFlex}
         >
-          <Title>
+          <Title
+            smallTitle={smallTitle}
+          >
             {titleText}
           </Title>
           <Intro>
