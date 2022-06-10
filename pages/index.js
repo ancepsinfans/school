@@ -36,7 +36,7 @@ export default function Home() {
           <>
 
             <GridCard
-              isAdmin={isAdmin}
+              
               link='/quiz'
               title='Quiz sandbox'
             />
