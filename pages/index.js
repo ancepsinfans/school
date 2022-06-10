@@ -73,11 +73,13 @@ export default function Home() {
               </Link>
             </>
             :
+            <Link href='/api/auth/login'>
             <div className={styles.card} >
-              <Link href='/api/auth/login'>
+              
                 <h2>You should login first</h2>
-              </Link>
             </div>
+            </Link>
+
           }
 
         </div>

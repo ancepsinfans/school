@@ -1,11 +1,12 @@
 import React from "react";
-import { useUser } from "@auth0/nextjs-auth0";
 import NavBarController from "../components/NavBar/NavBarController";
 import styles from '../styles/Home.module.css'
 import Link from "next/link";
 import connectMongo from "../middleware/connectMongo";
 import StudentProgress from '../models/progress/Progress'
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import styled from "@emotion/styled";
+
 
 
 const Literature = ({ user, progress }) => {
@@ -27,7 +28,6 @@ const Literature = ({ user, progress }) => {
         spheresPageCount[a].push(b)
     })
 
-    console.log(!spheresPageCount['literature'].includes('explication') ? styles.disabled : null)
     return (
         <>
             <NavBarController />
@@ -46,7 +46,7 @@ const Literature = ({ user, progress }) => {
                     </Link>
 
                     <Link href='/literature/explication'>
-                        <div className={`${styles.card} ${(spheresPageCount['literature'].includes('intro') ? null : styles.disabled)}`} >
+                        <div className={styles.card} >
                             <h2>Explication &rarr;</h2>
                             <p>How to ask questions when you read</p>
                         </div>

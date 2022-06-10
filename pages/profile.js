@@ -93,7 +93,7 @@ export default function Profile({ user, ans, progress, subs }) {
   })
   subs.map((e, idx) => {
     const [a, b] = e.split('/')
-    masterPageCount[a].push(b.slice(0, -3))
+    masterPageCount[a].push(b.slice(0,-3))
   })
 
 
@@ -133,7 +133,8 @@ export default function Profile({ user, ans, progress, subs }) {
           <ul>
             {progressSpheres.map((e, idx) => {
               return (
-                <ListItem key={idx}>{e} - {(spheresPageCount[e].length / masterPageCount[e].length * 100).toFixed(0)}% completed
+                <ListItem key={idx}>{masterPageCount[e]}
+                {/* <ListItem key={idx}>{e} - {(spheresPageCount[e].length / masterPageCount[e].length * 100).toFixed(0)}% completed */}
                   <ul style={{ padding: '0 20px' }}>
                     {progress.map((e, idx) => {
                       let d = new Date(e.timestamp)
