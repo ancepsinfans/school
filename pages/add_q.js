@@ -1,8 +1,13 @@
 import React from "react";
 import constants from "../styles/constants";
 import questionSender from "../models/questions/helpers";
-import styles from '../styles/Question.module.css'
+import styled from "@emotion/styled";
 
+const Input = styled.div`
+    padding: 5px 5px;
+    margin: 0%;
+    text-align: center;
+`
 const AddQ = () => {
 
 
@@ -29,7 +34,7 @@ const AddQ = () => {
   }
 
   return (
-    <div className={styles.input}>
+    <Input>
       <h4>Description</h4>
       <input
         style={{ backgroundColor: constants.accentWhite }}
@@ -97,7 +102,7 @@ const AddQ = () => {
 
       </div>
 
-    </div>
+    </Input>
   );
 };
 
