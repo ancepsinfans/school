@@ -1,5 +1,5 @@
 import connectDB from "../../middleware/mongodb";
-import StudentSchema from "../../models/users/User";
+import { StudentSchema, StudentProgress } from "../../models/users/User";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
@@ -7,22 +7,21 @@ const handler = async (req, res) => {
 
         if (user) {
             try {
-                var progressUpdate = {
+                const progressUpdate = new StudentProgress({
                     sphere: sphere,
-                    page: page,
-                    timestamp: Date.now
-                }
-                const progresscreated = await StudentSchema.findOneAndUpdate(
+                    page: page
+                })
+                const doc = await StudentSchema.findOneAndUpdate(
                     { user: user },
                     { $push: { progress: progressUpdate } },
-                    {
-                        upsert: true,
-                        new: false,
-                    }
+                    { upsert: true }
                 )
-                console.log('does this print?')
-                console.log(ddd)
-                return res.status(200).send(progresscreated)
+                console.log(doc)
+                doc.save()
+
+
+
+                return res.status(200).send(doc)
             } catch (error) {
                 return res.status(500).send(error.message)
             }

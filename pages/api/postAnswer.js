@@ -1,23 +1,29 @@
 import connectDB from "../../middleware/mongodb";
-import QuizAnswer from "../../models/answer/quizAnswer";
+import { StudentAnswers, StudentSchema } from "../../models/users/User";
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
     const { user, answer, correct, type, attempt, id, sphere } = req.body
-    if (user && answer && correct) {
+    if (user) {
       try {
-        var quizAnswer = new QuizAnswer({
-          user,
-          answer,
-          correct,
-          type,
-          attempt,
-          id,
-          sphere
+        const quizAnswer = new StudentAnswers({
+          answer: answer,
+          correct: correct,
+          type: type,
+          attempt: attempt,
+          id: id,
+          sphere: sphere
         })
 
-        var answercreated = await quizAnswer.save()
-        return res.status(200).send(answercreated)
+        const doc = await StudentSchema.findOneAndUpdate(
+          { user: user },
+          { $push: { answers: quizAnswer } },
+          { upsert: true }
+        )
+        console.log(doc)
+        doc.save()
+
+        return res.status(200).send(doc)
       } catch (error) {
         return res.status(500).send(error.message)
       }

@@ -3,9 +3,9 @@ import constants from '../styles/constants';
 import NavBar from '../components/NavBar'
 import Image from 'next/image';
 import connectMongo from "../middleware/connectMongo";
-import QuizAnswer from "../models/answer/quizAnswer";
-import StudentProgress from '../models/progress/Progress'
+import { StudentSchema, StudentAnswers, StudentProgress } from '../models/users/User'
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import MainContainer from '../components/MainContainer'
 
 
 const Main = styled.div`
@@ -39,68 +39,74 @@ const SubHeading = styled.h3`
 `
 
 
-export default function Profile({ user, ans, progress, subs }) {
-  /* Answers logic */
-  let numCorrect = 0
-  let totalAttempts = 0
-  let attemptList = {}
-  let questionTypes = {}
-  let questionsAnswered = new Set()
+export default function Profile({ user, subs }) {
+  // /* Answers logic */
+  // let numCorrect = 0
+  // let totalAttempts = 0
+  // let attemptList = {}
+  // let questionTypes = {}
+  // let questionsAnswered = new Set()
 
-  ans.map((e, idx) => {
-    totalAttempts += 1;
-    questionTypes[e.sphere] = {
-      [e.id]: 0,
-      'correct': 0,
-      'type': [],
-      'total_attempts': 0
-    }
-    attemptList[e.id] = e.attempt
-    questionsAnswered.add(e.id)
-  })
+  // ans.map((e, idx) => {
+  //   totalAttempts += 1;
+  //   questionTypes[e.sphere] = {
+  //     [e.id]: 0,
+  //     'correct': 0,
+  //     'type': [],
+  //     'total_attempts': 0
+  //   }
+  //   attemptList[e.id] = e.attempt
+  //   questionsAnswered.add(e.id)
+  // })
 
-  ans.map((e, idx) => {
-    if (e.answer === e.correct) {
-      numCorrect += 1
-      questionTypes[e.sphere]['correct'] += 1
-    }
-    questionTypes[e.sphere]['type'].push(e.type)
-    questionTypes[e.sphere]['total_attempts'] += 1
-    questionTypes[e.sphere][e.id] += 1
-  })
+  // ans.map((e, idx) => {
+  //   if (e.answer === e.correct) {
+  //     numCorrect += 1
+  //     questionTypes[e.sphere]['correct'] += 1
+  //   }
+  //   questionTypes[e.sphere]['type'].push(e.type)
+  //   questionTypes[e.sphere]['total_attempts'] += 1
+  //   questionTypes[e.sphere][e.id] += 1
+  // })
 
-  /* Progress logic */
-  let progressSpheres = new Set()
-  let spheresPageCount = {}
-  let masterPageCount = {}
+  // /* Progress logic */
+  // let progressSpheres = new Set()
+  // let spheresPageCount = {}
+  // let masterPageCount = {}
 
-  progress.map((e, idx) => {
-    const [a, b] = e.page.split('/').slice(1)
-    spheresPageCount[a] = []
-    progressSpheres.add(e.sphere)
-  })
+  // progress.map((e, idx) => {
+  //   const [a, b] = e.page.split('/').slice(1)
+  //   spheresPageCount[a] = []
+  //   progressSpheres.add(e.sphere)
+  // })
 
-  progressSpheres = Array.from(progressSpheres)
+  // progressSpheres = Array.from(progressSpheres)
 
-  progress.map((e, idx) => {
-    const [a, b] = e.page.split('/').slice(1)
-    spheresPageCount[a].push(b)
-  })
+  // progress.map((e, idx) => {
+  //   const [a, b] = e.page.split('/').slice(1)
+  //   spheresPageCount[a].push(b)
+  // })
 
-  subs.map((e, idx) => {
-    const [a, b] = e.split('/')
-    masterPageCount[a] = []
-  })
-  subs.map((e, idx) => {
-    const [a, b] = e.split('/')
-    masterPageCount[a].push(b.slice(0, -3))
-  })
+  // subs.map((e, idx) => {
+  //   const [a, b] = e.split('/')
+  //   masterPageCount[a] = []
+  // })
+  // subs.map((e, idx) => {
+  //   const [a, b] = e.split('/')
+  //   masterPageCount[a].push(b.slice(0, -3))
+  // })
 
 
 
   return (
     <>
-      <NavBar />
+      <MainContainer
+        titleText='user profile'
+        noFlex={true}
+      />
+
+
+      {/* <NavBar />
       <Main>
         <ImageNameBox>
           <Image src={user.picture} width={50} height={50} alt="avatar" />
@@ -154,7 +160,7 @@ export default function Profile({ user, ans, progress, subs }) {
           </ul>
 
         </Stats>
-      </Main>
+      </Main> */}
     </>
   )
 }
@@ -193,12 +199,16 @@ export const getServerSideProps = withPageAuthRequired({
 
 
     const auth0user = getSession(req, res)
-    console.log(auth0user.user)
-
-    try {
+    return {
+      props: {
+        user: auth0user,
+        subs: dirs
+      }
+    }
+    {/* try {
       await connectMongo()
 
-      const ans = await QuizAnswer.find({ user: auth0user.user.email })
+      const ans = await StudentAnswers.find({ user: auth0user.user.email })
       const progress = await StudentProgress.find({ user: auth0user.user.email })
 
       return {
@@ -215,7 +225,7 @@ export const getServerSideProps = withPageAuthRequired({
       return {
         notFound: true
       }
-    }
+    } */}
   }
 });
 

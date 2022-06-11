@@ -69,5 +69,8 @@ var studentSchema = new Schema({
 mongoose.models = {}
 
 var StudentSchema = mongoose.model('StudentSchema', studentSchema)
+var StudentProgress = mongoose.model('StudentProgress', studentProgress)
+var StudentAnswers = mongoose.model('StudentAnswers', studentAnswers)
 
-export default StudentSchema
+
+export { StudentSchema, StudentProgress, StudentAnswers }

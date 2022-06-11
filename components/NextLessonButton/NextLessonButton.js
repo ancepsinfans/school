@@ -1,6 +1,5 @@
 import React from "react";
-import Link from "next/link";
-import progressSender from '../../models/progress/helpers'
+import progressSender from '../../models/users/progressHelper'
 import BlueButton from "../BlueButton";
 
 function NextLessonButton({ link, text, user, sphere, path }) {

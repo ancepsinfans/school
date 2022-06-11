@@ -1,6 +1,6 @@
 import React from "react";
 import constants from "../../styles/constants";
-import answerSender from "../../models/answer/helpers";
+import answerSender from "../../models/users/answerHelper";
 import styled from "@emotion/styled";
 
 const Input = styled.div`

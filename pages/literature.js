@@ -1,29 +1,29 @@
 import React from "react";
 import connectMongo from "../middleware/connectMongo";
-import StudentProgress from '../models/progress/Progress'
+import StudentProgress from '../models/users/User'
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import MainContainer from "../components/MainContainer";
 import Grid from "../components/Grid";
 import GridCard from "../components/GridCard";
 
-const Literature = ({ user, progress }) => {
+const Literature = ({ user }) => {
 
     /* Progress logic */
-    let progressSpheres = new Set()
-    let spheresPageCount = {}
+    // let progressSpheres = new Set()
+    // let spheresPageCount = {}
 
-    progress.map((e, idx) => {
-        const [a, b] = e.page.split('/').slice(1)
-        spheresPageCount[a] = []
-        progressSpheres.add(e.sphere)
-    })
+    // progress.map((e, idx) => {
+    //     const [a, b] = e.page.split('/').slice(1)
+    //     spheresPageCount[a] = []
+    //     progressSpheres.add(e.sphere)
+    // })
 
-    progressSpheres = Array.from(progressSpheres)
+    // progressSpheres = Array.from(progressSpheres)
 
-    progress.map((e, idx) => {
-        const [a, b] = e.page.split('/').slice(1)
-        spheresPageCount[a].push(b)
-    })
+    // progress.map((e, idx) => {
+    //     const [a, b] = e.page.split('/').slice(1)
+    //     spheresPageCount[a].push(b)
+    // })
 
     return (
         <>
@@ -63,25 +63,29 @@ export const getServerSideProps = withPageAuthRequired({
     getServerSideProps: async ({ req, res }) => {
 
         const auth0user = getSession(req, res)
-
-        try {
-            await connectMongo()
-
-            const progress = await StudentProgress.find({ user: auth0user.user.email })
-
-            return {
-                props: {
-                    progress: JSON.parse(JSON.stringify(progress)),
-                }
-            }
-        } catch (error) {
-            console.log('oops')
-            console.log(error)
-
-            return {
-                notFound: true
+        return {
+            props: {
+                user: auth0user
             }
         }
+        // try {
+        //     await connectMongo()
+
+        //     const progress = await StudentProgress.find({ user: auth0user.user.email }).progress
+
+        //     return {
+        //         props: {
+        //             progress: JSON.parse(JSON.stringify(progress)),
+        //         }
+        //     }
+        // } catch (error) {
+        //     console.log('oops')
+        //     console.log(error)
+
+        //     return {
+        //         notFound: true
+        //     }
+        // }
     }
 });
 
