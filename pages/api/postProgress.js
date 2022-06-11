@@ -1,28 +1,27 @@
 import connectDB from "../../middleware/mongodb";
-import StudentProgress from "../../models/progress/Progress";
 import StudentSchema from "../../models/users/User";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
         const { user, sphere, page } = req.body
-        const filter = { user: user }
+
         if (user) {
             try {
-                var studentSchema = new StudentSchema({
-                    user: user,
-                    progress: [{
-                        sphere: sphere,
-                        page: page,
-                    }]
-                })
-                console.log(studentSchema)
-                var progresscreated = await studentProgress.findOneAndUpdate(
-                    filter,
-                    studentSchema,
+                var progressUpdate = {
+                    sphere: sphere,
+                    page: page,
+                    timestamp: Date.now
+                }
+                const progresscreated = await StudentSchema.findOneAndUpdate(
+                    { user: user },
+                    { $push: { progress: progressUpdate } },
                     {
-                        new: true,
                         upsert: true,
-                    })
+                        new: false,
+                    }
+                )
+                console.log('does this print?')
+                console.log(ddd)
                 return res.status(200).send(progresscreated)
             } catch (error) {
                 return res.status(500).send(error.message)
