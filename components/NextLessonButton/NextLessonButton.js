@@ -9,7 +9,7 @@ function NextLessonButton({ link, text, user, sphere, path }) {
       onClick={() => progressSender(
         user,
         sphere,
-        path
+        path.split('/')[2]
       )}
     >
       {text} &rarr;

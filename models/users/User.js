@@ -54,14 +54,14 @@ var studentSchema = new Schema({
         type: String,
         required: true
     },
-    answers: {
+    answers: [{
         type: studentAnswers,
         required: false
-    },
-    progress: {
+    }],
+    progress: [{
         type: studentProgress,
-        required: true
-    }
+        required: false
+    }]
 }, {
     collection: 'students'
 })

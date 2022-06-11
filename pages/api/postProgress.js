@@ -15,7 +15,7 @@ const handler = async (req, res) => {
                         page: page,
                     }]
                 })
-
+                console.log(studentSchema)
                 var progresscreated = await studentProgress.findOneAndUpdate(
                     filter,
                     studentSchema,
