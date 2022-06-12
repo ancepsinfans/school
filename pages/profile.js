@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
 import constants from '../styles/constants';
-import NavBar from '../components/NavBar'
 import Image from 'next/image';
 import connectMongo from "../middleware/connectMongo";
-import { StudentSchema, StudentAnswers, StudentProgress } from '../models/users/User'
+import { StudentSchema } from '../models/users/User'
+import SphereSchema from '../models/spheres/Spheres';
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import MainContainer from '../components/MainContainer'
-
 
 const ImageNameBox = styled.div`
   display: inline-flex;
@@ -80,24 +79,23 @@ export default function Profile({ user, studentInfo, subs }) {
   })
 
   progressSpheres.forEach((e, idx) => {
-    spheresPageCount[e] = []
+    spheresPageCount[e] = new Set()
     progress.map((f, id) => {
       if (f.sphere === e) {
-        spheresPageCount[e].push(f.page)
+        spheresPageCount[e].add(f.page)
       }
     })
   })
 
-  subs.map((e, idx) => {
-    const [a, b] = e.split('/')
-    masterPageCount[a] = []
-  })
-  subs.map((e, idx) => {
-    const [a, b] = e.split('/')
-    masterPageCount[a].push(b.slice(0, -3))
+  subs.forEach(e => {
+    masterPageCount[e.sphere] = []
+    e.pages.forEach(f => {
+      masterPageCount[e.sphere].push(f)
+    })
   })
 
-  console.log(subs)
+
+  console.log(masterPageCount)
 
   return (
     <>
@@ -114,6 +112,7 @@ export default function Profile({ user, studentInfo, subs }) {
         }
         noFlex={true}
       >
+
         <Stats>
           <SubHeading>Answers Statistics</SubHeading>
           <p>Total correct answers: {numCorrect}</p>
@@ -133,19 +132,19 @@ export default function Profile({ user, studentInfo, subs }) {
           }
           )}</ul>
         </Stats>
+
         <Stats>
           <SubHeading>Progress</SubHeading>
           <ul>
             {Object.entries(spheresPageCount).map(([key, value], i) => {
               return (
                 <ListItem key={i}>
-                  {key}: {(value.length / masterPageCount[key].length * 100).toFixed(1)}% completed
+                  {key}: {(value.size / masterPageCount[key].length * 100).toFixed(1)}% completed
                 </ListItem>
               )
             })}</ul>
-
-
         </Stats>
+
       </MainContainer>
     </>
   )
@@ -154,44 +153,18 @@ export default function Profile({ user, studentInfo, subs }) {
 export const getServerSideProps = withPageAuthRequired({
 
   getServerSideProps: async ({ req, res }) => {
-    const fs = require('fs');
-    const path = require('path')
-    const dir = './pages'
-    const dirs = []
-
-    fs.readdir(dir, (err, files) => {
-      if (err) {
-        throw err;
-      }
-
-      files.forEach(file => {
-        if (!file.includes('.') && file !== 'api') {
-          console.log(file)
-          fs.readdir(path.join(dir, file), (err, files_sub) => {
-            if (err) {
-              throw err;
-            }
-
-            files_sub.forEach(file_sub => {
-              dirs.push(path.join(file, file_sub))
-            })
-          })
-        }
-      })
-
-    })
-
 
     const auth0user = getSession(req, res)
 
     await connectMongo()
 
     const studentInfo = await StudentSchema.findOne({ user: auth0user.user.email })
+    const spheres = await SphereSchema.find({})
 
     return {
       props: {
         user: auth0user,
-        subs: dirs,
+        subs: JSON.parse(JSON.stringify(spheres)),
         studentInfo: JSON.parse(JSON.stringify(studentInfo))
       }
     }
