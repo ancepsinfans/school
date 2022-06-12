@@ -10,7 +10,7 @@ export const getServerSideProps = async () => {
     try {
         await connectMongo()
 
-        const qs = await Question.find()
+        const qs = await Question.find({ sphere: 'test' })
 
         return {
             props: {

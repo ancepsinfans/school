@@ -82,7 +82,7 @@ const NavBarH = () => {
 
 
 
-export const NavBarO = () => {
+export const NavBarO = (props) => {
   const { user } = useUser()
 
   return (
@@ -93,10 +93,11 @@ export const NavBarO = () => {
         </Link>
       </div>
 
-      <Link href='/profile'>
-        <UserName>{user ? `${user.name}` : null}</UserName>
-      </Link>
-
+      {props.isProfilePage ? null :
+        <Link href='/profile'>
+          <UserName>{user ? `${user.name}` : null}</UserName>
+        </Link>
+      }
 
       <div>
         {user ? (

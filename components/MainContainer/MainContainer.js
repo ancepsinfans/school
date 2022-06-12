@@ -10,9 +10,9 @@ const MainContainerStyled = styled.div`
 
 const MainContent = styled.main`
   min-height: 85vh;
-  padding: 5rem 0;
+  padding: ${props => props.noFlex ? '2.5rem 0' : '5rem 0'};
   flex: 1;
-  display: ${props => props.noFlex ? null : 'flex'};
+  display: ${props => props.noFlex ? 'block' : 'flex'};
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -52,10 +52,13 @@ const Footer = styled.footer`
 `
 
 
-const MainContainer = ({ navType, titleText, introText, noFlex, smallTitle, children }) => {
+const MainContainer = ({ navType, titleText, introText, noFlex, smallTitle, isProfilePage, children }) => {
   return (
     <>
-      <NavBarController type={navType} />
+      <NavBarController
+        type={navType}
+        isProfilePage={isProfilePage}
+      />
       <MainContainerStyled>
         <Head>
           <title>School</title>
