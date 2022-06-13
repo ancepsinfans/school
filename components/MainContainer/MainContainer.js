@@ -3,6 +3,10 @@ import styled from "@emotion/styled";
 import NavBarController from "../NavBar/NavBarController";
 import Image from "next/image";
 import Head from "next/head";
+import { useUser } from '@auth0/nextjs-auth0'
+import { useRouter } from 'next/router'
+import NextLessonButton from "../NextLessonButton";
+import next from "next";
 
 const MainContainerStyled = styled.div`
  padding: 0 2rem;
@@ -52,7 +56,32 @@ const Footer = styled.footer`
 `
 
 
-const MainContainer = ({ navType, titleText, introText, noFlex, smallTitle, isProfilePage, children }) => {
+const MainContainer = ({
+  navType,
+  titleText,
+  introText,
+  noFlex,
+  smallTitle,
+  isProfilePage,
+  isLesson,
+  nextPage,
+  children
+}) => {
+
+  const { user } = useUser()
+  const router = useRouter()
+  let nextLesson = null
+  let nextLessonCapitalized = null
+
+  if (isLesson) {
+    nextLesson = nextPage.split('/')[nextPage.split('/').length - 1]
+    nextLessonCapitalized = nextLesson.charAt(0).toUpperCase() + nextLesson.slice(1)
+    nextLessonCapitalized = nextLessonCapitalized.replace('-', ' ')
+    if (nextLesson === '') {
+      nextLessonCapitalized = 'Complete course!'
+    }
+  }
+
   return (
     <>
       <NavBarController
@@ -76,8 +105,18 @@ const MainContainer = ({ navType, titleText, introText, noFlex, smallTitle, isPr
             {introText}
           </Intro>
           {children}
-
+          {isLesson ?
+            <NextLessonButton
+              link={nextPage}
+              text={nextLessonCapitalized}
+              user={user ? user.email : 'none'}
+              sphere={router.pathname.split('/')[1]}
+              course={router.pathname.split('/')[2]}
+              page={router.pathname.split('/')[3]}
+            /> :
+            null}
         </MainContent>
+
         <Footer>
           <a
             style={{ textDecoration: 'none' }}
@@ -98,6 +137,7 @@ const MainContainer = ({ navType, titleText, introText, noFlex, smallTitle, isPr
               />
             </span>
           </a>
+
         </Footer>
       </MainContainerStyled>
     </>

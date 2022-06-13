@@ -1,7 +1,7 @@
 import React from 'react'
 import { UserProvider } from '@auth0/nextjs-auth0'
 import constants from '../styles/constants'
-import {createGlobalStyle} from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 
 const GlobalStyles = createGlobalStyle`
@@ -120,15 +120,20 @@ p, h1, h2, h3, h4, h5, h6, li, dl, dt, blockquote {
 
 a {
   color: var(--accentRedMain);
+  text-decoration: none;
+}
+
+p {
+  padding: 5px;
 }
 `
 
 function MyApp({ Component, pageProps }) {
   return (
-      <UserProvider>
-        <GlobalStyles/>
-        <Component {...pageProps} />
-      </UserProvider>
+    <UserProvider>
+      <GlobalStyles />
+      <Component {...pageProps} />
+    </UserProvider>
   )
 }
 

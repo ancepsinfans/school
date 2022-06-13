@@ -3,12 +3,13 @@ import { StudentSchema, StudentProgress } from "../../models/users/User";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
-        const { user, sphere, page } = req.body
+        const { user, sphere, course, page } = req.body
 
         if (user) {
             try {
                 const progressUpdate = new StudentProgress({
                     sphere: sphere,
+                    course: course,
                     page: page
                 })
                 const doc = await StudentSchema.findOneAndUpdate(

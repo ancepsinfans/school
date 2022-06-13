@@ -35,14 +35,9 @@ var studentAnswers = new Schema({
 })
 
 var studentProgress = new Schema({
-    sphere: {
-        type: String,
-        required: false
-    },
-    page: {
-        type: String,
-        required: true
-    },
+    sphere: String,
+    course: String,
+    page: String,
     timestamp: {
         type: Date,
         default: Date.now

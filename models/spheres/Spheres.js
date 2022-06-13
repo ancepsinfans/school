@@ -6,7 +6,10 @@ var sphereSchema = new Schema({
         type: String,
         required: true
     },
-    pages: [String],
+    courses: {
+        course: String,
+        pages: [String]
+    },
 }, {
     collection: 'spheres'
 })

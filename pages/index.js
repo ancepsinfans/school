@@ -6,6 +6,7 @@ import MainContainer from '../components/MainContainer'
 import constants from '../styles/constants'
 
 
+
 export default function Home() {
   const { user } = useUser()
   const isAdmin = (
@@ -36,7 +37,7 @@ export default function Home() {
           <>
 
             <GridCard
-              
+              isAdmin={isAdmin}
               link='/quiz'
               title='Quiz sandbox'
             />
@@ -50,23 +51,36 @@ export default function Home() {
             <GridCard
               link='/literature'
               title='Literature'
+              description='Courses to make your inner bookworm glow'
             />
 
             <GridCard
+              isDisabled={true}
               link=''
-              title='Placeholder'
+              title='Music'
+              description='Under construction'
             />
 
             <GridCard
+              isDisabled={true}
               link=''
-              title='Placeholder'
+              title='Science'
+              description='Under construction'
+            />
+
+            <GridCard
+              isDisabled={true}
+              link=''
+              title='Math'
+              description='Under construction'
             />
 
           </>
           :
           <GridCard
             link='/api/auth/login'
-            title='You should login first'
+            title='Login to get started'
+            description='By logging in it allows us to improve your experience'
           />
 
         }

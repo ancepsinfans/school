@@ -38,12 +38,14 @@ const UserName = styled.a`
   font-weight: 500;
   font-size: large;
   padding: 5px;
+  cursor: pointer;
 `
 
 const Back = styled.a`
   text-decoration: none;
   font-size: x-large;
   font-weight: 700;
+  cursor: pointer;
 `
 
 const NavBarH = () => {

@@ -71,31 +71,34 @@ export default function Profile({ user, studentInfo, subs }) {
 
   // /* Progress logic */
   let progressSpheres = new Set()
+  let progressCourses = new Set()
   let spheresPageCount = {}
   let masterPageCount = {}
 
-  progress.map((e, idx) => {
+  progress.map(e => {
     progressSpheres.add(e.sphere)
+    progressCourses.add(e.course)
   })
 
-  progressSpheres.forEach((e, idx) => {
-    spheresPageCount[e] = new Set()
-    progress.map((f, id) => {
-      if (f.sphere === e) {
-        spheresPageCount[e].add(f.page)
-      }
+  progressSpheres.forEach(e => {
+    spheresPageCount[e] = {}
+    progressCourses.forEach(f => {
+      spheresPageCount[e][f] = []
     })
   })
 
-  subs.forEach(e => {
-    masterPageCount[e.sphere] = []
-    e.pages.forEach(f => {
-      masterPageCount[e.sphere].push(f)
-    })
+  progress.map(e => {
+    spheresPageCount[e.sphere][e.course].push(e.page)
   })
 
+  subs.map(e => {
+    masterPageCount[e.sphere] = {}
 
-  console.log(masterPageCount)
+
+    e.courses.forEach(f => {
+      masterPageCount[e.sphere][Object.keys(f)[0]] = Object.values(f)[0]
+    })
+  })
 
   return (
     <>
@@ -139,7 +142,16 @@ export default function Profile({ user, studentInfo, subs }) {
             {Object.entries(spheresPageCount).map(([key, value], i) => {
               return (
                 <ListItem key={i}>
-                  {key}: {(value.size / masterPageCount[key].length * 100).toFixed(1)}% completed
+                  {key}
+                  <ul style={{ padding: '0 20px' }}>
+                    {Object.entries(value).map(([k, v], j) => {
+                      return (
+                        <ListItem key={j}>
+                          {k}: {(v.length / masterPageCount[key][k].length * 100).toFixed(1)}% complete
+                        </ListItem>
+                      )
+                    })}
+                  </ul>
                 </ListItem>
               )
             })}</ul>

@@ -1,8 +1,9 @@
 import axios from 'axios'
 
-async function progressSender(user, sphere, page) {
+async function progressSender(user, sphere, course, page) {
     const payload = {
         user: (user ? user : 'unregistered'),
+        course: course,
         sphere: sphere,
         page: page,
     }
