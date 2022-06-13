@@ -2,9 +2,12 @@ import React from 'react'
 import NavBarH, { NavBarO } from './NavBar'
 
 
-const NavBarController = (props) => {
+const NavBarController = ({ isProfilePage, isHome }) => {
     return (
-        props.type === 'home' ? <NavBarH /> : <NavBarO isProfilePage={props.isProfilePage} />
+        <NavBarH
+            isProfilePage={isProfilePage}
+            isHome={isHome}
+        />
     )
 }
 

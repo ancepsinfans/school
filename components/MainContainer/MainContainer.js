@@ -6,7 +6,6 @@ import Head from "next/head";
 import { useUser } from '@auth0/nextjs-auth0'
 import { useRouter } from 'next/router'
 import NextLessonButton from "../NextLessonButton";
-import next from "next";
 
 const MainContainerStyled = styled.div`
  padding: 0 2rem;
@@ -14,7 +13,7 @@ const MainContainerStyled = styled.div`
 
 const MainContent = styled.main`
   min-height: 85vh;
-  padding: ${props => props.noFlex ? '2.5rem 0' : '5rem 0'};
+  padding: ${props => props.noFlex ? '2.5rem 0' : '4rem 0'};
   flex: 1;
   display: ${props => props.noFlex ? 'block' : 'flex'};
   flex-direction: column;
@@ -24,7 +23,7 @@ const MainContent = styled.main`
 
 const Title = styled.h1`
   text-align: center;
-  margin: 30px auto;
+  margin: ${props => props.smallTitle ? '0px auto' : '30px auto'};
   line-height: 1.15;
   font-size: ${props => props.smallTitle ? '2.5rem' : '4rem'};
 `
@@ -63,6 +62,7 @@ const MainContainer = ({
   noFlex,
   smallTitle,
   isProfilePage,
+  isHome,
   isLesson,
   nextPage,
   children
@@ -85,6 +85,7 @@ const MainContainer = ({
   return (
     <>
       <NavBarController
+        isHome={isHome}
         type={navType}
         isProfilePage={isProfilePage}
       />

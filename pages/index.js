@@ -15,6 +15,7 @@ export default function Home() {
 
   return (
     <MainContainer
+      isHome={true}
       navType='home'
       titleText={
         <>

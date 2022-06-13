@@ -5,17 +5,18 @@ import styled from "@emotion/styled";
 import BlueButton from "../BlueButton";
 
 const NavBar = styled.header`
-  height: 76px;
+  height: ${props => props.isHome ? '76px' : '50px'};
   width: 100%;
   background: var(--primaryMain);
   border-bottom: 3px solid var(--accentBlue40);
   align-items: center;
   display: flex;
-  position: fixed;
+  position: sticky;
   justify-content: space-around;
   left: 0;
   z-index: 2;
   top: 0;
+  transition: height 2s;
 `
 
 const NavBarOther = styled.header`
@@ -48,17 +49,24 @@ const Back = styled.a`
   cursor: pointer;
 `
 
-const NavBarH = () => {
+const NavBarH = ({ isProfilePage, isHome }) => {
   const { user } = useUser()
 
 
   return (
-    <NavBar>
+    <NavBar isHome={isHome}>
       <div>
+        {isHome ? null :
+          <Link href='/'>
+            <Back>School</Back>
+          </Link>}
       </div>
-      <Link href='/profile'>
-        <UserName>{user ? `${user.name}` : null}</UserName>
-      </Link>
+
+      {isProfilePage ? null :
+        <Link href='/profile'>
+          <UserName>{user ? `${user.name}` : null}</UserName>
+        </Link>
+      }
 
       <div>
         {user ? (
