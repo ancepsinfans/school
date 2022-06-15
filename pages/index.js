@@ -6,7 +6,6 @@ import MainContainer from '../components/MainContainer'
 import constants from '../styles/constants'
 
 
-
 export default function Home() {
   const { user } = useUser()
   const isAdmin = (

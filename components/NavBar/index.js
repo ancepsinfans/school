@@ -1,2 +1,2 @@
-export * from "./NavBarController";
-export { default } from "./NavBarController";
+export * from "./NavBar";
+export { default } from "./NavBar";

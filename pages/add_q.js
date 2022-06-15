@@ -36,6 +36,8 @@ const AddQ = () => {
   const [good, setGood] = React.useState('')
   const [bad, setBad] = React.useState('')
   const [sphere, setSphere] = React.useState('')
+  const [id, setId] = React.useState('')
+
   const [isSuccess, setIsSuccess] = React.useState(false)
 
   const splitter = (data) => {
@@ -74,6 +76,11 @@ const AddQ = () => {
         style={{ backgroundColor: constants.accentWhite }}
         onChange={(e) => { setSphere(e.target.value); setIsSuccess(false) }}
       />
+      <h4>id</h4>
+      <input
+        style={{ backgroundColor: constants.accentWhite }}
+        onChange={(e) => { setId(e.target.value); setIsSuccess(false) }}
+      />
       <h4>good</h4>
       <input
         style={{ backgroundColor: constants.accentWhite }}
@@ -93,6 +100,7 @@ const AddQ = () => {
             options,
             correct,
             sphere,
+            id,
             good,
             bad
           );

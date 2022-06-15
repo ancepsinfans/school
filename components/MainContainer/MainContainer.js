@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import NavBarController from "../NavBar/NavBarController";
+import NavBar from "../NavBar/";
 import Image from "next/image";
 import Head from "next/head";
 import { useUser } from '@auth0/nextjs-auth0'
@@ -56,7 +56,6 @@ const Footer = styled.footer`
 
 
 const MainContainer = ({
-  navType,
   titleText,
   introText,
   noFlex,
@@ -84,9 +83,8 @@ const MainContainer = ({
 
   return (
     <>
-      <NavBarController
+      <NavBar
         isHome={isHome}
-        type={navType}
         isProfilePage={isProfilePage}
       />
       <MainContainerStyled>

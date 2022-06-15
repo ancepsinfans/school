@@ -10,7 +10,6 @@ async function answerSender(type, data, correct, user, attempts, id, sphere) {
         id: id,
         sphere: sphere,
     }
-    console.log(payload)
 
     const response = await axios.post(`/api/postAnswer`, payload)
 

@@ -2,6 +2,7 @@ import React from "react";
 import constants from '../../styles/constants'
 import answerSender from "../../models/users/answerHelper";
 import styled from "@emotion/styled";
+import useQuestion from "../../lib/fetchQuestion";
 
 const Question = styled.div`
   padding: 5px 5px;

@@ -17,7 +17,6 @@ const handler = async (req, res) => {
                     { $push: { progress: progressUpdate } },
                     { upsert: true }
                 )
-                console.log(doc)
                 doc.save()
 
 

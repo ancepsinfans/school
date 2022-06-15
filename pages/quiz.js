@@ -5,12 +5,14 @@ import { useUser } from '@auth0/nextjs-auth0'
 import connectMongo from "../middleware/connectMongo";
 import Question from "../models/questions/Questions";
 import MainContainer from "../components/MainContainer";
+import useQuestion from "../lib/fetchQuestion";
 
-export const getServerSideProps = async () => {
+
+export const getStaticProps = async () => {
     try {
         await connectMongo()
 
-        const qs = await Question.find({ sphere: 'test' })
+        const qs = await Question.find({})
 
         return {
             props: {
@@ -24,8 +26,11 @@ export const getServerSideProps = async () => {
         }
     }
 }
+
+
 const Quiz = ({ qs }) => {
     const { user } = useUser()
+
     return (
         <MainContainer
             titleText='Quiz Sandbox'

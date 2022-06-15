@@ -20,7 +20,6 @@ const handler = async (req, res) => {
           { $push: { answers: quizAnswer } },
           { upsert: true }
         )
-        console.log(doc)
         doc.save()
 
         return res.status(200).send(doc)

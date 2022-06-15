@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import uuid from "react-uuid";
 var Schema = mongoose.Schema
 
 var question = new Schema({
@@ -21,7 +20,7 @@ var question = new Schema({
     },
     id: {
         type: String,
-        default: uuid().toString()
+        required: true
     },
     good: {
         type: String,

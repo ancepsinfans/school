@@ -7,7 +7,6 @@ async function progressSender(user, sphere, course, page) {
         sphere: sphere,
         page: page,
     }
-    console.log(payload)
 
     const response = await axios.post(`/api/postProgress`, payload)
 
