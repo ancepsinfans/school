@@ -1,55 +1,75 @@
-import { useRouter } from "next/router";
-import react from "react";
+import React from "react";
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from "next-mdx-remote";
-import { getPostSlugs } from "../../../lib/api";
+import { getLessonPage } from "../../../lib/api";
+import MainContainer from "../../../components/MainContainer";
+import Question from "../../../models/questions/Questions";
+import MC from "../../../components/MC";
+import connectMongo from "../../../middleware/connectMongo";
+import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
-const Test = ({ routes }) => {
-    const router = useRouter()
-    const { sphere, course, lesson } = router.query
-    console.log(routes)
+
+
+
+const Test = ({ source, params, sphere, course, lesson, qs, user }) => {
+    console.log(qs)
+    const components = {
+        MC: MC
+    }
     return (
-        <>
-            <p>{routes}</p>
-            {/* <MDXRemote {...source} /> */}
-            {/* <h1>{sphere}</h1>
-            <h2>{course}</h2>
-            <h3>{lesson}</h3> */}
-        </>
+        <MainContainer
+            smallTitle={true}
+            titleText={source.frontmatter.title}
+            introText={source.frontmatter.intro}
+            isLesson={true}
+            nextPage={`/${sphere}/${course}/${source.frontmatter.next}`}
+        >
+            <MDXRemote {...source} scope={{ sphere: sphere, user: user, qs: qs }} components={components} />
+
+        </MainContainer>
     )
 }
 
 
-// export async function getStaticPaths() {
-//     const files = await getPostSlugs()
-//     console.log(files)
-//     return {
-//         paths: [
-//             // files?.map((lesson) => ({ params: { lesson } }))
-//             '/literature/101/test'
-//             // { params: { sphere: sphere, course: course, lesson: lesson } } // See the "paths" section below
-//         ],
-//         fallback: false
-//     };
-// }
+export const getServerSideProps = withPageAuthRequired({
+    getServerSideProps: async ({ req, res, params }) => {
+        const lessonContents = await getLessonPage(params.sphere, params.course, params.lesson)
+        const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
+        const auth0user = getSession(req, res)
+        try {
+            await connectMongo()
 
-export async function getServerSideProps({ params, ...props }) {
-    const routes = await getPostSlugs()
+            const qs = await Question.find({})
 
-    return {
-        props: {
-            routes: routes
+            return {
+                props: {
+                    user: auth0user,
+                    source: mdxSource,
+                    params: params,
+                    sphere: params.sphere,
+                    course: params.course,
+                    lesson: params.lesson,
+                    qs: JSON.parse(JSON.stringify(qs))
+                }
+            }
+        } catch (error) {
+            console.log(error)
+            return {
+                props: {
+                    user: auth0user,
+                    source: mdxSource,
+                    params: params,
+                    sphere: params.sphere,
+                    course: params.course,
+                    lesson: params.lesson,
+                    qs: 'none'
+                }
+            }
         }
+
+
+
     }
-
-    // const source = `_pages/${ctx.sphere}/${ctx.course}/${ctx.lesson}`
-    // const mdxSource = await serialize(source)
-    // return {
-    //     props: {
-    //         source: mdxSource,
-
-    //     }
-    // }
-}
+})
 
 export default Test

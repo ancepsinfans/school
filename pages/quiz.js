@@ -5,7 +5,6 @@ import { useUser } from '@auth0/nextjs-auth0'
 import connectMongo from "../middleware/connectMongo";
 import Question from "../models/questions/Questions";
 import MainContainer from "../components/MainContainer";
-import useQuestion from "../lib/fetchQuestion";
 
 
 export const getStaticProps = async () => {
