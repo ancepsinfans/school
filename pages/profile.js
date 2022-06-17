@@ -83,12 +83,12 @@ export default function Profile({ user, studentInfo, paths }) {
   progressSpheres.forEach(e => {
     spheresPageCount[e] = {}
     progressCourses.forEach(f => {
-      spheresPageCount[e][f] = []
+      spheresPageCount[e][f] = new Set()
     })
   })
 
   progress.map(e => {
-    spheresPageCount[e.sphere][e.course].push(e.page)
+    spheresPageCount[e.sphere][e.course].add(e.page)
   })
 
 
@@ -139,7 +139,7 @@ export default function Profile({ user, studentInfo, paths }) {
                     {Object.entries(value).map(([k, v], j) => {
                       return (
                         <ListItem key={j}>
-                          {k}: {(v.length / paths[key][k].length * 100).toFixed(1)}% complete
+                          {k}: {(v.size / paths[key][k].length * 100).toFixed(1)}% complete
                         </ListItem>
                       )
                     })}
