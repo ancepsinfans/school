@@ -51,7 +51,7 @@ const GridCard = ({ link, isAdmin, title, description, isDisabled }) => {
 
 
   return (
-    <div style={{ display: isAdmin }}>
+    <div style={{ display: (isAdmin ? "visible" : "none" }}>
       <Link href={link}>
         <Card
           isDisabled={isDisabled}

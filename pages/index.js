@@ -9,7 +9,7 @@ import constants from '../styles/constants'
 export default function Home() {
   const { user } = useUser()
   const isAdmin = (
-    user && user.email == 'zachary.r.bullard@gmail.com' ? null : 'none'
+    user && user.email == 'zachary.r.bullard@gmail.com' ? true : false
   )
 
   return (
@@ -35,12 +35,6 @@ export default function Home() {
 
         {user ?
           <>
-
-            <GridCard
-              isAdmin={isAdmin}
-              link='/quiz'
-              title='Quiz sandbox'
-            />
 
             <GridCard
               isAdmin={isAdmin}

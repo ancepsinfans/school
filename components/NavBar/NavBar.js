@@ -58,7 +58,7 @@ const NavBar = ({ isProfilePage, isHome }) => {
 
 
       <Link href='/profile'>
-        <UserName>{isProfilePage ? 'Profile' : `${user ? `${user.name}` : null}`}</UserName>
+        <UserName>{isProfilePage ? 'Profile' : `${user ? `${user.name}` : ''}`}</UserName>
       </Link>
 
 
