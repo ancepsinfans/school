@@ -6,6 +6,7 @@ import { StudentSchema } from '../models/users/User'
 import SphereSchema from '../models/spheres/Spheres';
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import MainContainer from '../components/MainContainer'
+import { getAllLessons } from '../lib/fetchAllLessons';
 
 const ImageNameBox = styled.div`
   display: inline-flex;
@@ -34,10 +35,10 @@ const SubHeading = styled.h3`
   padding-bottom: 5px;
 `
 
-export default function Profile({ user, studentInfo, subs }) {
+export default function Profile({ user, studentInfo, paths }) {
   const ans = studentInfo.answers
   const progress = studentInfo.progress
-
+  console.log(paths)
   // /* Answers logic */
   let numCorrect = 0
   let totalAttempts = 0
@@ -73,7 +74,6 @@ export default function Profile({ user, studentInfo, subs }) {
   let progressSpheres = new Set()
   let progressCourses = new Set()
   let spheresPageCount = {}
-  let masterPageCount = {}
 
   progress.map(e => {
     progressSpheres.add(e.sphere)
@@ -91,14 +91,6 @@ export default function Profile({ user, studentInfo, subs }) {
     spheresPageCount[e.sphere][e.course].push(e.page)
   })
 
-  subs.map(e => {
-    masterPageCount[e.sphere] = {}
-
-
-    e.courses.forEach(f => {
-      masterPageCount[e.sphere][Object.keys(f)[0]] = Object.values(f)[0]
-    })
-  })
 
   return (
     <>
@@ -147,7 +139,7 @@ export default function Profile({ user, studentInfo, subs }) {
                     {Object.entries(value).map(([k, v], j) => {
                       return (
                         <ListItem key={j}>
-                          {k}: {(v.length / masterPageCount[key][k].length * 100).toFixed(1)}% complete
+                          {k}: {(v.length / paths[key][k].length * 100).toFixed(1)}% complete
                         </ListItem>
                       )
                     })}
@@ -166,6 +158,8 @@ export const getServerSideProps = withPageAuthRequired({
 
   getServerSideProps: async ({ req, res }) => {
 
+    const allLessons = await getAllLessons()
+
     const auth0user = getSession(req, res)
 
     await connectMongo()
@@ -175,6 +169,7 @@ export const getServerSideProps = withPageAuthRequired({
 
     return {
       props: {
+        paths: allLessons,
         user: auth0user,
         subs: JSON.parse(JSON.stringify(spheres)),
         studentInfo: JSON.parse(JSON.stringify(studentInfo))

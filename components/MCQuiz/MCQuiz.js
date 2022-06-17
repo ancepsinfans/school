@@ -2,7 +2,6 @@ import React from "react";
 import constants from '../../styles/constants'
 import answerSender from "../../models/users/answerHelper";
 import styled from "@emotion/styled";
-import useQuestion from "../../lib/fetchQuestion";
 
 const Question = styled.div`
   padding: 5px 5px;
@@ -11,37 +10,45 @@ const Question = styled.div`
 `
 const AnswerButton = styled.button`
 & {
-    width: 15%;
-    border: 1px solid var(--blackMain);
-    border-radius: 12px;
-    color: var(--blackMain);
-    border-radius: 5px;
-    margin: 5px;
-    height: 25px;
+  width: 15%;
+  border: 1px solid var(--blackMain);
+  border-radius: 12px;
+  color: var(--blackMain);
+  border-radius: 5px;
+  margin: 5px;
+  height: 25px;
 }
 
 &:hover {
-    border: none;
-    width: calc(15% + 2px);
-    height: calc(25px + 0px);
+  border: none;
+  width: calc(15% + 2px);
+  height: calc(25px + 0px);
 }
 `
 
-const MCQuiz = (props) => {
+const MCQuiz = ({ questionSet, questID, user }) => {
+
+  let activeQuestion = null
+
+  questionSet.forEach(e => {
+    if (e.id === questID) {
+      activeQuestion = e
+    }
+  })
 
   const [answer, setAnswer] = React.useState('');
   const [attempts, setAttempts] = React.useState(0)
   const [color, setColor] = React.useState(
-    () => new Array(props.question[props.questionNumber].options.length).fill(constants.primaryMain)
+    () => new Array(activeQuestion.options.length).fill(constants.primaryMain)
   )
 
   const renderFeedback = (data) => {
-    if (data === props.question[props.questionNumber].correct) {
-      return (props.question[props.questionNumber].good)
+    if (data === activeQuestion.correct) {
+      return (activeQuestion.good)
     } else if (data === '') {
       return ''
     } else {
-      return (props.question[props.questionNumber].bad)
+      return (activeQuestion.bad)
     }
   }
 
@@ -61,7 +68,7 @@ const MCQuiz = (props) => {
       'mc quiz',
       ans,
       correct,
-      props.user,
+      user.email,
       attempts,
       id,
       sphere
@@ -70,21 +77,21 @@ const MCQuiz = (props) => {
 
   return (
     <Question>
-      <h2>{props.question[props.questionNumber].desc}</h2>
+      <h2>{activeQuestion.desc}</h2>
       <ol>
-        {props.question[props.questionNumber].options.map((ans, i) => {
+        {activeQuestion.options.map((ans, i) => {
 
 
           return (
-            <li key={`${i}_${ans}`} style={{ listStyle: 'none' }}>
+            <li key={`${i}_${ans}`} style={{ listStyle: 'none', width: '500px' }}>
               <AnswerButton
                 key={i}
                 style={{ backgroundColor: color[i] }}
                 onClick={() => parentOnClick(
                   ans,
-                  props.question[props.questionNumber].correct,
-                  props.question[props.questionNumber].id,
-                  props.question[props.questionNumber].sphere,
+                  activeQuestion.correct,
+                  activeQuestion.id,
+                  activeQuestion.sphere,
                   i
                 )}
               >
@@ -96,7 +103,6 @@ const MCQuiz = (props) => {
       </ol>
       <span>{renderFeedback(answer)}</span>
       <br />
-      <p>attempts: {attempts}</p>
     </Question>
   )
 }

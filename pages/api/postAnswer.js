@@ -15,11 +15,17 @@ const handler = async (req, res) => {
           sphere: sphere
         })
 
-        const doc = await StudentSchema.findOneAndUpdate(
+        let doc = await StudentSchema.findOneAndUpdate(
           { user: user },
-          { $push: { answers: quizAnswer } },
           { upsert: true }
         )
+
+        if (!doc.answers) {
+          doc.answers = []
+        }
+
+        doc.answers.push(quizAnswer)
+
         doc.save()
 
         return res.status(200).send(doc)

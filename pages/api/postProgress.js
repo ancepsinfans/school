@@ -12,14 +12,20 @@ const handler = async (req, res) => {
                     course: course,
                     page: page
                 })
-                const doc = await StudentSchema.findOneAndUpdate(
+
+
+                let doc = await StudentSchema.findOneAndUpdate(
                     { user: user },
-                    { $push: { progress: progressUpdate } },
                     { upsert: true }
                 )
+
+                if (!doc.progress) {
+                    doc.progress = []
+                }
+
+                doc.progress.push(progressUpdate)
+
                 doc.save()
-
-
 
                 return res.status(200).send(doc)
             } catch (error) {

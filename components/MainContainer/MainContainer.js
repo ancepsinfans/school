@@ -64,6 +64,9 @@ const MainContainer = ({
   isHome,
   isLesson,
   nextPage,
+  sphere,
+  course,
+  lesson,
   children
 }) => {
 
@@ -109,9 +112,9 @@ const MainContainer = ({
               link={nextPage}
               text={nextLessonCapitalized}
               user={user ? user.email : 'none'}
-              sphere={router.pathname.split('/')[1]}
-              course={router.pathname.split('/')[2]}
-              page={router.pathname.split('/')[3]}
+              sphere={sphere}
+              course={course}
+              page={lesson}
             /> :
             null}
         </MainContent>
