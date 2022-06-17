@@ -1,35 +1,73 @@
 import React from "react";
+import styled from "@emotion/styled";
 
-const Definition = ({ children, definition }) => {
-  const tipRef = React.createRef(null);
-  function handleMouseEnter() {
-    tipRef.current.style.opacity = 1;
-    tipRef.current.style.marginLeft = "20px";
+
+const Popup = styled.div`
+  & {
+    position: absolute;
+    border-radius: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px;
+    color: var(--tooltip-text-color);
+    background: var(--tooltip-background-color);
+    border: 2px solid var(--accentPurple70);
+    font-size: 14px;
+    font-family: sans-serif;
+    line-height: 1;
+    z-index: 100;
+    white-space: nowrap;
+    top: calc(var(--tooltip-margin) * -1); 
   }
-  function handleMouseLeave() {
-    tipRef.current.style.opacity = 0;
-    tipRef.current.style.marginLeft = "10px";
+
+  &::before {
+    content: " ";
+    left: 50%;
+    border: solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: var(--tooltip-arrow-size);
+    margin-left: calc(var(--tooltip-arrow-size) * -1);
+    top: 101%;
+    border-top-color: var(--accentPurple70);
+    z-index:90;
   }
+`
+
+const Wrapper = styled.span`
+  display: inline-block; 
+  position: relative; 
+`
+
+const Definition = ({ content, delay, children }) => {
+  let timeout;
+  const [active, setActive] = React.useState(false);
+
+  const showTip = () => {
+    timeout = setTimeout(() => {
+      setActive(true);
+    }, delay || 50);
+  };
+
+  const hideTip = () => {
+    clearInterval(timeout);
+    setActive(false);
+  };
 
   return (
-    <span
-      className="relative flex items-center"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+    <Wrapper
+      onMouseEnter={showTip}
+      onMouseLeave={hideTip}
     >
-      <div
-        className="absolute whitespace-no-wrap bg-gradient-to-r from-black to-gray-700 text-white px-4 py-2 rounded flex items-center transition-all duration-150"
-        style={{ left: "100%", opacity: 0 }}
-        ref={tipRef}
-      >
-        <div
-          className="bg-black h-3 w-3 absolute"
-          style={{ left: "-6px", transform: "rotate(45deg)" }}
-        />
-        {definition}
-      </div>
-      {children}
-    </span>
+      <span style={{ textDecoration: 'underline 4px var(--accentPurple70)' }}>{children}</span>
+      {active && (
+        <Popup>
+          {content}
+        </Popup>
+      )}
+    </Wrapper>
   );
 };
 
