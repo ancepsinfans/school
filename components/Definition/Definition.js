@@ -36,6 +36,11 @@ const Popup = styled.div`
   }
 `
 
+const Child = stuled.span`
+ -webkit-text-decoration: underline 4px var(--accentPurple70);
+ text-decoration: underline 4px var(--accentPurple70);
+ `
+
 const Wrapper = styled.span`
   display: inline-block; 
   position: relative; 
@@ -61,7 +66,7 @@ const Definition = ({ content, delay, children }) => {
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
     >
-      <span style={{ textDecoration: 'underline 4px var(--accentPurple70)' }}>{children}</span>
+      <Child>{children}</Child>
       {active && (
         <Popup>
           {content}
