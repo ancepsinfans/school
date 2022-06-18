@@ -47,11 +47,11 @@ const Card = styled.div`
 
 
 
-const GridCard = ({ link, isAdmin, title, description, isDisabled }) => {
+const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled }) => {
 
 
   return (
-    <div style={{ display: (isAdmin ? "visible" : "none" }}>
+    <div style={{ display: (isRestricted && !isAdmin ? "none" : "block" ) }}>
       <Link href={link}>
         <Card
           isDisabled={isDisabled}

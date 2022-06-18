@@ -38,6 +38,7 @@ export default function Home() {
 
             <GridCard
               isAdmin={isAdmin}
+              isRestricted={true}
               link='/add_q'
               title='Add questions'
             />
