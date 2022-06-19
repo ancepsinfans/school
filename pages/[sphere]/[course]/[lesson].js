@@ -1,15 +1,31 @@
 import React from "react";
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from "next-mdx-remote";
-import { getLessonPage } from "../../../lib/fetchLesson";
-import MainContainer from "../../../components/MainContainer";
-import Question from "../../../models/questions/Questions";
-import MCQuiz from "../../../components/MCQuiz";
-import TextInput from '../../../components/TextInput'
-import connectMongo from "../../../middleware/connectMongo";
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import Definition from "../../../components/Definition";
+import { MainContainer } from "../../../components/infrastructureComponents";
+import { MCQuiz, TextInput, MCorOther, Definition } from "../../../components/lessonComponents";
+import { getLessonPage } from "../../../lib/fetchLesson";
+import connectMongo from '../../../middleware/connectMongo'
+import Question from '../../../models/questions/Questions'
+import styled from "@emotion/styled";
 
+const Content = styled.div`
+ & {
+     margin: 15px 0;
+ }
+
+ & ul, ol {
+     list-style-position: inside;
+     padding: 10px 0 10px 20px;
+ }
+
+ & em {
+     text-decoration: underline 4px var(--accentPurple70);
+     font-style: normal;
+ }
+
+
+`
 
 const Test = ({ source, sphere, course, lesson, qs, user }) => {
     console.log(qs)
@@ -17,6 +33,7 @@ const Test = ({ source, sphere, course, lesson, qs, user }) => {
         MCQ: MCQuiz,
         TextI: TextInput,
         Def: Definition,
+        Feed: MCorOther,
     }
     return (
         <MainContainer
@@ -29,8 +46,20 @@ const Test = ({ source, sphere, course, lesson, qs, user }) => {
             course={course}
             lesson={lesson}
         >
-            <MDXRemote {...source} scope={{ sphere: sphere, user: user, qs: qs }} components={components} />
-
+            <Content>
+                <MDXRemote
+                    {...source}
+                    scope={{
+                        path: [sphere, course, lesson],
+                        sphere: sphere,
+                        course: course,
+                        lesson: lesson,
+                        user: user,
+                        qs: qs
+                    }}
+                    components={components}
+                />
+            </Content>
         </MainContainer>
     )
 }

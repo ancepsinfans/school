@@ -36,6 +36,8 @@ const AddQ = () => {
   const [good, setGood] = React.useState('')
   const [bad, setBad] = React.useState('')
   const [sphere, setSphere] = React.useState('')
+  const [course, setCourse] = React.useState('')
+  const [lesson, setLesson] = React.useState('')
   const [id, setId] = React.useState('')
 
   const [isSuccess, setIsSuccess] = React.useState(false)
@@ -76,6 +78,16 @@ const AddQ = () => {
         style={{ backgroundColor: constants.accentWhite }}
         onChange={(e) => { setSphere(e.target.value); setIsSuccess(false) }}
       />
+      <h4>course</h4>
+      <input
+        style={{ backgroundColor: constants.accentWhite }}
+        onChange={(e) => { setCourse(e.target.value); setIsSuccess(false) }}
+      />
+      <h4>lesson</h4>
+      <input
+        style={{ backgroundColor: constants.accentWhite }}
+        onChange={(e) => { setLesson(e.target.value); setIsSuccess(false) }}
+      />
       <h4>id</h4>
       <input
         style={{ backgroundColor: constants.accentWhite }}
@@ -100,6 +112,8 @@ const AddQ = () => {
             options,
             correct,
             sphere,
+            course,
+            lesson,
             id,
             good,
             bad

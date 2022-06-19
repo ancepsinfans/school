@@ -1,6 +1,6 @@
 import React from "react";
-import constants from "../../styles/constants";
-import answerSender from "../../models/users/answerHelper";
+import constants from "../../../../styles/constants";
+import answerSender from '../../../../models/users/answerHelper'
 import styled from "@emotion/styled";
 
 const Input = styled.div`
@@ -59,7 +59,10 @@ const TextInput = ({ questionSet, questID, user }) => {
       cor,
       user.email,
       attempts,
-      id, sphere
+      id,
+      sphere,
+      course,
+      lesson
     )
   }
 
@@ -78,7 +81,9 @@ const TextInput = ({ questionSet, questID, user }) => {
           value,
           activeQuestion.correct,
           activeQuestion.id,
-          activeQuestion.sphere
+          activeQuestion.sphere,
+          activeQuestion.course,
+          activeQuestion.lesson
         )}
       >
         Check

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import NavBar from "../NavBar/";
+import NavBar from "../NavBar";
 import Image from "next/image";
 import Head from "next/head";
 import { useUser } from '@auth0/nextjs-auth0'
@@ -114,7 +114,7 @@ const MainContainer = ({
               user={user ? user.email : 'none'}
               sphere={sphere}
               course={course}
-              page={lesson}
+              lesson={lesson}
             /> :
             null}
         </MainContent>

@@ -1,6 +1,5 @@
 import React from "react";
-import MainContainer from "../components/MainContainer";
-import BlueButton from "../components/BlueButton";
+import { MainContainer, BlueButton } from "../components/infrastructureComponents";
 
 const FourOhFour = () => {
     return (
