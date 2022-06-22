@@ -34,3 +34,6 @@ yarn-error.log*
 
 # mdx-data
 .mdx-data
+
+# obsidian
+.obsidian

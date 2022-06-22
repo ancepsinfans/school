@@ -11,7 +11,7 @@ export default function Home() {
   const isAdmin = (
     user && user.email == 'zachary.r.bullard@gmail.com' ? true : false
   )
-
+  
   return (
     <MainContainer
       isHome={true}
