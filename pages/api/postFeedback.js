@@ -1,20 +1,17 @@
 import connectDB from "../../middleware/mongodb";
-import { StudentAnswers, StudentSchema } from "../../models/users/User";
+import { StudentFeedback, StudentSchema } from "../../models/users/User";
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
-    const { user, answer, correct, type, attempt, id, sphere, course, lesson } = req.body
+    const { user, answer, id, sphere, course, lesson } = req.body
     if (user) {
       try {
-        const quizAnswer = new StudentAnswers({
+        const feedback = new StudentFeedback({
           answer: answer,
-          correct: correct,
-          type: type,
-          attempt: attempt,
           id: id,
           sphere: sphere,
           course: course,
-          lesson: lesson
+          lesson: lesson,
         })
 
         let doc = await StudentSchema.findOneAndUpdate(
@@ -22,11 +19,11 @@ const handler = async (req, res) => {
           { upsert: true }
         )
 
-        if (!doc.answers) {
-          doc.answers = []
+        if (!doc.feedback) {
+          doc.feedback = []
         }
 
-        doc.answers.push(quizAnswer)
+        doc.feedback.push(feedback)
 
         doc.save()
 

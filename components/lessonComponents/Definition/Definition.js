@@ -36,9 +36,9 @@ const Popup = styled.div`
   }
 `
 
-const Child = stuled.span`
- -webkit-text-decoration: underline 4px var(--accentPurple70);
- text-decoration: underline 4px var(--accentPurple70);
+const Child = styled.span`
+ -webkit-text-decoration: underline 4px var(--accentPurple70) !important;
+  text-decoration: underline 4px var(--accentPurple70) !important;
  `
 
 const Wrapper = styled.span`

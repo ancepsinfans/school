@@ -1,8 +1,8 @@
 import React from "react";
-import progressSender from '../../models/users/progressHelper'
+import progressSender from '../../../models/users/progressHelper'
 import BlueButton from "../BlueButton";
 
-function NextLessonButton({ link, text, user, sphere, course, page }) {
+function NextLessonButton({ link, text, user, sphere, course, lesson }) {
 
   return (
     <BlueButton link={link}
@@ -10,7 +10,7 @@ function NextLessonButton({ link, text, user, sphere, course, page }) {
         user,
         sphere,
         course,
-        page
+        lesson
       )}
     >
       {text} &rarr;

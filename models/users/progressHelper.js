@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-async function progressSender(user, sphere, course, page) {
+async function progressSender(user, sphere, course, lesson) {
     const payload = {
         user: (user ? user : 'unregistered'),
         course: course,
         sphere: sphere,
-        page: page,
+        lesson: lesson,
     }
 
     const response = await axios.post(`/api/postProgress`, payload)

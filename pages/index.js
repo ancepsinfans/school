@@ -1,8 +1,6 @@
 
 import { useUser } from '@auth0/nextjs-auth0'
-import GridCard from '../components/GridCard'
-import Grid from '../components/Grid'
-import MainContainer from '../components/MainContainer'
+import { Grid, GridCard, MainContainer } from '../components/infrastructureComponents'
 import constants from '../styles/constants'
 
 
@@ -66,7 +64,35 @@ export default function Home() {
             <GridCard
               isDisabled={true}
               link=''
+              title='Film'
+              description='Under construction'
+            />
+
+            <GridCard
+              isDisabled={true}
+              link=''
+              title='Linguistics'
+              description='Under construction'
+            />
+
+            <GridCard
+              isDisabled={true}
+              link=''
               title='Math'
+              description='Under construction'
+            />
+
+            <GridCard
+              isDisabled={true}
+              link=''
+              title='Psychology'
+              description='Under construction'
+            />
+
+            <GridCard
+              isDisabled={true}
+              link=''
+              title='Food'
               description='Under construction'
             />
 

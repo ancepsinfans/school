@@ -1,6 +1,6 @@
 import React from "react";
-import constants from '../../styles/constants'
-import answerSender from "../../models/users/answerHelper";
+import constants from '../../../../styles/constants'
+import answerSender from '../../../../models/users/answerHelper'
 import styled from "@emotion/styled";
 
 const Question = styled.div`
@@ -60,7 +60,7 @@ const MCQuiz = ({ questionSet, questID, user }) => {
     setColor(temp_colors)
   }
 
-  const parentOnClick = (ans, correct, id, sphere, i) => {
+  const parentOnClick = (ans, correct, id, sphere, course, lesson, i) => {
     setAnswer(ans)
     setAttempts(attempts + 1)
     colorHandler(ans, correct, i)
@@ -71,7 +71,9 @@ const MCQuiz = ({ questionSet, questID, user }) => {
       user.email,
       attempts,
       id,
-      sphere
+      sphere,
+      course,
+      lesson
     )
   }
 
@@ -92,6 +94,8 @@ const MCQuiz = ({ questionSet, questID, user }) => {
                   activeQuestion.correct,
                   activeQuestion.id,
                   activeQuestion.sphere,
+                  activeQuestion.course,
+                  activeQuestion.lesson,
                   i
                 )}
               >

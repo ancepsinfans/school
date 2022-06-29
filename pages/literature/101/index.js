@@ -2,9 +2,8 @@ import React from "react";
 import connectMongo from "../../../middleware/connectMongo";
 import { StudentSchema } from '../../../models/users/User'
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import MainContainer from "../../../components/MainContainer";
-import Grid from "../../../components/Grid";
-import GridCard from "../../../components/GridCard";
+import { MainContainer, Grid, GridCard } from "../../../components/infrastructureComponents";
+
 import Link from "next/link";
 
 const Literature = ({ progress }) => {

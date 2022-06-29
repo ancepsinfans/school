@@ -2,11 +2,10 @@ import styled from '@emotion/styled';
 import constants from '../styles/constants';
 import Image from 'next/image';
 import connectMongo from "../middleware/connectMongo";
-import { StudentSchema } from '../models/users/User'
-import SphereSchema from '../models/spheres/Spheres';
-import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import MainContainer from '../components/MainContainer'
+import { StudentSchema } from '../models/users/User';
 import { getAllLessons } from '../lib/fetchAllLessons';
+import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { MainContainer } from '../components/infrastructureComponents'
 
 const ImageNameBox = styled.div`
   display: inline-flex;
@@ -165,7 +164,6 @@ export const getServerSideProps = withPageAuthRequired({
     await connectMongo()
 
     const studentInfo = await StudentSchema.findOne({ user: auth0user.user.email })
-    const spheres = await SphereSchema.find({})
 
     return {
       props: {

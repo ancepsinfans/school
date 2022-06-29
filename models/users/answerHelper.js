@@ -1,14 +1,16 @@
 import axios from 'axios'
 
-async function answerSender(type, data, correct, user, attempts, id, sphere) {
+async function answerSender(type, answer, correct, user, attempts, id, sphere, course, lesson) {
     const payload = {
-        answer: data,
+        answer: answer,
         correct: correct.toString(),
         user: (user ? user : 'unregistered'),
         type: type,
         attempt: (attempts + 1).toString(),
         id: id,
         sphere: sphere,
+        course: course,
+        lesson: lesson
     }
 
     const response = await axios.post(`/api/postAnswer`, payload)

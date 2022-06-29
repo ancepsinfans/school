@@ -3,14 +3,14 @@ import { StudentSchema, StudentProgress } from "../../models/users/User";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
-        const { user, sphere, course, page } = req.body
+        const { user, sphere, course, lesson } = req.body
 
         if (user) {
             try {
                 const progressUpdate = new StudentProgress({
                     sphere: sphere,
                     course: course,
-                    page: page
+                    lesson: lesson
                 })
 
 

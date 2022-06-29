@@ -2,26 +2,13 @@ import mongoose from "mongoose";
 var Schema = mongoose.Schema
 
 var question = new Schema({
-    desc: {
-        type: String,
-        required: true
-    },
-    options: {
-        type: [String],
-        required: true
-    },
-    correct: {
-        type: String,
-        required: true
-    },
-    sphere: {
-        type: String,
-        required: true
-    },
-    id: {
-        type: String,
-        required: true
-    },
+    desc: String,
+    options: [String],
+    correct: String,
+    sphere: String,
+    course: String,
+    lesson: String,
+    id: String,
     good: {
         type: String,
         default: 'Great!'
