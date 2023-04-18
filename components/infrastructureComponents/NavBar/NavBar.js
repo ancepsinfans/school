@@ -51,8 +51,8 @@ const NavBar = ({ isProfilePage, isHome }) => {
 
     <NavBarStyled isHome={isHome}>
       <Back>
-        <Link href='/'>
-          <a>{isHome ? '🎒' : 'School'}</a>
+        <Link href={isHome ? '/about' : '/'}>
+          <a>{isHome ? 'About' : 'School'}</a>
         </Link>
       </Back>
 

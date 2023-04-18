@@ -1,12 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
 import connectMongo from "../../../middleware/connectMongo";
 import { StudentSchema } from '../../../models/users/User'
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import { MainContainer, Grid, GridCard } from "../../../components/infrastructureComponents";
-
+import { MainContainer, Grid, GridCard, Loading, ButtonMechanics } from "../../../components/infrastructureComponents";
+import constants from '../../../styles/constants'
 import Link from "next/link";
 
 const Literature = ({ progress }) => {
+
+
     let progressSpheres = new Set()
     let spheresPageCount = {}
 
@@ -18,13 +20,13 @@ const Literature = ({ progress }) => {
         spheresPageCount[e] = new Set()
         progress.map((f, id) => {
             if (f.sphere === e) {
-                spheresPageCount[e].add(f.page)
+                spheresPageCount[e].add(f.lesson)
             }
         })
     })
 
     return (
-        <>
+        <Suspense fallback={Loading}>
             <MainContainer
                 navType='other'
                 titleText='Lit 101'
@@ -64,7 +66,7 @@ const Literature = ({ progress }) => {
                     />
                 </Grid>
             </MainContainer>
-        </>
+        </Suspense>
     )
 }
 
@@ -81,7 +83,11 @@ export const getServerSideProps = withPageAuthRequired({
         try {
             await connectMongo()
 
-            const progress = await StudentSchema.findOne({ user: auth0user.user.email })
+            const progress = await StudentSchema.findOne({
+                user: auth0user.user.email
+            }, {
+                progress: 1
+            })
             return {
                 props: {
                     user: auth0user,

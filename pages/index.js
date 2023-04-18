@@ -96,6 +96,13 @@ export default function Home() {
               description='Under construction'
             />
 
+            <GridCard
+              isDisabled={true}
+              link=''
+              title='Philosophy'
+              description='Under construction'
+            />
+
           </>
           :
           <GridCard

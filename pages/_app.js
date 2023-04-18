@@ -77,7 +77,8 @@ const GlobalStyles = createGlobalStyle`
   3. Allow percentage-based heights in the application
 */
 html, body {
-  height: 100%;
+  height: auto;
+
   background-color: var(--primary80);
   font-family: 'Vollkorn', serif;
 }

@@ -87,9 +87,9 @@ export default function Profile({ user, studentInfo, paths }) {
   })
 
   progress.map(e => {
-    spheresPageCount[e.sphere][e.course].add(e.page)
+    spheresPageCount[e.sphere][e.course].add(e.lesson)
   })
-
+  console.log(progress)
 
   return (
     <>
@@ -157,19 +157,18 @@ export const getServerSideProps = withPageAuthRequired({
 
   getServerSideProps: async ({ req, res }) => {
 
-    const allLessons = await getAllLessons()
+    const allLessons = await getAllLessons(false)
 
     const auth0user = getSession(req, res)
 
     await connectMongo()
 
-    const studentInfo = await StudentSchema.findOne({ user: auth0user.user.email })
+    const studentInfo = await StudentSchema.findOne({ user: auth0user.user.email }, { feedback: 0 })
 
     return {
       props: {
         paths: allLessons,
         user: auth0user,
-        subs: JSON.parse(JSON.stringify(spheres)),
         studentInfo: JSON.parse(JSON.stringify(studentInfo))
       }
     }

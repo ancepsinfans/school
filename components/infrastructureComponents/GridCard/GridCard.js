@@ -12,11 +12,12 @@ const Card = styled.div`
   text-decoration: none;
   border: ${props => props.isDisabled ? `2px solid var(--black30)` : `2px solid var(--accentBlue40)`};
   box-shadow:
-    1px 2px 2px hsl(220deg 60% 50% / 0.2),
-    2px 4px 4px hsl(176deg 58% 45% / 0.2),
-    4px 8px 8px hsl(176deg 58% 45% / 0.2);
+    0.6px 0.7px 1px hsl(176deg 52% 28% / 0.53),
+    2px 2.6px 3.5px -0.9px hsl(176deg 52% 28% / 0.5),
+    5.3px 6.9px 9.4px -1.9px hsl(176deg 52% 28% / 0.48),
+    13.3px 17.3px 23.6px -2.8px hsl(176deg 52% 28% / 0.45);
   border-radius: 12px;
-  transition: .75s ease-out;
+  transition: .5s ease-out;
   max-width: 300px;
   min-width: 300px;
   min-height: 190px;
@@ -29,7 +30,9 @@ const Card = styled.div`
   background-color: ${props => props.isDisabled ? `var(--black40)` : `var(--primaryMain)`};
   border-color: ${props => props.isDisabled ? `var(--blackMain)` : `var(--accentBlueMain)`};
   box-shadow:
-    0.5px 1px 1px hsl(176deg 58% 45% / 0.7);
+    0.6px 0.7px 1px hsl(176deg 52% 28% / 0.51),
+    1px 1.3px 1.8px -1.4px hsl(176deg 52% 28% / 0.47),
+    2.7px 3.5px 4.8px -2.8px hsl(176deg 52% 28% / 0.44);
   transition: .25s ease-in;
 }
 
@@ -51,7 +54,7 @@ const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled 
 
 
   return (
-    <div style={{ display: (isRestricted && !isAdmin ? "none" : "block" ) }}>
+    <div style={{ display: (isRestricted && !isAdmin ? "none" : "block") }}>
       <Link href={link}>
         <Card
           isDisabled={isDisabled}

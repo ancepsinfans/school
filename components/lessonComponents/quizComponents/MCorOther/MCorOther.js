@@ -2,7 +2,6 @@ import React from "react";
 import constants from '../../../../styles/constants'
 import feedbackSender from '../../../../models/users/feedbackHelper'
 import styled from "@emotion/styled";
-import { set } from "mongoose";
 
 const Question = styled.div`
   padding: 5px 5px;
@@ -11,7 +10,7 @@ const Question = styled.div`
 `
 const AnswerButton = styled.button`
 & {
-  width: 25%;
+  width: 15%;
   border: none;
   color: var(--blackMain);
   border-radius: 5px;
@@ -22,13 +21,13 @@ const AnswerButton = styled.button`
 &:hover {
 
   border: 1px solid var(--blackMain);
-  width: calc(25% - 2px);
+  width: calc(15% - 2px);
 }
 `
 
 const OtherButton = styled.button`
 & {
-  width: 25%;
+  width: 15%;
   border: none;
   color: var(--blackMain);
   border-radius: 5px;
@@ -38,13 +37,13 @@ const OtherButton = styled.button`
 
 &:hover {
   border: 1px solid var(--blackMain);
-  width: calc(25% - 2px);
+  width: calc(15% - 2px);
 }
 `
 
 const InputField = styled.input`
 & {
-  width: 25%;
+  width: 15%;
   border: none;
   color: var(--blackMain);
   border-radius: 5px;
@@ -55,7 +54,7 @@ const InputField = styled.input`
 
 const SubmitButton = styled(AnswerButton)`
 & {
-  background-color: ${props => props.isSelected ? 'var(--alertYellow95)' : 'var(--alertYellow80)'};
+  background-color: ${props => props.isSelected ? 'var(--accentBrown65)' : 'var(--alertYellow95)'};
   margin: 0 0 0 20px;
 } 
 `
@@ -78,7 +77,7 @@ const MCorOther = ({ user, options, desc, path, idNum, withOther }) => {
   const colorHandler = (i) => {
     let temp_colors = [...color]
     let temp_element = { ...temp_colors[i] }
-    temp_element = constants.accentBrown55
+    temp_element = constants.accentBrown65
     temp_colors[i] = temp_element
     setColor(temp_colors)
   }
@@ -114,7 +113,7 @@ const MCorOther = ({ user, options, desc, path, idNum, withOther }) => {
             <li key={'other'} style={{ listStyle: 'none' }}>
               {!otherClicked ?
                 <OtherButton
-                  style={{ backgroundColor: 'var(--primaryMain)' }}
+                  style={{ backgroundColor: constants.primaryMain }}
                   onClick={() => {
                     setOtherClicked(true)
                   }}

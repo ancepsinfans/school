@@ -84,6 +84,7 @@ const MainContainer = ({
     }
   }
 
+  console.log(nextPage)
   return (
     <>
       <NavBar
@@ -115,7 +116,8 @@ const MainContainer = ({
               sphere={sphere}
               course={course}
               lesson={lesson}
-            /> :
+            />
+            :
             null}
         </MainContent>
 
