@@ -10,7 +10,7 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <link rel="nostr.json file" href="%PUBLIC_URL%/.well-known/nostr.json" />
+                    <link rel="nostr.json file" href="new-school.vercel.app/.well-known/nostr.json" />
                     {/* <link rel="nostr file" href="%PUBLIC_URL%/.well-known/nostr" /> */}
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" />
