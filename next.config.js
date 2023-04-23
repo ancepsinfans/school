@@ -14,7 +14,12 @@ const withMDX = require('@next/mdx')({
 const nextConfig = {
   reactStrictMode: true,
 }
-
+const securityHeaders = [
+  {
+    key: 'Access-Control-Allow-Origin',
+    value: "*"
+  }
+]
 module.exports = withMDX({
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   nextConfig,
@@ -26,5 +31,13 @@ module.exports = withMDX({
   },
   env: {
     mongodburl: process.env.MONGODB_URI
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: securityHeaders
+      }
+    ]
   }
 })
