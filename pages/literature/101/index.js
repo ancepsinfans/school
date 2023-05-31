@@ -12,7 +12,7 @@ const Literature = (
     // console.log({ user })
     let progressSpheres = new Set()
     let spheresPageCount = {}
-
+    let progress = []
     progress.map((e, idx) => {
         progressSpheres.add(e.sphere)
     })
