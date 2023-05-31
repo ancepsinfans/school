@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import constants from '../styles/constants';
-import Image from 'next/image';
+// import Image from 'next/image';
 import connectMongo from "../middleware/connectMongo";
 import { StudentSchema } from '../models/users/User';
 import { getAllLessons } from '../lib/fetchAllLessons';
@@ -46,7 +46,6 @@ export default function Profile({ user, studentInfo, paths }) {
   let questionsAnswered = new Set()
 
 
-
   ans.map((e, idx) => {
     totalAttempts += 1;
     questionTypes[e.sphere] = {
@@ -89,7 +88,7 @@ export default function Profile({ user, studentInfo, paths }) {
   progress.map(e => {
     spheresPageCount[e.sphere][e.course].add(e.lesson)
   })
-  console.log(progress)
+  console.log({ user })
 
   return (
     <>
@@ -99,7 +98,7 @@ export default function Profile({ user, studentInfo, paths }) {
         titleText={
           <>
             <ImageNameBox>
-              <Image src={user.picture} width={50} height={50} alt="avatar" />
+              {/* <Image src={user.picture} width={50} height={50} alt="avatar" /> */}
               <h4>{user.name}</h4>
             </ImageNameBox>
           </>

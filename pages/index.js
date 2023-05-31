@@ -5,11 +5,13 @@ import constants from '../styles/constants'
 
 
 export default function Home() {
-  const { user } = useUser()
-  const isAdmin = (
-    user && user.email == 'zachary.r.bullard@gmail.com' ? true : false
-  )
-  
+  // const { user } = useUser()
+  const user = true
+  const isAdmin = false
+  //   (
+  //   user && user.email == 'zachary.r.bullard@gmail.com' ? true : false
+  // )
+
   return (
     <MainContainer
       isHome={true}

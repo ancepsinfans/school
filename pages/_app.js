@@ -138,7 +138,6 @@ function MyApp({ Component, pageProps }) {
     <UserProvider>
       <GlobalStyles />
       <Component {...pageProps} />
-
     </UserProvider>
   )
 }

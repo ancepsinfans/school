@@ -6,9 +6,10 @@ import { MainContainer, Grid, GridCard, Loading, ButtonMechanics } from "../../.
 import constants from '../../../styles/constants'
 import Link from "next/link";
 
-const Literature = ({ progress }) => {
-
-
+const Literature = (
+    // {user,  progress }
+) => {
+    // console.log({ user })
     let progressSpheres = new Set()
     let spheresPageCount = {}
 
@@ -74,36 +75,40 @@ const Literature = ({ progress }) => {
 export default Literature
 
 
-export const getServerSideProps = withPageAuthRequired({
+// export const getServerSideProps = withPageAuthRequired({
 
-    getServerSideProps: async ({ req, res }) => {
+//     getServerSideProps: async ({ req, res }) => {
 
-        const auth0user = getSession(req, res)
+//         const auth0user = getSession(req, res)
 
-        try {
-            await connectMongo()
+//         try {
+//             await connectMongo()
 
-            const progress = await StudentSchema.findOne({
-                user: auth0user.user.email
-            }, {
-                progress: 1
-            })
-            return {
-                props: {
-                    user: auth0user,
-                    progress: JSON.parse(JSON.stringify(progress)).progress
-                }
-            }
-        } catch (error) {
-            console.log('oops')
-            console.log(error)
-
-            return {
-                notFound: true
-            }
-        }
+//             const progress = await StudentSchema.findOne({
+//                 user: 'zach@bullard.dev'
+//                 // user: auth0user.user.email
+//             }, {
+//                 progress: 1
+//             })
 
 
-    }
-});
+//             return {
+//                 props: {
+//                     user: (!!progress ? auth0user : null),
+//                     progress: (!!progress ? JSON.parse(JSON.stringify(progress)).progress : [])
+//                 }
+//             }
+
+//         } catch (error) {
+//             console.log('oops')
+//             console.log(error)
+
+//             return {
+//                 notFound: true
+//             }
+//         }
+
+
+//     }
+// });
 

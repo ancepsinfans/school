@@ -27,8 +27,17 @@ const Content = styled.div`
 
 `
 
-const Test = ({ source, sphere, course, lesson, qs, user }) => {
-    console.log(`/${sphere}/${course}/${source.frontmatter.next}`)
+const Test = (
+    {
+        source,
+        sphere,
+        course,
+        lesson,
+        qs,
+        // user
+    }
+) => {
+    // console.log(`/${sphere}/${course}/${source.frontmatter.next}`)
     const components = {
         MCQ: MCQuiz,
         TextI: TextInput,
@@ -55,7 +64,7 @@ const Test = ({ source, sphere, course, lesson, qs, user }) => {
                             sphere: sphere,
                             course: course,
                             lesson: lesson,
-                            user: user,
+                            // user: user,
                             qs: qs
                         }}
                         components={components}

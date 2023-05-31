@@ -65,6 +65,7 @@ const NavBar = ({ isProfilePage, isHome }) => {
       <div>
         {user ? (
           <BlueButton
+            disabled
             id='logout'
             link='/api/auth/logout'
           >
@@ -73,6 +74,7 @@ const NavBar = ({ isProfilePage, isHome }) => {
 
         ) : (
           <BlueButton
+            disabled
             id='login'
             link='/api/auth/login'
           >

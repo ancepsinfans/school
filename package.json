@@ -1,5 +1,6 @@
 {
   "name": "school",
+  "homepage": "bullard.dev/projects/school",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,10 +17,10 @@
     "@mdx-js/loader": "^2.1.1",
     "@next/mdx": "^12.1.6",
     "axios": "^0.27.2",
-    "connect-mongo": "^4.6.0",
+    "connect-mongo": "^5.0.0",
     "gray-matter": "^4.0.3",
-    "mongodb": "^4.6.0",
-    "mongoose": "^6.3.4",
+    "mongodb": "^5.5.0",
+    "mongoose": "^7.2.0",
     "next": "12.1.6",
     "next-mdx-enhanced": "^5.0.0",
     "next-mdx-remote": "^4.0.3",
