@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from "next-mdx-remote";
-import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { Loading, MainContainer } from "../../../components/infrastructureComponents";
 import { MCQuiz, TextInput, MCorOther, Definition } from "../../../components/lessonComponents";
 import { getLessonPage } from "../../../lib/fetchLesson";
@@ -34,7 +33,7 @@ const Test = (
         course,
         lesson,
         qs,
-        // user
+        user
     }
 ) => {
     // console.log(`/${sphere}/${course}/${source.frontmatter.next}`)
@@ -64,7 +63,7 @@ const Test = (
                             sphere: sphere,
                             course: course,
                             lesson: lesson,
-                            // user: user,
+                            user: user,
                             qs: qs
                         }}
                         components={components}
@@ -76,55 +75,55 @@ const Test = (
 }
 
 
-export const getServerSideProps = withPageAuthRequired({
-    getServerSideProps: async ({ req, res, params }) => {
+export const getServerSideProps = async ({ req, res, params, query }) => {
+
+    try {
+        const lessonContents = await getLessonPage(params.sphere, params.course, params.lesson)
+
+
+        const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
 
         try {
-            const lessonContents = await getLessonPage(params.sphere, params.course, params.lesson)
+            await connectMongo()
 
+            const qs = await Question.find({})
 
-            const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
-            const auth0user = getSession(req, res)
-            try {
-                await connectMongo()
-
-                const qs = await Question.find({})
-
-                return {
-                    props: {
-                        user: auth0user,
-                        source: mdxSource,
-                        params: params,
-                        sphere: params.sphere,
-                        course: params.course,
-                        lesson: params.lesson,
-                        qs: JSON.parse(JSON.stringify(qs))
-                    }
-                }
-            } catch (error) {
-                console.log(error)
-                return {
-                    props: {
-                        user: auth0user,
-                        source: mdxSource,
-                        params: params,
-                        sphere: params.sphere,
-                        course: params.course,
-                        lesson: params.lesson,
-                        qs: 'none'
-                    }
+            return {
+                props: {
+                    user: query.email,
+                    source: mdxSource,
+                    params: params,
+                    sphere: params.sphere,
+                    course: params.course,
+                    lesson: params.lesson,
+                    qs: JSON.parse(JSON.stringify(qs))
                 }
             }
-
         } catch (error) {
+            console.log(error)
             return {
-
-                notFound: true
-
+                props: {
+                    user: query.email,
+                    source: mdxSource,
+                    params: params,
+                    sphere: params.sphere,
+                    course: params.course,
+                    lesson: params.lesson,
+                    qs: 'none'
+                }
             }
         }
 
+    } catch (error) {
+        return {
+
+            notFound: true
+
+        }
     }
-})
+
+
+}
+
 
 export default Test

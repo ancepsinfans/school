@@ -1,8 +1,7 @@
 import React from 'react'
-import { UserProvider } from '@auth0/nextjs-auth0'
 import constants from '../styles/constants'
 import { createGlobalStyle } from 'styled-components'
-
+import { SessionProvider } from 'next-auth/react'
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -133,12 +132,15 @@ p {
 }
 `
 
-function MyApp({ Component, pageProps }) {
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps }
+}) {
   return (
-    <UserProvider>
+    <SessionProvider session={session}>
       <GlobalStyles />
       <Component {...pageProps} />
-    </UserProvider>
+    </SessionProvider>
   )
 }
 

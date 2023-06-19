@@ -50,9 +50,22 @@ const Card = styled.div`
 
 
 
-const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled }) => {
+const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick }) => {
 
-
+  if (link === '') {
+    return (
+      <div style={{ display: (isRestricted && !isAdmin ? "none" : "block") }}>
+        <button style={{ background: 'none', border: 'none' }} onClick={onClick}>
+          <Card
+            isDisabled={isDisabled}
+          >
+            <h2>{title} &rarr;</h2>
+            <p>{description}</p>
+          </Card>
+        </button>
+      </div>
+    )
+  }
   return (
     <div style={{ display: (isRestricted && !isAdmin ? "none" : "block") }}>
       <Link href={link}>

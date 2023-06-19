@@ -1,16 +1,29 @@
-
-import { useUser } from '@auth0/nextjs-auth0'
+import React from 'react'
 import { Grid, GridCard, MainContainer } from '../components/infrastructureComponents'
 import constants from '../styles/constants'
+import { signIn, useSession } from 'next-auth/react'
 
 
 export default function Home() {
-  // const { user } = useUser()
-  const user = true
-  const isAdmin = false
-  //   (
-  //   user && user.email == 'zachary.r.bullard@gmail.com' ? true : false
-  // )
+  const { data: session } = useSession()
+  const user = (!!session ? session.user : undefined)
+  const isInitialMount = React.useRef(true);
+
+  React.useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      // Your useEffect code here to be run on update
+      window.localStorage.setItem('userName', JSON.stringify(user.name))
+      window.localStorage.setItem('userEmail', JSON.stringify(user.email))
+    }
+  }, [user])
+
+
+  const isAdmin =
+    (
+      user && user.email == 'zachary.r.bullard@gmail.com' ? true : false
+    )
 
   return (
     <MainContainer
@@ -108,7 +121,8 @@ export default function Home() {
           </>
           :
           <GridCard
-            link='/api/auth/login'
+            link=''
+            onClick={() => signIn()}
             title='Login to get started'
             description='By logging in it allows us to improve your experience'
           />

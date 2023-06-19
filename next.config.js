@@ -25,6 +25,7 @@ module.exports = withMDX({
   nextConfig,
   images: {
     domains: [
+      'zach.bullard.dev',
       's.gravatar.com',
       'www.thispersondoesnotexist.com'
     ],

@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 import constants from '../styles/constants';
-// import Image from 'next/image';
 import connectMongo from "../middleware/connectMongo";
 import { StudentSchema } from '../models/users/User';
 import { getAllLessons } from '../lib/fetchAllLessons';
-import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { MainContainer } from '../components/infrastructureComponents'
+import React from 'react';
+import { useSession, getSession } from 'next-auth/react';
+
 
 const ImageNameBox = styled.div`
   display: inline-flex;
@@ -34,10 +35,24 @@ const SubHeading = styled.h3`
   padding-bottom: 5px;
 `
 
-export default function Profile({ user, studentInfo, paths }) {
+export default function Profile({ paths, studentInfo }) {
+  const { data: session, status } = useSession()
+  const user = session.user
+
+
+  if (status === "loading") {
+    return <p>Loading...</p>
+  }
+
+  if (status === "unauthenticated") {
+    return <p>Login first</p>
+  }
+
+
   const ans = studentInfo.answers
   const progress = studentInfo.progress
-  console.log(paths)
+
+
   // /* Answers logic */
   let numCorrect = 0
   let totalAttempts = 0
@@ -45,8 +60,7 @@ export default function Profile({ user, studentInfo, paths }) {
   let questionTypes = {}
   let questionsAnswered = new Set()
 
-
-  ans.map((e, idx) => {
+  ans?.map((e, idx) => {
     totalAttempts += 1;
     questionTypes[e.sphere] = {
       [e.id]: 0,
@@ -58,7 +72,7 @@ export default function Profile({ user, studentInfo, paths }) {
     questionsAnswered.add(e.id)
   })
 
-  ans.map((e, idx) => {
+  ans?.map((e, idx) => {
     if (e.answer === e.correct) {
       numCorrect += 1
       questionTypes[e.sphere]['correct'] += 1
@@ -73,22 +87,22 @@ export default function Profile({ user, studentInfo, paths }) {
   let progressCourses = new Set()
   let spheresPageCount = {}
 
-  progress.map(e => {
+  progress?.map(e => {
     progressSpheres.add(e.sphere)
     progressCourses.add(e.course)
   })
 
-  progressSpheres.forEach(e => {
+  progressSpheres?.forEach(e => {
     spheresPageCount[e] = {}
     progressCourses.forEach(f => {
       spheresPageCount[e][f] = new Set()
     })
   })
 
-  progress.map(e => {
+  progress?.map(e => {
     spheresPageCount[e.sphere][e.course].add(e.lesson)
   })
-  console.log({ user })
+
 
   return (
     <>
@@ -152,26 +166,20 @@ export default function Profile({ user, studentInfo, paths }) {
   )
 }
 
-export const getServerSideProps = withPageAuthRequired({
+export const getServerSideProps = async (ctx) => {
+  const allLessons = getAllLessons(false)
 
-  getServerSideProps: async ({ req, res }) => {
-
-    const allLessons = await getAllLessons(false)
-
-    const auth0user = getSession(req, res)
-
-    await connectMongo()
-
-    const studentInfo = await StudentSchema.findOne({ user: auth0user.user.email }, { feedback: 0 })
-
-    return {
-      props: {
-        paths: allLessons,
-        user: auth0user,
-        studentInfo: JSON.parse(JSON.stringify(studentInfo))
-      }
+  await connectMongo()
+  const studentInfo = await StudentSchema.findOne({ user: ctx.query.email }, { feedback: 0 })
+  return {
+    props: {
+      paths: allLessons,
+      studentInfo: JSON.parse(JSON.stringify(studentInfo))
     }
-
   }
-});
+
+
+
+
+};
 

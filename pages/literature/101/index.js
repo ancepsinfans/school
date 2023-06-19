@@ -5,14 +5,13 @@ import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { MainContainer, Grid, GridCard, Loading, ButtonMechanics } from "../../../components/infrastructureComponents";
 import constants from '../../../styles/constants'
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
-const Literature = (
-    // {user,  progress }
-) => {
-    // console.log({ user })
+const Literature = ({ progress }) => {
+    const { data: session } = useSession()
     let progressSpheres = new Set()
     let spheresPageCount = {}
-    let progress = []
+
     progress.map((e, idx) => {
         progressSpheres.add(e.sphere)
     })
@@ -43,7 +42,7 @@ const Literature = (
                 <Grid>
 
                     <GridCard
-                        link='/literature/101/intro'
+                        link={`/literature/101/intro?email=${session.user.email}`}
                         title='Intro'
                         description='Course overview'
                     />
@@ -52,7 +51,7 @@ const Literature = (
                             spheresPageCount.literature != undefined ?
                                 !spheresPageCount.literature.has('intro') :
                                 true}
-                        link='/literature/101/explication'
+                        link={`/literature/101/explication?email=${session.user.email}`}
                         title='Explication'
                         description='How to ask questions when you read'
                     />
@@ -61,7 +60,7 @@ const Literature = (
                             spheresPageCount.literature != undefined ?
                                 !spheresPageCount.literature.has('explication') :
                                 true}
-                        link='/literature/101/close-reading'
+                        link={`/literature/101/close-reading?email=${session.user.email}`}
                         title='Close reading'
                         description='Breaking down a story and getting blood from the turnip'
                     />
@@ -75,40 +74,37 @@ const Literature = (
 export default Literature
 
 
-// export const getServerSideProps = withPageAuthRequired({
+export const getServerSideProps = async ({ req, res, query }) => {
 
-//     getServerSideProps: async ({ req, res }) => {
+    console.log({ email: query.email })
+    try {
+        await connectMongo()
 
-//         const auth0user = getSession(req, res)
-
-//         try {
-//             await connectMongo()
-
-//             const progress = await StudentSchema.findOne({
-//                 user: 'zach@bullard.dev'
-//                 // user: auth0user.user.email
-//             }, {
-//                 progress: 1
-//             })
+        const progress = await StudentSchema.findOne({
+            user: query.email
+            // user: auth0user.user.email
+        }, {
+            progress: 1
+        })
 
 
-//             return {
-//                 props: {
-//                     user: (!!progress ? auth0user : null),
-//                     progress: (!!progress ? JSON.parse(JSON.stringify(progress)).progress : [])
-//                 }
-//             }
+        return {
+            props: {
+                user: (!!progress ? query.email : null),
+                progress: (!!progress ? JSON.parse(JSON.stringify(progress)).progress : [])
+            }
+        }
 
-//         } catch (error) {
-//             console.log('oops')
-//             console.log(error)
+    } catch (error) {
+        console.log('oops')
+        console.log(error)
 
-//             return {
-//                 notFound: true
-//             }
-//         }
+        return {
+            notFound: true
+        }
+    }
 
 
-//     }
-// });
+}
+    ;
 

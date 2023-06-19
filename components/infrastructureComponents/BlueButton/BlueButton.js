@@ -24,6 +24,19 @@ const Login = styled.button`
 `
 
 const BlueButton = ({ id, link, onClick, children }) => {
+  if (link === '') {
+    return (
+      <div id={id}>
+        <Login
+          onClick={onClick}
+        >
+          {children}
+        </Login>
+      </div>
+    )
+  }
+
+
   return (
     <Link id={id} href={link}>
       <Login

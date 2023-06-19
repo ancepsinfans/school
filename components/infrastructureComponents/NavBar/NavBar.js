@@ -1,11 +1,8 @@
 import React from "react";
-import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import BlueButton from "../BlueButton";
-
-
-
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const NavBarStyled = styled.header`
   height: 50px;
@@ -20,9 +17,6 @@ const NavBarStyled = styled.header`
   z-index: 2;
   top: 0;
   transition: height .3s ease-out;
-
-}
-
 `
 
 const UserName = styled.a`
@@ -44,9 +38,11 @@ width: 50px;
 `
 
 const NavBar = ({ isProfilePage, isHome }) => {
-  const { user } = useUser()
+  const { data: session } = useSession()
 
+  const user = (!!session ? session.user : '')
 
+  console.log(session)
   return (
 
     <NavBarStyled isHome={isHome}>
@@ -57,26 +53,26 @@ const NavBar = ({ isProfilePage, isHome }) => {
       </Back>
 
 
-      <Link href='/profile'>
-        <UserName>{isProfilePage ? 'Profile' : `${user ? `${user.name}` : ''}`}</UserName>
+      <Link href={`/profile?email=${user.email}`}>
+        <UserName>{isProfilePage ? 'Profile' : `${!!session ? session.user.name : ''}`}</UserName>
       </Link>
 
 
       <div>
-        {user ? (
+        {!!session ? (
           <BlueButton
-            disabled
+            onClick={() => signOut()}
             id='logout'
-            link='/api/auth/logout'
+            link=''
           >
             Logout
           </BlueButton>
 
         ) : (
           <BlueButton
-            disabled
+            onClick={() => signIn()}
             id='login'
-            link='/api/auth/login'
+            link=''
           >
             Login
           </BlueButton>

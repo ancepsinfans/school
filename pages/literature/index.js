@@ -1,8 +1,9 @@
 import React from "react";
 import { MainContainer, Grid, GridCard } from "../../components/infrastructureComponents";
+import { useSession } from "next-auth/react";
 
 const Literature = () => {
-
+    const { data: session } = useSession()
 
     return (
         <>
@@ -14,7 +15,7 @@ const Literature = () => {
 
                 <Grid>
                     <GridCard
-                        link='/literature/101'
+                        link={`/literature/101?email=${session.user.email}`}
                         title='Lit 101'
                         description='A remedial course in literature'
                     />

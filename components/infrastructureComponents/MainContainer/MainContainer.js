@@ -3,9 +3,9 @@ import styled from "@emotion/styled";
 import NavBar from "../NavBar";
 import Image from "next/image";
 import Head from "next/head";
-import { useUser } from '@auth0/nextjs-auth0'
 import { useRouter } from 'next/router'
 import NextLessonButton from "../NextLessonButton";
+import { useSession } from "next-auth/react";
 
 const MainContainerStyled = styled.div`
  padding: 0 2rem;
@@ -51,7 +51,6 @@ const Footer = styled.footer`
   align-items: center;
   flex-grow: 1;
 }
-
 `
 
 
@@ -69,8 +68,7 @@ const MainContainer = ({
   lesson,
   children
 }) => {
-
-  const { user } = useUser()
+  const { data: session } = useSession()
   const router = useRouter()
   let nextLesson = null
   let nextLessonCapitalized = null
@@ -110,9 +108,9 @@ const MainContainer = ({
           {children}
           {isLesson ?
             <NextLessonButton
-              link={nextPage}
+              link={nextPage + `?email=${session.user.email}`}
               text={nextLessonCapitalized}
-              user={user ? user.email : 'none'}
+              user={!!session ? session.user.email : 'none'}
               sphere={sphere}
               course={course}
               lesson={lesson}
