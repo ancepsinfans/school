@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import connectMongo from "../../../middleware/connectMongo";
 import { StudentSchema } from '../../../models/users/User'
-import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { MainContainer, Grid, GridCard, Loading, ButtonMechanics } from "../../../components/infrastructureComponents";
 import constants from '../../../styles/constants'
 import Link from "next/link";
@@ -82,7 +81,6 @@ export const getServerSideProps = async ({ req, res, query }) => {
 
         const progress = await StudentSchema.findOne({
             user: query.email
-            // user: auth0user.user.email
         }, {
             progress: 1
         })

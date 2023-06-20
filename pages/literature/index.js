@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 
 const Literature = () => {
     const { data: session } = useSession()
-
+    const email = session?.user.email
     return (
         <>
             <MainContainer
@@ -15,7 +15,7 @@ const Literature = () => {
 
                 <Grid>
                     <GridCard
-                        link={`/literature/101?email=${session.user.email}`}
+                        link={`/literature/101?email=${email}`}
                         title='Lit 101'
                         description='A remedial course in literature'
                     />
