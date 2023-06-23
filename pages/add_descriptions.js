@@ -234,12 +234,12 @@ export default AddDesc
 export const getServerSideProps = async () => {
     const allLessons = getAllLessons(false)
 
-    const { data } = await getStructure()
+    const db = await getStructure()
 
     return {
         props: {
             paths: allLessons,
-            db: data
+            db: db
         }
     }
 };
