@@ -1,26 +1,37 @@
 import React from "react";
 import { MainContainer, Grid, GridCard } from "../../components/infrastructureComponents";
 import { useSession } from "next-auth/react";
+import getStructure from "../../lib/fetchStructure";
 
-const Literature = () => {
+const Literature = ({ db }) => {
     const { data: session } = useSession()
     const email = session?.user.email
     return (
         <>
             <MainContainer
                 navType='other'
-                titleText='Literature'
-                introText='The hub for reading'
+                titleText={db.name}
+                introText={db.description}
             >
 
                 <Grid>
-                    <GridCard
-                        link={`/literature/101?email=${email}`}
-                        title='Lit 101'
-                        description='A remedial course in literature'
-                    />
 
-                    <GridCard
+                    {
+                        db.courses.map((e, idx) => {
+                            return (
+                                <GridCard
+                                    key={e._id}
+                                    isDisabled={!e.lessons.length}
+                                    link={`/study/${db.sphere}/${e.course}?email=${email}`}
+                                    title={e.name}
+                                    description={e.description}
+                                />
+
+                            )
+                        })
+                    }
+
+                    {/* <GridCard
                         isDisabled={true}
                         link=''
                         title='Reading in Translation'
@@ -36,7 +47,7 @@ const Literature = () => {
                         link=''
                         title='Intro to Poetry'
                         description='Under construction'
-                    />
+                    /> */}
 
                 </Grid>
             </MainContainer>
@@ -48,3 +59,14 @@ const Literature = () => {
 export default Literature
 
 
+export const getServerSideProps = async ({ params }) => {
+    const db = await getStructure()
+    const currentDB = db.find((i) => i.sphere === params.sphere)
+
+    return {
+        props: {
+
+            db: currentDB
+        }
+    }
+};

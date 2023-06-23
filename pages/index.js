@@ -2,23 +2,12 @@ import React from 'react'
 import { Grid, GridCard, MainContainer } from '../components/infrastructureComponents'
 import constants from '../styles/constants'
 import { signIn, useSession } from 'next-auth/react'
+import getStructure from '../lib/fetchStructure';
 
 
-export default function Home() {
+export default function Home({ db }) {
   const { data: session } = useSession()
   const user = (!!session ? session.user : undefined)
-  const isInitialMount = React.useRef(true);
-
-  React.useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      // Your useEffect code here to be run on update
-      window.localStorage.setItem('userName', JSON.stringify(user.name))
-      window.localStorage.setItem('userEmail', JSON.stringify(user.email))
-    }
-  }, [user])
-
 
   const isAdmin =
     (
@@ -44,10 +33,10 @@ export default function Home() {
     >
 
 
-      <Grid>
 
-        {user ?
-          <>
+      {user ?
+        <>
+          <Grid>
 
             <GridCard
               isAdmin={isAdmin}
@@ -57,12 +46,31 @@ export default function Home() {
             />
 
             <GridCard
-              link='/literature'
-              title='Literature'
-              description='Courses to make your inner bookworm glow'
+              isAdmin={isAdmin}
+              isRestricted={true}
+              link='/add_descriptions'
+              title='Add course descriptions'
             />
-
-            <GridCard
+          </Grid>
+          <br />
+          <Grid>
+            {
+              db.map((e, idx) => {
+                return (
+                  <GridCard
+                    isDisabled={!e.courses.length}
+                    key={e._id}
+                    link={`/study/${e.sphere}`}
+                    title={e.name}
+                    //add this all to the db
+                    description={e.description}
+                  />
+                )
+              })
+            }
+          </Grid >
+          <>
+            {/* <GridCard
               isDisabled={true}
               link=''
               title='Music'
@@ -116,20 +124,32 @@ export default function Home() {
               link=''
               title='Philosophy'
               description='Under construction'
-            />
+            /> */}
 
           </>
-          :
+        </>
+        :
+        <Grid>
           <GridCard
             link=''
             onClick={() => signIn()}
             title='Login to get started'
             description='By logging in it allows us to improve your experience'
           />
+        </Grid>
+      }
 
-        }
-
-      </Grid>
     </MainContainer>
   )
 }
+
+export const getServerSideProps = async () => {
+  const db = await getStructure()
+
+  return {
+    props: {
+      db: db
+    }
+  }
+};
+

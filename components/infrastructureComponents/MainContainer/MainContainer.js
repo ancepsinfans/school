@@ -82,7 +82,7 @@ const MainContainer = ({
     }
   }
 
-  console.log(nextPage)
+  /* console.log(nextPage) */
   return (
     <>
       <NavBar
@@ -108,7 +108,7 @@ const MainContainer = ({
           {children}
           {isLesson ?
             <NextLessonButton
-              link={nextPage + `?email=${session.user.email}`}
+              link={"/study" + nextPage + `?email=${session?.user.email}`}
               text={nextLessonCapitalized}
               user={!!session ? session.user.email : 'none'}
               sphere={sphere}

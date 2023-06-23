@@ -1,11 +1,11 @@
 import React, { Suspense } from "react";
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from "next-mdx-remote";
-import { Loading, MainContainer } from "../../../components/infrastructureComponents";
-import { MCQuiz, TextInput, MCorOther, Definition } from "../../../components/lessonComponents";
-import { getLessonPage } from "../../../lib/fetchLesson";
-import connectMongo from '../../../middleware/connectMongo'
-import Question from '../../../models/questions/Questions'
+import { Loading, MainContainer } from "../../../../components/infrastructureComponents";
+import { MCQuiz, TextInput, MCorOther, Definition } from "../../../../components/lessonComponents";
+import { getLessonPage } from "../../../../lib/fetchLesson";
+import connectMongo from '../../../../middleware/connectMongo'
+import Question from '../../../../models/questions/Questions'
 import styled from "@emotion/styled";
 
 const Content = styled.div`

@@ -26,7 +26,6 @@ const handler = async (req, res) => {
                 doc.progress.push(progressUpdate)
 
                 doc.save()
-
                 return res.status(200).send(doc)
             } catch (error) {
                 return res.status(500).send(error.message)

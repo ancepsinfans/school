@@ -42,7 +42,6 @@ const NavBar = ({ isProfilePage, isHome }) => {
 
   const user = (!!session ? session.user : '')
 
-  console.log(session)
   return (
 
     <NavBarStyled isHome={isHome}>
@@ -54,7 +53,7 @@ const NavBar = ({ isProfilePage, isHome }) => {
 
 
       <Link href={`/profile?email=${user.email}`}>
-        <UserName>{isProfilePage ? 'Profile' : `${!!session ? session.user.name : ''}`}</UserName>
+        <UserName>{isProfilePage ? 'Profile' : `${!!session?.user.name ? session.user.name : 'Profile'}`}</UserName>
       </Link>
 
 

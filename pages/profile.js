@@ -37,7 +37,7 @@ const SubHeading = styled.h3`
 
 export default function Profile({ paths, studentInfo }) {
   const { data: session, status } = useSession()
-  const user = session.user
+  const user = session?.user
 
 
   if (status === "loading") {
@@ -49,8 +49,8 @@ export default function Profile({ paths, studentInfo }) {
   }
 
 
-  const ans = studentInfo.answers
-  const progress = studentInfo.progress
+  const ans = studentInfo?.answers
+  const progress = studentInfo?.progress
 
 
   // /* Answers logic */
