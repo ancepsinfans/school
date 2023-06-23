@@ -5,8 +5,8 @@ const handler = async (req, res) => {
     if (req.method === 'GET') {
 
         try {
-            let lessons = await getAllLessons()
-
+            const fs = require('fs')
+            let lessons = await getAllLessons(fs, false)
             return res.status(200).json({ success: true, data: lessons })
         } catch (error) {
 

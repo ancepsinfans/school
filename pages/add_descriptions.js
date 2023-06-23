@@ -83,10 +83,6 @@ const AddDesc = ({ paths, db }) => {
 
     const router = useRouter()
 
-    const splitter = (data) => {
-        return data.split(', ')
-    }
-
     const clearAll = () => {
         setData({})
         setActive('none')
@@ -97,6 +93,7 @@ const AddDesc = ({ paths, db }) => {
             router.reload();
         }, 500);
     }
+
     return (
         <MainContainer>
 
@@ -232,14 +229,13 @@ const AddDesc = ({ paths, db }) => {
 export default AddDesc
 
 export const getServerSideProps = async () => {
-    const allLessons = getAllLessons(false)
 
-    const db = await getStructure()
-    console.log({ allLessons, db })
+    const { dbData, fileData } = await getStructure(true)
+
     return {
         props: {
-            paths: allLessons,
-            db: db
+            paths: fileData,
+            db: dbData
         }
     }
 };
