@@ -2,11 +2,10 @@ import React from "react";
 import constants from "../styles/constants";
 import sphereSender from "../models/spheres/sphereHelper";
 import styled from "@emotion/styled";
-import { getAllLessons } from "../lib/fetchAllLessons";
 import { MainContainer } from "../components/infrastructureComponents";
-import axios from "axios";
 import { useRouter } from "next/router";
 import getStructure from "../lib/fetchStructure";
+import pageStructure from "../lib/generatePageStructure";
 
 const ListItem = styled.li`
   list-style-position: inside;
@@ -147,7 +146,7 @@ const AddDesc = ({ paths, db }) => {
                                                     </button>
                                                     <ul style={{ padding: '0 20px' }}>
                                                         {
-                                                            paths[e][f].map((g, idx) => {
+                                                            paths[e][f].files.map((g, idx) => {
                                                                 return (
                                                                     <ListItem
                                                                         key={idx}
@@ -230,9 +229,8 @@ const AddDesc = ({ paths, db }) => {
 export default AddDesc
 
 export const getServerSideProps = async () => {
-
-    const { dbData, fileData } = await getStructure(true)
-
+    const fileData = pageStructure
+    const dbData = await getStructure()
     return {
         props: {
             paths: fileData,
