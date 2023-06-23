@@ -78,23 +78,28 @@ const handler = async (req, res) => {
         const updatedSphere = await SphereSchema.findOneAndUpdate(
           {
             sphere: sphere,
-            'courses.course': course,
-            'courses.lessons.lesson': lesson
+            'courses': {
+              $elemMatch: {
+                course: course,
+                'lessons.lesson': lesson
+              }
+            }
           },
           {
             $set: {
               'courses.$[courseElem].lessons.$[lessonElem].name': name,
-              'courses.$[courseElem].lessons.$[lessonElem].description': description,
-            },
+              'courses.$[courseElem].lessons.$[lessonElem].description': description
+            }
           },
           {
             arrayFilters: [
               { 'courseElem.course': course },
-              { 'lessonElem.name': lesson },
+              { 'lessonElem.lesson': lesson }
             ],
-            new: true,
+            new: true
           }
         );
+
 
       } else if (!!course) {
         const updatedSphere = await SphereSchema.findOneAndUpdate(

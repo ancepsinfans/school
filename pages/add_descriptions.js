@@ -39,7 +39,6 @@ const AnswerButton = styled.button`
 
 
 const AddDesc = ({ paths, db }) => {
-    console.log({ paths, db })
     const hasElement = (db, data) => {
         let sphereName = data.sphere
         let courseName = data.course
