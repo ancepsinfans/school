@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import NavBar from "../NavBar";
 import Image from "next/image";
 import Head from "next/head";
-import { useRouter } from 'next/router'
 import NextLessonButton from "../NextLessonButton";
 import { useSession } from "next-auth/react";
 
@@ -54,41 +53,28 @@ const Footer = styled.footer`
 `
 
 
-const MainContainer = ({
-  titleText,
-  introText,
-  noFlex,
-  smallTitle,
-  isProfilePage,
-  isHome,
-  isLesson,
-  nextPage,
-  sphere,
-  course,
-  lesson,
-  children
-}) => {
-  const { data: session } = useSession()
-  const router = useRouter()
-  let nextLesson = null
-  let nextLessonCapitalized = null
+function MainContainer({
+  titleText, introText, noFlex, smallTitle, isProfilePage, isHome, isLesson, nextPage, sphere, course, lesson, children
+}) {
+  const { data: session } = useSession();
+  let nextLesson = null;
+  let nextLessonCapitalized = null;
 
   if (isLesson) {
-    nextLesson = nextPage.split('/')[nextPage.split('/').length - 1]
-    nextLessonCapitalized = nextLesson.charAt(0).toUpperCase() + nextLesson.slice(1)
-    nextLessonCapitalized = nextLessonCapitalized.replace('-', ' ')
+    nextLesson = nextPage.split('/')[nextPage.split('/').length - 1];
+    nextLesson = nextLesson.split('-').slice(1).join(' ')
+    nextLessonCapitalized = nextLesson.charAt(0).toUpperCase() + nextLesson.slice(1);
+    nextLessonCapitalized = nextLessonCapitalized.replace('-', ' ');
     if (nextLesson === '') {
-      nextLessonCapitalized = 'Complete course!'
+      nextLessonCapitalized = 'Complete course!';
     }
   }
 
-  /* console.log(nextPage) */
   return (
     <>
       <NavBar
         isHome={isHome}
-        isProfilePage={isProfilePage}
-      />
+        isProfilePage={isProfilePage} />
       <MainContainerStyled>
         <Head>
           <title>School</title>
@@ -113,8 +99,7 @@ const MainContainer = ({
               user={!!session ? session.user.email : 'none'}
               sphere={sphere}
               course={course}
-              lesson={lesson}
-            />
+              lesson={lesson} />
             :
             null}
         </MainContent>
@@ -135,8 +120,7 @@ const MainContainer = ({
                 src="/vercel.svg"
                 alt="Vercel Logo"
                 width={72}
-                height={16}
-              />
+                height={16} />
             </span>
           </a>
 
@@ -144,6 +128,6 @@ const MainContainer = ({
       </MainContainerStyled>
     </>
   );
-};
+}
 
 export default MainContainer;
