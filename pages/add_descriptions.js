@@ -235,7 +235,7 @@ export const getServerSideProps = async () => {
     const allLessons = getAllLessons(false)
 
     const db = await getStructure()
-
+    console.log({ allLessons, db })
     return {
         props: {
             paths: allLessons,
