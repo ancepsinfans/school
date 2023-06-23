@@ -6,6 +6,7 @@ import { getAllLessons } from "../lib/fetchAllLessons";
 import { MainContainer } from "../components/infrastructureComponents";
 import axios from "axios";
 import { useRouter } from "next/router";
+import getStructure from "../lib/fetchStructure";
 
 const ListItem = styled.li`
   list-style-position: inside;
@@ -233,7 +234,7 @@ export default AddDesc
 export const getServerSideProps = async () => {
     const allLessons = getAllLessons(false)
 
-    const { data } = await axios.get('http://127.0.0.1:3000/api/spheres')
+    const { data } = await getStructure()
 
     return {
         props: {
