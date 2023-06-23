@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import constants from '../styles/constants';
-import connectMongo from "../middleware/connectMongo";
-import { StudentSchema } from '../models/users/User';
-import { getAllLessons } from '../lib/fetchAllLessons';
-import { MainContainer } from '../components/infrastructureComponents'
+import constants from '../../styles/constants';
+import connectMongo from "../../middleware/connectMongo";
+import { StudentSchema } from '../../models/users/User';
+import { getAllLessons } from '../../lib/fetchAllLessons';
+import { MainContainer } from '../../components/infrastructureComponents'
 import React from 'react';
 import { useSession, getSession } from 'next-auth/react';
 

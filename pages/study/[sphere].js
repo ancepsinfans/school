@@ -63,9 +63,12 @@ export const getServerSideProps = async ({ params }) => {
     const db = await getStructure()
     const currentDB = db.find((i) => i.sphere === params.sphere)
 
+    // const session = await getServerSession(ctx.req, ctx.res, authOptions)
+    // const { data } = await axios.get(process.env.DEV + "/api/getUser", { params: { email: session.user.email } })
+
     return {
         props: {
-
+            // ID: data,
             db: currentDB
         }
     }

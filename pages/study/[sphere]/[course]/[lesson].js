@@ -7,6 +7,7 @@ import { getLessonPage } from "../../../../lib/fetchLesson";
 import connectMongo from '../../../../middleware/connectMongo'
 import Question from '../../../../models/questions/Questions'
 import styled from "@emotion/styled";
+import { useSession } from "next-auth/react";
 
 const Content = styled.div`
  & {
@@ -36,13 +37,20 @@ const Test = (
         user
     }
 ) => {
-    // console.log(`/${sphere}/${course}/${source.frontmatter.next}`)
+    const { data: session, status } = useSession()
+
     const components = {
         MCQ: MCQuiz,
         TextI: TextInput,
         Def: Definition,
         Feed: MCorOther,
     }
+
+    if (status === 'unauthenticated') {
+        return <p>Please login</p>
+    }
+
+
     return (
         <Suspense fallback={Loading}>
             <MainContainer

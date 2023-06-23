@@ -12,7 +12,6 @@ const handler = async (req, res) => {
 
   if (req.method === 'POST') {
     const { sphere, course, lesson, name, description, createNew } = req.body
-    console.log({ createNew })
     if (createNew) {
       if (!!lesson) {
 

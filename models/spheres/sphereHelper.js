@@ -17,7 +17,6 @@ async function sphereSender(
         description,
         createNew
     }
-    console.log({ payload })
     const response = await axios.post(`/api/spheres`, payload)
 
 }

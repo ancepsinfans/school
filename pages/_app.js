@@ -2,6 +2,7 @@ import React from 'react'
 import constants from '../styles/constants'
 import { createGlobalStyle } from 'styled-components'
 import { SessionProvider } from 'next-auth/react'
+import AuthBlock from '../components/infrastructureComponents/AuthBlock/AuthBlock'
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -136,12 +137,19 @@ function MyApp({
   Component,
   pageProps: { session, ...pageProps }
 }) {
+
+
   return (
-    <SessionProvider session={session}>
-      <GlobalStyles />
-      <Component {...pageProps} />
-    </SessionProvider>
+    <>
+      <SessionProvider session={session}>
+        <AuthBlock>
+          <GlobalStyles />
+          <Component {...pageProps} />
+        </AuthBlock>
+      </SessionProvider>
+    </>
   )
 }
 
 export default MyApp
+

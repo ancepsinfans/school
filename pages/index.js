@@ -3,10 +3,14 @@ import { Grid, GridCard, MainContainer } from '../components/infrastructureCompo
 import constants from '../styles/constants'
 import { signIn, useSession } from 'next-auth/react'
 import getStructure from '../lib/fetchStructure';
+// import { getServerSession } from 'next-auth';
+// import { authOptions } from "./api/auth/[...nextauth]"
+// import axios from 'axios';
 
 
-export default function Home({ db }) {
+export default function Home({ db, ID }) {
   const { data: session } = useSession()
+
   const user = (!!session ? session.user : undefined)
 
   const isAdmin =
@@ -143,12 +147,15 @@ export default function Home({ db }) {
   )
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx) => {
   const db = await getStructure()
+  // const session = await getServerSession(ctx.req, ctx.res, authOptions)
+  // const { data } = await axios.get(process.env.DEV + "/api/getUser", { params: { email: session.user.email } })
 
   return {
     props: {
-      db: db
+      db: db,
+      // ID: data
     }
   }
 };
