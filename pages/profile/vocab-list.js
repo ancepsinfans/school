@@ -91,7 +91,12 @@ export default function Profile({ ID, vocab, db }) {
                                 <ListItem key={e._id}>
                                     {e.term.term} -- {e.term.definition}
                                     <ul style={{ padding: '0 20px' }}>
-                                        <ListItem><Link href={`/study/${e.sphere}/${e.course}/${e.lesson}?ID=${ID}`}>{`${sphereName} > ${courseName} > ${lessonName}`}</Link></ListItem>
+                                        <ListItem>
+                                            <Link
+                                                href={`/study/${e.sphere}/${e.course}/${e.lesson}?ID=${ID}`}>
+                                                {`${sphereName} > ${courseName} > ${lessonName}`}
+                                            </Link>
+                                        </ListItem>
                                     </ul>
                                 </ListItem>
 

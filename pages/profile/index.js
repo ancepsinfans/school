@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import connectMongo from "../../middleware/connectMongo";
-import { StudentSchema } from '../../models/users/User';
+// import { StudentSchema } from '../../models/users/User';
 import { Grid, GridCard, MainContainer } from '../../components/infrastructureComponents'
 import React from 'react';
 import Image from 'next/image';
@@ -12,15 +12,6 @@ const ImageNameBox = styled.div`
   justify-content: space-between;
   gap: 15px;
   align-items: center;
-`
-
-const ListItem = styled.li`
-  list-style-position: inside;
-`
-
-const SubHeading = styled.h3`
-  text-decoration: underline;
-  padding-bottom: 5px;
 `
 
 export default function Profile({ ID }) {
@@ -83,7 +74,7 @@ export default function Profile({ ID }) {
 export const getServerSideProps = async (ctx) => {
 
     await connectMongo()
-    const studentInfo = await StudentSchema.findOne({ user: ctx.query.ID })
+    // const studentInfo = await StudentSchema.findOne({ user: ctx.query.ID })
 
     return {
         props: {
