@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import vocabSender from "../../../models/users/vocabHelper";
 
 
 const Popup = styled.span`
@@ -84,13 +85,12 @@ const AddButton = styled.button`
   }
 `
 
-const Definition = ({ content, delay, children }) => {
-  const addTerm = () => {
-
-  }
+const Definition = ({ content, delay, user, location, children }) => {
 
   let timeout;
   const [active, setActive] = React.useState(false);
+
+
 
   const showTip = () => {
     timeout = setTimeout(() => {
@@ -111,7 +111,14 @@ const Definition = ({ content, delay, children }) => {
       <Child>{children}</Child>
       {active && (
         <Popup>
-          {content}{' '}<AddButton>+</AddButton>
+          {content}{' '}
+          <AddButton
+            onClick={() => {
+              vocabSender(user, { term: children, definition: content }, location)
+            }}
+          >
+            +
+          </AddButton>
         </Popup>
       )}
     </Wrapper>

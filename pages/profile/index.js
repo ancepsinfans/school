@@ -85,7 +85,6 @@ export const getServerSideProps = async (ctx) => {
     await connectMongo()
     const studentInfo = await StudentSchema.findOne({ user: ctx.query.ID })
 
-    console.log({ studentInfo })
     return {
         props: {
             ID: ctx.query.ID

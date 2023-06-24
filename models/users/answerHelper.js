@@ -4,7 +4,7 @@ async function answerSender(type, answer, correct, user, attempts, id, sphere, c
     const payload = {
         answer: answer,
         correct: correct.toString(),
-        user: (user ? user : 'unregistered'),
+        user: user,
         type: type,
         attempt: (attempts + 1).toString(),
         id: id,

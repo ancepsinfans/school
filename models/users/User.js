@@ -31,7 +31,7 @@ var studentFeedback = new Schema({
 })
 
 var studentVocab = new Schema({
-    term: String,
+    term: Map,
     sphere: String,
     course: String,
     lesson: String,

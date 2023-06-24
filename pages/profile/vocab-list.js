@@ -3,6 +3,10 @@ import { MainContainer } from '../../components/infrastructureComponents'
 import React from 'react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { StudentSchema } from '../../models/users/User'
+import connectMongo from "../../middleware/connectMongo";
+import Link from 'next/link';
+import getStructure from '../../lib/fetchStructure';
 
 
 const ImageNameBox = styled.div`
@@ -32,10 +36,9 @@ const SubHeading = styled.h3`
   padding-bottom: 5px;
 `
 
-export default function Profile({ ID }) {
+export default function Profile({ ID, vocab, db }) {
     const { data: session, status } = useSession()
     const user = session?.user
-
 
     if (status === 'loading') {
         return (
@@ -47,7 +50,6 @@ export default function Profile({ ID }) {
             </MainContainer>
         )
     }
-
 
     return (
         <>
@@ -64,18 +66,55 @@ export default function Profile({ ID }) {
                 }
                 noFlex={false}
             >
+                <Stats>
+                    <ul>
+                        {vocab.map(e => {
+                            const sphereName = db
+                                .find(({ sphere }) => sphere === e.sphere)
+                                ?.name
 
+                            const courseName = db
+                                .find(({ sphere }) => sphere === e.sphere)
+                                ?.courses
+                                .find(({ course }) => course === e.course)
+                                ?.name
 
-            </MainContainer>
+                            const lessonName = db
+                                .find(({ sphere }) => sphere === e.sphere)
+                                ?.courses
+                                .find(({ course }) => course === e.course)
+                                ?.lessons
+                                .find(({ lesson }) => lesson === e.lesson)
+                                ?.name;
+
+                            return (
+                                <ListItem key={e._id}>
+                                    {e.term.term} -- {e.term.definition}
+                                    <ul style={{ padding: '0 20px' }}>
+                                        <ListItem><Link href={`/study/${e.sphere}/${e.course}/${e.lesson}?ID=${ID}`}>{`${sphereName} > ${courseName} > ${lessonName}`}</Link></ListItem>
+                                    </ul>
+                                </ListItem>
+
+                            )
+
+                        })}
+                    </ul>
+                </Stats>
+
+            </MainContainer >
         </>
     )
 }
 
 export const getServerSideProps = async (ctx) => {
-    // const studentInfo = await StudentSchema.findOne({ user: ctx.query.ID })
+    await connectMongo()
+    const studentInfo = await StudentSchema.find({ user: ctx.query.ID }, { vocab: 1 })
+    const db = await getStructure()
     return {
         props: {
-            ID: ctx.query.ID
+            ID: ctx.query.ID,
+            vocab: JSON.parse(JSON.stringify(studentInfo[0].vocab)),
+            db: db
         }
     }
 };

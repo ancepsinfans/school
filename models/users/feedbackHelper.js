@@ -2,7 +2,7 @@ import axios from 'axios'
 
 async function feedbackSender(user, answer, id, sphere, course, lesson) {
     const payload = {
-        user: (user ? user : 'unregistered'),
+        user: user,
         answer: answer,
         id: id,
         sphere: sphere,
