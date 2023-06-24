@@ -27,7 +27,8 @@ module.exports = withMDX({
     domains: [
       'zach.bullard.dev',
       's.gravatar.com',
-      'www.thispersondoesnotexist.com'
+      'www.thispersondoesnotexist.com',
+      'lh3.googleusercontent.com'
     ],
   },
   env: {

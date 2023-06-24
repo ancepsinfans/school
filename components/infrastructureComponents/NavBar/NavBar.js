@@ -3,6 +3,7 @@ import Link from "next/link";
 import styled from "@emotion/styled";
 import BlueButton from "../BlueButton";
 import { useSession, signIn, signOut } from "next-auth/react"
+import axios from "axios";
 
 const NavBarStyled = styled.header`
   height: 50px;
@@ -38,9 +39,28 @@ width: 50px;
 `
 
 const NavBar = ({ isProfilePage, isHome }) => {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+  const [ID, setID] = React.useState('')
 
-  const user = (!!session ? session.user : '')
+  React.useEffect(() => {
+    const getUserId = async () => {
+      async function getEnv() {
+        const response = await fetch('/api/env');
+        const { url } = await response.json();
+        return url;
+      }
+      const url = await getEnv()
+
+
+      const { data } = await axios.get(`${url}/api/getUser`, { params: { email: session.user.email } })
+      setID(data)
+    }
+    if (status !== "authenticated") {
+      return
+    }
+    getUserId()
+
+  }, [status, session])
 
   return (
 
@@ -52,7 +72,7 @@ const NavBar = ({ isProfilePage, isHome }) => {
       </Back>
 
 
-      <Link href={`/profile?email=${user.email}`}>
+      <Link href={`/profile?ID=${ID}`}>
         <UserName>{isProfilePage ? 'Profile' : `${!!session?.user.name ? session.user.name : 'Profile'}`}</UserName>
       </Link>
 

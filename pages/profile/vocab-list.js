@@ -168,7 +168,6 @@ export default function Profile({ paths, studentInfo }) {
 
 export const getServerSideProps = async (ctx) => {
     const allLessons = getAllLessons(false)
-
     await connectMongo()
     const studentInfo = await StudentSchema.findOne({ user: ctx.query.email }, { feedback: 0 })
     return {
@@ -177,9 +176,5 @@ export const getServerSideProps = async (ctx) => {
             studentInfo: JSON.parse(JSON.stringify(studentInfo))
         }
     }
-
-
-
-
 };
 

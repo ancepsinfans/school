@@ -4,7 +4,6 @@ import NavBar from "../NavBar";
 import Image from "next/image";
 import Head from "next/head";
 import NextLessonButton from "../NextLessonButton";
-import { useSession } from "next-auth/react";
 
 const MainContainerStyled = styled.div`
  padding: 0 2rem;
@@ -56,13 +55,15 @@ const Footer = styled.footer`
 function MainContainer({
   titleText, introText, noFlex, smallTitle, isProfilePage, isHome, isLesson, nextPage, sphere, course, lesson, children
 }) {
-  const { data: session } = useSession();
   let nextLesson = null;
   let nextLessonCapitalized = null;
+  let ID
 
   if (isLesson) {
     nextLesson = nextPage.split('/')[nextPage.split('/').length - 1];
+    [nextLesson, ID] = nextLesson.split('?')
     nextLesson = nextLesson.split('-').slice(1).join(' ')
+    ID = ID.split('=')[1]
     nextLessonCapitalized = nextLesson.charAt(0).toUpperCase() + nextLesson.slice(1);
     nextLessonCapitalized = nextLessonCapitalized.replace('-', ' ');
     if (nextLesson === '') {
@@ -94,9 +95,9 @@ function MainContainer({
           {children}
           {isLesson ?
             <NextLessonButton
-              link={"/study" + nextPage + `?email=${session?.user.email}`}
+              link={"/study" + nextPage}
               text={nextLessonCapitalized}
-              user={!!session ? session.user.email : 'none'}
+              user={ID}
               sphere={sphere}
               course={course}
               lesson={lesson} />

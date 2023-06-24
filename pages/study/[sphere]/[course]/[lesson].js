@@ -9,6 +9,7 @@ import Question from '../../../../models/questions/Questions'
 import styled from "@emotion/styled";
 import { useSession } from "next-auth/react";
 
+
 const Content = styled.div`
  & {
      margin: 15px 0;
@@ -27,17 +28,17 @@ const Content = styled.div`
 
 `
 
-const Test = (
+const LessonPage = (
     {
         source,
         sphere,
         course,
         lesson,
         qs,
-        user
+        user,
     }
 ) => {
-    const { data: session, status } = useSession()
+    const { status } = useSession()
 
     const components = {
         MCQ: MCQuiz,
@@ -46,8 +47,15 @@ const Test = (
         Feed: MCorOther,
     }
 
-    if (status === 'unauthenticated') {
-        return <p>Please login</p>
+    if (status === 'loading') {
+        return (
+            <MainContainer
+                navType='other'
+                titleText="Loading..."
+            >
+
+            </MainContainer>
+        )
     }
 
 
@@ -58,7 +66,7 @@ const Test = (
                 titleText={source.frontmatter.title}
                 introText={source.frontmatter.intro}
                 isLesson={true}
-                nextPage={`/${sphere}/${course}/${source.frontmatter.next}`}
+                nextPage={`/${sphere}/${course}/${source.frontmatter.next}?ID=${user}`}
                 sphere={sphere}
                 course={course}
                 lesson={lesson}
@@ -83,10 +91,10 @@ const Test = (
 }
 
 
-export const getServerSideProps = async ({ req, res, params, query }) => {
+export const getServerSideProps = async (ctx) => {
 
     try {
-        const lessonContents = await getLessonPage(params.sphere, params.course, params.lesson)
+        const lessonContents = await getLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)
 
 
         const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
@@ -98,12 +106,11 @@ export const getServerSideProps = async ({ req, res, params, query }) => {
 
             return {
                 props: {
-                    user: query.email,
+                    user: ctx.query.ID,
                     source: mdxSource,
-                    params: params,
-                    sphere: params.sphere,
-                    course: params.course,
-                    lesson: params.lesson,
+                    sphere: ctx.params.sphere,
+                    course: ctx.params.course,
+                    lesson: ctx.params.lesson,
                     qs: JSON.parse(JSON.stringify(qs))
                 }
             }
@@ -111,12 +118,11 @@ export const getServerSideProps = async ({ req, res, params, query }) => {
             console.log(error)
             return {
                 props: {
-                    user: query.email,
+                    user: ctx.query.ID,
                     source: mdxSource,
-                    params: params,
-                    sphere: params.sphere,
-                    course: params.course,
-                    lesson: params.lesson,
+                    sphere: ctx.params.sphere,
+                    course: ctx.params.course,
+                    lesson: ctx.params.lesson,
                     qs: 'none'
                 }
             }
@@ -134,4 +140,4 @@ export const getServerSideProps = async ({ req, res, params, query }) => {
 }
 
 
-export default Test
+export default LessonPage

@@ -10,6 +10,8 @@ function AuthBlock({ children }) {
   const isHomepage = asPath === '/';
   const isAbout = asPath === '/about'
   const session = useSession();
+
+
   // Check session on every render, except for the homepage
   if (!isHomepage && !isAbout) {
     if (session.status === 'unauthenticated') {

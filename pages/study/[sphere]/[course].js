@@ -1,17 +1,34 @@
 import React from "react";
-import { MainContainer, Grid, GridCard } from "../../../components/infrastructureComponents";
+import { MainContainer, Grid, GridCard, BlueButton, ButtonMechanics } from "../../../components/infrastructureComponents";
 import { useSession } from "next-auth/react";
 import getStructure from "../../../lib/fetchStructure";
 
-const Literature = ({ sphere, db }) => {
-    const { data: session } = useSession()
-    const email = session?.user.email
+
+const CoursePage = ({ sphere, db, ID, sphereName }) => {
+    const { status } = useSession()
+    if (status === 'loading') {
+        return (
+            <MainContainer
+                navType='other'
+                titleText="Loading..."
+            >
+
+            </MainContainer>
+        )
+    }
     return (
         <>
             <MainContainer
                 navType='other'
                 titleText={db.name}
-                introText={db.description}
+                introText={
+                    <>
+                        {db.description}
+                        <br />
+                        <br />
+                        Back to the <a href={`/study/${sphere}`}>{sphereName} page</a>
+                    </>
+                }
             >
 
                 <Grid>
@@ -22,7 +39,7 @@ const Literature = ({ sphere, db }) => {
                             return (
                                 <GridCard
                                     key={e._id}
-                                    link={`/study/${sphere}/${db.course}/${e.lesson}?email=${email}`}
+                                    link={`/ study / ${sphere} /${db.course}/${e.lesson}?ID = ${ID} `}
                                     title={e.name}
                                     description={e.description}
                                 />
@@ -30,44 +47,29 @@ const Literature = ({ sphere, db }) => {
                         })
                     }
 
-
-                    {/* <GridCard
-                        isDisabled={true}
-                        link=''
-                        title='Reading in Translation'
-                        description='Under construction'
-                    />
-                    <GridCard
-                        isDisabled={true}
-                        link=''
-                        title='A Primer to Short Fiction'
-                        description='Under construction' />
-                    <GridCard
-                        isDisabled={true}
-                        link=''
-                        title='Intro to Poetry'
-                        description='Under construction'
-                    /> */}
-
                 </Grid>
+
             </MainContainer>
         </>
     )
 }
 
 
-export default Literature
+export default CoursePage
 
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async (ctx) => {
+
     const db = await getStructure()
-    const currentSphere = db.find((i) => i.sphere === params.sphere)
-    const currentDB = currentSphere.courses.find((i) => i.course === params.course)
+    const currentSphere = db.find((i) => i.sphere === ctx.params.sphere)
+    const currentDB = currentSphere.courses.find((i) => i.course === ctx.params.course)
 
     return {
         props: {
-            sphere: params.sphere,
-            db: currentDB
+            sphere: ctx.params.sphere,
+            db: currentDB,
+            ID: ctx.query.ID,
+            sphereName: currentSphere.name
         }
     }
 };
