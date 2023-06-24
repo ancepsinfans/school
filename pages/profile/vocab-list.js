@@ -31,11 +31,6 @@ const ListItem = styled.li`
   list-style-position: inside;
 `
 
-const SubHeading = styled.h3`
-  text-decoration: underline;
-  padding-bottom: 5px;
-`
-
 export default function Profile({ ID, vocab, db }) {
     const { data: session, status } = useSession()
     const user = session?.user

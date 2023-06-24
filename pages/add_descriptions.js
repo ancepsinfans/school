@@ -221,10 +221,6 @@ const AddDesc = ({ paths, db }) => {
 };
 
 
-
-
-
-
 export default AddDesc
 
 export const getServerSideProps = async () => {

@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from "next-mdx-remote";
-import { Loading, MainContainer } from "../../../../components/infrastructureComponents";
+import { MainContainer } from "../../../../components/infrastructureComponents";
 import { MCQuiz, TextInput, MCorOther, Definition } from "../../../../components/lessonComponents";
 import { getLessonPage } from "../../../../lib/fetchLesson";
 import connectMongo from '../../../../middleware/connectMongo'
@@ -60,33 +60,31 @@ const LessonPage = (
 
 
     return (
-        <Suspense fallback={Loading}>
-            <MainContainer
-                smallTitle={true}
-                titleText={source.frontmatter.title}
-                introText={source.frontmatter.intro}
-                isLesson={true}
-                nextPage={`/${sphere}/${course}/${source.frontmatter.next}?ID=${user}`}
-                sphere={sphere}
-                course={course}
-                lesson={lesson}
-            >
-                <Content>
-                    <MDXRemote
-                        {...source}
-                        scope={{
-                            path: [sphere, course, lesson],
-                            sphere: sphere,
-                            course: course,
-                            lesson: lesson,
-                            user: user,
-                            qs: qs
-                        }}
-                        components={components}
-                    />
-                </Content>
-            </MainContainer>
-        </Suspense>
+        <MainContainer
+            smallTitle={true}
+            titleText={source.frontmatter.title}
+            introText={source.frontmatter.intro}
+            isLesson={true}
+            nextPage={`/${sphere}/${course}/${source.frontmatter.next}?ID=${user}`}
+            sphere={sphere}
+            course={course}
+            lesson={lesson}
+        >
+            <Content>
+                <MDXRemote
+                    {...source}
+                    scope={{
+                        path: [sphere, course, lesson],
+                        sphere: sphere,
+                        course: course,
+                        lesson: lesson,
+                        user: user,
+                        qs: qs
+                    }}
+                    components={components}
+                />
+            </Content>
+        </MainContainer>
     )
 }
 
