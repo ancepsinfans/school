@@ -30,7 +30,7 @@ const Intro = styled.div`
   margin-bottom: 25px;
   font-size: 1.25rem;
   max-width: 850px;
-  text-align: center
+  text-align: center;
 `
 
 const Footer = styled.footer`

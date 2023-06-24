@@ -1,33 +1,27 @@
-import mongoose from "mongoose";
 import connectDB from "../../../middleware/mongodb";
 import Question from "../../../models/questions/Questions";
 import connectMongo from '../../../middleware/connectMongo'
+import { ObjectId } from "mongodb";
 
 const handler = async (req, res) => {
-
-
     if (req.method === 'POST') {
-        const { desc, options, correct, good, bad, id, sphere } = req.body
-        if (desc && options && correct) {
-            try {
-                var question = new Question({
-                    desc: desc,
-                    options: options,
-                    correct: correct,
-                    sphere: sphere,
-                    id: id,
-                    good: good,
-                    bad: bad
-                })
-
-                var questioncreated = await question.save()
-                return res.status(200).send(questioncreated)
-            } catch (error) {
-                return res.status(500).send(error.message)
-            }
-        } else {
-            res.status(422).send('data_incomplete')
+        try {
+            var question = new Question({
+                desc: req.body.desc,
+                options: req.body.options,
+                correct: req.body.correct,
+                sphere: req.body.sphere,
+                good: req.body.good,
+                bad: req.body.bad,
+                course: req.body.course,
+                lesson: req.body.lesson
+            })
+            var questioncreated = await question.save()
+            return res.status(200).send(questioncreated)
+        } catch (error) {
+            return res.status(500).send(error.message)
         }
+
     } else if (req.method === 'GET') {
         const {
             query: { sphere, id },
@@ -36,9 +30,10 @@ const handler = async (req, res) => {
             await connectMongo()
             let qs = []
             if (sphere && id) {
-                qs = await Question.find({ sphere: sphere, id: id })
+                qs = await Question.find({ sphere: sphere, _id: new ObjectId(id) })
+                console.log({ qs })
             } else if (!sphere) {
-                qs = await Question.find({ id: id })
+                qs = await Question.find({ _id: new ObjectId(id) })
             } else if (!id) {
                 qs = await Question.find({ sphere: sphere })
             } else {

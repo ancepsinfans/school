@@ -26,29 +26,21 @@ const AnswerButton = styled.button`
 }
 `
 
-const MCQuiz = ({ questionSet, questID, user }) => {
-
-  let activeQuestion = null
-
-  questionSet.forEach(e => {
-    if (e.id === questID) {
-      activeQuestion = e
-    }
-  })
+const MCQuiz = ({ question, user }) => {
 
   const [answer, setAnswer] = React.useState('');
   const [attempts, setAttempts] = React.useState(0)
   const [color, setColor] = React.useState(
-    () => new Array(activeQuestion.options.length).fill(constants.primaryMain)
+    () => new Array(question.options.length).fill(constants.primaryMain)
   )
 
   const renderFeedback = (data) => {
-    if (data === activeQuestion.correct) {
-      return (activeQuestion.good)
+    if (data === question.correct) {
+      return (question.good)
     } else if (data === '') {
       return ''
     } else {
-      return (activeQuestion.bad)
+      return (question.bad)
     }
   }
 
@@ -68,7 +60,7 @@ const MCQuiz = ({ questionSet, questID, user }) => {
       'mc quiz',
       ans,
       correct,
-      user.email,
+      user,
       attempts,
       id,
       sphere,
@@ -79,9 +71,9 @@ const MCQuiz = ({ questionSet, questID, user }) => {
 
   return (
     <Question>
-      <h2>{activeQuestion.desc}</h2>
+      <h2>{question.desc}</h2>
       <ol>
-        {activeQuestion.options.map((ans, i) => {
+        {question.options.map((ans, i) => {
 
 
           return (
@@ -91,11 +83,11 @@ const MCQuiz = ({ questionSet, questID, user }) => {
                 style={{ backgroundColor: color[i] }}
                 onClick={() => parentOnClick(
                   ans,
-                  activeQuestion.correct,
-                  activeQuestion.id,
-                  activeQuestion.sphere,
-                  activeQuestion.course,
-                  activeQuestion.lesson,
+                  question.correct,
+                  question.id,
+                  question.sphere,
+                  question.course,
+                  question.lesson,
                   i
                 )}
               >

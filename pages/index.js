@@ -42,14 +42,14 @@ export default function Home({ db, ID }) {
             <GridCard
               isAdmin={isAdmin}
               isRestricted={true}
-              link='/add_q'
+              link='/admin/add_q'
               title='Add questions'
             />
 
             <GridCard
               isAdmin={isAdmin}
               isRestricted={true}
-              link='/add_descriptions'
+              link='/admin/add_descriptions'
               title='Add course descriptions'
             />
           </Grid>

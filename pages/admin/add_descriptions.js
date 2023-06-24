@@ -1,11 +1,11 @@
 import React from "react";
-import constants from "../styles/constants";
-import sphereSender from "../models/spheres/sphereHelper";
+import constants from "../../styles/constants";
+import sphereSender from "../../models/spheres/sphereHelper";
 import styled from "@emotion/styled";
-import { MainContainer } from "../components/infrastructureComponents";
+import { MainContainer } from "../../components/infrastructureComponents";
 import { useRouter } from "next/router";
-import getStructure from "../lib/fetchStructure";
-import pageStructure from "../lib/generatePageStructure";
+import getStructure from "../../lib/fetchStructure";
+import pageStructure from "../../lib/generatePageStructure";
 
 const ListItem = styled.li`
   list-style-position: inside;

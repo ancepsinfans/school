@@ -50,19 +50,19 @@ const TextInput = ({ questionSet, questID, user }) => {
     }
   }
 
-  const parentOnClick = (val, cor, id, sphere) => {
+  const parentOnClick = (val) => {
     setShowFeedback(true)
     setAttempts(attempts + 1)
     answerSender(
       'text input',
       val,
-      cor,
-      user.email,
+      activeQuestion.correct,
+      user,
       attempts,
-      id,
-      sphere,
-      course,
-      lesson
+      activeQuestion.id,
+      activeQuestion.sphere,
+      activeQuestion.course,
+      activeQuestion.lesson
     )
   }
 
@@ -79,11 +79,6 @@ const TextInput = ({ questionSet, questID, user }) => {
         style={{ backgroundColor: constants.primaryMain }}
         onClick={() => parentOnClick(
           value,
-          activeQuestion.correct,
-          activeQuestion.id,
-          activeQuestion.sphere,
-          activeQuestion.course,
-          activeQuestion.lesson
         )}
       >
         Check

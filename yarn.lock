@@ -1793,6 +1793,11 @@ ignore@^5.2.0:
   resolved "https://registry.npmjs.org/ignore/-/ignore-5.2.0.tgz"
   integrity sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==
 
+immer@^10.0.2:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-10.0.2.tgz#11636c5b77acf529e059582d76faf338beb56141"
+  integrity sha512-Rx3CqeqQ19sxUtYV9CU911Vhy8/721wRFnJv3REVGWUmoAcIwzifTsdmJte/MV+0/XpM35LZdQMBGkRIoLPwQA==
+
 import-fresh@^3.0.0, import-fresh@^3.1.0, import-fresh@^3.2.1:
   version "3.3.0"
   resolved "https://registry.npmjs.org/import-fresh/-/import-fresh-3.3.0.tgz"
@@ -2717,6 +2722,11 @@ node-releases@^2.0.3:
   resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.5.tgz"
   integrity sha512-U9h1NLROZTq9uE1SNffn6WuPDg8icmi3ns4rEl/oTfIle4iLjTliCzgTsbaIFMq/Xn078/lfY/BL0GWZ+psK4Q==
 
+nodemailer@^6.9.3:
+  version "6.9.3"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.9.3.tgz#e4425b85f05d83c43c5cd81bf84ab968f8ef5cbe"
+  integrity sha512-fy9v3NgTzBngrMFkDsKEj0r02U7jm6XfC3b52eoNV+GCrGj+s8pt5OqhiJdWKuw51zCTdiNR/IUD1z33LIIGpg==
+
 oauth4webapi@^2.0.6:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/oauth4webapi/-/oauth4webapi-2.3.0.tgz#d01aeb83b60dbe3ff9ef1c6ec4a39e29c7be7ff6"
@@ -3516,6 +3526,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-immer@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/use-immer/-/use-immer-0.9.0.tgz#66e4e8f7ab75df45e96dfd5c56337f9fd49db9fd"
+  integrity sha512-/L+enLi0nvuZ6j4WlyK0US9/ECUtV5v9RUbtxnn5+WbtaXYUaOBoKHDNL9I5AETdurQ4rIFIj/s+Z5X80ATyKw==
 
 uuid@^8.3.2:
   version "8.3.2"
