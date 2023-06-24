@@ -39,7 +39,7 @@ const CoursePage = ({ sphere, db, ID, sphereName }) => {
                             return (
                                 <GridCard
                                     key={e._id}
-                                    link={`/ study / ${sphere} /${db.course}/${e.lesson}?ID = ${ID} `}
+                                    link={`/study/${sphere}/${db.course}/${e.lesson}?ID=${ID}`}
                                     title={e.name}
                                     description={e.description}
                                 />
