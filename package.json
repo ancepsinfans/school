@@ -23,7 +23,6 @@
     "mongoose": "^7.2.0",
     "next": "12.1.6",
     "next-auth": "^4.22.1",
-    "next-mdx-enhanced": "^5.0.0",
     "next-mdx-remote": "^4.0.3",
     "nodemailer": "^6.9.3",
     "react": "18.1.0",

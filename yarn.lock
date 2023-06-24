@@ -2520,6 +2520,15 @@ loader-utils@^2.0.0:
     emojis-list "^3.0.0"
     json5 "^2.1.2"
 
+loader-utils@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.4.tgz#8b5cb38b5c34a9a018ee1fc0e6a066d1dfcc528c"
+  integrity sha512-xXqpXoINfFhgua9xiqD8fPFHgkoq1mmmpE92WlDbm9rNRd/EbRb+Gqf908T2DMfuHjjJlksiK2RbHVOdD/MqSw==
+  dependencies:
+    big.js "^5.2.2"
+    emojis-list "^3.0.0"
+    json5 "^2.1.2"
+
 locate-path@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/locate-path/-/locate-path-2.0.0.tgz"
@@ -3144,6 +3153,21 @@ next-auth@^4.22.1:
     preact "^10.6.3"
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
+
+next-mdx-enhanced-plus@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/next-mdx-enhanced-plus/-/next-mdx-enhanced-plus-5.0.1.tgz#77ce22fd6c94cc982794d9bdd83a6981847198e2"
+  integrity sha512-lnbQejmc8ITO6fr9Mm/gC6qE4bVK0QlsfXJueRhc9snJAEhIALzcK8YDTUXOJzxqkt3jggJbNd58k4ZN/dtXgw==
+  dependencies:
+    "@babel/core" "7.x"
+    "@mdx-js/loader" "^1.6.19"
+    debug "^4.2.0"
+    fs-extra "^9.0.1"
+    glob "^7.1.6"
+    gray-matter "^4.0.2"
+    loader-utils "^2.0.4"
+    prebuild-webpack-plugin "1.1.1"
+    stringify-object "^3.3.0"
 
 next-mdx-enhanced@^5.0.0:
   version "5.0.0"
