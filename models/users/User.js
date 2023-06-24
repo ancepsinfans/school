@@ -30,6 +30,17 @@ var studentFeedback = new Schema({
     }
 })
 
+var studentVocab = new Schema({
+    term: String,
+    sphere: String,
+    course: String,
+    lesson: String,
+    timestamp: {
+        type: Date,
+        default: Date.now
+    }
+})
+
 var studentProgress = new Schema({
     sphere: String,
     course: String,
@@ -56,6 +67,10 @@ var studentSchema = new Schema({
     feedback: [{
         type: studentFeedback,
         required: false
+    }],
+    vocab: [{
+        type: studentVocab,
+        required: false
     }]
 }, {
     collection: 'students'
@@ -67,6 +82,7 @@ var StudentSchema = mongoose.model('StudentSchema', studentSchema)
 var StudentProgress = mongoose.model('StudentProgress', studentProgress)
 var StudentAnswers = mongoose.model('StudentAnswers', studentAnswers)
 var StudentFeedback = mongoose.model('StudentFeedback', studentFeedback)
+var StudentVocab = mongoose.model('StudentVocab', studentVocab)
 
 
-export { StudentSchema, StudentProgress, StudentAnswers, StudentFeedback }
+export { StudentSchema, StudentProgress, StudentAnswers, StudentFeedback, StudentVocab }

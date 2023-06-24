@@ -45,14 +45,14 @@ const NavBar = ({ isProfilePage, isHome }) => {
   React.useEffect(() => {
     const getUserId = async () => {
       async function getEnv() {
-        const response = await fetch('/api/env');
+        const response = await fetch('/api/admin/env');
         const { url } = await response.json();
         return url;
       }
       const url = await getEnv()
 
 
-      const { data } = await axios.get(`${url}/api/getUser`, { params: { email: session.user.email } })
+      const { data } = await axios.get(`${url}/api/user/getUser`, { params: { email: session.user.email } })
       setID(data)
     }
     if (status !== "authenticated") {

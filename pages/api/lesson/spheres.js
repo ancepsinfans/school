@@ -1,5 +1,5 @@
-import connectDB from "../../middleware/mongodb";
-import { SphereSchema, LessonSchema, CourseSchema } from "../../models/spheres/Spheres";
+import connectDB from "../../../middleware/mongodb";
+import { SphereSchema, LessonSchema, CourseSchema } from "../../../models/spheres/Spheres";
 
 const handler = async (req, res) => {
   if (req.method === "GET") {

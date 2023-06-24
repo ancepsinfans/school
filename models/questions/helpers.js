@@ -14,7 +14,7 @@ async function questionSender(desc, options, correct, sphere, course, lesson, id
 
     }
 
-    const response = await axios.post(`/api/questions`, payload)
+    const response = await axios.post(`/api/lesson/questions`, payload)
 
 }
 

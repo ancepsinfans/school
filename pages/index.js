@@ -150,7 +150,7 @@ export default function Home({ db, ID }) {
 export const getServerSideProps = async (ctx) => {
   const db = await getStructure()
   // const session = await getServerSession(ctx.req, ctx.res, authOptions)
-  // const { data } = await axios.get(process.env.DEV + "/api/getUser", { params: { email: session.user.email } })
+  // const { data } = await axios.get(process.env.DEV + "/api/user/getUser", { params: { email: session.user.email } })
 
   return {
     props: {

@@ -1,4 +1,4 @@
-import { getAllLessons } from "../../lib/fetchAllLessons";
+import { getAllLessons } from "../../../lib/fetchAllLessons";
 
 const handler = async (req, res) => {
 

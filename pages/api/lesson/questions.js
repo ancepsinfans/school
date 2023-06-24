@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import connectDB from "../../middleware/mongodb";
-import Question from "../../models/questions/Questions";
-import connectMongo from '../../middleware/connectMongo'
+import connectDB from "../../../middleware/mongodb";
+import Question from "../../../models/questions/Questions";
+import connectMongo from '../../../middleware/connectMongo'
 
 const handler = async (req, res) => {
 

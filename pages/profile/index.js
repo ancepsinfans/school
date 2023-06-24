@@ -23,7 +23,7 @@ const SubHeading = styled.h3`
   padding-bottom: 5px;
 `
 
-export default function Profile({ }) {
+export default function Profile({ ID }) {
     const { data: session, status } = useSession()
     const user = session?.user
 
@@ -57,12 +57,12 @@ export default function Profile({ }) {
 
                 <Grid>
                     <GridCard
-                        link={`/profile/vocab-list`}
+                        link={`/profile/vocab-list?ID=${ID}`}
                         title='Vocabulary List'
                         description="Here are all the words you've marked"
                     />
                     <GridCard
-                        link={`/profile/analytics`}
+                        link={`/profile/analytics?ID=${ID}`}
                         title='Your Analytics'
                         description='Here you can find data about your study history'
                     />
@@ -88,7 +88,7 @@ export const getServerSideProps = async (ctx) => {
     console.log({ studentInfo })
     return {
         props: {
-            p: null
+            ID: ctx.query.ID
         }
     }
 

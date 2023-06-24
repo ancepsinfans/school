@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 
 
-const Popup = styled.div`
+const Popup = styled.span`
   & {
     position: absolute;
     border-radius: 4px;
@@ -85,6 +85,10 @@ const AddButton = styled.button`
 `
 
 const Definition = ({ content, delay, children }) => {
+  const addTerm = () => {
+
+  }
+
   let timeout;
   const [active, setActive] = React.useState(false);
 

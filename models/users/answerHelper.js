@@ -13,7 +13,7 @@ async function answerSender(type, answer, correct, user, attempts, id, sphere, c
         lesson: lesson
     }
 
-    const response = await axios.post(`/api/postAnswer`, payload)
+    const response = await axios.post(`/api/user/postAnswer`, payload)
 
 }
 

@@ -1,5 +1,5 @@
-import connectDB from "../../middleware/mongodb";
-import { StudentFeedback, StudentSchema } from "../../models/users/User";
+import connectDB from "../../../middleware/mongodb";
+import { StudentFeedback, StudentSchema } from "../../../models/users/User";
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {

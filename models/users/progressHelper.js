@@ -7,7 +7,7 @@ async function progressSender(user, sphere, course, lesson) {
         sphere: sphere,
         lesson: lesson,
     }
-    const response = await axios.post(`/api/postProgress`, payload)
+    const response = await axios.post(`/api/user/postProgress`, payload)
 
 }
 

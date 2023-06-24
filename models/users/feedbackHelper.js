@@ -10,7 +10,7 @@ async function feedbackSender(user, answer, id, sphere, course, lesson) {
         lesson: lesson,
     }
 
-    const response = await axios.post(`/api/postFeedback`, payload)
+    const response = await axios.post(`/api/user/postFeedback`, payload)
 
 }
 

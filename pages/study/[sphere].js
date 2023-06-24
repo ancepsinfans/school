@@ -87,7 +87,7 @@ export const getServerSideProps = async (ctx) => {
         }
     }
 
-    const { data } = await axios.get(process.env.BASE_URL + "/api/getUser", { params: { email: session.user.email } })
+    const { data } = await axios.get(process.env.BASE_URL + "/api/user/getUser", { params: { email: session.user.email } })
 
     return {
         props: {
