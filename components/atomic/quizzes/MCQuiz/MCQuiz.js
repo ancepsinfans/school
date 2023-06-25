@@ -52,23 +52,6 @@ const MCQuiz = ({ question, user }) => {
     setColor(temp_colors)
   }
 
-  const parentOnClick = (ans, correct, id, sphere, course, lesson, i) => {
-    setAnswer(ans)
-    setAttempts(attempts + 1)
-    colorHandler(ans, correct, i)
-    answerSender(
-      'mc quiz',
-      ans,
-      correct,
-      user,
-      attempts,
-      id,
-      sphere,
-      course,
-      lesson
-    )
-  }
-
   return (
     <Question>
       <h2>{question.desc}</h2>
@@ -81,15 +64,22 @@ const MCQuiz = ({ question, user }) => {
               <AnswerButton
                 key={i}
                 style={{ backgroundColor: color[i] }}
-                onClick={() => parentOnClick(
-                  ans,
-                  question.correct,
-                  question.id,
-                  question.sphere,
-                  question.course,
-                  question.lesson,
-                  i
-                )}
+                onClick={() => {
+                  setAnswer(ans)
+                  setAttempts(attempts + 1)
+                  colorHandler(ans, correct, i)
+                  answerSender(
+                    'mc quiz',
+                    ans,
+                    question.correct,
+                    user,
+                    attempts,
+                    question.id,
+                    question.sphere,
+                    question.course,
+                    question.lesson
+                  )
+                }}
               >
                 {ans}
               </AnswerButton>
