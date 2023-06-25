@@ -23,22 +23,7 @@ export default async function handler(req, res) {
             }
 
         } else {
-            const ID = req.query.ID
-            try {
-                await client.connect(); // Connect to the MongoDB server
-
-                const collection = client.db('school').collection('users');
-                const query = { _id: new ObjectId(ID) };
-                const results = await collection.find(query).toArray();
-
-                res.status(200).send(results.email);
-            } catch (error) {
-                console.error('Error executing MongoDB query', error);
-                res.status(500).json({ error: 'Failed to execute the query' });
-            } finally {
-                await client.close(); // Close the MongoDB connection
-            }
-
+            res.status(403).send('error')
         }
     }
 }

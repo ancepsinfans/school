@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 
 const FooterStyled = styled.footer`
   & {

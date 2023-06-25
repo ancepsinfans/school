@@ -1,7 +1,7 @@
 import React from "react";
 import constants from "../../../../styles/constants";
 import answerSender from '../../../../models/users/answerHelper'
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 const Input = styled.div`
   padding: 5px 5px;

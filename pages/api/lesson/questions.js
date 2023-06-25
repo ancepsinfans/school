@@ -1,6 +1,6 @@
 import connectDB from "../../../middleware/mongodb";
 import Question from "../../../models/questions/Questions";
-import connectMongo from '../../../middleware/connectMongo'
+
 import { ObjectId } from "mongodb";
 
 const handler = async (req, res) => {
@@ -27,7 +27,7 @@ const handler = async (req, res) => {
             query: { sphere, id },
         } = req
         try {
-            await connectMongo()
+
             let qs = []
             if (sphere && id) {
                 qs = await Question.find({ sphere: sphere, _id: new ObjectId(id) })

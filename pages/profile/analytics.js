@@ -1,11 +1,11 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import constants from '../../styles/constants';
-import connectMongo from "../../middleware/connectMongo";
+
 import { StudentSchema } from '../../models/users/User';
 import { Loading, MainContainer } from '../../components/meta'
 import React from 'react';
 import { useSession } from 'next-auth/react';
-import getStructure from '../../lib/fetchStructure'
+import getStructure from '../../middleware/fetchStructure'
 import Image from 'next/image';
 
 
@@ -170,7 +170,7 @@ export default function Profile({ ID, paths, studentInfo }) {
 
 export const getServerSideProps = async (ctx) => {
   const db = await getStructure()
-  await connectMongo()
+
   const studentInfo = await StudentSchema.findOne({ user: ctx.query.ID }, { feedback: 0 })
 
   return {

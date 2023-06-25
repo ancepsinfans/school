@@ -1,11 +1,11 @@
 import React from "react";
 import constants from "../../styles/constants";
 import sphereSender from "../../models/spheres/sphereHelper";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { MainContainer } from "../../components/meta";
 import { useRouter } from "next/router";
-import getStructure from "../../lib/fetchStructure";
-import pageStructure from "../../lib/generatePageStructure";
+import getStructure from "../../middleware/fetchStructure";
+import pageStructure from "../../middleware/generatePageStructure";
 
 const ListItem = styled.li`
   list-style-position: inside;
@@ -224,11 +224,11 @@ const AddDesc = ({ paths, db }) => {
 export default AddDesc
 
 export const getServerSideProps = async () => {
-    const fileData = pageStructure
+
     const dbData = await getStructure()
     return {
         props: {
-            paths: fileData,
+            paths: pageStructure,
             db: dbData
         }
     }

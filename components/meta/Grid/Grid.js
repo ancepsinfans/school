@@ -1,6 +1,5 @@
 import React from "react";
-import styled from "@emotion/styled";
-
+import styled from "styled-components";
 
 const GridStyle = styled.div`
   display: flex;
@@ -23,4 +22,3 @@ const Grid = ({ children }) => {
 };
 
 export default Grid;
-    

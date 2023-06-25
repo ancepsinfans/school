@@ -1,9 +1,8 @@
 import React from "react";
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from "next-mdx-remote";
-import styled from "@emotion/styled";
-import { getLessonPage } from "../../../../lib/fetchLesson";
-import connectMongo from '../../../../middleware/connectMongo'
+import styled from "styled-components";
+import { getLessonPage } from "../../../../middleware/fetchLesson";
 import Question from '../../../../models/questions/Questions'
 import { useSession } from "next-auth/react";
 import { Loading, MainContainer } from "../../../../components/meta";
@@ -90,7 +89,6 @@ export const getServerSideProps = async (ctx) => {
         const lessonContents = await getLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)
         const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
         try {
-            await connectMongo()
             const qs = await Question.find({})
             return {
                 props: {

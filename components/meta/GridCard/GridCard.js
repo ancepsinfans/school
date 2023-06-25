@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import Link from "next/link";
 
 const Card = styled.div`
@@ -47,37 +47,24 @@ const Card = styled.div`
   line-height: 1.5;
 }
 `
+const Button = styled.button``
 
 
 
 const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick }) => {
-
-  if (link === '') {
-    return (
-      <div style={{ display: (isRestricted && !isAdmin ? "none" : "block") }}>
-        <button style={{ background: 'none', border: 'none' }} onClick={onClick}>
-          <Card
-            isDisabled={isDisabled}
-          >
-            <h2>{title} &rarr;</h2>
-            <p>{description}</p>
-          </Card>
-        </button>
-      </div>
-    )
-  }
+  const Type = link === '' ? Button : Link
   return (
     <div style={{ display: (isRestricted && !isAdmin ? "none" : "block") }}>
-      <Link href={link}>
+      <Type href={link} style={{ background: 'none', border: 'none' }} onClick={onClick}>
         <Card
           isDisabled={isDisabled}
         >
           <h2>{title} &rarr;</h2>
           <p>{description}</p>
         </Card>
-      </Link>
+      </Type>
     </div>
-  );
+  )
 };
 
 export default GridCard;

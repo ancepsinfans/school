@@ -1,7 +1,7 @@
 import React from "react";
 import constants from '../../../../styles/constants'
 import feedbackSender from '../../../../models/users/feedbackHelper'
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { useSession } from "next-auth/react";
 
 const Question = styled.div`

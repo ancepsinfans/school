@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 export default async function getStructure() {
 
     let baseURL = process.env.PROD
@@ -9,7 +8,6 @@ export default async function getStructure() {
     }
 
     let dbData
-    let fileData
 
     try {
         const response = await axios.get(`${baseURL}/api/lesson/spheres`);
@@ -20,9 +18,7 @@ export default async function getStructure() {
         throw error;
     }
 
-
     return dbData
-
 
 }
 

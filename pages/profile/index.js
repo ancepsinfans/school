@@ -1,6 +1,4 @@
-import styled from '@emotion/styled';
-import connectMongo from "../../middleware/connectMongo";
-// import { StudentSchema } from '../../models/users/User';
+import styled from 'styled-components';
 import { Grid, GridCard, Loading, MainContainer } from '../../components/meta'
 import React from 'react';
 import Image from 'next/image';
@@ -52,12 +50,7 @@ export default function Profile({ ID }) {
                         title='Your Analytics'
                         description='Here you can find data about your study history'
                     />
-                    {/* <GridCard
-                        isDisabled={true}
-                        link={`/profile/advice`}
-                        title='Advice'
-                        description='Under construction'
-                    /> */}
+
 
                 </Grid>
 
@@ -67,9 +60,6 @@ export default function Profile({ ID }) {
 }
 
 export const getServerSideProps = async (ctx) => {
-
-    await connectMongo()
-    // const studentInfo = await StudentSchema.findOne({ user: ctx.query.ID })
 
     return {
         props: {

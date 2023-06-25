@@ -2,12 +2,11 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { Loading, MainContainer } from '../../components/meta'
 import { StudentSchema } from '../../models/users/User'
-import getStructure from '../../lib/fetchStructure';
-import connectMongo from "../../middleware/connectMongo";
-import { courseNamer, lessonNamer, sphereNamer } from '../../lib/getNames';
+import getStructure from '../../middleware/fetchStructure';
+import { courseNamer, lessonNamer, sphereNamer } from '../../middleware/getNames';
 
 
 const ImageNameBox = styled.div`
@@ -91,7 +90,6 @@ export default function Profile({ ID, vocab, db }) {
 }
 
 export const getServerSideProps = async (ctx) => {
-    await connectMongo()
     const studentInfo = await StudentSchema.find({ user: ctx.query.ID }, { vocab: 1 })
     const db = await getStructure()
     return {

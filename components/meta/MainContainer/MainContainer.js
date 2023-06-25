@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import NavBar from "../NavBar";
 import Footer from '../Footer'
 import NextLessonButton from "../../atomic/buttons/NextLessonButton";

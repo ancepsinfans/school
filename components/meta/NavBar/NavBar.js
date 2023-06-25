@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { useSession, signIn, signOut } from "next-auth/react"
 import axios from "axios";
 import BlueButton from "../../atomic/buttons/BlueButton";

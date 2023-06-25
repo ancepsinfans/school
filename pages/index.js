@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, GridCard, MainContainer } from '../components/meta'
 import constants from '../styles/constants'
 import { signIn, useSession } from 'next-auth/react'
-import getStructure from '../lib/fetchStructure';
+import getStructure from '../middleware/fetchStructure';
 
 
 export default function Home({ db, ID }) {
@@ -70,64 +70,8 @@ export default function Home({ db, ID }) {
               })
             }
           </Grid >
-          <>
-            {/* <GridCard
-              isDisabled={true}
-              link=''
-              title='Music'
-              description='Under construction'
-            />
 
-            <GridCard
-              isDisabled={true}
-              link=''
-              title='Science'
-              description='Under construction'
-            />
 
-            <GridCard
-              isDisabled={true}
-              link=''
-              title='Film'
-              description='Under construction'
-            />
-
-            <GridCard
-              isDisabled={true}
-              link=''
-              title='Linguistics'
-              description='Under construction'
-            />
-
-            <GridCard
-              isDisabled={true}
-              link=''
-              title='Math'
-              description='Under construction'
-            />
-
-            <GridCard
-              isDisabled={true}
-              link=''
-              title='Psychology'
-              description='Under construction'
-            />
-
-            <GridCard
-              isDisabled={true}
-              link=''
-              title='Food'
-              description='Under construction'
-            />
-
-            <GridCard
-              isDisabled={true}
-              link=''
-              title='Philosophy'
-              description='Under construction'
-            /> */}
-
-          </>
         </>
         :
         <Grid>

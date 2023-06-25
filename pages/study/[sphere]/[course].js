@@ -1,8 +1,7 @@
 import React from "react";
 import { MainContainer, Grid, GridCard, Loading } from "../../../components/meta";
 import { useSession } from "next-auth/react";
-import getStructure from "../../../lib/fetchStructure";
-
+import getStructure from "../../../middleware/fetchStructure";
 
 const CoursePage = ({ sphere, db, ID, sphereName, broken }) => {
     const { status } = useSession()
@@ -55,6 +54,16 @@ export default CoursePage
 
 
 export const getServerSideProps = async (ctx) => {
+    const db = await getStructure()
+    let currentDB
+    const currentSphere = db.find((i) => i.sphere === ctx.params.sphere)
+    if (currentSphere.courses.some(item => item.course === ctx.params.course)) {
+        currentDB = currentSphere.courses.find((i) => i.course === ctx.params.course)
+    } else {
+        return {
+            redirect: { destination: '/404', permanent: false }
+        }
+    }
     if (!ctx.query.ID) {
         return {
             props: {
@@ -62,9 +71,7 @@ export const getServerSideProps = async (ctx) => {
             }
         }
     }
-    const db = await getStructure()
-    const currentSphere = db.find((i) => i.sphere === ctx.params.sphere)
-    const currentDB = currentSphere.courses.find((i) => i.course === ctx.params.course)
+
 
     return {
         props: {
