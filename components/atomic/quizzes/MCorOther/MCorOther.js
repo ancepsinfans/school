@@ -2,7 +2,6 @@ import React from "react";
 import constants from '../../../../styles/constants'
 import feedbackSender from '../../../../models/users/feedbackHelper'
 import styled from "styled-components";
-import { useSession } from "next-auth/react";
 
 const Question = styled.div`
   padding: 5px 5px;
@@ -60,12 +59,8 @@ const SubmitButton = styled(AnswerButton)`
 } 
 `
 
-const MCorOther = ({ options, desc, path, idNum, withOther }) => {
-  const { data: session } = useSession()
-  const concatID = path.join('/') + '_' + idNum
-
-  let sphere, course, lesson
-  [sphere, course, lesson] = path
+const MCorOther = ({ user, options, desc, path, id, withOther }) => {
+  const concatID = path.join('/') + '_' + id
 
   const [otherClicked, setOtherClicked] = React.useState(false)
   const [otherValue, setOtherValue] = React.useState('')
@@ -137,12 +132,10 @@ const MCorOther = ({ options, desc, path, idNum, withOther }) => {
           () => {
             setResponse(response => [...response, otherValue]);
             feedbackSender(
-              session.user.email,
+              user,
               response,
               concatID,
-              sphere,
-              course,
-              lesson
+              path
             );
             setIsSubmitted(true);
           }

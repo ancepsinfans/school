@@ -1,15 +1,15 @@
 import axios from 'axios'
 
-async function feedbackSender(user, answer, id, sphere, course, lesson) {
+async function feedbackSender(user, answer, id, path) {
+
     const payload = {
         user: user,
         answer: answer,
         id: id,
-        sphere: sphere,
-        course: course,
-        lesson: lesson,
+        sphere: path[0],
+        course: path[1],
+        lesson: path[2],
     }
-
     const response = await axios.post(`/api/user/postFeedback`, payload)
 
 }

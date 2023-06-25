@@ -1,39 +1,26 @@
 import connectDB from "../../../middleware/mongodb";
 import { StudentFeedback, StudentSchema } from "../../../models/users/User";
+import ifDocExists from "../../../middleware/ifDocExists";
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
-    const { user, answer, id, sphere, course, lesson } = req.body
-    if (user) {
-      try {
-        const feedback = new StudentFeedback({
-          answer: answer,
-          id: id,
-          sphere: sphere,
-          course: course,
-          lesson: lesson,
-        })
+    const { user, answer, sphere, course, id, lesson } = req.body
+    try {
+      const feedback = new StudentFeedback({
+        answer: answer,
+        sphere: sphere,
+        id: id,
+        course: course,
+        lesson: lesson,
+      })
 
-        let doc = await StudentSchema.findOneAndUpdate(
-          { user: user },
-          { upsert: true }
-        )
+      const result = ifDocExists(user, 'feedback', feedback, StudentSchema, res)
+      return result
 
-        if (!doc.feedback) {
-          doc.feedback = []
-        }
-
-        doc.feedback.push(feedback)
-
-        doc.save()
-
-        return res.status(200).send(doc)
-      } catch (error) {
-        return res.status(500).send(error.message)
-      }
-    } else {
-      res.status(422).send('data_incomplete')
+    } catch (error) {
+      return res.status(500).send(error.message)
     }
+
   } else {
     res.status(422).send('method not supported')
   }

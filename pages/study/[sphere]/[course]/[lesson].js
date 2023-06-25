@@ -88,39 +88,24 @@ export const getServerSideProps = async (ctx) => {
     try {
         const lessonContents = await getLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)
         const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
-        try {
-            const qs = await Question.find({})
-            return {
-                props: {
-                    user: ctx.query.ID,
-                    source: mdxSource,
-                    sphere: ctx.params.sphere,
-                    course: ctx.params.course,
-                    lesson: ctx.params.lesson,
-                    qs: JSON.parse(JSON.stringify(qs))
-                }
-            }
-        } catch (error) {
-            console.log(error)
-            return {
-                props: {
-                    user: ctx.query.ID,
-                    source: mdxSource,
-                    sphere: ctx.params.sphere,
-                    course: ctx.params.course,
-                    lesson: ctx.params.lesson,
-                    qs: 'none'
-                }
+        const qs = await Question.find({})
+        return {
+            props: {
+                user: ctx.query.ID,
+                source: mdxSource,
+                sphere: ctx.params.sphere,
+                course: ctx.params.course,
+                lesson: ctx.params.lesson,
+                qs: JSON.parse(JSON.stringify(qs))
             }
         }
+
     } catch (error) {
         error.log(error)
         return {
             broken: true
         }
     }
-
-
 }
 
 
