@@ -8,7 +8,9 @@ import getStructure from "../../middleware/fetchStructure";
 import pageStructure from "../../middleware/generatePageStructure";
 import hasElement from "../../middleware/hasElement";
 import { useImmer } from "use-immer";
-import { TextInput, SubmitButton } from "../../components/atomic";
+import { TextInput, SubmitButton, TextInputQuiz, MCQuiz } from "../../components/atomic";
+import axios from "axios";
+
 
 const ListItem = styled.li`
   list-style-position: inside;
@@ -20,7 +22,7 @@ const Input = styled.form`
     text-align: center;
 `
 
-const AddDesc = ({ paths, db }) => {
+const AddDesc = ({ paths, db, qs }) => {
     const INIT = {
         sphere: undefined,
         course: undefined,
@@ -39,7 +41,10 @@ const AddDesc = ({ paths, db }) => {
             titleText={"Lesson structure"}
             smallTitle={true}
         >
-
+            <MCQuiz
+                question={qs[0]}
+                user='649144e86d4ab7e6a549a0e7'
+            />
             <ul style={{ padding: '0 20px' }}>
                 {
                     Object.keys(paths).map((e, idx) => {
@@ -159,12 +164,13 @@ const AddDesc = ({ paths, db }) => {
 export default AddDesc
 
 export const getServerSideProps = async () => {
-
+    const qs = await axios.get('http://localhost:3000/api/lesson/questions')
     const dbData = await getStructure()
     return {
         props: {
             paths: pageStructure,
-            db: dbData
+            db: dbData,
+            qs: qs.data.data
         }
     }
 };

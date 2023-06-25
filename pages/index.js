@@ -53,7 +53,7 @@ export default function Home({ db, ID }) {
               title='Add course descriptions'
             />
           </Grid>
-          <br />
+          <hr style={{ backgroundColor: constants.blackMain, margin: '5px', borderStyle: 'solid', width: '100%' }} hidden={!isAdmin} />
           <Grid>
             {
               db.map((e, idx) => {

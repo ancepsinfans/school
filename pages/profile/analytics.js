@@ -124,8 +124,9 @@ export default function Profile({ ID, paths, studentInfo }) {
           <p>Percent correct: {(numCorrect / totalAttempts * 100).toFixed(2)}%</p>
           <hr style={{ backgroundColor: constants.blackMain, margin: '5px', borderStyle: 'solid' }} />
           <ul>{Object.entries(questionTypes).map(([key, value], idx) => {
+            const properName = paths.find(i => i.sphere === key)
             return (
-              <ListItem key={idx}>sphere: {key}
+              <ListItem key={idx}>sphere: {properName ? properName.name : key}
                 <ul style={{ padding: '0 20px' }}>
 
                   <ListItem key={`${idx}_1`}>{(questionTypes[key]['correct'] / questionTypes[key]['total_attempts'] * 100).toFixed(1)}% correct</ListItem>
@@ -140,9 +141,11 @@ export default function Profile({ ID, paths, studentInfo }) {
           <SubHeading>Progress</SubHeading>
           <ul>
             {Object.entries(spheresPageCount).map(([key, value], i) => {
+              const properName = paths.find(i => i.sphere === key)
+
               return (
                 <ListItem key={i}>
-                  {key}
+                  {properName ? properName.name : key}
                   <ul style={{ padding: '0 20px' }}>
                     {Object.entries(value).map(([k, v], j) => {
 

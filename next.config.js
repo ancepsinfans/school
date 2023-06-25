@@ -22,7 +22,7 @@ const securityHeaders = [
 ]
 module.exports = withMDX({
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  nextConfig,
+  ...nextConfig,
   images: {
     domains: [
       'zach.bullard.dev',

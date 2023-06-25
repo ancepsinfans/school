@@ -6,7 +6,7 @@ import { getLessonPage } from "../../../../middleware/fetchLesson";
 import Question from '../../../../models/questions/Questions'
 import { useSession } from "next-auth/react";
 import { Loading, MainContainer } from "../../../../components/meta";
-import { Popover, MCQuiz, TextInput, MCorOther } from "../../../../components/atomic";
+import { Popover, MCQuiz, TextInputQuiz, MCorOther } from "../../../../components/atomic";
 
 
 const Content = styled.div`
@@ -40,7 +40,7 @@ const LessonPage = (
 
     const components = {
         MCQ: MCQuiz,
-        TextI: TextInput,
+        TextI: TextInputQuiz,
         Def: Popover,
         Feed: MCorOther,
     }

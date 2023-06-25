@@ -63,7 +63,6 @@ export default function Profile({ ID, vocab, db }) {
                 <ul>
                     {uniqueVocab.map(e => {
                         const sphereName = sphereNamer(db, e)
-                        console.log(sphereName)
                         const courseName = courseNamer(db, e)
                         const lessonName = lessonNamer(db, e)
                         return (

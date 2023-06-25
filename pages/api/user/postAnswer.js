@@ -17,7 +17,6 @@ const handler = async (req, res) => {
       course: course,
       lesson: lesson
     })
-
     const result = ifDocExists(user, 'answers', quizAnswer, StudentSchema, res)
     return result
 

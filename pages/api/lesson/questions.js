@@ -28,17 +28,16 @@ const handler = async (req, res) => {
         } = req
         try {
 
-            let qs = []
+            let qs
             if (sphere && id) {
                 qs = await Question.find({ sphere: sphere, _id: new ObjectId(id) })
-            } else if (!sphere) {
-                qs = await Question.find({ _id: new ObjectId(id) })
+            } else if (!sphere && !id) {
+                qs = await Question.find({})
             } else if (!id) {
                 qs = await Question.find({ sphere: sphere })
             } else {
-                qs = await Question.find({})
+                qs = await Question.find({ _id: new ObjectId(id) })
             }
-
             return res.status(200).json({ success: true, data: qs })
         } catch (error) {
 

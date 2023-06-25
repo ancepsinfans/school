@@ -10,7 +10,7 @@ const Question = styled.div`
 `
 const AnswerButton = styled.button`
 & {
-  width: 15%;
+  width: 35%;
   border: 1px solid var(--blackMain);
   border-radius: 12px;
   color: var(--blackMain);
@@ -21,7 +21,7 @@ const AnswerButton = styled.button`
 
 &:hover {
   border: none;
-  width: calc(15% + 2px);
+  width: calc(35% + 2px);
   height: calc(25px + 0px);
 }
 `
@@ -67,7 +67,7 @@ const MCQuiz = ({ question, user }) => {
                 onClick={() => {
                   setAnswer(ans)
                   setAttempts(attempts + 1)
-                  colorHandler(ans, correct, i)
+                  colorHandler(ans, question.correct, i)
                   answerSender(
                     'mc quiz',
                     ans,

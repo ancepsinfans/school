@@ -2,8 +2,9 @@ import React from "react";
 import constants from "../../../../styles/constants";
 import answerSender from '../../../../models/users/answerHelper'
 import styled from "styled-components";
+import TextInput from "../../inputs/TextInput";
 
-const Input = styled.div`
+const Question = styled.form`
   padding: 5px 5px;
   margin: 0%;
   text-align: center;
@@ -26,67 +27,53 @@ const AnswerButton = styled.button`
 }
 `
 
-const TextInputQuiz = ({ questionSet, questID, user }) => {
-
-  let activeQuestion = null
-
-  questionSet.forEach(e => {
-    if (e.id === questID) {
-      activeQuestion = e
-    }
-  })
+const TextInputQuiz = ({ question, user }) => {
 
   const [value, setValue] = React.useState('')
   const [attempts, setAttempts] = React.useState(0)
   const [showFeedback, setShowFeedback] = React.useState(false)
 
   const renderFeedback = (data) => {
-    if (data.toString() == activeQuestion.correct.toString()) {
-      return (activeQuestion.good)
+    if (data.toString() == question.correct.toString()) {
+      return (question.good)
     } else if (data === '') {
       return ''
     } else {
-      return (activeQuestion.bad)
+      return (question.bad)
     }
   }
 
-  const parentOnClick = (val) => {
-    setShowFeedback(true)
-    setAttempts(attempts + 1)
-    answerSender(
-      'text input',
-      val,
-      activeQuestion.correct,
-      user,
-      attempts,
-      activeQuestion.id,
-      activeQuestion.sphere,
-      activeQuestion.course,
-      activeQuestion.lesson
-    )
-  }
-
   return (
-    <Input>
-      <h2>{activeQuestion.desc}</h2>
-      <input
+    <Question
+      onSubmit={e => {
+        e.preventDefault();
+        setShowFeedback(true)
+        setAttempts(attempts + 1)
+        answerSender(
+          'text input',
+          value,
+          user,
+          attempts,
+          question
+        )
+      }}
+    >
+      <TextInput
         style={{ backgroundColor: constants.alertYellow90 }}
+        value={value}
         onChange={(e) => { setValue(e.target.value); setShowFeedback(false) }}
-
+        label={question.desc}
       />
-      <br />
+
       <AnswerButton
         style={{ backgroundColor: constants.primaryMain }}
-        onClick={() => parentOnClick(
-          value,
-        )}
       >
         Check
       </AnswerButton>
       <br />
       <span>{(showFeedback ? renderFeedback(value) : null)}</span>
       <br />
-    </Input>
+    </Question>
   );
 };
 
