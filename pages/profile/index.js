@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import connectMongo from "../../middleware/connectMongo";
 // import { StudentSchema } from '../../models/users/User';
-import { Grid, GridCard, MainContainer } from '../../components/infrastructureComponents'
+import { Grid, GridCard, Loading, MainContainer } from '../../components/meta'
 import React from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
@@ -20,12 +20,7 @@ export default function Profile({ ID }) {
 
     if (status === 'loading') {
         return (
-            <MainContainer
-                navType='other'
-                titleText="Loading..."
-            >
-
-            </MainContainer>
+            <Loading />
         )
     }
 

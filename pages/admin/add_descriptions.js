@@ -2,7 +2,7 @@ import React from "react";
 import constants from "../../styles/constants";
 import sphereSender from "../../models/spheres/sphereHelper";
 import styled from "@emotion/styled";
-import { MainContainer } from "../../components/infrastructureComponents";
+import { MainContainer } from "../../components/meta";
 import { useRouter } from "next/router";
 import getStructure from "../../lib/fetchStructure";
 import pageStructure from "../../lib/generatePageStructure";

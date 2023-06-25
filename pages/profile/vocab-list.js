@@ -1,12 +1,13 @@
-import styled from '@emotion/styled';
-import { MainContainer } from '../../components/infrastructureComponents'
 import React from 'react';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { StudentSchema } from '../../models/users/User'
-import connectMongo from "../../middleware/connectMongo";
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import styled from '@emotion/styled';
+import { Loading, MainContainer } from '../../components/meta'
+import { StudentSchema } from '../../models/users/User'
 import getStructure from '../../lib/fetchStructure';
+import connectMongo from "../../middleware/connectMongo";
+import { courseNamer, lessonNamer, sphereNamer } from '../../lib/getNames';
 
 
 const ImageNameBox = styled.div`
@@ -14,17 +15,6 @@ const ImageNameBox = styled.div`
   justify-content: space-between;
   gap: 15px;
   align-items: center;
-`
-
-const Stats = styled.div`
-  display: flex;
-  justify-content: center;
-  
-  flex-direction: column;
-  max-width: 50vh;
-  margin: 5px auto;
-  padding: 2vh;
-  border: 2px solid var(--blackMain);
 `
 
 const ListItem = styled.li`
@@ -35,14 +25,24 @@ export default function Profile({ ID, vocab, db }) {
     const { data: session, status } = useSession()
     const user = session?.user
 
+    const uniqueVocab = vocab.reduce((result, current) => {
+        const existing = result.find(item =>
+            item.term.term === current.term.term &&
+            item.term.definition === current.term.definition
+        );
+
+        if (!existing) {
+            result.push(current);
+        } else if (current.timestamp > existing.timestamp) {
+            result[result.indexOf(existing)] = current;
+        }
+
+        return result;
+    }, []);
+
     if (status === 'loading') {
         return (
-            <MainContainer
-                navType='other'
-                titleText="Loading..."
-            >
-
-            </MainContainer>
+            <Loading />
         )
     }
 
@@ -61,27 +61,13 @@ export default function Profile({ ID, vocab, db }) {
                 }
                 noFlex={false}
             >
-                <Stats>
+                <div>
                     <ul>
-                        {vocab.map(e => {
-                            const sphereName = db
-                                .find(({ sphere }) => sphere === e.sphere)
-                                ?.name
-
-                            const courseName = db
-                                .find(({ sphere }) => sphere === e.sphere)
-                                ?.courses
-                                .find(({ course }) => course === e.course)
-                                ?.name
-
-                            const lessonName = db
-                                .find(({ sphere }) => sphere === e.sphere)
-                                ?.courses
-                                .find(({ course }) => course === e.course)
-                                ?.lessons
-                                .find(({ lesson }) => lesson === e.lesson)
-                                ?.name;
-
+                        {uniqueVocab.map(e => {
+                            const sphereName = sphereNamer(db, e)
+                            console.log(sphereName)
+                            const courseName = courseNamer(db, e)
+                            const lessonName = lessonNamer(db, e)
                             return (
                                 <ListItem key={e._id}>
                                     {e.term.term} -- {e.term.definition}
@@ -94,14 +80,12 @@ export default function Profile({ ID, vocab, db }) {
                                         </ListItem>
                                     </ul>
                                 </ListItem>
-
                             )
-
                         })}
                     </ul>
-                </Stats>
+                </div>
 
-            </MainContainer >
+            </MainContainer>
         </>
     )
 }

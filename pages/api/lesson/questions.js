@@ -31,7 +31,6 @@ const handler = async (req, res) => {
             let qs = []
             if (sphere && id) {
                 qs = await Question.find({ sphere: sphere, _id: new ObjectId(id) })
-                console.log({ qs })
             } else if (!sphere) {
                 qs = await Question.find({ _id: new ObjectId(id) })
             } else if (!id) {

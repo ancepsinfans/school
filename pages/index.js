@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, GridCard, MainContainer } from '../components/infrastructureComponents'
+import { Grid, GridCard, MainContainer } from '../components/meta'
 import constants from '../styles/constants'
 import { signIn, useSession } from 'next-auth/react'
 import getStructure from '../lib/fetchStructure';

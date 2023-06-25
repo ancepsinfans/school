@@ -1,5 +1,5 @@
 import React from "react";
-import { MainContainer, Grid, GridCard } from "../../components/infrastructureComponents";
+import { MainContainer, Grid, GridCard, Loading } from "../../components/meta";
 import { useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import axios from "axios";
@@ -11,12 +11,7 @@ const SpherePage = ({ db, ID }) => {
 
     if (status === 'loading') {
         return (
-            <MainContainer
-                navType='other'
-                titleText="Loading..."
-            >
-
-            </MainContainer>
+            <Loading />
         )
     }
 
@@ -74,6 +69,7 @@ export default SpherePage
 
 
 export const getServerSideProps = async (ctx) => {
+
     const db = await getStructure()
     const currentDB = db.find((i) => i.sphere === ctx.params.sphere)
 

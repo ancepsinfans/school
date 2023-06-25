@@ -2,7 +2,7 @@ import React from 'react'
 import constants from '../styles/constants'
 import { createGlobalStyle } from 'styled-components'
 import { SessionProvider } from 'next-auth/react'
-import AuthBlock from '../components/infrastructureComponents/AuthBlock/AuthBlock'
+import AuthBlock from '../components/meta/AuthBlock/AuthBlock'
 
 const GlobalStyles = createGlobalStyle`
   :root {

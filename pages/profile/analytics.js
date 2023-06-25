@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import constants from '../../styles/constants';
 import connectMongo from "../../middleware/connectMongo";
 import { StudentSchema } from '../../models/users/User';
-import { MainContainer } from '../../components/infrastructureComponents'
+import { Loading, MainContainer } from '../../components/meta'
 import React from 'react';
 import { useSession } from 'next-auth/react';
 import getStructure from '../../lib/fetchStructure'
@@ -42,16 +42,10 @@ export default function Profile({ ID, paths, studentInfo }) {
 
   if (status === 'loading') {
     return (
-      <MainContainer
-        navType='other'
-        titleText="Loading..."
-      >
-
-      </MainContainer>
+      <Loading />
     )
   }
 
-  console.log({ paths, studentInfo })
   const ans = studentInfo.answers
   const progress = studentInfo.progress
 
@@ -156,11 +150,10 @@ export default function Profile({ ID, paths, studentInfo }) {
                         .find(({ sphere }) => sphere === key)
                         ?.courses
                         .find(({ course }) => course === k)
-
                       return (
 
                         <ListItem key={j}>
-                          {k}: {(v.size / course.lessons.length * 100).toFixed(1)}% complete
+                          {course.name}: {(v.size / course.lessons.length * 100).toFixed(1)}% complete
                         </ListItem>
                       )
                     })}

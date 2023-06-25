@@ -1,21 +1,17 @@
 import React from "react";
-import { MainContainer, Grid, GridCard, BlueButton, ButtonMechanics } from "../../../components/infrastructureComponents";
+import { MainContainer, Grid, GridCard, Loading } from "../../../components/meta";
 import { useSession } from "next-auth/react";
 import getStructure from "../../../lib/fetchStructure";
 
 
-const CoursePage = ({ sphere, db, ID, sphereName }) => {
+const CoursePage = ({ sphere, db, ID, sphereName, broken }) => {
     const { status } = useSession()
-    if (status === 'loading') {
+    if (status === 'loading' | broken) {
         return (
-            <MainContainer
-                navType='other'
-                titleText="Loading..."
-            >
-
-            </MainContainer>
+            <Loading />
         )
     }
+
     return (
         <>
             <MainContainer
@@ -59,7 +55,13 @@ export default CoursePage
 
 
 export const getServerSideProps = async (ctx) => {
-
+    if (!ctx.query.ID) {
+        return {
+            props: {
+                broken: true
+            }
+        }
+    }
     const db = await getStructure()
     const currentSphere = db.find((i) => i.sphere === ctx.params.sphere)
     const currentDB = currentSphere.courses.find((i) => i.course === ctx.params.course)
@@ -69,7 +71,8 @@ export const getServerSideProps = async (ctx) => {
             sphere: ctx.params.sphere,
             db: currentDB,
             ID: ctx.query.ID,
-            sphereName: currentSphere.name
+            sphereName: currentSphere.name,
+
         }
     }
 };
