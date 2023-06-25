@@ -6,10 +6,10 @@ import axios from "axios";
 import { authOptions } from '../api/auth/[...nextauth]'
 import getStructure from "../../lib/fetchStructure";
 
-const SpherePage = ({ db, ID }) => {
+const SpherePage = ({ db, ID, broken }) => {
     const { status } = useSession()
 
-    if (status === 'loading') {
+    if (status === 'loading' | broken) {
         return (
             <Loading />
         )
@@ -26,7 +26,7 @@ const SpherePage = ({ db, ID }) => {
                 <Grid>
 
                     {
-                        db.courses.map((e, idx) => {
+                        db.courses.map(e => {
                             return (
                                 <GridCard
                                     key={e._id}
@@ -70,18 +70,17 @@ export default SpherePage
 
 export const getServerSideProps = async (ctx) => {
 
-    const db = await getStructure()
-    const currentDB = db.find((i) => i.sphere === ctx.params.sphere)
-
     const session = await getServerSession(ctx.req, ctx.res, authOptions)
-    if (session === null) {
+    if (session === null | !ctx.query.ID) {
         return {
             props: {
-                db: null,
-                ID: null
+                broken: true
             }
         }
     }
+    const db = await getStructure()
+    const currentDB = db.find((i) => i.sphere === ctx.params.sphere)
+
 
     const { data } = await axios.get(process.env.BASE_URL + "/api/user/getUser", { params: { email: session.user.email } })
 

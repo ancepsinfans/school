@@ -1,5 +1,6 @@
 import React from "react";
-import { MainContainer, BlueButton } from "../components/meta";
+import { MainContainer } from "../components/meta";
+import { BlueButton } from "../components/atomic";
 
 const FourOhFour = () => {
     return (
@@ -10,6 +11,7 @@ const FourOhFour = () => {
         >
             <p>Do you want it to?</p>
             <BlueButton
+                id='404'
                 onClick={() => alert('duly noted')}
             >Yes</BlueButton>
         </MainContainer>
