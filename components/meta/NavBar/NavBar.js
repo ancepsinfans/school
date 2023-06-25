@@ -59,15 +59,14 @@ const NavBar = ({ isProfilePage, isHome }) => {
   }, [status, session])
 
   return (
-
     <NavBarStyled isHome={isHome}>
       <Back>
         <Link href={isHome ? '/about' : '/'}>
-          <a>{isHome ? 'About' : 'School'}</a>
+          {isHome ? 'About' : 'School'}
         </Link>
       </Back>
 
-      <Link href={`/profile?ID=${ID}`}>
+      <Link href={`/profile?ID=${ID}`} legacyBehavior>
         <UserName>{isProfilePage ? 'Profile' : `${!!session?.user.name ? session.user.name : 'Profile'}`}</UserName>
       </Link>
 
@@ -79,7 +78,7 @@ const NavBar = ({ isProfilePage, isHome }) => {
         </BlueButton>
       </div>
     </NavBarStyled>
-  )
+  );
 }
 
 export default NavBar

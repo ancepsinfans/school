@@ -45,48 +45,47 @@ export default function Profile({ ID, vocab, db }) {
     }, []);
 
 
-    return (
-        <>
-            <MainContainer
-                isProfilePage={true}
-                smallTitle={true}
-                titleText={
-                    <>
-                        <ImageNameBox>
-                            {user.image ? <Image src={user.image} width={50} height={50} alt="avatar" /> : null}
-                            <h4>{user.name}</h4>
-                        </ImageNameBox>
-                    </>
-                }
-                noFlex={false}
-            >
-                <div>
-                    <ul>
-                        {uniqueVocab.map(e => {
-                            const sphereName = sphereNamer(db, e)
-                            console.log(sphereName)
-                            const courseName = courseNamer(db, e)
-                            const lessonName = lessonNamer(db, e)
-                            return (
-                                <ListItem key={e._id}>
-                                    {e.term.term} -- {e.term.definition}
-                                    <ul style={{ padding: '0 20px' }}>
-                                        <ListItem>
-                                            <Link
-                                                href={`/study/${e.sphere}/${e.course}/${e.lesson}?ID=${ID}`}>
-                                                {`${sphereName} > ${courseName} > ${lessonName}`}
-                                            </Link>
-                                        </ListItem>
-                                    </ul>
-                                </ListItem>
-                            )
-                        })}
-                    </ul>
-                </div>
+    return <>
+        <MainContainer
+            isProfilePage={true}
+            smallTitle={true}
+            titleText={
+                <>
+                    <ImageNameBox>
+                        {user.image ? <Image src={user.image} width={50} height={50} alt="avatar" /> : null}
+                        <h4>{user.name}</h4>
+                    </ImageNameBox>
+                </>
+            }
+            noFlex={false}
+        >
+            <div>
+                <ul>
+                    {uniqueVocab.map(e => {
+                        const sphereName = sphereNamer(db, e)
+                        console.log(sphereName)
+                        const courseName = courseNamer(db, e)
+                        const lessonName = lessonNamer(db, e)
+                        return (
+                            <ListItem key={e._id}>
+                                {e.term.term} -- {e.term.definition}
+                                <ul style={{ padding: '0 20px' }}>
+                                    <ListItem>
+                                        <Link
+                                            href={`/study/${e.sphere}/${e.course}/${e.lesson}?ID=${ID}`}
+                                            legacyBehavior>
+                                            {`${sphereName} > ${courseName} > ${lessonName}`}
+                                        </Link>
+                                    </ListItem>
+                                </ul>
+                            </ListItem>
+                        );
+                    })}
+                </ul>
+            </div>
 
-            </MainContainer>
-        </>
-    )
+        </MainContainer>
+    </>;
 }
 
 export const getServerSideProps = async (ctx) => {

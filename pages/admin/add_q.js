@@ -11,8 +11,6 @@ const Input = styled.form`
     text-align: center;
 `
 
-
-
 const AddQ = ({ spheres, courses, lessons }) => {
   const INIT = {
     sphere: '',

@@ -3,12 +3,10 @@ import React from 'react';
 
 function LinkyButton({ children, link }) {
   return (
-
-    <Link href={link} passHref>
+    <Link href={link} passHref legacyBehavior>
       {children}
     </Link>
-
-  )
+  );
 }
 
 export default LinkyButton;

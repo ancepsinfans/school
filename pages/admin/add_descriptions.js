@@ -7,64 +7,42 @@ import { useRouter } from "next/router";
 import getStructure from "../../middleware/fetchStructure";
 import pageStructure from "../../middleware/generatePageStructure";
 import hasElement from "../../middleware/hasElement";
+import { useImmer } from "use-immer";
+import { TextInput, SubmitButton } from "../../components/atomic";
 
 const ListItem = styled.li`
   list-style-position: inside;
 `
 
-const Input = styled.div`
+const Input = styled.form`
     padding: 5px 5px;
     margin: 0%;
     text-align: center;
 `
 
-const AnswerButton = styled.button`
-& {
-    width: 50%;
-    border: 1px solid var(--blackMain);
-    border-radius: 12px;
-    color: var(--blackMain);
-    border-radius: 5px;
-    margin: 5px;
-    height: 25px;
-}
-
-&:hover {
-    border: none;
-    width: calc(50% + 2px);
-    height: calc(25px + 0px);
-}
-`
-
 const AddDesc = ({ paths, db }) => {
+    const INIT = {
+        sphere: undefined,
+        course: undefined,
+        lesson: undefined,
+        active: 'none',
+        name: '',
+        desc: ''
+    }
 
-
-    const [data, setData] = React.useState({})
-    const [active, setActive] = React.useState('none')
-    const [desc, setDesc] = React.useState('')
-    const [name, setName] = React.useState('')
+    const [data, updateData] = useImmer(INIT)
 
     const router = useRouter()
 
-    const clearAll = () => {
-        setData({})
-        setActive('none')
-        setDesc('')
-        setName('')
-
-        setTimeout(() => {
-            router.reload();
-        }, 500);
-    }
-
     return (
-        <MainContainer>
+        <MainContainer
+            titleText={"Lesson structure"}
+            smallTitle={true}
+        >
 
-            <h2>Lesson structure</h2>
             <ul style={{ padding: '0 20px' }}>
                 {
                     Object.keys(paths).map((e, idx) => {
-
                         return (
                             <ListItem
                                 key={idx}
@@ -72,11 +50,11 @@ const AddDesc = ({ paths, db }) => {
                                 <button
                                     style={{ backgroundColor: hasElement(db, { sphere: e, course: undefined, lesson: undefined }) ? constants.alertGreenMain : constants.alertRedMain }}
                                     onClick={() => {
-                                        setActive(e)
-                                        setData({
-                                            sphere: e,
-                                            course: undefined,
-                                            lesson: undefined
+                                        updateData((draft) => {
+                                            draft.active = e
+                                            draft.sphere = e
+                                            draft.course = undefined
+                                            draft.lesson = undefined
                                         })
                                     }}
                                 >
@@ -96,11 +74,11 @@ const AddDesc = ({ paths, db }) => {
                                                         style={{ backgroundColor: hasElement(db, { sphere: e, course: f, lesson: undefined }) ? constants.alertGreenMain : constants.alertRed65 }}
                                                         disabled={!hasElement(db, { sphere: e, course: undefined, lesson: undefined })}
                                                         onClick={() => {
-                                                            setActive(f)
-                                                            setData({
-                                                                sphere: e,
-                                                                course: f,
-                                                                lesson: undefined
+                                                            updateData((draft) => {
+                                                                draft.active = f
+                                                                draft.sphere = e
+                                                                draft.course = f
+                                                                draft.lesson = undefined
                                                             })
                                                         }}
                                                     >
@@ -118,11 +96,11 @@ const AddDesc = ({ paths, db }) => {
                                                                             style={{ backgroundColor: hasElement(db, { sphere: e, course: f, lesson: g }) ? constants.alertGreen65 : constants.alertRed65 }}
                                                                             disabled={!hasElement(db, { sphere: e, course: f, lesson: undefined })}
                                                                             onClick={() => {
-                                                                                setActive(g)
-                                                                                setData({
-                                                                                    sphere: e,
-                                                                                    course: f,
-                                                                                    lesson: g
+                                                                                updateData((draft) => {
+                                                                                    draft.active = g
+                                                                                    draft.sphere = e
+                                                                                    draft.course = f
+                                                                                    draft.lesson = g
                                                                                 })
                                                                             }}
                                                                         >
@@ -146,37 +124,30 @@ const AddDesc = ({ paths, db }) => {
 
             <br />
 
-            <h2>{active}</h2>
+            <h2>{data.active}</h2>
 
-            <Input>
-                <h4>Description</h4>
-                <input
-                    style={{ backgroundColor: constants.accentWhite }}
-                    onChange={(e) => { setDesc(e.target.value) }}
-                />
-                <h4>Proper Name</h4>
-                <input
-                    style={{ backgroundColor: constants.accentWhite }}
-                    onChange={(e) => { setName(e.target.value) }}
-                />
+            <Input onSubmit={e => {
+                e.preventDefault();
+                sphereSender(
+                    data,
+                    !hasElement(db, data)
+                );
+                updateData((draft) => { draft = INIT })
+                setTimeout(() => {
+                    router.reload();
+                }, 500);
+            }}>
+                <TextInput value={data.desc} onChange={(e) => { updateData((draft) => { draft.desc = e.target.value }) }} label={'Description'} />
+                <TextInput value={data.name} onChange={(e) => { updateData((draft) => { draft.name = e.target.value }) }} label={'Proper Name'} />
+
 
                 <br />
 
-                <AnswerButton
-                    disabled={active === 'none'}
-                    style={{ backgroundColor: constants.accentPurple85, }}
-                    onClick={() => {
-                        sphereSender(
-                            data,
-                            name,
-                            desc,
-                            !hasElement(db, data)
-                        );
-                        clearAll()
-                    }}
+                <SubmitButton
+                    disabled={data.active === 'none'}
                 >
-                    submit
-                </AnswerButton>
+                    Submit
+                </SubmitButton>
 
 
             </Input>

@@ -2,19 +2,14 @@ import axios from 'axios'
 
 async function sphereSender(
     data,
-    name,
-    description,
     createNew
 ) {
-    const { sphere, course, lesson } = data
-
-
     const payload = {
-        sphere,
-        course,
-        lesson,
-        name,
-        description,
+        sphere: data.sphere,
+        course: data.course,
+        lesson: data.lesson,
+        name: data.name,
+        description: data.desc,
         createNew
     }
     const response = await axios.post(`/api/lesson/spheres`, payload)
