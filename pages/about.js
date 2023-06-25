@@ -1,5 +1,5 @@
 import React from "react";
-import { MainContainer } from '../components/infrastructureComponents'
+import { MainContainer } from '../components/meta'
 import Image from "next/image";
 
 

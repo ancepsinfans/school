@@ -8,7 +8,6 @@ var question = new Schema({
     sphere: String,
     course: String,
     lesson: String,
-    id: String,
     good: {
         type: String,
         default: 'Great!'

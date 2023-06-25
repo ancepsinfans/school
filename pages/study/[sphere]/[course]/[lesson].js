@@ -1,13 +1,13 @@
 import React from "react";
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from "next-mdx-remote";
-import { MainContainer } from "../../../../components/infrastructureComponents";
-import { MCQuiz, TextInput, MCorOther, Definition } from "../../../../components/lessonComponents";
+import styled from "@emotion/styled";
 import { getLessonPage } from "../../../../lib/fetchLesson";
 import connectMongo from '../../../../middleware/connectMongo'
 import Question from '../../../../models/questions/Questions'
-import styled from "@emotion/styled";
 import { useSession } from "next-auth/react";
+import { Loading, MainContainer } from "../../../../components/meta";
+import { Popover, MCQuiz, TextInput, MCorOther } from "../../../../components/atomic";
 
 
 const Content = styled.div`
@@ -24,8 +24,6 @@ const Content = styled.div`
      text-decoration: underline 4px var(--accentPurple70);
      font-style: normal;
  }
-
-
 `
 
 const LessonPage = (
@@ -36,6 +34,7 @@ const LessonPage = (
         lesson,
         qs,
         user,
+        broken
     }
 ) => {
     const { status } = useSession()
@@ -43,18 +42,13 @@ const LessonPage = (
     const components = {
         MCQ: MCQuiz,
         TextI: TextInput,
-        Def: Definition,
+        Def: Popover,
         Feed: MCorOther,
     }
 
-    if (status === 'loading') {
+    if (status === 'loading' | broken) {
         return (
-            <MainContainer
-                navType='other'
-                titleText="Loading..."
-            >
-
-            </MainContainer>
+            <Loading />
         )
     }
 
@@ -66,9 +60,7 @@ const LessonPage = (
             introText={source.frontmatter.intro}
             isLesson={true}
             nextPage={`/${sphere}/${course}/${source.frontmatter.next}?ID=${user}`}
-            sphere={sphere}
-            course={course}
-            lesson={lesson}
+            location={{ sphere, course, lesson }}
         >
             <Content>
                 <MDXRemote
@@ -90,6 +82,9 @@ const LessonPage = (
 
 
 export const getServerSideProps = async (ctx) => {
+    if (!ctx.query.ID) {
+        return { props: { broken: true } }
+    }
 
     try {
         const lessonContents = await getLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)

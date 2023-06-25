@@ -3,8 +3,8 @@ import { StudentSchema, StudentProgress } from "../../../models/users/User";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
-        const { user, sphere, course, lesson } = req.body
-
+        const { user, location } = req.body
+        const { sphere, course, lesson } = location
         const docExists = await StudentSchema.findOne({ user: user })
         const progressUpdate = new StudentProgress({
             sphere: sphere,
