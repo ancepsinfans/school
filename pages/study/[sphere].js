@@ -24,7 +24,6 @@ const SpherePage = ({ db, ID, broken }) => {
             >
 
                 <Grid>
-
                     {
                         db.courses.map(e => {
                             return (
@@ -40,54 +39,41 @@ const SpherePage = ({ db, ID, broken }) => {
                         })
                     }
 
-                    {/* <GridCard
-                        isDisabled={true}
-                        link=''
-                        title='Reading in Translation'
-                        description='Under construction'
-                    />
-                    <GridCard
-                        isDisabled={true}
-                        link=''
-                        title='A Primer to Short Fiction'
-                        description='Under construction' />
-                    <GridCard
-                        isDisabled={true}
-                        link=''
-                        title='Intro to Poetry'
-                        description='Under construction'
-                    /> */}
-
                 </Grid>
             </MainContainer>
         </>
     )
 }
 
-
 export default SpherePage
 
 
 export const getServerSideProps = async (ctx) => {
 
+    const db = await getStructure()
+    let currentDB
     const session = await getServerSession(ctx.req, ctx.res, authOptions)
-    if (session === null | !ctx.query.ID) {
+    if (session === null) {
         return {
             props: {
                 broken: true
             }
         }
     }
-    const db = await getStructure()
-    const currentDB = db.find((i) => i.sphere === ctx.params.sphere)
-
+    if (db.some(item => item.sphere === ctx.params.sphere)) {
+        currentDB = db.find((i) => i.sphere === ctx.params.sphere)
+    } else {
+        return {
+            redirect: { destination: '/404', permanent: false }
+        }
+    }
 
     const { data } = await axios.get(process.env.BASE_URL + "/api/user/getUser", { params: { email: session.user.email } })
 
     return {
         props: {
             ID: data,
-            db: currentDB
+            db: currentDB || db
         }
     }
 };

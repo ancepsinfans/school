@@ -24,6 +24,11 @@ const ListItem = styled.li`
 export default function Profile({ ID, vocab, db }) {
     const { data: session, status } = useSession()
     const user = session?.user
+    if (status === 'loading') {
+        return (
+            <Loading />
+        )
+    }
 
     const uniqueVocab = vocab.reduce((result, current) => {
         const existing = result.find(item =>
@@ -40,11 +45,6 @@ export default function Profile({ ID, vocab, db }) {
         return result;
     }, []);
 
-    if (status === 'loading') {
-        return (
-            <Loading />
-        )
-    }
 
     return (
         <>

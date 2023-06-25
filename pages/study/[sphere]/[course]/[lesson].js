@@ -88,15 +88,10 @@ export const getServerSideProps = async (ctx) => {
 
     try {
         const lessonContents = await getLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)
-
-
         const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
-
         try {
             await connectMongo()
-
             const qs = await Question.find({})
-
             return {
                 props: {
                     user: ctx.query.ID,
@@ -120,12 +115,10 @@ export const getServerSideProps = async (ctx) => {
                 }
             }
         }
-
     } catch (error) {
+        error.log(error)
         return {
-
-            notFound: true
-
+            broken: true
         }
     }
 
