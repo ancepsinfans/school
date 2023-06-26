@@ -1,15 +1,14 @@
 import axios from 'axios'
 
 export default async function getStructure() {
-
+    const BASE_URL = process.env.BASE_URL
     let dbData
-
     try {
-        const response = await axios.get(`${process.env.BASE_URL}/api/lesson/spheres`);
+        const response = await axios.get(`${BASE_URL}/api/lesson/spheres`);
         dbData = response.data;
 
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error:');
         throw error;
     }
 

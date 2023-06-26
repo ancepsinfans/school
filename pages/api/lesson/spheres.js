@@ -3,8 +3,8 @@ import { SphereSchema, LessonSchema, CourseSchema } from "../../../models/sphere
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
-    res.status(202)
-    let doc = await SphereSchema.find()
+
+    let doc = await SphereSchema.find({})
     const info = doc
     return res.status(200).send(info)
   }

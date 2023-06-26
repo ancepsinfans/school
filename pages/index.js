@@ -4,8 +4,6 @@ import constants from '../styles/constants'
 import { signIn, useSession } from 'next-auth/react'
 import { getStructure } from '../middleware';
 
-
-
 export default function Home({ db, ID }) {
   const { data: session } = useSession()
 
