@@ -174,6 +174,7 @@ export const getServerSideProps = async (ctx) => {
   const db = await getStructure()
 
   const studentInfo = await StudentSchema.findOne({ user: ctx.query.ID }, { feedback: 0 })
+  console.log({ studentInfo, db })
 
   return {
     props: {

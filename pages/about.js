@@ -10,22 +10,18 @@ const About = () => {
             titleText='About me'
         >
             <h2>Hi! This is me, Zach.</h2>
-            <div style={{ width: '25%', margin: '0 auto' }}>
-                <Image
-                    width={300}
-                    height={300}
-                    alt=""
-                    src='/images/me.jpeg' />
-            </div>
-            <br />
+            <Image
+                width={200}
+                height={300}
+                alt=""
+                src='/images/me.jpeg' />
             <h3>Buy me a coffee?</h3>
             <aside>Lightning QR: $5</aside>
             <Image
-                width={200}
-                height={200}
+                width={300}
+                height={300}
                 alt=""
-                src='/images/lnqr.png'
-            />
+                src='/images/lnqr.png' />
         </MainContainer>
     )
 }
