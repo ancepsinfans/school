@@ -1,5 +1,4 @@
-import ifDocExists from "../../../middleware/ifDocExists";
-import connectDB from "../../../middleware/mongodb";
+import { ifDocExists, connectDB } from "../../../middleware";
 import { StudentAnswers, StudentSchema } from "../../../models/users/User";
 ifDocExists
 

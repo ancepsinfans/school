@@ -1,10 +1,10 @@
-const sphereNamer = (db, e) => {
+function sphereNamer(db, e) {
     return db
         .find(({ sphere }) => sphere === e.sphere)
         ?.name
 }
 
-const courseNamer = (db, e) => {
+function courseNamer(db, e) {
     return db
         .find(({ sphere }) => sphere === e.sphere)
         ?.courses
@@ -12,7 +12,7 @@ const courseNamer = (db, e) => {
         ?.name
 }
 
-const lessonNamer = (db, e) => {
+function lessonNamer(db, e) {
     return db
         .find(({ sphere }) => sphere === e.sphere)
         ?.courses

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import axios from "axios";
 import { authOptions } from '../api/auth/[...nextauth]'
-import getStructure from "../../middleware/fetchStructure";
+import { getStructure } from "../../middleware";
 
 const SpherePage = ({ db, ID, broken }) => {
     const { status } = useSession()

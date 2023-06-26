@@ -5,8 +5,7 @@ import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import { Loading, MainContainer } from '../../components/meta'
 import { StudentSchema } from '../../models/users/User'
-import getStructure from '../../middleware/fetchStructure';
-import { courseNamer, lessonNamer, sphereNamer } from '../../middleware/getNames';
+import { courseNamer, lessonNamer, sphereNamer, getStructure } from '../../middleware';
 
 
 const ImageNameBox = styled.div`

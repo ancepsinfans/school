@@ -4,12 +4,9 @@ import sphereSender from "../../models/spheres/sphereHelper";
 import styled from "styled-components";
 import { MainContainer } from "../../components/meta";
 import { useRouter } from "next/router";
-import getStructure from "../../middleware/fetchStructure";
-import pageStructure from "../../middleware/generatePageStructure";
-import hasElement from "../../middleware/hasElement";
+import { getStructure, generatePageStructure, hasElement } from "../../middleware";
 import { useImmer } from "use-immer";
-import { TextInput, SubmitButton, TextInputQuiz, MCQuiz } from "../../components/atomic";
-import axios from "axios";
+import { TextInput, SubmitButton } from "../../components/atomic";
 
 
 const ListItem = styled.li`
@@ -22,7 +19,7 @@ const Input = styled.form`
     text-align: center;
 `
 
-const AddDesc = ({ paths, db, qs }) => {
+const AddDesc = ({ paths, db }) => {
     const INIT = {
         sphere: undefined,
         course: undefined,
@@ -41,10 +38,8 @@ const AddDesc = ({ paths, db, qs }) => {
             titleText={"Lesson structure"}
             smallTitle={true}
         >
-            <MCQuiz
-                question={qs[0]}
-                user='649144e86d4ab7e6a549a0e7'
-            />
+
+            <br />
             <ul style={{ padding: '0 20px' }}>
                 {
                     Object.keys(paths).map((e, idx) => {
@@ -164,13 +159,13 @@ const AddDesc = ({ paths, db, qs }) => {
 export default AddDesc
 
 export const getServerSideProps = async () => {
-    const qs = await axios.get('http://localhost:3000/api/lesson/questions')
+
     const dbData = await getStructure()
+    const pageStructure = await generatePageStructure()
     return {
         props: {
             paths: pageStructure,
             db: dbData,
-            qs: qs.data.data
         }
     }
 };

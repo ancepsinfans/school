@@ -1,6 +1,5 @@
-import connectDB from "../../../middleware/mongodb";
+import { connectDB } from "../../../middleware";
 import Question from "../../../models/questions/Questions";
-
 import { ObjectId } from "mongodb";
 
 const handler = async (req, res) => {

@@ -2,6 +2,7 @@ import React from "react";
 import constants from '../../../../styles/constants'
 import answerSender from '../../../../models/users/answerHelper'
 import styled from "styled-components";
+import { useImmer } from "use-immer";
 
 const Question = styled.div`
   padding: 5px 5px;
@@ -27,12 +28,12 @@ const AnswerButton = styled.button`
 `
 
 const MCQuiz = ({ question, user }) => {
-
-  const [answer, setAnswer] = React.useState('');
-  const [attempts, setAttempts] = React.useState(0)
-  const [color, setColor] = React.useState(
-    () => new Array(question.options.length).fill(constants.primaryMain)
-  )
+  const INIT = {
+    color: new Array(question.options.length).fill(constants.primaryMain),
+    answer: '',
+    attempts: 0
+  }
+  const [data, updateData] = useImmer(INIT)
 
   const renderFeedback = (data) => {
     if (data === question.correct) {
@@ -44,13 +45,6 @@ const MCQuiz = ({ question, user }) => {
     }
   }
 
-  const colorHandler = (ans, corr, i) => {
-    let temp_colors = [...color]
-    let temp_element = { ...temp_colors[i] }
-    temp_element = ans === corr ? constants.alertGreenMain : constants.alertRedMain
-    temp_colors[i] = temp_element
-    setColor(temp_colors)
-  }
 
   return (
     <Question>
@@ -58,26 +52,23 @@ const MCQuiz = ({ question, user }) => {
       <ol>
         {question.options.map((ans, i) => {
 
-
           return (
             <li key={`${i}_${ans}`} style={{ listStyle: 'none', width: '500px' }}>
               <AnswerButton
                 key={i}
-                style={{ backgroundColor: color[i] }}
+                style={{ backgroundColor: data.color[i] }}
                 onClick={() => {
-                  setAnswer(ans)
-                  setAttempts(attempts + 1)
-                  colorHandler(ans, question.correct, i)
+                  updateData((draft) => {
+                    draft.answer = ans
+                    draft.attempts += 1;
+                    draft.color[i] = ans === question.correct ? constants.alertGreenMain : constants.alertRedMain
+                  })
                   answerSender(
                     'mc quiz',
                     ans,
-                    question.correct,
                     user,
-                    attempts,
-                    question.id,
-                    question.sphere,
-                    question.course,
-                    question.lesson
+                    data.attempts,
+                    question
                   )
                 }}
               >
@@ -87,7 +78,7 @@ const MCQuiz = ({ question, user }) => {
           )
         })}
       </ol>
-      <span>{renderFeedback(answer)}</span>
+      <span>{renderFeedback(data.answer)}</span>
       <br />
     </Question>
   )

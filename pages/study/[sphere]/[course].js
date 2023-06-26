@@ -1,7 +1,7 @@
 import React from "react";
 import { MainContainer, Grid, GridCard, Loading } from "../../../components/meta";
 import { useSession } from "next-auth/react";
-import getStructure from "../../../middleware/fetchStructure";
+import { getStructure } from "../../../middleware";
 
 const CoursePage = ({ sphere, db, ID, sphereName, broken }) => {
     const { status } = useSession()

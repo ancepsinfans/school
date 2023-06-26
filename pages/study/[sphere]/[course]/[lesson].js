@@ -2,11 +2,11 @@ import React from "react";
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from "next-mdx-remote";
 import styled from "styled-components";
-import { getLessonPage } from "../../../../middleware/fetchLesson";
-import Question from '../../../../models/questions/Questions'
 import { useSession } from "next-auth/react";
 import { Loading, MainContainer } from "../../../../components/meta";
 import { Popover, MCQuiz, TextInputQuiz, MCorOther } from "../../../../components/atomic";
+import axios from "axios";
+import { getLessonPage } from "../../../../middleware";
 
 
 const Content = styled.div`
@@ -87,8 +87,10 @@ export const getServerSideProps = async (ctx) => {
 
     try {
         const lessonContents = await getLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)
+
+        console.log({ lessonContents })
         const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
-        const qs = await Question.find({})
+        const qs = await axios.get('http://localhost:3000/api/lesson/questions')
         return {
             props: {
                 user: ctx.query.ID,
@@ -96,14 +98,17 @@ export const getServerSideProps = async (ctx) => {
                 sphere: ctx.params.sphere,
                 course: ctx.params.course,
                 lesson: ctx.params.lesson,
-                qs: JSON.parse(JSON.stringify(qs))
+                qs: qs.data.data
             }
         }
 
     } catch (error) {
-        error.log(error)
+        console.log(error)
         return {
-            broken: true
+            props: {
+
+                broken: true
+            }
         }
     }
 }

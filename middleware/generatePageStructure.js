@@ -1,33 +1,12 @@
-const fs = require('fs');
-const path = require('path');
+import axios from 'axios';
 
-function generatePageStructure(dir) {
-    const files = fs.readdirSync(dir);
-    const pages = {};
-
-    for (const file of files) {
-        const filePath = path.join(dir, file);
-        const stat = fs.statSync(filePath);
-
-        if (stat.isDirectory()) {
-            pages[file] = generatePageStructure(filePath);
-        } else if (stat.isFile()) {
-            const fileName = path.parse(file).name;
-            const fileType = path.extname(file);
-
-            if (fileType === '.mdx') {
-                if (!pages.files) {
-                    pages.files = [];
-                }
-                pages.files.push(fileName);
-            }
-        }
+export default async function generatePageStructure() {
+    const BASE_URL = process.env.NODE_ENV === "development" ? process.env.DEV : process.env.PROD
+    try {
+        const response = await axios.get(`${BASE_URL}/api/lesson/fetchPageStructure`);
+        const pageStructure = response.data;
+        return pageStructure
+    } catch (error) {
+        console.error('Error fetching page structure:');
     }
-
-    return pages;
 }
-
-const pageStructure = generatePageStructure('./_pages');
-delete pageStructure['.obsidian']
-
-export default pageStructure

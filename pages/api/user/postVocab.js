@@ -1,6 +1,5 @@
-import connectDB from "../../../middleware/mongodb";
+import { ifDocExists, connectDB } from "../../../middleware";
 import { StudentSchema, StudentVocab } from "../../../models/users/User";
-import ifDocExists from "../../../middleware/ifDocExists";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {

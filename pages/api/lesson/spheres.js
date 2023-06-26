@@ -1,4 +1,4 @@
-import connectDB from "../../../middleware/mongodb";
+import { connectDB } from "../../../middleware";
 import { SphereSchema, LessonSchema, CourseSchema } from "../../../models/spheres/Spheres";
 
 const handler = async (req, res) => {

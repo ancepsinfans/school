@@ -5,7 +5,7 @@ import { StudentSchema } from '../../models/users/User';
 import { Loading, MainContainer } from '../../components/meta'
 import React from 'react';
 import { useSession } from 'next-auth/react';
-import getStructure from '../../middleware/fetchStructure'
+import { getStructure } from '../../middleware'
 import Image from 'next/image';
 
 

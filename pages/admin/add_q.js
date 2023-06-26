@@ -2,7 +2,7 @@ import React from "react";
 import questionSender from "../../models/questions/helpers";
 import { useImmer } from "use-immer";
 import styled from "styled-components";
-import getStructure from "../../middleware/fetchStructure";
+import { getStructure } from "../../middleware";
 import { SelectInput, TextInput, SubmitButton } from "../../components/atomic";
 
 const Input = styled.form`
