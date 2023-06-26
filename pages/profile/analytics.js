@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import constants from '../../styles/constants';
-
 import { StudentSchema } from '../../models/users/User';
 import { Loading, MainContainer } from '../../components/meta'
 import React from 'react';
