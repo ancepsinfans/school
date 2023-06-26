@@ -69,6 +69,7 @@ const SubmitButton = styled(AnswerButton)`
 & {
   background-color: ${props => props.isSelected ? 'var(--accentBrown65)' : 'var(--alertYellow95)'};
   width: 15%;
+  margin: 5px;
 } 
 `
 
@@ -133,29 +134,33 @@ const MCorOther = ({ user, options, desc, path, id, withOther }) => {
             </li> :
             null
           }
+
         </ol> :
         null
       }
-      <SubmitButton
-        disabled={data.isSumbitted}
-        onClick={
-          () => {
-            updateData((draft) => {
-              draft.isSumbitted = true
-            })
-            feedbackSender(
-              user,
-              data.response,
-              concatID,
-              path
-            );
-          }
-        }
-        isSelected={data.isSumbitted}
-      >
-        {!data.isSumbitted ? 'Submit' : 'thanks!'}
-      </SubmitButton>
-      <br />
+      <ol>
+        <li style={{ listStyle: 'none', }}>
+          <SubmitButton
+            disabled={data.isSumbitted}
+            onClick={
+              () => {
+                updateData((draft) => {
+                  draft.isSumbitted = true
+                })
+                feedbackSender(
+                  user,
+                  data.response,
+                  concatID,
+                  path
+                );
+              }
+            }
+            isSelected={data.isSumbitted}
+          >
+            {!data.isSumbitted ? 'Submit' : 'thanks!'}
+          </SubmitButton>
+        </li>
+      </ol>
     </Question >
   )
 }

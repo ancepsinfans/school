@@ -10,13 +10,22 @@ const About = () => {
             titleText='About me'
         >
             <h2>Hi! This is me, Zach.</h2>
-            <div style={{ width: '10%', margin: '0 auto' }}>
+            <div style={{ width: '25%', margin: '0 auto' }}>
                 <Image
-                    width={100}
-                    height={100}
+                    width={300}
+                    height={300}
                     alt=""
-                    src='https://zach.bullard.dev/images/author/profile_hu66165088d23e25f7e32b9f17dd432d89_9199917_148x148_fit_q75_box.jpg' />
+                    src='/images/me.jpeg' />
             </div>
+            <br />
+            <h3>Buy me a coffee?</h3>
+            <aside>Lightning QR: $5</aside>
+            <Image
+                width={200}
+                height={200}
+                alt=""
+                src='/images/lnqr.png'
+            />
         </MainContainer>
     )
 }
