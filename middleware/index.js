@@ -6,5 +6,6 @@ import { lessonNamer, courseNamer, sphereNamer } from './getNames'
 import hasElement from './hasElement'
 import ifDocExists from './ifDocExists'
 import connectDB from './mongodb'
+import fetchUser from './fetchUser'
 
-export { generatePageStructure, getLessonPage, fetchQuestions, getStructure, lessonNamer, courseNamer, sphereNamer, hasElement, ifDocExists, connectDB }
+export { generatePageStructure, fetchUser, getLessonPage, fetchQuestions, getStructure, lessonNamer, courseNamer, sphereNamer, hasElement, ifDocExists, connectDB }

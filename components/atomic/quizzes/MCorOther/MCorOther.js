@@ -126,7 +126,7 @@ const MCorOther = ({ user, options, desc, path, id, withOther }) => {
                   />
                   <Check
                     onClick={() => {
-                      updateData((draft) => { draft.response.push(data.otherValue) })
+                      updateData((draft) => { draft.response.push(data.otherValue); draft.otherValue = '' })
                     }}
                   >✔️</Check>
                 </InputDiv>

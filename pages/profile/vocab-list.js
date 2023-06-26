@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import { Loading, MainContainer } from '../../components/meta'
 import { StudentSchema } from '../../models/users/User'
-import { courseNamer, lessonNamer, sphereNamer, getStructure } from '../../middleware';
+import { courseNamer, lessonNamer, sphereNamer, getStructure, fetchUser } from '../../middleware';
 
 
 const ImageNameBox = styled.div`
@@ -87,12 +87,12 @@ export default function Profile({ ID, vocab, db }) {
 }
 
 export const getServerSideProps = async (ctx) => {
-    const studentInfo = await StudentSchema.find({ user: ctx.query.ID }, { vocab: 1 })
+    const studentInfo = await fetchUser(ctx.query.ID, { vocab: 1 })
     const db = await getStructure()
     return {
         props: {
             ID: ctx.query.ID,
-            vocab: JSON.parse(JSON.stringify(studentInfo[0].vocab)),
+            vocab: JSON.parse(JSON.stringify(studentInfo.vocab)),
             db: db
         }
     }
