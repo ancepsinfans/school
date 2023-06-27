@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import NavBar from "../NavBar";
 import Footer from '../Footer'
-import NextLessonButton from "../../atomic/buttons/NextLessonButton";
+import { NextLessonButton } from "../../atomic";
 import Header from '../Head'
 
 const MainContainerStyled = styled.div`

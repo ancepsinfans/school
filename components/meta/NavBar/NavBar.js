@@ -49,7 +49,7 @@ const NavBar = ({ isProfilePage, isHome }) => {
         return url;
       }
       const url = await getEnv()
-      const { data } = await axios.get(`${url}/api/user/getUser`, { params: { email: session.user.email } })
+      const { data } = await axios.get(`${url}/api/user/user`, { params: { email: session.user.email } })
       setID(data)
     }
     if (status !== "authenticated") {

@@ -2,7 +2,7 @@ import fs from 'fs';
 import { join, parse, extname } from 'path';
 
 
-function generatePageStructure(dir) {
+function fetchFileTreeStructure(dir) {
 
     const files = fs.readdirSync(dir);
     const pages = {};
@@ -12,7 +12,7 @@ function generatePageStructure(dir) {
         const stat = fs.statSync(filePath);
 
         if (stat.isDirectory()) {
-            pages[file] = generatePageStructure(filePath);
+            pages[file] = fetchFileTreeStructure(filePath);
         } else if (stat.isFile()) {
             const fileName = parse(file).name;
             const fileType = extname(file);
@@ -30,7 +30,7 @@ function generatePageStructure(dir) {
 
 export default function handler(req, res) {
     const masterDirectory = join(process.cwd(), '_pages');
-    const pageStructure = generatePageStructure(masterDirectory);
+    const pageStructure = fetchFileTreeStructure(masterDirectory);
     delete pageStructure['.obsidian'];
 
     res.status(200).json(pageStructure);

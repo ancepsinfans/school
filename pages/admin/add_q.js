@@ -2,7 +2,7 @@ import React from "react";
 import questionSender from "../../models/questions/helpers";
 import { useImmer } from "use-immer";
 import styled from "styled-components";
-import { getStructure } from "../../middleware";
+import { fetchDBStructure } from "../../middleware";
 import { SelectInput, TextInput, SubmitButton } from "../../components/atomic";
 
 const Input = styled.form`
@@ -85,7 +85,7 @@ const AddQ = ({ spheres, courses, lessons }) => {
 export default AddQ
 
 export const getServerSideProps = async () => {
-  const db = await getStructure()
+  const db = await fetchDBStructure()
   const spheres = db.map(({ sphere, name }) => [sphere, name]);
 
   const courses = db.reduce((acc, { sphere, courses }) => {

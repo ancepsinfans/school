@@ -1,5 +1,4 @@
-import { MongoClient, ObjectId } from "mongodb";
-import { StudentSchema } from "../../../models/users/User";
+import { MongoClient } from "mongodb";
 
 export default async function handler(req, res) {
     const client = new MongoClient(process.env.MONGODB_URI)

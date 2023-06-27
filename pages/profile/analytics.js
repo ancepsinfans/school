@@ -3,7 +3,7 @@ import constants from '../../styles/constants';
 import { Loading, MainContainer } from '../../components/meta'
 import React from 'react';
 import { useSession } from 'next-auth/react';
-import { getStructure, fetchUser } from '../../middleware'
+import { fetchDBStructure, fetchUser } from '../../middleware'
 import Image from 'next/image';
 
 
@@ -171,7 +171,7 @@ export default function Profile({ ID, paths, studentInfo }) {
 
 export const getServerSideProps = async (ctx) => {
   const studentInfo = await fetchUser(ctx.query.ID, { feedback: 0 })
-  const db = await getStructure()
+  const db = await fetchDBStructure()
 
   return {
     props: {

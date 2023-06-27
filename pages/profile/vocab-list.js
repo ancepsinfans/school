@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import { Loading, MainContainer } from '../../components/meta'
 import { StudentSchema } from '../../models/users/User'
-import { courseNamer, lessonNamer, sphereNamer, getStructure, fetchUser } from '../../middleware';
+import { getCourseName, getLessonName, getSphereName, fetchDBStructure, fetchUser } from '../../middleware';
 
 
 const ImageNameBox = styled.div`
@@ -61,9 +61,9 @@ export default function Profile({ ID, vocab, db }) {
             <div>
                 <ul>
                     {uniqueVocab.map(e => {
-                        const sphereName = sphereNamer(db, e)
-                        const courseName = courseNamer(db, e)
-                        const lessonName = lessonNamer(db, e)
+                        const sphereName = getSphereName(db, e)
+                        const courseName = getCourseName(db, e)
+                        const lessonName = getLessonName(db, e)
                         return (
                             <ListItem key={e._id}>
                                 {e.term.term} -- {e.term.definition}
@@ -88,7 +88,7 @@ export default function Profile({ ID, vocab, db }) {
 
 export const getServerSideProps = async (ctx) => {
     const studentInfo = await fetchUser(ctx.query.ID, { vocab: 1 })
-    const db = await getStructure()
+    const db = await fetchDBStructure()
     return {
         props: {
             ID: ctx.query.ID,

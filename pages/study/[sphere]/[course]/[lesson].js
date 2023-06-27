@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useSession } from "next-auth/react";
 import { Loading, MainContainer } from "../../../../components/meta";
 import { Popover, MCQuiz, TextInputQuiz, MCorOther } from "../../../../components/atomic";
-import { getLessonPage, fetchQuestions } from "../../../../middleware";
+import { fetchLessonPage, fetchQuestions } from "../../../../middleware";
 
 
 const Content = styled.div`
@@ -85,7 +85,7 @@ export const getServerSideProps = async (ctx) => {
     }
 
     try {
-        const lessonContents = await getLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)
+        const lessonContents = await fetchLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)
         console.log({ lessonContents })
         const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
         const qs = await fetchQuestions()

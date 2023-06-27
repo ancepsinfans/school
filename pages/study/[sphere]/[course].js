@@ -1,7 +1,7 @@
 import React from "react";
 import { MainContainer, Grid, GridCard, Loading } from "../../../components/meta";
 import { useSession } from "next-auth/react";
-import { getStructure } from "../../../middleware";
+import { fetchDBStructure } from "../../../middleware";
 
 const CoursePage = ({ sphere, db, ID, sphereName, broken }) => {
     const { status } = useSession()
@@ -54,7 +54,7 @@ export default CoursePage
 
 
 export const getServerSideProps = async (ctx) => {
-    const db = await getStructure()
+    const db = await fetchDBStructure()
     let currentDB
     const currentSphere = db.find((i) => i.sphere === ctx.params.sphere)
     if (currentSphere.courses.some(item => item.course === ctx.params.course)) {

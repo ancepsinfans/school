@@ -1,10 +1,10 @@
-function sphereNamer(db, e) {
+function getSphereName(db, e) {
     return db
         .find(({ sphere }) => sphere === e.sphere)
         ?.name
 }
 
-function courseNamer(db, e) {
+function getCourseName(db, e) {
     return db
         .find(({ sphere }) => sphere === e.sphere)
         ?.courses
@@ -12,7 +12,7 @@ function courseNamer(db, e) {
         ?.name
 }
 
-function lessonNamer(db, e) {
+function getLessonName(db, e) {
     return db
         .find(({ sphere }) => sphere === e.sphere)
         ?.courses
@@ -23,4 +23,4 @@ function lessonNamer(db, e) {
 
 }
 
-export { lessonNamer, courseNamer, sphereNamer }
+export { getLessonName, getCourseName, getSphereName }

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default async function getStructure() {
+export default async function fetchDBStructure() {
     const BASE_URL = process.env.BASE_URL
     let dbData
     try {

@@ -4,7 +4,7 @@ import sphereSender from "../../models/spheres/sphereHelper";
 import styled from "styled-components";
 import { MainContainer } from "../../components/meta";
 import { useRouter } from "next/router";
-import { getStructure, generatePageStructure, hasElement } from "../../middleware";
+import { fetchDBStructure, fetchFileTreeStructure, hasElement } from "../../middleware";
 import { useImmer } from "use-immer";
 import { TextInput, SubmitButton } from "../../components/atomic";
 
@@ -160,8 +160,8 @@ export default AddDesc
 
 export const getServerSideProps = async () => {
 
-    const dbData = await getStructure()
-    const pageStructure = await generatePageStructure()
+    const dbData = await fetchDBStructure()
+    const pageStructure = await fetchFileTreeStructure()
     return {
         props: {
             paths: pageStructure,

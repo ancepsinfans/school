@@ -2,7 +2,8 @@ import React from 'react'
 import { Grid, GridCard, MainContainer } from '../components/meta'
 import constants from '../styles/constants'
 import { signIn, useSession } from 'next-auth/react'
-import { getStructure } from '../middleware';
+import { fetchDBStructure } from '../middleware';
+
 
 export default function Home({ db, ID }) {
   const { data: session } = useSession()
@@ -88,7 +89,7 @@ export default function Home({ db, ID }) {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const db = await getStructure()
+  const db = await fetchDBStructure()
 
 
   return {
