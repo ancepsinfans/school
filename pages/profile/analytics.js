@@ -154,7 +154,8 @@ export default function Profile({ ID, paths, studentInfo }) {
                       return (
 
                         <ListItem key={j}>
-                          {course.name}: {(v.size / course.lessons.length * 100).toFixed(1)}% complete
+
+                          {course?.name}: {(v.size / course?.lessons.length * 100).toFixed(1)}% complete
                         </ListItem>
                       )
                     })}

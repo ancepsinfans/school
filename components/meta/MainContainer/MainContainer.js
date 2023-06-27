@@ -37,21 +37,15 @@ const Intro = styled.div`
 function MainContainer({
   titleText, introText, noFlex, smallTitle, isProfilePage, isHome, isLesson, nextPage, location, children
 }) {
-  let nextLesson = null;
-  let nextLessonCapitalized = null;
+
   let ID
 
   if (isLesson) {
-    nextLesson = nextPage.split('/')[nextPage.split('/').length - 1];
-    [nextLesson, ID] = nextLesson.split('?')
-    nextLesson = nextLesson.split('-').slice(1).join(' ')
+    ID = nextPage.link.split('?')[1]
     ID = ID.split('=')[1]
-    nextLessonCapitalized = nextLesson.charAt(0).toUpperCase() + nextLesson.slice(1);
-    nextLessonCapitalized = nextLessonCapitalized.replace('-', ' ');
-    if (nextLesson === '') {
-      nextLessonCapitalized = 'Complete course!';
-    }
+
   }
+  console.log({ ID })
 
   return (
     <>
@@ -73,8 +67,8 @@ function MainContainer({
           {children}
           {isLesson ?
             <NextLessonButton
-              link={"/study" + nextPage}
-              text={nextLessonCapitalized}
+              link={"/study" + nextPage.link}
+              text={nextPage.name}
               user={ID}
               location={location} />
             :

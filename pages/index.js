@@ -56,7 +56,7 @@ export default function Home({ db, ID }) {
           <hr style={{ backgroundColor: constants.blackMain, margin: '5px', borderStyle: 'solid', width: '100%' }} hidden={!isAdmin} />
           <Grid>
             {
-              db.map((e, idx) => {
+              db.map((e) => {
                 return (
                   <GridCard
                     hidden={!e.show}
@@ -64,7 +64,6 @@ export default function Home({ db, ID }) {
                     key={e._id}
                     link={`/study/${e.sphere}`}
                     title={e.name}
-                    //add this all to the db
                     description={e.description}
                   />
                 )

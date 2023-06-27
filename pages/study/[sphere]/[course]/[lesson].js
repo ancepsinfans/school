@@ -5,7 +5,8 @@ import styled from "styled-components";
 import { useSession } from "next-auth/react";
 import { Loading, MainContainer } from "../../../../components/meta";
 import { Popover, MCQuiz, TextInputQuiz, MCorOther } from "../../../../components/atomic";
-import { fetchLessonPage, fetchQuestions } from "../../../../middleware";
+import { fetchDBStructure, fetchLessonPage, fetchQuestions, getLessonName } from "../../../../middleware";
+import Link from "next/link";
 
 
 const Content = styled.div`
@@ -32,7 +33,8 @@ const LessonPage = (
         lesson,
         qs,
         user,
-        broken
+        broken,
+        nextPage
     }
 ) => {
     const { status } = useSession()
@@ -42,6 +44,7 @@ const LessonPage = (
         TextI: TextInputQuiz,
         Def: Popover,
         Feed: MCorOther,
+        a: Link,
     }
 
     if (status === 'loading' | broken) {
@@ -50,14 +53,13 @@ const LessonPage = (
         )
     }
 
-
     return (
         <MainContainer
             smallTitle={true}
             titleText={source.frontmatter.title}
             introText={source.frontmatter.intro}
             isLesson={true}
-            nextPage={`/${sphere}/${course}/${source.frontmatter.next}?ID=${user}`}
+            nextPage={nextPage}
             location={{ sphere, course, lesson }}
         >
             <Content>
@@ -83,11 +85,18 @@ export const getServerSideProps = async (ctx) => {
     if (!ctx.query.ID) {
         return { props: { broken: true } }
     }
+    const db = await fetchDBStructure()
 
     try {
         const lessonContents = await fetchLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)
         const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
         const qs = await fetchQuestions()
+
+        const nextLessonName = mdxSource.frontmatter.next !== "" ? getLessonName(db, { sphere: ctx.params.sphere, course: ctx.params.course, lesson: mdxSource.frontmatter.next }) : "Complete course!"
+
+        const link = mdxSource.frontmatter.next !== "" ? `/${ctx.params.sphere}/${ctx.params.course}/${mdxSource.frontmatter.next}?ID=${ctx.query.ID}` : `/${ctx.params.sphere}/${ctx.params.course}?ID=${ctx.query.ID}`
+
+        const nextPage = { name: nextLessonName, link: link }
 
         return {
             props: {
@@ -96,7 +105,8 @@ export const getServerSideProps = async (ctx) => {
                 sphere: ctx.params.sphere,
                 course: ctx.params.course,
                 lesson: ctx.params.lesson,
-                qs: qs
+                qs: qs,
+                nextPage: nextPage
             }
         }
 
