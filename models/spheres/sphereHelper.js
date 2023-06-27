@@ -8,7 +8,9 @@ async function sphereSender(
         sphere: data.sphere,
         course: data.course,
         lesson: data.lesson,
+        show: data.show,
         name: data.name,
+        disable: data.disable,
         description: data.desc,
         createNew
     }

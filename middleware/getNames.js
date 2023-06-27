@@ -1,4 +1,8 @@
-function getSphereName(db, e) {
+function getSphereName(db, e, obj = false) {
+    if (obj) {
+        return db
+            .find(({ sphere }) => sphere === e)
+    }
     return db
         .find(({ sphere }) => sphere === e.sphere)
         ?.name

@@ -59,7 +59,8 @@ export default function Home({ db, ID }) {
               db.map((e, idx) => {
                 return (
                   <GridCard
-                    isDisabled={!e.courses.length}
+                    hidden={!e.show}
+                    isDisabled={e.disable}
                     key={e._id}
                     link={`/study/${e.sphere}`}
                     title={e.name}

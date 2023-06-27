@@ -86,7 +86,6 @@ export const getServerSideProps = async (ctx) => {
 
     try {
         const lessonContents = await fetchLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)
-        console.log({ lessonContents })
         const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
         const qs = await fetchQuestions()
 

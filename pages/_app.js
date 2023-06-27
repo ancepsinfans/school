@@ -52,7 +52,6 @@ const GlobalStyles = createGlobalStyle`
     --primaryMain: ${constants.primaryMain};
     --white: ${constants.white};
     --tooltip-text-color: ${constants.blackMain};
-    --tooltip-background-color: ${constants.accentPurpleMain};
     --tooltip-margin: 30px;
     --tooltip-arrow-size: 6px;
   }

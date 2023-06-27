@@ -4,9 +4,9 @@ import sphereSender from "../../models/spheres/sphereHelper";
 import styled from "styled-components";
 import { MainContainer } from "../../components/meta";
 import { useRouter } from "next/router";
-import { fetchDBStructure, fetchFileTreeStructure, hasElement } from "../../middleware";
+import { fetchDBStructure, fetchFileTreeStructure, getSphereName, hasElement } from "../../middleware";
 import { useImmer } from "use-immer";
-import { TextInput, SubmitButton } from "../../components/atomic";
+import { TextInput, SubmitButton, SelectInput } from "../../components/atomic";
 
 
 const ListItem = styled.li`
@@ -24,17 +24,18 @@ const AddDesc = ({ paths, db }) => {
         sphere: undefined,
         course: undefined,
         lesson: undefined,
+        show: true,
+        disable: false,
         active: 'none',
         name: '',
         desc: ''
     }
-
     const [data, updateData] = useImmer(INIT)
 
     const router = useRouter()
 
     return (
-        <MainContainer
+        <MainContainer MainContainer
             titleText={"Lesson structure"}
             smallTitle={true}
         >
@@ -138,8 +139,40 @@ const AddDesc = ({ paths, db }) => {
                 }, 500);
             }}>
                 <TextInput value={data.desc} onChange={(e) => { updateData((draft) => { draft.desc = e.target.value }) }} label={'Description'} />
-                <TextInput value={data.name} onChange={(e) => { updateData((draft) => { draft.name = e.target.value }) }} label={'Proper Name'} />
+                <p>Currently: {getSphereName(db, data.active, true)?.description}</p>
 
+                <TextInput value={data.name} onChange={(e) => { updateData((draft) => { draft.name = e.target.value }) }} label={'Proper Name'} />
+                <p>Currently: {getSphereName(db, data.active, true)?.name}</p>
+
+                <SelectInput
+                    disabled={!!data.course || !!data.lesson}
+                    value={data.show}
+                    onChange={event => {
+                        updateData((draft) => { draft.show = event.target.value })
+                    }}
+                    optionsLogic={
+                        <>
+                            <option value={true}>Yes</option>
+                            <option value={false}>No</option>
+                        </>
+                    }
+                    label='Show sphere'
+                />
+
+                <SelectInput
+                    disabled={!!data.course || !!data.lesson}
+                    value={data.disable}
+                    onChange={event => {
+                        updateData((draft) => { draft.disable = event.target.value })
+                    }}
+                    optionsLogic={
+                        <>
+                            <option value={true}>Yes</option>
+                            <option value={false}>No</option>
+                        </>
+                    }
+                    label='Disabled sphere'
+                />
 
                 <br />
 

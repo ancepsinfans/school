@@ -51,12 +51,13 @@ const Button = styled.button``
 
 
 
-const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick }) => {
+const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick, hidden }) => {
   const Type = link === '' ? Button : Link
   return (
     <div style={{ display: (isRestricted && !isAdmin ? "none" : "block") }}>
       <Type href={link} style={{ background: 'none', border: 'none' }} onClick={onClick}>
         <Card
+          hidden={hidden}
           isDisabled={isDisabled}
         >
           <h2>{title} &rarr;</h2>

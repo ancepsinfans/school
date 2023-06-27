@@ -8,6 +8,5 @@ export default function handler(req, res) {
 
     const fileContents = fs.readFileSync(join(masterDirectory, sphere, course, lesson + '.mdx'), 'utf8');
     res.setHeader('Content-Type', 'application/json');
-    console.log({ fileContents })
     res.status(200).json({ content: fileContents });
 }

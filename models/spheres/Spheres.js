@@ -18,6 +18,8 @@ const courseSchema = new mongoose.Schema({
 const sphereSchema = new mongoose.Schema({
     sphere: String,
     name: String,
+    show: Boolean,
+    disable: Boolean,
     description: String,
     courses: [courseSchema],
 }, {

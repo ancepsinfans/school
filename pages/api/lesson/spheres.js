@@ -11,7 +11,7 @@ const handler = async (req, res) => {
 
 
   if (req.method === 'POST') {
-    const { sphere, course, lesson, name, description, createNew } = req.body
+    const { sphere, course, lesson, name, show, disable, description, createNew } = req.body
     if (createNew) {
       if (!!lesson) {
 
@@ -62,6 +62,8 @@ const handler = async (req, res) => {
           const newSphere = new SphereSchema({
             sphere: sphere,
             name: name,
+            show: show,
+            disable: disable,
             description: description,
             courses: []
           })
@@ -127,6 +129,8 @@ const handler = async (req, res) => {
             $set: {
               'description': description,
               'name': name,
+              'show': show,
+              'disable': disable
             },
           },
           {

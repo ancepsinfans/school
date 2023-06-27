@@ -11,8 +11,8 @@ const Popup = styled.span`
     transform: translateX(-50%);
     padding: 6px;
     color: var(--tooltip-text-color);
-    background: var(--tooltip-background-color);
-    border: 2px solid var(--accentPurple70);
+    background: var(${props => props.isVocab ? '--accentPurpleMain' : '--accentRed90'});
+    border: 2px solid var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'});
     font-size: 14px;
     font-family: sans-serif;
     line-height: 1;
@@ -32,14 +32,14 @@ const Popup = styled.span`
     border-width: var(--tooltip-arrow-size);
     margin-left: calc(var(--tooltip-arrow-size) * -1);
     top: 101%;
-    border-top-color: var(--accentPurple70);
+    border-top-color: var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'});
     z-index:90;
   }
 `
-
+//
 const Child = styled.span`
-  -webkit-text-decoration: underline wavy 1.5px var(--accentPurple70) !important;
-  text-decoration: underline wavy 1.5px var(--accentPurple70) !important;
+  -webkit-text-decoration: underline wavy 1.5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
+  text-decoration: underline wavy 1.5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
  `
 
 const Wrapper = styled.span`
@@ -87,6 +87,7 @@ const AddButton = styled.button`
 
 const Popover = ({ content, delay, user, location, children }) => {
 
+  const isVocab = !!user ? true : false
   let timeout;
   const [active, setActive] = React.useState(false);
 
@@ -108,17 +109,17 @@ const Popover = ({ content, delay, user, location, children }) => {
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
     >
-      <Child>{children}</Child>
+      <Child isVocab={isVocab}>{children}</Child>
       {active && (
-        <Popup>
+        <Popup isVocab={isVocab}>
           {content}{' '}
-          <AddButton
+          {isVocab ? <AddButton
             onClick={() => {
               vocabSender(user, { term: children, definition: content }, location)
             }}
           >
             +
-          </AddButton>
+          </AddButton> : null}
         </Popup>
       )}
     </Wrapper>
