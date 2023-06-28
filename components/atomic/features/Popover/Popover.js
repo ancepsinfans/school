@@ -38,9 +38,16 @@ const Popup = styled.span`
 `
 //
 const Child = styled.span`
-  -webkit-text-decoration: underline wavy 1.5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
-  text-decoration: underline wavy 1.5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
- `
+  & {
+    -webkit-text-decoration: underline wavy 1.5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
+    text-decoration: underline wavy 1.5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
+}
+
+  @media (max-width: 768px) {
+    -webkit-text-decoration: underline 5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
+    text-decoration: underline 5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
+  }
+`
 
 const Wrapper = styled.span`
   display: inline-block; 

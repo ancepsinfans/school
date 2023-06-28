@@ -11,8 +11,11 @@ import Link from "next/link";
 
 const Content = styled.div`
  & {
-     margin: 15px 0;
+     margin: 15px 40px;
  }
+   @media (max-width: 768px) {
+    margin: 15px 10px;
+  }
 
  & ul, ol {
      list-style-position: inside;
@@ -59,6 +62,7 @@ const LessonPage = (
             titleText={source.frontmatter.title}
             introText={source.frontmatter.intro}
             isLesson={true}
+
             nextPage={nextPage}
             location={{ sphere, course, lesson }}
         >
