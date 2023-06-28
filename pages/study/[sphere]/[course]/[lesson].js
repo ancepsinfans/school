@@ -14,7 +14,7 @@ const Content = styled.div`
      margin: 15px 40px;
  }
    @media (max-width: 768px) {
-    margin: 15px 10px;
+    margin: 15px 0px;
   }
 
  & ul, ol {

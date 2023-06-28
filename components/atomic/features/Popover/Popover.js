@@ -44,8 +44,9 @@ const Child = styled.span`
 }
 
   @media (max-width: 768px) {
-    -webkit-text-decoration: underline 5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
-    text-decoration: underline 5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
+    color: var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
+    -webkit-text-decoration: none !important;
+    text-decoration: none !important;
   }
 `
 
