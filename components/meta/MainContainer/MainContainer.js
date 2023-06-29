@@ -45,7 +45,6 @@ function MainContainer({
     ID = ID.split('=')[1]
 
   }
-  console.log({ ID })
 
   return (
     <>

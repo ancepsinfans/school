@@ -11,7 +11,18 @@ const handler = async (req, res) => {
 
 
   if (req.method === 'POST') {
-    const { sphere, course, lesson, name, show, disable, description, createNew } = req.body
+    const { 
+    sphere, 
+    course, 
+    lesson, 
+    name, 
+    description, 
+    show, 
+    disable, 
+    linear,
+    createNew 
+    } = req.body
+    
     if (createNew) {
       if (!!lesson) {
 
@@ -41,6 +52,7 @@ const handler = async (req, res) => {
             course: course,
             name: name,
             description: description,
+            linear: linear,
             lessons: []
           })
 
@@ -112,6 +124,7 @@ const handler = async (req, res) => {
             $set: {
               'courses.$.description': description,
               'courses.$.name': name,
+              'courses.$.linear': linear,
             },
           },
           {
