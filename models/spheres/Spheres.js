@@ -12,6 +12,7 @@ const courseSchema = new mongoose.Schema({
     course: String,
     name: String,
     description: String,
+    linear: Boolean,
     lessons: [lessonSchema],
 });
 
