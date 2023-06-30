@@ -19,6 +19,7 @@ const Popup = styled.span`
     z-index: 100;
     white-space: nowrap;
     top: calc(var(--tooltip-margin) * -1); 
+    max-width: 100vw;
   }
 
   &::before {
@@ -36,7 +37,7 @@ const Popup = styled.span`
     z-index:90;
   }
 `
-//
+
 const Child = styled.span`
   & {
     -webkit-text-decoration: underline wavy 1.5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;

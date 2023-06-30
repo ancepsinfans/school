@@ -130,6 +130,12 @@ a {
 p {
   padding: 5px;
 }
+
+blockquote>blockquote {
+  border: 3px solid var(--accentRedMain);
+  background-color: var(--accentRed90);
+  margin: 2.5% 5%;
+}
 `
 
 function MyApp({
