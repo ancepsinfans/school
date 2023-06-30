@@ -35,7 +35,6 @@ const AddDesc = ({ paths, db }) => {
     const [data, updateData] = useImmer(INIT)
 
     const router = useRouter()
-    console.log(getAnyName(db,data,level))
 
     const level = !!data.sphere + !!data.course + !!data.lesson
 
