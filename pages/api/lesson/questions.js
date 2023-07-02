@@ -22,9 +22,8 @@ const handler = async (req, res) => {
         }
 
     } else if (req.method === 'GET') {
-        const {
-            query: { sphere, id },
-        } = req
+        const {sphere, id} = req.query
+       
         try {
 
             let qs

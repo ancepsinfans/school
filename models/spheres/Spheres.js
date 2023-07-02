@@ -6,6 +6,7 @@ const lessonSchema = new mongoose.Schema({
     lesson: String,
     name: String,
     description: String,
+    text: String,
 });
 
 const courseSchema = new mongoose.Schema({
