@@ -49,9 +49,19 @@ const Card = styled.div`
 `
 const Button = styled.button``
 
-
-
-const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick, hidden }) => {
+const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick, hidden, status }) => {
+  let mark
+  switch(status) {
+        case 'finished':
+            mark = '✅'
+            break
+        case 'active':
+            mark = '📖'
+            break
+        default:
+            mark = '📚'
+  }
+            
   const Type = link === '' ? Button : Link
   return (
     <div style={{ display: (isRestricted && !isAdmin ? "none" : "block") }}>
@@ -60,8 +70,12 @@ const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled,
           hidden={hidden}
           isDisabled={isDisabled}
         >
-          <h2>{title} &rarr;</h2>
+          <h2>{title} </h2>
           <p>{description}</p>
+        {!!status ?   <div style={{display:'flex'}}>
+            <p style={{marginLeft: 'auto', alignSelf: 'flex-end'}}>{mark}</p>
+          </div> :
+            null}
         </Card>
       </Type>
     </div>
