@@ -1,7 +1,7 @@
 import React from "react";
 import { MainContainer, Grid, GridCard, Loading } from "../../../components/meta";
 import { useSession } from "next-auth/react";
-import { fetchDBStructure } from "../../../middleware";
+import { fetchDBStructure, fetchUser } from "../../../middleware";
 
 const CoursePage = ({ sphere, db, ID, sphereName, broken }) => {
     const { status } = useSession()
@@ -37,6 +37,7 @@ const CoursePage = ({ sphere, db, ID, sphereName, broken }) => {
                                     link={`/study/${sphere}/${db.course}/${e.lesson}?ID=${ID}`}
                                     title={e.name}
                                     description={e.description}
+                                    status={'finished'}
                                 />
                             )
                         })
@@ -72,9 +73,10 @@ export const getServerSideProps = async (ctx) => {
         }
     }
 
+    const test = await fetchUser( {progress: 'true', ID: ctx.query.ID, sphere: ctx.params.sphere, course: ctx.params.course})
 
     return {
-        props: {
+props: {
             sphere: ctx.params.sphere,
             db: currentDB,
             ID: ctx.query.ID,
