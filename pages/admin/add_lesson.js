@@ -1,8 +1,4 @@
 import React from "react";
-//import "@uiw/react-md-editor/markdown-editor.css";
-//import "@uiw/react-markdown-preview/markdown.css";
-//import dynamic from 'next/dynamic';
-
 import constants from "../../styles/constants";
 import sphereSender from "../../models/spheres/sphereHelper";
 import styled from "styled-components";
@@ -11,11 +7,6 @@ import { useRouter } from "next/router";
 import { fetchDBStructure, fetchFileTreeStructure, getAnyName, hasElement } from "../../middleware";
 import { useImmer } from "use-immer";
 import { TextInput, SubmitButton, SelectInput, MarkdownEditor } from "../../components/atomic";
-
-
-//const MDEditor = dynamic(
-//  ()=> import('@uiw/react-md-editor'), {ssr: false}
-//)
 
 
 const ListItem = styled.li`
@@ -38,16 +29,21 @@ const AddDesc = ({ paths, db }) => {
         desc: '',
         show: true,
         disable: false,
-        text: '',
+        text: `---
+title: xxx
+intro: xxx
+next: ""
+difficulty: xxx
+words: xxx
+readability: xxx
+---
+`,
         linear: true,
 
     }
     const [data, updateData] = useImmer(INIT)
-
     const router = useRouter()
-    
     const level = !!data.sphere + !!data.course + !!data.lesson
-
 
     return (
         <MainContainer

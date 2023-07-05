@@ -4,7 +4,7 @@ import { SphereSchema, LessonSchema, CourseSchema } from "../../../models/sphere
 const handler = async (req, res) => {
   if (req.method === "GET") {
     // setting up a query object and pruning invalid values
-    const query = { sphere: req.query.sphere, 'courses.course': req.query.course};
+    const query = { sphere: req.query.sphere, 'courses.course': req.query.course, 'courses.lessons.lesson': req.query.lesson};
     Object.keys(query).forEach((k) => query[k] == undefined && delete query[k])
     
     let doc = await SphereSchema.find(query)

@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+	/** @type {import('next').NextConfig} */
 const withPlugins = require('next-compose-plugins')
 const removeImports = require('next-remove-imports')()
 

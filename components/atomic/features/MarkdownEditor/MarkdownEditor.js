@@ -1,21 +1,25 @@
 import React from "react";
-import "@uiw/react-md-editor/markdown-editor.css";
-import "@uiw/react-markdown-preview/markdown.css";
-import dynamic from 'next/dynamic';
+import 'bytemd/dist/index.css'
+import gfm from '@bytemd/plugin-gfm'
+import breaks from '@bytemd/plugin-breaks'
+import frontmatter from '@bytemd/plugin-frontmatter'
+import gemoji from '@bytemd/plugin-gemoji'
+import {Editor,Viewer} from '@bytemd/react'
 
-const MDEditor = dynamic(
-  ()=> import('@uiw/react-md-editor'), {ssr: false}
-)
 
 
 const MarkdownEditor = ({value, change}) => {
   
   return (
-    <div data-color-mode="light" className='container' style={{width: '75vw'}}>
-      <MDEditor
-        height={400}
-        autofocus={false}
-//        hideToolbar={true}
+    <div style={{width: '80vw', textAlign: 'left'}}>
+      <Editor
+        plugins={[
+          gfm(),
+          breaks(),
+          frontmatter(),
+          gemoji()
+        ]}
+        mode='split'
         value={value}
         onChange={change}
       />
