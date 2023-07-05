@@ -50,7 +50,7 @@ export default SpherePage
 
 export const getServerSideProps = async (ctx) => {
 
-    const db = await fetchDBStructure()
+    const db = await fetchDBStructure({sphere: ctx.params.sphere})
     let currentDB
     const session = await getServerSession(ctx.req, ctx.res, authOptions)
     if (session === null) {

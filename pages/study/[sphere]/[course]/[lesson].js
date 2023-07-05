@@ -89,15 +89,15 @@ export const getServerSideProps = async (ctx) => {
     if (!ctx.query.ID) {
         return { props: { broken: true } }
     }
-    const db = await fetchDBStructure()
+    const db = await fetchDBStructure({sphere: ctx.params.sphere, course: ctx.params.course})
 
     try {
         const lessonContents = await fetchLessonPage(ctx.params.sphere, ctx.params.course, ctx.params.lesson)
         const mdxSource = await serialize(lessonContents, { parseFrontmatter: true })
         const qs = await fetchQuestions( {sphere: ctx.params.sphere, course: ctx.params.course, lesson: ctx.params.lesson })
-        console.log({qs})
+        
 
-        const nextLessonName = mdxSource.frontmatter.next !== "" ? getLessonName(db, { sphere: ctx.params.sphere, course: ctx.params.course, lesson: mdxSource.frontmatter.next }) : "Complete course!"
+        const nextLessonName = mdxSource.frontmatter.next !== "" ? getLessonName(db, { sphere: ctx.params.sphere, course: ctx.params.course, lesson: mdxSource.frontmatter.next }) : "Complete!"
 
         const link = mdxSource.frontmatter.next !== "" ? `/${ctx.params.sphere}/${ctx.params.course}/${mdxSource.frontmatter.next}?ID=${ctx.query.ID}` : `/${ctx.params.sphere}/${ctx.params.course}?ID=${ctx.query.ID}`
 

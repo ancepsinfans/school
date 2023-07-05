@@ -3,10 +3,13 @@ import { SphereSchema, LessonSchema, CourseSchema } from "../../../models/sphere
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
+    // setting up a query object and pruning invalid values
+    const query = { sphere: req.query.sphere, 'courses.course': req.query.course};
+    Object.keys(query).forEach((k) => query[k] == undefined && delete query[k])
+    
+    let doc = await SphereSchema.find(query)
 
-    let doc = await SphereSchema.find({})
-    const info = doc
-    return res.status(200).send(info)
+    return res.status(200).send(doc)
   }
 
 
@@ -20,6 +23,7 @@ const handler = async (req, res) => {
     show, 
     disable, 
     linear,
+    text,
     createNew 
     } = req.body
     
@@ -31,6 +35,7 @@ const handler = async (req, res) => {
             lesson: lesson,
             name: name,
             description: description,
+            text, text
           })
 
           let doc = await SphereSchema.findOneAndUpdate(
@@ -101,7 +106,8 @@ const handler = async (req, res) => {
           {
             $set: {
               'courses.$[courseElem].lessons.$[lessonElem].name': name,
-              'courses.$[courseElem].lessons.$[lessonElem].description': description
+              'courses.$[courseElem].lessons.$[lessonElem].description': description,
+              'courses.$[courseElem].lessons.$[lessonElem].text': text
             }
           },
           {

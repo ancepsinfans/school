@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const withPlugins = require('next-compose-plugins')
+const removeImports = require('next-remove-imports')()
 
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
@@ -10,19 +12,10 @@ const withMDX = require('@next/mdx')({
   },
 })
 
-
 const nextConfig = {
   reactStrictMode: true,
-}
-const securityHeaders = [
-  {
-    key: 'Access-Control-Allow-Origin',
-    value: "*"
-  }
-]
-module.exports = withMDX({
+  experimental: {esmExternals: 'loose'},
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  ...nextConfig,
   images: {
     domains: [
       'zach.bullard.dev',
@@ -38,8 +31,19 @@ module.exports = withMDX({
     return [
       {
         source: '/:path*',
-        headers: securityHeaders
+        headers: [
+  {
+    key: 'Access-Control-Allow-Origin',
+    value: "*"
+  }
+]
       }
     ]
   }
-})
+
+}
+
+module.exports = withPlugins(
+	[[removeImports], [withMDX]],
+	nextConfig
+)

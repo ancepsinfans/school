@@ -88,8 +88,8 @@ export default function Profile({ ID, vocab, db }) {
 
 export const getServerSideProps = async (ctx) => {
     const studentInfo = await fetchUser({ ID: ctx.query.ID, vocab: 'true' })
-    console.log({studentInfo})
-    const db = await fetchDBStructure()
+
+    const db = await fetchDBStructure({})
     return {
         props: {
             ID: ctx.query.ID,

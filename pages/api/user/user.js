@@ -26,7 +26,7 @@ export default async function handler(req, res) {
                 await client.close(); // Close the MongoDB connection
             }
 
-        } else {
+        } else if (!!req.query.distinct) {
 
             await client.connect(); // Connect to the MongoDB server
             const collection = client.db('school').collection('students');
@@ -42,10 +42,32 @@ export default async function handler(req, res) {
                     delete projection[e]
                 }
             })
-            console.log({query, projection})
+
+            const results = await collection.distinct(req.query.distinct, query, {projection: projection});
+
+
+            res.status(200).send(results);
+        }  else if (Object.keys(req.query).includes('ID')) {
+
+            await client.connect(); // Connect to the MongoDB server
+            const collection = client.db('school').collection('students');
+
+            // setting up a query object and pruning invalid values
+            const query = { user: req.query.ID, 'progress.sphere': req.query.sphere, 'progress.course': req.query.course};
+            Object.keys(query).forEach((k) => query[k] == undefined && delete query[k])
+            
+            // setting up the projection object and only keeping false values
+            const projection = {feedback: isTrue(req.query.feedback), progress: isTrue(req.query.progress), answers: isTrue(req.query.answers), vocab: isTrue(req.query.vocab)}
+            Object.keys(projection).map(e=>{
+                if (projection[e]) {
+                    delete projection[e]
+                }
+            })
+
             const results = await collection.find(query, {projection: projection}).toArray();
 
             res.status(200).send(results[0]);
-        } 
+
+}
     }
 }

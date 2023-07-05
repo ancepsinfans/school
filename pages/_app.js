@@ -136,6 +136,11 @@ blockquote>blockquote {
   background-color: var(--accentRed90);
   margin: 2.5% 5%;
 }
+
+.w-md-editor-text-input {
+  font-family: 'Vollkorn', serif !important;
+  line-height: calc(1em + 0.5rem) !important;
+}
 `
 
 function MyApp({

@@ -49,18 +49,9 @@ const Card = styled.div`
 `
 const Button = styled.button``
 
-const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick, hidden, status }) => {
-  let mark
-  switch(status) {
-        case 'finished':
-            mark = '✅'
-            break
-        case 'active':
-            mark = '📖'
-            break
-        default:
-            mark = '📚'
-  }
+const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick, hidden, completed }) => {
+
+  
             
   const Type = link === '' ? Button : Link
   return (
@@ -69,13 +60,11 @@ const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled,
         <Card
           hidden={hidden}
           isDisabled={isDisabled}
+          completed={completed}
         >
           <h2>{title} </h2>
           <p>{description}</p>
-        {!!status ?   <div style={{display:'flex'}}>
-            <p style={{marginLeft: 'auto', alignSelf: 'flex-end'}}>{mark}</p>
-          </div> :
-            null}
+        {completed? <div style={{display: 'flex'}}><p style={{marginLeft: 'auto'}}>✅</p></div> :null}          
         </Card>
       </Type>
     </div>
