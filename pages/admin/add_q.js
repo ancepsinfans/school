@@ -85,7 +85,7 @@ const AddQ = ({ spheres, courses, lessons }) => {
 export default AddQ
 
 export const getServerSideProps = async () => {
-  const db = await fetchDBStructure()
+  const db = await fetchDBStructure({})
   const spheres = db.map(({ sphere, name }) => [sphere, name]);
 
   const courses = db.reduce((acc, { sphere, courses }) => {

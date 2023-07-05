@@ -49,9 +49,10 @@ const Card = styled.div`
 `
 const Button = styled.button``
 
+const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick, hidden, completed }) => {
 
-
-const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick, hidden }) => {
+  
+            
   const Type = link === '' ? Button : Link
   return (
     <div style={{ display: (isRestricted && !isAdmin ? "none" : "block") }}>
@@ -59,9 +60,11 @@ const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled,
         <Card
           hidden={hidden}
           isDisabled={isDisabled}
+          completed={completed}
         >
-          <h2>{title} &rarr;</h2>
+          <h2>{title} </h2>
           <p>{description}</p>
+        {completed? <div style={{display: 'flex'}}><p style={{marginLeft: 'auto'}}>✅</p></div> :null}          
         </Card>
       </Type>
     </div>

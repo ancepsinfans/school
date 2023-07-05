@@ -97,7 +97,7 @@ export default function Home({ db, ID }) {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const db = await fetchDBStructure()
+  const db = await fetchDBStructure({})
 
 
   return {

@@ -213,7 +213,7 @@ export default AddDesc
 
 export const getServerSideProps = async () => {
 
-    const dbData = await fetchDBStructure()
+    const dbData = await fetchDBStructure({})
     const pageStructure = await fetchFileTreeStructure()
     return {
         props: {
