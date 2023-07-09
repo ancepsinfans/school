@@ -1,7 +1,7 @@
 function getSphereName(db, e, obj = false) {
     if (obj) {
         return db
-            .find(({ sphere }) => sphere === e)
+            .find(({ sphere }) => sphere === e.sphere)
     }
     return db
         .find(({ sphere }) => sphere === e.sphere)
@@ -42,21 +42,24 @@ function getLessonName(db, e, obj = false) {
 }
 
 function getAnyName(db, e, level) {
-    switch(level) {
+
+    let val
+    switch (level) {
         case 1:
-            return getSphereName(db, e, true)
+            val = getSphereName(db, e, true)
             break
         case 2:
-            return getCourseName(db, e, true)
+            val = getCourseName(db, e, true)
             break
         case 3:
-            return getLessonName(db, e, true)
+            val = getLessonName(db, e, true)
             break
         default:
-            return ''
+            val = ''
     }
-        
+    return val
+
 }
 
 
-export { getLessonName, getCourseName, getSphereName, getAnyName}
+export { getLessonName, getCourseName, getSphereName, getAnyName }

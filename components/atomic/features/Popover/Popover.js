@@ -19,18 +19,15 @@ const Popup = styled(Pop.Content)`
   }
 
   &::before {
- 
     border: solid transparent;
- 
     border-width: var(--tooltip-arrow-size);
-   
     border-top-color: var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'});
   }
 `
 
 const Arrow = styled(Pop.Arrow)`
   & {
-    color: var(${props => props.isVocab ? '--accentPurpleMain' : '--accentRed90'});
+    fill: var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'});
   }
 `
 
@@ -39,9 +36,7 @@ const Child = styled(Pop.Trigger)`
     -webkit-text-decoration: underline wavy 1.5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
     text-decoration: underline wavy 1.5px var(${props => props.isVocab ? '--accentPurple70' : '--accentRed75'}) !important;
     background: none;
-    border: none;
-    
-    
+    border: none;   
 }
 
   @media (max-width: 768px) {

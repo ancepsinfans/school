@@ -5,7 +5,7 @@ import { MainContainer } from "../../components/meta";
 import { useRouter } from "next/router";
 import { fetchDBStructure, fetchFileTreeStructure, getAnyName, hasElement } from "../../middleware";
 import { useImmer } from "use-immer";
-import { TextInput, SubmitButton, SelectInput, MarkdownEditor } from "../../components/atomic";
+import { TextInput, SelectWithTextInput, SubmitButton, SelectInput, MarkdownEditor } from "../../components/atomic";
 
 const Input = styled.form`
     padding: 5px 5px;
@@ -45,12 +45,53 @@ readability: xxx
 ---
 `,
         linear: true,
+        test: '',
+        sphereWriteIn: false,
+        courseWriteIn: false,
+        lessonWriteIn: false
 
     }
+
     const [data, updateData] = useImmer(INIT)
     const router = useRouter()
     const level = !!data.sphere + !!data.course + !!data.lesson
+    function newEntryHandler(v, level, isNewParent) {
+        if (v === '' || isNewParent) {
+            return null
+        }
 
+
+        if (level === 1) {
+            return (
+                <>
+                    <option value={INIT.course} >{INIT.course}</option>
+                    {
+                        db.find(i => i.sphere === data.sphere).courses.map(e => {
+                            return (
+                                <option value={e.course} key={e._id}>{e.name}</option>
+                            )
+                        })
+                    }
+                </>
+            )
+
+        } else if (level === 2) {
+
+            return (
+                <>
+                    <option value={INIT.lesson} >{INIT.lesson}</option>
+                    {data.course === '' ? null :
+                        db.find(i => i.sphere === data.sphere).courses.find(j => j.course === data.course).lessons.map(e => {
+                            return (
+                                <option value={e.lesson} key={e._id}>{e.name}</option>
+                            )
+                        })
+                    }
+                </>
+            )
+
+        }
+    }
     return (
         <MainContainer
             titleText={"Lesson structure"}
@@ -71,11 +112,21 @@ readability: xxx
                 <Flex>
 
                     <Field>
-
-                        <SelectInput
+                        <SelectWithTextInput
+                            condition={!data.sphereWriteIn}
+                            setCondition={() => {
+                                updateData((draft) => {
+                                    draft.sphereWriteIn = !data.sphereWriteIn
+                                    draft.courseWriteIn = !data.courseWriteIn
+                                })
+                            }}
                             value={data.sphere}
-                            onChange={event => {
-                                updateData((draft) => { draft.sphere = event.target.value })
+                            onChange={(e) => {
+                                updateData((draft) => {
+                                    draft.sphere = e.target.value
+                                    draft.course = INIT.course
+                                    draft.lesson = INIT.lesson
+                                })
                             }}
                             optionsLogic={
                                 <>
@@ -91,58 +142,50 @@ readability: xxx
 
                                 </>
                             }
-                            label='Sphere'
+                            label={'Sphere'}
                         />
-
-                        <SelectInput
+                        <SelectWithTextInput
                             disabled={!data.sphere}
+                            condition={(!data.sphereWriteIn && !data.courseWriteIn)}
+                            setCondition={() => {
+                                if (data.sphereWriteIn) {
+                                    return
+                                }
+                                updateData((draft) => { draft.courseWriteIn = !data.courseWriteIn })
+                            }}
                             value={data.course}
-                            onChange={event => {
-                                updateData((draft) => { draft.course = event.target.value })
-                            }}
-                            optionsLogic={
-                                <>
-                                    <option value={INIT.course} >{INIT.course}</option>
-                                    {data.sphere === '' ? null :
-                                        db.find(i => i.sphere === data.sphere).courses.map(e => {
-                                            return (
-                                                <option value={e.course} key={e._id}>{e.name}</option>
-                                            )
-                                        })
+                            onChange={(e) => {
+                                updateData((draft) => {
+                                    draft.course = e.target.value
+                                    draft.lesson = INIT.lesson
+                                })
 
-                                    }
-
-
-
-                                </>
                             }
-                            label='Course'
+                            }
+                            optionsLogic={newEntryHandler(data.sphere, 1, data.sphereWriteIn)}
+                            label={'Course'}
                         />
-
-                        <SelectInput
+                        <SelectWithTextInput
                             disabled={!data.course}
-                            value={data.lesson}
-                            onChange={event => {
-                                updateData((draft) => { draft.lesson = event.target.value })
+                            setCondition={() => {
+                                if (data.sphereWriteIn || data.courseWriteIn) {
+                                    return
+                                }
+                                updateData((draft) => { draft.lessonWriteIn = !data.lessonWriteIn })
                             }}
-                            optionsLogic={
-                                <>
-                                    <option value={INIT.lesson} >{INIT.lesson}</option>
-                                    {data.course === '' ? null :
-                                        db.find(i => i.sphere === data.sphere).courses.find(j => j.course === data.course).lessons.map(e => {
-                                            return (
-                                                <option value={e.lesson} key={e._id}>{e.name}</option>
-                                            )
-                                        })
 
-                                    }
-
-
-
-                                </>
-                            }
-                            label='Lesson'
+                            condition={(!data.sphereWriteIn && !data.courseWriteIn && !data.lessonWriteIn)}
+                            value={data.lesson}
+                            onChange={(e) => {
+                                updateData((draft) => {
+                                    draft.lesson = e.target.value
+                                    draft.text = getAnyName(db, { ...data, lesson: e.target.value }, 3)?.text || INIT.text
+                                })
+                            }}
+                            optionsLogic={newEntryHandler(data.course, 2, data.courseWriteIn)}
+                            label={'Lesson'}
                         />
+
                     </Field>
                     <Field>
 

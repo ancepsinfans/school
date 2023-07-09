@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TextInput({ value, onChange, label, style }) {
+function TextInput({ value, onChange, label, style, disabled, onKeyDown }) {
 
   return (
     <>
@@ -8,6 +8,8 @@ function TextInput({ value, onChange, label, style }) {
         <label htmlFor={label}>{label}</label>
         <br />
         <input
+          disabled={disabled}
+          onKeyDown={onKeyDown}
           style={style}
           type="text"
           id={label}

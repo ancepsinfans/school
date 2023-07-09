@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SelectInput({ value, optionsLogic, onChange, label, disabled }) {
+function SelectInput({ value, optionsLogic, onChange, label, disabled, children }) {
   return (
     <>
       <div style={{ padding: '10px 0' }}
@@ -17,6 +17,7 @@ function SelectInput({ value, optionsLogic, onChange, label, disabled }) {
           onChange={onChange}
         >
           {optionsLogic}
+          {children}
         </select>
       </div>
     </>
