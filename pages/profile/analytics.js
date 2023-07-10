@@ -17,7 +17,6 @@ const ImageNameBox = styled.div`
 const Stats = styled.div`
   display: flex;
   justify-content: center;
-  
   flex-direction: column;
   max-width: 50vh;
   margin: 5px auto;
@@ -78,6 +77,7 @@ export default function Profile({ ID, paths, studentInfo }) {
   })
 
   /* Progress logic */
+  // Need to improve mongo query to accomplish this
   let progressSpheres = new Set()
   let progressCourses = new Set()
   let spheresPageCount = {}
@@ -122,9 +122,9 @@ export default function Profile({ ID, paths, studentInfo }) {
           <p>Percent correct: {(numCorrect / totalAttempts * 100).toFixed(2)}%</p>
           <hr style={{ backgroundColor: constants.blackMain, margin: '5px', borderStyle: 'solid' }} />
           <ul>{Object.entries(questionTypes).map(([key, value], idx) => {
-            const properName = paths.find(i => i.sphere === key)
+            const properName = paths.find(i => i.slug === key)?.sphere
             return (
-              <ListItem key={idx}>sphere: {properName ? properName.name : key}
+              <ListItem key={idx}>{properName ? properName : key}
                 <ul style={{ padding: '0 20px' }}>
 
                   <ListItem key={`${idx}_1`}>{(questionTypes[key]['correct'] / questionTypes[key]['total_attempts'] * 100).toFixed(1)}% correct</ListItem>
@@ -137,25 +137,25 @@ export default function Profile({ ID, paths, studentInfo }) {
 
         <Stats>
           <SubHeading>Progress</SubHeading>
+          {/* add support for unopened spheres? */}
           <ul>
             {Object.entries(spheresPageCount).map(([key, value], i) => {
-              const properName = paths.find(i => i.sphere === key)
+              const properName = paths.find(i => i.slug === key).sphere
 
               return (
                 <ListItem key={i}>
-                  {properName ? properName.name : key}
+                  {properName ? properName : key}
                   <ul style={{ padding: '0 20px' }}>
                     {Object.entries(value).map(([k, v], j) => {
-
                       const course = paths
-                        .find(({ sphere }) => sphere === key)
+                        .find(({ slug }) => slug === key)
                         ?.courses
-                        .find(({ course }) => course === k)
+                        .find(({ slug }) => slug === k)
                       return (
 
                         <ListItem key={j}>
 
-                          {course?.name}: {(v.size / course?.lessons.length * 100).toFixed(1)}% complete
+                          {course?.course}: {(v.size / course?.lessons.length * 100).toFixed(1)}% complete
                         </ListItem>
                       )
                     })}
@@ -171,7 +171,7 @@ export default function Profile({ ID, paths, studentInfo }) {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const studentInfo = await fetchUser( { ID: ctx.query.ID, answers: 'true', progress: 'true' })
+  const studentInfo = await fetchUser({ ID: ctx.query.ID, answers: 'true', progress: 'true' })
   const db = await fetchDBStructure({})
 
 
