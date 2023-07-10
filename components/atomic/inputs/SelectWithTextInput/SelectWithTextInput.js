@@ -10,18 +10,19 @@ function SelectWithTextInput({
   onChange,
   label,
   disabled,
+  style,
 }) {
 
   return (
     <>
       {condition ?
         <SelectInput
+          style={style}
           disabled={disabled}
           value={value}
           onChange={(e) => {
             if (e.target.value === 'custom-314159') {
               setCondition()
-
             } else {
               onChange(e)
             }
@@ -33,6 +34,7 @@ function SelectWithTextInput({
         </SelectInput>
         :
         <TextInput
+          style={{ width: '175px' }}
           disabled={disabled}
           value={value}
           onKeyDown={(e) => {
@@ -47,30 +49,7 @@ function SelectWithTextInput({
     </>
   )
 
-  // const [isTextInput, setIsTextInput] = React.useState(false)
-  // return (
-  //   <>
-  //     {(selectDefault && !isTextInput) ?
-  //       <SelectInput
-  //         disabled={disabled}
-  //         value={value}
-  //         onChange={(e) => {
-  //           if (e.target.value === 'custom') {
-  //             setIsTextInput(true)
-  //           } else {
 
-  //             onChange(e)
-  //           }
-  //         }}
-  //         optionsLogic={optionsLogic}
-  //         label={label}
-  //       >
-  //         <option value='custom'>Write new value</option>
-  //       </SelectInput>
-  //       : <TextInput value={value} onChange={onChange} label={label} disabled={disabled} />
-  //     }
-  //   </>
-  // );
 }
 
 export default SelectWithTextInput;

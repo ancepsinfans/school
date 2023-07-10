@@ -1,43 +1,41 @@
-function getSphereName(db, e, obj = false) {
+function getSphereName(db, e, obj = false, prop = 'slug') {
     if (obj) {
         return db
-            .find(({ sphere }) => sphere === e.sphere)
+            .find(({ slug }) => slug === e.sphere)
     }
     return db
-        .find(({ sphere }) => sphere === e.sphere)
-        ?.name
+        .find(({ slug }) => slug === e.sphere)[prop]
 }
 
-function getCourseName(db, e, obj = false) {
+function getCourseName(db, e, obj = false, prop = 'slug') {
     if (obj) {
         return db
-            .find(({ sphere }) => sphere === e.sphere)
+            .find(({ slug }) => slug === e.sphere)
             ?.courses
-            .find(({ course }) => course === e.course)
+            .find(({ slug }) => slug === e.course)
     }
     return db
-        .find(({ sphere }) => sphere === e.sphere)
+        .find(({ slug }) => slug === e.sphere)
         ?.courses
-        .find(({ course }) => course === e.course)
-        ?.name
+        .find(({ slug }) => slug === e.course)[prop]
 }
 
-function getLessonName(db, e, obj = false) {
+function getLessonName(db, e, obj = false, prop = 'slug') {
     if (obj) {
         return db
-            .find(({ sphere }) => sphere === e.sphere)
+            .find(({ slug }) => slug === e.sphere)
             ?.courses
-            .find(({ course }) => course === e.course)
+            .find(({ slug }) => slug === e.course)
             ?.lessons
-            .find(({ lesson }) => lesson === e.lesson)
+            .find(({ slug }) => slug === e.lesson)
     }
+
     return db
-        .find(({ sphere }) => sphere === e.sphere)
+        .find(({ slug }) => slug === e.sphere)
         ?.courses
-        .find(({ course }) => course === e.course)
+        .find(({ slug }) => slug === e.course)
         ?.lessons
-        .find(({ lesson }) => lesson === e.lesson)
-        ?.name
+        .find(({ slug }) => slug === e.lesson)[prop]
 
 }
 

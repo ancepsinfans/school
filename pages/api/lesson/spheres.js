@@ -4,9 +4,9 @@ import { SphereSchema, LessonSchema, CourseSchema } from "../../../models/sphere
 const handler = async (req, res) => {
   if (req.method === "GET") {
     // setting up a query object and pruning invalid values
-    const query = { sphere: req.query.sphere, 'courses.course': req.query.course, 'courses.lessons.lesson': req.query.lesson};
+    const query = { slug: req.query.sphere, 'courses.slug': req.query.course, 'courses.lessons.slug': req.query.lesson };
     Object.keys(query).forEach((k) => query[k] == undefined && delete query[k])
-    
+
     let doc = await SphereSchema.find(query)
 
     return res.status(200).send(doc)
@@ -14,28 +14,30 @@ const handler = async (req, res) => {
 
 
   if (req.method === 'POST') {
-    const { 
-    sphere, 
-    course, 
-    lesson, 
-    name, 
-    description, 
-    show, 
-    disable, 
-    linear,
-    text,
-    createNew 
+    const {
+      sphere,
+      course,
+      lesson,
+      slug,
+      description,
+      show,
+      disable,
+      linear,
+      text,
+      number,
+      createNew
     } = req.body
-    
+
     if (createNew) {
       if (!!lesson) {
 
         try {
           const newLesson = new LessonSchema({
             lesson: lesson,
-            name: name,
+            slug: slug,
             description: description,
-            text, text
+            text: text,
+            number: number
           })
 
           let doc = await SphereSchema.findOneAndUpdate(
@@ -55,7 +57,7 @@ const handler = async (req, res) => {
         try {
           const newCourse = new CourseSchema({
             course: course,
-            name: name,
+            slug: slug,
             description: description,
             linear: linear,
             lessons: []
@@ -78,7 +80,7 @@ const handler = async (req, res) => {
         try {
           const newSphere = new SphereSchema({
             sphere: sphere,
-            name: name,
+            slug: slug,
             show: show,
             disable: disable,
             description: description,
@@ -105,9 +107,10 @@ const handler = async (req, res) => {
           },
           {
             $set: {
-              'courses.$[courseElem].lessons.$[lessonElem].name': name,
+              'courses.$[courseElem].lessons.$[lessonElem].slug': slug,
               'courses.$[courseElem].lessons.$[lessonElem].description': description,
-              'courses.$[courseElem].lessons.$[lessonElem].text': text
+              'courses.$[courseElem].lessons.$[lessonElem].text': text,
+              'courses.$[courseElem].lessons.$[lessonElem].number': number
             }
           },
           {
@@ -129,7 +132,7 @@ const handler = async (req, res) => {
           {
             $set: {
               'courses.$.description': description,
-              'courses.$.name': name,
+              'courses.$.slug': slug,
               'courses.$.linear': linear,
             },
           },
@@ -147,7 +150,7 @@ const handler = async (req, res) => {
           {
             $set: {
               'description': description,
-              'name': name,
+              'slug': slug,
               'show': show,
               'disable': disable
             },

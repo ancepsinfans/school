@@ -19,7 +19,7 @@ const SpherePage = ({ db, ID, broken }) => {
         <>
             <MainContainer
                 navType='other'
-                titleText={db.name}
+                titleText={db.sphere}
                 introText={db.description}
             >
 
@@ -30,8 +30,8 @@ const SpherePage = ({ db, ID, broken }) => {
                                 <GridCard
                                     key={e._id}
                                     isDisabled={!e.lessons.length}
-                                    link={`/study/${db.sphere}/${e.course}?ID=${ID}`}
-                                    title={e.name}
+                                    link={`/study/${db.slug}/${e.slug}?ID=${ID}`}
+                                    title={e.course}
                                     description={e.description}
                                 />
 
@@ -50,7 +50,7 @@ export default SpherePage
 
 export const getServerSideProps = async (ctx) => {
 
-    const db = await fetchDBStructure({sphere: ctx.params.sphere})
+    const db = await fetchDBStructure({ sphere: ctx.params.sphere })
     let currentDB
     const session = await getServerSession(ctx.req, ctx.res, authOptions)
     if (session === null) {
@@ -60,8 +60,8 @@ export const getServerSideProps = async (ctx) => {
             }
         }
     }
-    if (db.some(item => item.sphere === ctx.params.sphere)) {
-        currentDB = db.find((i) => i.sphere === ctx.params.sphere)
+    if (db.some(item => item.slug === ctx.params.sphere)) {
+        currentDB = db.find((i) => i.slug === ctx.params.sphere)
     } else {
         return {
             redirect: { destination: '/404', permanent: false }

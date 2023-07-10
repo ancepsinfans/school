@@ -54,6 +54,7 @@ const GlobalStyles = createGlobalStyle`
     --tooltip-text-color: ${constants.blackMain};
     --tooltip-margin: 40px;
     --tooltip-arrow-size: 8px;
+    --navHeight: 50px;
   }
 
   /*
@@ -139,6 +140,11 @@ blockquote>blockquote {
 
 .bytemd {
   height: 35vh;
+}
+
+.bytemd-fullscreen.bytemd {
+  top: var(--navHeight);
+  z-index: 200;
 }
 `
 

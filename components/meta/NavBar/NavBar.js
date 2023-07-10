@@ -6,7 +6,7 @@ import axios from "axios";
 import BlueButton from "../../atomic/buttons/BlueButton";
 
 const NavBarStyled = styled.header`
-  height: 50px;
+  height: var(--navHeight);
   width: 100%;
   background: var(--primaryMain);
   border-bottom: 3px solid var(--accentBlue40);

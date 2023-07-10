@@ -1,17 +1,16 @@
 import mongoose from "mongoose";
-var Schema = mongoose.Schema
-
 
 const lessonSchema = new mongoose.Schema({
     lesson: String,
-    name: String,
+    slug: String,
     description: String,
     text: String,
+    number: String
 });
 
 const courseSchema = new mongoose.Schema({
     course: String,
-    name: String,
+    slug: String,
     description: String,
     linear: Boolean,
     lessons: [lessonSchema],
@@ -19,7 +18,7 @@ const courseSchema = new mongoose.Schema({
 
 const sphereSchema = new mongoose.Schema({
     sphere: String,
-    name: String,
+    slug: String,
     show: Boolean,
     disable: Boolean,
     description: String,

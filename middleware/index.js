@@ -7,5 +7,20 @@ import { getLessonName, getCourseName, getSphereName, getAnyName } from './getNa
 import hasElement from './hasElement'
 import ifDocExists from './ifDocExists'
 import connectDB from './mongodb'
+import slugify from './slugify'
 
-export { fetchFileTreeStructure, fetchUser, fetchLessonPage, fetchQuestions, fetchDBStructure, getLessonName, getCourseName, getSphereName, getAnyName, hasElement, ifDocExists, connectDB }
+export {
+    fetchFileTreeStructure,
+    fetchLessonPage,
+    fetchQuestions,
+    fetchDBStructure,
+    fetchUser,
+    getLessonName,
+    getCourseName,
+    getSphereName,
+    getAnyName,
+    hasElement,
+    ifDocExists,
+    connectDB,
+    slugify
+}

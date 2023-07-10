@@ -9,5 +9,19 @@ import TextInputQuiz from "./quizzes/TextInputQuiz";
 import MCQuiz from "./quizzes/MCQuiz/";
 import MCorOther from "./quizzes/MCorOther";
 import SelectWithTextInput from "./inputs/SelectWithTextInput";
+import NumberPicker from "./inputs/NumberPicker";
 
-export { SelectInput, MarkdownEditor, TextInput, SubmitButton, SelectWithTextInput, NextLessonButton, BlueButton, Popover, MCQuiz, MCorOther, TextInputQuiz }
+export {
+    SelectInput,
+    TextInput,
+    SubmitButton,
+    NextLessonButton,
+    BlueButton,
+    Popover,
+    MarkdownEditor,
+    TextInputQuiz,
+    MCQuiz,
+    MCorOther,
+    SelectWithTextInput,
+    NumberPicker,
+}

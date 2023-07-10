@@ -15,7 +15,7 @@ const CoursePage = ({ sphere, db, ID, sphereName, completedLessons, broken }) =>
         <>
             <MainContainer
                 navType='other'
-                titleText={db.name}
+                titleText={db.course}
                 introText={
                     <>
                         {db.description}
@@ -34,10 +34,10 @@ const CoursePage = ({ sphere, db, ID, sphereName, completedLessons, broken }) =>
                             return (
                                 <GridCard
                                     key={e._id}
-                                    link={`/study/${sphere}/${db.course}/${e.lesson}?ID=${ID}`}
-                                    title={e.name}
+                                    link={`/study/${sphere}/${db.slug}/${e.slug}?ID=${ID}`}
+                                    title={e.lesson}
                                     description={e.description}
-                                    completed={completedLessons.includes(e.lesson)}
+                                    completed={completedLessons.includes(e.slug)}
                                     disabled={false}
                                 />
                             )
@@ -56,11 +56,12 @@ export default CoursePage
 
 
 export const getServerSideProps = async (ctx) => {
-    const db = await fetchDBStructure({sphere: ctx.params.sphere, course: ctx.params.course})
+    const db = await fetchDBStructure({ sphere: ctx.params.sphere, course: ctx.params.course })
+
     let currentDB
-    const currentSphere = db.find((i) => i.sphere === ctx.params.sphere)
-    if (currentSphere.courses.some(item => item.course === ctx.params.course)) {
-        currentDB = currentSphere.courses.find((i) => i.course === ctx.params.course)
+    const currentSphere = db.find((i) => i.slug === ctx.params.sphere)
+    if (currentSphere.courses.some(item => item.slug === ctx.params.course)) {
+        currentDB = currentSphere.courses.find((i) => i.slug === ctx.params.course)
     } else {
         return {
             redirect: { destination: '/404', permanent: false }
@@ -74,16 +75,15 @@ export const getServerSideProps = async (ctx) => {
         }
     }
 
-    const completedLessons = await fetchUser( {distinct: 'progress.lesson', ID: ctx.query.ID, sphere: ctx.params.sphere, course: ctx.params.course})
-    
-   
+    const completedLessons = await fetchUser({ distinct: 'progress.lesson', ID: ctx.query.ID, sphere: ctx.params.sphere, course: ctx.params.course })
+
 
     return {
-props: {
+        props: {
             sphere: ctx.params.sphere,
             db: currentDB,
             ID: ctx.query.ID,
-            sphereName: currentSphere.name,
+            sphereName: currentSphere.sphere,
             completedLessons: completedLessons
         }
     }

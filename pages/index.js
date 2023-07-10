@@ -52,14 +52,14 @@ export default function Home({ db, ID }) {
               link='/admin/add_descriptions'
               title='Add course descriptions'
             />
-            
+
             <GridCard
               isAdmin={isAdmin}
               isRestricted={true}
               link='/admin/add_lesson'
               title='Add lesson text'
             />
-            
+
           </Grid>
           <hr style={{ backgroundColor: constants.blackMain, margin: '5px', borderStyle: 'solid', width: '100%' }} hidden={!isAdmin} />
           <Grid>
@@ -70,8 +70,8 @@ export default function Home({ db, ID }) {
                     hidden={!e.show}
                     isDisabled={e.disable}
                     key={e._id}
-                    link={`/study/${e.sphere}`}
-                    title={e.name}
+                    link={`/study/${e.slug}`}
+                    title={e.sphere}
                     description={e.description}
                   />
                 )
