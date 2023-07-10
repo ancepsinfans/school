@@ -49,13 +49,6 @@ export default function Home({ db, ID }) {
             <GridCard
               isAdmin={isAdmin}
               isRestricted={true}
-              link='/admin/add_descriptions'
-              title='Add course descriptions'
-            />
-
-            <GridCard
-              isAdmin={isAdmin}
-              isRestricted={true}
               link='/admin/add_lesson'
               title='Add lesson text'
             />

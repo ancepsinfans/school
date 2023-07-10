@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import { Loading, MainContainer } from '../../components/meta'
-import { StudentSchema } from '../../models/users/User'
 import { getCourseName, getLessonName, getSphereName, fetchDBStructure, fetchUser } from '../../middleware';
 
 
@@ -28,20 +27,6 @@ export default function Profile({ ID, vocab, db }) {
         )
     }
 
-    const uniqueVocab = vocab.reduce((result, current) => {
-        const existing = result.find(item =>
-            item.term.term === current.term.term &&
-            item.term.definition === current.term.definition
-        );
-
-        if (!existing) {
-            result.push(current);
-        } else if (current.timestamp > existing.timestamp) {
-            result[result.indexOf(existing)] = current;
-        }
-
-        return result;
-    }, []);
 
 
     return <>
@@ -60,10 +45,11 @@ export default function Profile({ ID, vocab, db }) {
         >
             <div>
                 <ul>
-                    {uniqueVocab.map(e => {
-                        const sphereName = getSphereName(db, e)
-                        const courseName = getCourseName(db, e)
-                        const lessonName = getLessonName(db, e)
+                    {vocab.map(e => {
+                        console.log({ e })
+                        const sphereName = getSphereName(db, e, undefined, 'sphere')
+                        const courseName = getCourseName(db, e, undefined, 'course')
+                        const lessonName = getLessonName(db, e, undefined, 'lesson')
                         return (
                             <ListItem key={e._id}>
                                 {e.term.term} -- {e.term.definition}
@@ -88,12 +74,13 @@ export default function Profile({ ID, vocab, db }) {
 
 export const getServerSideProps = async (ctx) => {
     const studentInfo = await fetchUser({ ID: ctx.query.ID, vocab: 'true' })
+    console.log({ studentInfo })
 
     const db = await fetchDBStructure({})
     return {
         props: {
             ID: ctx.query.ID,
-            vocab: JSON.parse(JSON.stringify(studentInfo.vocab)),
+            vocab: JSON.parse(JSON.stringify(studentInfo)),
             db: db
         }
     }

@@ -29,7 +29,14 @@ function getLessonName(db, e, obj = false, prop = 'slug') {
             ?.lessons
             .find(({ slug }) => slug === e.lesson)
     }
-
+    console.log({
+        lesson: db
+            .find(({ slug }) => slug === e.sphere)
+            ?.courses
+            .find(({ slug }) => slug === e.course)
+            ?.lessons
+            .find(({ slug }) => slug === e.lesson)[prop]
+    })
     return db
         .find(({ slug }) => slug === e.sphere)
         ?.courses
