@@ -1,4 +1,3 @@
-import fetchFileTreeStructure from './fetchers/fetchFileTreeStructure'
 import fetchLessonPage from './fetchers/fetchLessonPage'
 import fetchQuestions from './fetchers/fetchQuestions'
 import fetchDBStructure from './fetchers/fetchDBStructure'
@@ -10,7 +9,6 @@ import connectDB from './mongodb'
 import slugify from './slugify'
 
 export {
-    fetchFileTreeStructure,
     fetchLessonPage,
     fetchQuestions,
     fetchDBStructure,
