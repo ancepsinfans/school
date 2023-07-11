@@ -1,0 +1,29 @@
+name: MongoDB Update
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  update-mongodb:
+    runs-on: ubuntu-latest
+
+    env:
+      MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING }}
+
+    steps:
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run MongoDB Update
+        run: node path/to/your/file.js
