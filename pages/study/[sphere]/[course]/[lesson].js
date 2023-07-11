@@ -95,6 +95,7 @@ export const getServerSideProps = async (ctx) => {
 
         const mdxSource = await serialize(thisLesson.text, { parseFrontmatter: true })
         const qs = await fetchQuestions({ sphere: ctx.params.sphere, course: ctx.params.course, lesson: ctx.params.lesson })
+        console.log(mdxSource.frontmatter.next)
 
         const nextLessonName = mdxSource.frontmatter.next !== "" ? getLessonName(db, { sphere: ctx.params.sphere, course: ctx.params.course, lesson: mdxSource.frontmatter.next }, undefined, 'lesson') : "Complete!"
 

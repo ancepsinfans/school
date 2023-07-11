@@ -9,7 +9,6 @@ export default function Home({ db, ID }) {
   const { data: session } = useSession()
 
   const user = (!!session ? session.user : undefined)
-
   const isAdmin =
     (
       user && user.email == 'zachary.r.bullard@gmail.com' ? true : false

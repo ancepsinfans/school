@@ -94,7 +94,7 @@ readability: xxx
                 return
         }
     }
-
+    console.log({ level })
     const active = (level) => {
         switch (level) {
             case 1: {
@@ -111,7 +111,6 @@ readability: xxx
             }
         }
     }
-
     return (
         <MainContainer
             titleText={"Lesson structure"}
@@ -243,7 +242,15 @@ readability: xxx
                             <p>DB: {getAnyName(db, { sphere: slugify(data.sphere), course: slugify(data.course), lesson: slugify(data.lesson, data.number) }, level)?.slug}</p>
                         </Field>
                         <Field>
-                            <TextInput value={data.desc} onChange={(e) => { updateData((draft) => { draft.desc = e.target.value }) }} label={'Description'} />
+                            <TextInput
+                                value={data.desc}
+                                onChange={
+                                    (e) => {
+                                        updateData((draft) => { draft.desc = e.target.value })
+                                    }}
+                                label={'Description'}
+
+                            />
                             <p>Currently: {getAnyName(db, { sphere: slugify(data.sphere), course: slugify(data.course), lesson: slugify(data.lesson, data.number) }, level)?.description}</p>
                         </Field>
 

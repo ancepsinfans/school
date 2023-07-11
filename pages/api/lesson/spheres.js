@@ -1,4 +1,4 @@
-import { connectDB } from "../../../middleware";
+import { connectDB, slugify } from "../../../middleware";
 import { SphereSchema, LessonSchema, CourseSchema } from "../../../models/spheres/Spheres";
 
 const handler = async (req, res) => {
@@ -57,7 +57,7 @@ const handler = async (req, res) => {
         try {
           const newCourse = new CourseSchema({
             course: course,
-            slug: slug,
+            slug: slugify(course),
             description: description,
             linear: linear,
             lessons: []
@@ -80,7 +80,7 @@ const handler = async (req, res) => {
         try {
           const newSphere = new SphereSchema({
             sphere: sphere,
-            slug: slug,
+            slug: slugify(sphere),
             show: show,
             disable: disable,
             description: description,
@@ -132,7 +132,7 @@ const handler = async (req, res) => {
           {
             $set: {
               'courses.$.description': description,
-              'courses.$.slug': slug,
+              'courses.$.slug': slugify(course),
               'courses.$.linear': linear,
             },
           },
@@ -150,7 +150,7 @@ const handler = async (req, res) => {
           {
             $set: {
               'description': description,
-              'slug': slug,
+              'slug': slugify(sphere),
               'show': show,
               'disable': disable
             },

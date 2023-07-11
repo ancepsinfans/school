@@ -1,4 +1,5 @@
 function getSphereName(db, e, obj = false, prop = 'slug') {
+    console.log({ db }, { e: db.find(({ slug }) => slug === e.sphere) })
     if (obj) {
         return db
             .find(({ slug }) => slug === e.sphere)
@@ -8,12 +9,14 @@ function getSphereName(db, e, obj = false, prop = 'slug') {
 }
 
 function getCourseName(db, e, obj = false, prop = 'slug') {
+
     if (obj) {
         return db
             .find(({ slug }) => slug === e.sphere)
             ?.courses
             .find(({ slug }) => slug === e.course)
     }
+
     return db
         .find(({ slug }) => slug === e.sphere)
         ?.courses
@@ -29,14 +32,7 @@ function getLessonName(db, e, obj = false, prop = 'slug') {
             ?.lessons
             .find(({ slug }) => slug === e.lesson)
     }
-    console.log({
-        lesson: db
-            .find(({ slug }) => slug === e.sphere)
-            ?.courses
-            .find(({ slug }) => slug === e.course)
-            ?.lessons
-            .find(({ slug }) => slug === e.lesson)[prop]
-    })
+
     return db
         .find(({ slug }) => slug === e.sphere)
         ?.courses
