@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import { FlexWrapper } from "../../wrappers";
 
 const Card = styled.div`
 & {
@@ -49,10 +50,10 @@ const Card = styled.div`
 `
 const Button = styled.button``
 
-const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick, hidden, completed }) => {
 
-  
-            
+
+const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled, onClick, hidden, completed, lessonDetails }) => {
+
   const Type = link === '' ? Button : Link
   return (
     <div style={{ display: (isRestricted && !isAdmin ? "none" : "block") }}>
@@ -64,11 +65,16 @@ const GridCard = ({ link, isAdmin, title, description, isRestricted, isDisabled,
         >
           <h2>{title} </h2>
           <p>{description}</p>
-        {completed? <div style={{display: 'flex'}}><p style={{marginLeft: 'auto'}}>✅</p></div> :null}          
+          <FlexWrapper direction="row" justifyContent="space-between">
+            {lessonDetails}
+            <div>{completed ? "✅" : null}</div>
+          </FlexWrapper>
         </Card>
       </Type>
     </div>
   )
+
+
 };
 
 export default GridCard;

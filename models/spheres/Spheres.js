@@ -5,7 +5,12 @@ const lessonSchema = new mongoose.Schema({
     slug: String,
     description: String,
     text: String,
-    number: String
+    number: String,
+    fleschReadingEase: String,
+    words: Number,
+    readingTime: Number,
+    cefrLevel: String,
+    requirements: [String]
 });
 
 const courseSchema = new mongoose.Schema({

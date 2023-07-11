@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useSession } from "next-auth/react";
 import { Loading, MainContainer } from "../../../../components/meta";
 import { Popover, MCQuiz, TextInputQuiz, MCorOther } from "../../../../components/atomic";
-import { fetchDBStructure, fetchLessonPage, fetchQuestions, getAnyName, getLessonName } from "../../../../middleware";
+import { fetchDBStructure, fetchQuestions, getAnyName, getLessonName } from "../../../../middleware";
 import Link from "next/link";
 
 
@@ -94,10 +94,11 @@ export const getServerSideProps = async (ctx) => {
     try {
 
         const mdxSource = await serialize(thisLesson.text, { parseFrontmatter: true })
-        const qs = await fetchQuestions({ sphere: ctx.params.sphere, course: ctx.params.course, lesson: ctx.params.lesson })
-        console.log(mdxSource.frontmatter.next)
 
-        const nextLessonName = mdxSource.frontmatter.next !== "" ? getLessonName(db, { sphere: ctx.params.sphere, course: ctx.params.course, lesson: mdxSource.frontmatter.next }, undefined, 'lesson') : "Complete!"
+        const nextLesson = getAnyName(db, { sphere: ctx.params.sphere, course: ctx.params.course, lesson: mdxSource.frontmatter.next }, 3)
+
+        const qs = await fetchQuestions({ sphere: ctx.params.sphere, course: ctx.params.course, lesson: ctx.params.lesson })
+        const nextLessonName = mdxSource.frontmatter.next !== "" ? nextLesson.lesson : "Complete!"
 
         const link = mdxSource.frontmatter.next !== "" ? `/${ctx.params.sphere}/${ctx.params.course}/${mdxSource.frontmatter.next}?ID=${ctx.query.ID}` : `/${ctx.params.sphere}/${ctx.params.course}?ID=${ctx.query.ID}`
 

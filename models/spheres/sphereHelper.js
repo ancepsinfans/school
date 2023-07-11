@@ -16,6 +16,7 @@ async function sphereSender(
         linear: data.linear,
         text: data.text,
         number: data.number,
+        requirements: data.requirements,
         createNew
     }
     const response = await axios.post(`/api/lesson/spheres`, payload)

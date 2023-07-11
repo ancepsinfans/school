@@ -31,6 +31,7 @@ const CoursePage = ({ sphere, db, ID, sphereName, completedLessons, broken }) =>
 
                     {
                         db.lessons.map((e) => {
+                            console.log(!!e.requirements.length)
                             return (
                                 <GridCard
                                     key={e._id}
@@ -38,7 +39,12 @@ const CoursePage = ({ sphere, db, ID, sphereName, completedLessons, broken }) =>
                                     title={e.lesson}
                                     description={e.description}
                                     completed={completedLessons.includes(e.slug)}
-                                    disabled={false}
+                                    isDisabled={e.requirements?.length !== 0 && e.requirements?.every((lesson) => !completedLessons.includes(lesson))}
+                                    lessonDetails={
+                                        <>
+                                            <aside>{e.readingTime} mins &mdash; {e.cefrLevel}</aside>
+                                        </>
+                                    }
                                 />
                             )
                         })
