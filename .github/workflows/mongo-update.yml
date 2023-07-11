@@ -26,4 +26,4 @@ jobs:
         run: npm install
 
       - name: Run MongoDB Update
-        run: node path/to/your/file.js
+        run: node middleware/update-on-PR.js
