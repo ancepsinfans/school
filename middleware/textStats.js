@@ -33,7 +33,7 @@ const sphereSchema = new mongoose.Schema({
 }, {
     collection: 'spheres'
 });
-const connectionString = 'mongodb+srv://ancepsinfans:ifBfw32bCX5HKpVi@school.ctl3v.mongodb.net/?retryWrites=true&w=majority';
+const connectionString = process.env.MONGODB_CONNECTION_STRING;
 mongoose.connect(connectionString, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
