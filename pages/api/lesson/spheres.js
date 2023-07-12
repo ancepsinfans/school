@@ -25,6 +25,7 @@ const handler = async (req, res) => {
       linear,
       text,
       number,
+      requirements,
       createNew
     } = req.body
 
@@ -37,7 +38,8 @@ const handler = async (req, res) => {
             slug: slug,
             description: description,
             text: text,
-            number: number
+            number: number,
+            requirements: requirements
           })
 
           let doc = await SphereSchema.findOneAndUpdate(
@@ -110,7 +112,8 @@ const handler = async (req, res) => {
               'courses.$[courseElem].lessons.$[lessonElem].slug': slug,
               'courses.$[courseElem].lessons.$[lessonElem].description': description,
               'courses.$[courseElem].lessons.$[lessonElem].text': text,
-              'courses.$[courseElem].lessons.$[lessonElem].number': number
+              'courses.$[courseElem].lessons.$[lessonElem].number': number,
+              'courses.$[courseElem].lessons.$[lessonElem].requirements': requirements
             }
           },
           {

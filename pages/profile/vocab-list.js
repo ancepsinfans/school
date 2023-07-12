@@ -46,7 +46,6 @@ export default function Profile({ ID, vocab, db }) {
             <div>
                 <ul>
                     {vocab.map(e => {
-                        console.log({ e })
                         const sphereName = getSphereName(db, e, undefined, 'sphere')
                         const courseName = getCourseName(db, e, undefined, 'course')
                         const lessonName = getLessonName(db, e, undefined, 'lesson')
@@ -74,7 +73,6 @@ export default function Profile({ ID, vocab, db }) {
 
 export const getServerSideProps = async (ctx) => {
     const studentInfo = await fetchUser({ ID: ctx.query.ID, vocab: 'true' })
-    console.log({ studentInfo })
 
     const db = await fetchDBStructure({})
     return {

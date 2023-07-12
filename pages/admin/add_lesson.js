@@ -5,21 +5,14 @@ import { MainContainer } from "../../components/meta";
 import { useRouter } from "next/router";
 import { fetchDBStructure, getAnyName, hasElement, slugify } from "../../middleware";
 import { useImmer } from "use-immer";
-import { TextInput, SelectWithTextInput, SubmitButton, SelectInput, MarkdownEditor, NumberPicker } from "../../components/atomic";
+import { TextInput, SelectWithTextInput, SubmitButton, SelectInput, MarkdownEditor, NumberPicker, Multiselect } from "../../components/atomic";
+import { FlexWrapper } from "../../components/wrappers";
 
 const Input = styled.form`
     padding: 5px 5px;
     margin: 0%;
     text-align: center;
 `
-
-const Flex = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    min-height: 300px;
-`
-
 
 const Field = styled.fieldset`
     border: none;
@@ -39,6 +32,7 @@ const AddDesc = ({ db }) => {
         show: true,
         disable: false,
         linear: true,
+        requirements: [],
         number: '',
         sphereWriteIn: false,
         courseWriteIn: false,
@@ -94,23 +88,7 @@ readability: xxx
                 return
         }
     }
-    console.log({ level })
-    const active = (level) => {
-        switch (level) {
-            case 1: {
-                return 'sphere'
-            }
-            case 2: {
-                return 'course'
-            }
-            case 3: {
-                return 'lesson'
-            }
-            default: {
-                return null
-            }
-        }
-    }
+
     return (
         <MainContainer
             titleText={"Lesson structure"}
@@ -128,7 +106,7 @@ readability: xxx
                     router.reload();
                 }, 500);
             }}>
-                <Flex>
+                <FlexWrapper minHeight="300px">
                     <Field >
                         <SelectWithTextInput
                             style={{ width: '215px' }}
@@ -303,8 +281,19 @@ readability: xxx
                             label='Course linear'
                         />
                     </Field>
-                </Flex>
-                <br />
+                </FlexWrapper>
+                <Multiselect
+                    disabled={!data.lesson}
+                    options={getAnyName(db, {
+                        sphere: slugify(data.sphere),
+                        course: slugify(data.course),
+                    }, 2)?.lessons.map(e => ({ label: e.lesson, value: e.slug }))}
+                    onChange={(selected) => {
+                        updateData((draft) => {
+                            draft.requirements = selected
+                        })
+                    }}
+                />
                 <br />
                 <br />
 

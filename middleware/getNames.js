@@ -1,5 +1,4 @@
 function getSphereName(db, e, obj = false, prop = 'slug') {
-    console.log({ db }, { e: db.find(({ slug }) => slug === e.sphere) })
     if (obj) {
         return db
             .find(({ slug }) => slug === e.sphere)
@@ -24,6 +23,7 @@ function getCourseName(db, e, obj = false, prop = 'slug') {
 }
 
 function getLessonName(db, e, obj = false, prop = 'slug') {
+
     if (obj) {
         return db
             .find(({ slug }) => slug === e.sphere)

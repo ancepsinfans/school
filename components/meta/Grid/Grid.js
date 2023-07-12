@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const GridStyle = styled.div`
   display: flex;
   align-items: center;
@@ -13,6 +14,7 @@ const GridStyle = styled.div`
 }
 `
 
+
 const Grid = ({ children }) => {
   return (
     <GridStyle>
@@ -20,5 +22,6 @@ const Grid = ({ children }) => {
     </GridStyle>
   );
 };
+
 
 export default Grid;

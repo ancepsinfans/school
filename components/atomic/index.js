@@ -10,6 +10,7 @@ import MCQuiz from "./quizzes/MCQuiz/";
 import MCorOther from "./quizzes/MCorOther";
 import SelectWithTextInput from "./inputs/SelectWithTextInput";
 import NumberPicker from "./inputs/NumberPicker";
+import Multiselect from './inputs/Multiselect'
 
 export {
     SelectInput,
@@ -24,4 +25,5 @@ export {
     MCorOther,
     SelectWithTextInput,
     NumberPicker,
+    Multiselect
 }
