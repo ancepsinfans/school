@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Grid, GridCard, Loading, MainContainer } from '../../components/meta'
+import { Grid, Loading, MainContainer } from '../../components/meta'
 import React from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
@@ -40,12 +40,12 @@ export default function Profile({ ID }) {
             >
 
                 <Grid>
-                    <GridCard
+                    <Grid.GridCard
                         link={`/profile/vocab-list?ID=${ID}`}
                         title='Vocabulary List'
                         description="Here are all the words you've marked"
                     />
-                    <GridCard
+                    <Grid.GridCard
                         link={`/profile/analytics?ID=${ID}`}
                         title='Your Analytics'
                         description='Here you can find data about your study history'

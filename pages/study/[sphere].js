@@ -1,5 +1,5 @@
 import React from "react";
-import { MainContainer, Grid, GridCard, Loading } from "../../components/meta";
+import { MainContainer, Grid, Loading } from "../../components/meta";
 import { useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import axios from "axios";
@@ -27,7 +27,7 @@ const SpherePage = ({ db, ID, broken }) => {
                     {
                         db.courses.map(e => {
                             return (
-                                <GridCard
+                                <Grid.GridCard
                                     key={e._id}
                                     isDisabled={!e.lessons.length}
                                     link={`/study/${db.slug}/${e.slug}?ID=${ID}`}
