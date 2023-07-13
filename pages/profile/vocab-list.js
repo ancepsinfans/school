@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
-import { Loading, MainContainer } from '../../components/meta'
+import { Loading, MainContainer, Grid } from '../../components/meta'
 import { getCourseName, getLessonName, getSphereName, fetchDBStructure, fetchUser } from '../../middleware';
 
 
@@ -43,29 +43,25 @@ export default function Profile({ ID, vocab, db }) {
             }
             noFlex={false}
         >
-            <div>
-                <ul>
-                    {vocab.map(e => {
-                        const sphereName = getSphereName(db, e, undefined, 'sphere')
-                        const courseName = getCourseName(db, e, undefined, 'course')
-                        const lessonName = getLessonName(db, e, undefined, 'lesson')
-                        return (
-                            <ListItem key={e._id}>
-                                {e.term.term} -- {e.term.definition}
-                                <ul style={{ padding: '0 20px' }}>
-                                    <ListItem>
-                                        <Link
-                                            href={`/study/${e.sphere}/${e.course}/${e.lesson}?ID=${ID}`}
-                                            legacyBehavior>
-                                            {`${sphereName} > ${courseName} > ${lessonName}`}
-                                        </Link>
-                                    </ListItem>
-                                </ul>
-                            </ListItem>
-                        );
-                    })}
-                </ul>
-            </div>
+            <Grid>
+                {vocab.map(e => {
+                    const sphereName = getSphereName(db, e, undefined, 'sphere')
+                    const courseName = getCourseName(db, e, undefined, 'course')
+                    const lessonName = getLessonName(db, e, undefined, 'lesson')
+                    return (
+                        <Grid.GridCard
+                            key={e._id}
+                            link={`/study/${e.sphere}/${e.course}/${e.lesson}?ID=${ID}`}
+                            title={e.term.term}
+                            description={e.term.definition}
+                            lessonDetails={<aside style={{ color: 'var(--black40)' }}>{`${sphereName} > ${courseName} > ${lessonName}`}</aside>}
+                        />
+
+                    );
+                })}
+
+            </Grid>
+
 
         </MainContainer>
     </>;

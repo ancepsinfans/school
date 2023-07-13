@@ -1,5 +1,5 @@
 import React from "react";
-import { MainContainer, Grid, GridCard, Loading } from "../../../components/meta";
+import { MainContainer, Grid, Loading } from "../../../components/meta";
 import { useSession } from "next-auth/react";
 import { fetchDBStructure, fetchUser } from "../../../middleware";
 
@@ -33,7 +33,7 @@ const CoursePage = ({ sphere, db, ID, sphereName, completedLessons, broken }) =>
                         db.lessons.map((e) => {
                             console.log(!!e.requirements.length)
                             return (
-                                <GridCard
+                                <Grid.GridCard
                                     key={e._id}
                                     link={`/study/${sphere}/${db.slug}/${e.slug}?ID=${ID}`}
                                     title={e.lesson}

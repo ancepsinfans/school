@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, GridCard, MainContainer } from '../components/meta'
+import { Grid, MainContainer } from '../components/meta'
 import constants from '../styles/constants'
 import { signIn, useSession } from 'next-auth/react'
 import { fetchDBStructure } from '../middleware';
@@ -38,14 +38,14 @@ export default function Home({ db, ID }) {
         <>
           <Grid>
 
-            <GridCard
+            <Grid.GridCard
               isAdmin={isAdmin}
               isRestricted={true}
               link='/admin/add_q'
               title='Add questions'
             />
 
-            <GridCard
+            <Grid.GridCard
               isAdmin={isAdmin}
               isRestricted={true}
               link='/admin/add_lesson'
@@ -58,7 +58,7 @@ export default function Home({ db, ID }) {
             {
               db.map((e) => {
                 return (
-                  <GridCard
+                  <Grid.GridCard
                     hidden={!e.show}
                     isDisabled={e.disable}
                     key={e._id}
@@ -75,7 +75,7 @@ export default function Home({ db, ID }) {
         </>
         :
         <Grid>
-          <GridCard
+          <Grid.GridCard
             link=''
             onClick={() => signIn()}
             title='Login to get started'
