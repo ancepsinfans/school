@@ -1,10 +1,24 @@
-import React from 'react'
-import constants from '../styles/constants'
-import { SessionProvider } from 'next-auth/react'
-import AuthBlock from '../components/meta/AuthBlock/AuthBlock'
-import { createGlobalStyle } from 'styled-components'
+'use client';
+import React from 'react';
+import { useServerInsertedHTML } from 'next/navigation';
+import { ServerStyleSheet, StyleSheetManager, createGlobalStyle } from 'styled-components';
+import constants from '../styles/constants';
+
 
 const GlobalStyles = createGlobalStyle`
+
+  @font-face {
+    font-family: 'Vollkorn';
+    src: url('/fonts/Vollkorn/Vollkorn-Italic-VariableFont_wght.ttf') format('truetype');
+    /* Repeat the above line for each TTF font file you want to import */
+  }
+
+    @font-face {
+    font-family: 'Vollkorn';
+    src: url('/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf') format('truetype');
+    /* Repeat the above line for each TTF font file you want to import */
+  }
+
   :root {
     --accentBlue40: ${constants.accentBlue40};
     --accentBlue45: ${constants.accentBlue45};
@@ -147,24 +161,24 @@ blockquote>blockquote {
   z-index: 200;
 }
 `
-
-function MyApp({
-  Component,
-  pageProps: { session, ...pageProps }
+export default function StyledComponentsRegistry({
+  children,
 }) {
+  // Only create stylesheet once with lazy initial state
+  // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
+  const [styledComponentsStyleSheet] = React.useState(() => new ServerStyleSheet());
 
+  useServerInsertedHTML(() => {
+    const styles = styledComponentsStyleSheet.getStyleElement();
+    styledComponentsStyleSheet.instance.clearTag();
+    return <>{styles}</>;
+  });
 
+  if (typeof window !== 'undefined') return <>{children}</>;
   return (
-    <>
-      <SessionProvider session={session}>
-        <AuthBlock>
-          <GlobalStyles />
-          <Component {...pageProps} />
-        </AuthBlock>
-      </SessionProvider>
-    </>
-  )
+    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+      <GlobalStyles />
+      {children}
+    </StyleSheetManager>
+  );
 }
-
-export default MyApp
-

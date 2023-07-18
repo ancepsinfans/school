@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import constants from "../../../../styles/constants";
 import answerSender from '../../../../models/users/answerHelper'

@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import MainContainer from '../MainContainer/MainContainer';
 import Link from 'next/link';

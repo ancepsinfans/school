@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import 'bytemd/dist/index.css'
 import gfm from '@bytemd/plugin-gfm'

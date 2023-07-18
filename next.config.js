@@ -1,4 +1,4 @@
-	/** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfig} */
 const withPlugins = require('next-compose-plugins')
 const removeImports = require('next-remove-imports')()
 
@@ -14,7 +14,10 @@ const withMDX = require('@next/mdx')({
 
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {esmExternals: 'loose'},
+  experimental: { esmExternals: 'loose' },
+  compiler: {
+    styledComponents: true
+  },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   images: {
     domains: [
@@ -32,11 +35,11 @@ const nextConfig = {
       {
         source: '/:path*',
         headers: [
-  {
-    key: 'Access-Control-Allow-Origin',
-    value: "*"
-  }
-]
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: "*"
+          }
+        ]
       }
     ]
   }
@@ -44,6 +47,6 @@ const nextConfig = {
 }
 
 module.exports = withPlugins(
-	[[removeImports], [withMDX]],
-	nextConfig
+  [[removeImports], [withMDX]],
+  nextConfig
 )

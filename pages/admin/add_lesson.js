@@ -2,7 +2,7 @@ import React from "react";
 import sphereSender from "../../models/spheres/sphereHelper";
 import styled from "styled-components";
 import { MainContainer } from "../../components/meta";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { fetchDBStructure, getAnyName, hasElement, slugify } from "../../middleware";
 import { useImmer } from "use-immer";
 import { TextInput, SelectWithTextInput, SubmitButton, SelectInput, MarkdownEditor, NumberPicker, Multiselect } from "../../components/atomic";

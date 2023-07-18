@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 
 function SelectInput({ value, optionsLogic, onChange, label, disabled, style, children }) {
