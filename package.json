@@ -25,7 +25,7 @@
     "babel-plugin-transform-remove-imports": "^1.7.0",
     "immer": "^10.0.2",
     "mongodb": "^5.6.0",
-    "mongoose": "^7.3.1",
+    "mongoose": "^7.3.3",
     "next": "^13.4.7",
     "next-auth": "^4.22.1",
     "next-compose-plugins": "^2.2.1",
