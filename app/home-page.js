@@ -1,5 +1,4 @@
 'use client'
-
 import React from 'react'
 import { Grid, MainContainer } from '../components/meta'
 import constants from '../styles/constants'

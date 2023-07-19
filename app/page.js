@@ -7,8 +7,9 @@ async function getDatabase() {
 }
 
 export default async function Page() {
-    // Fetch data directly in a Server Component
     const db = await getDatabase()
-    // Forward fetched data to your Client Component
     return <Home db={db} />
 }
+
+
+// <G

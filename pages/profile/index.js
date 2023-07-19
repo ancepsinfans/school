@@ -36,7 +36,6 @@ export default function Profile({ ID }) {
                         </ImageNameBox>
                     </>
                 }
-                noFlex={false}
             >
 
                 <Grid>
