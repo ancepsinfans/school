@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Grid, MainContainer } from '../components/meta'
+import { Grid, GridCard, MainContainer } from '../components/meta'
 import constants from '../styles/constants'
 import { signIn, useSession } from 'next-auth/react'
 import { fetchDBStructure } from '../middleware';
@@ -17,7 +17,6 @@ export default function Home({ db }) {
 
     return (
         <MainContainer
-            isHome={true}
             navType='home'
             titleText={
                 <>
@@ -39,14 +38,14 @@ export default function Home({ db }) {
                 <>
                     <Grid>
 
-                        <Grid.GridCard
+                        <GridCard
                             isAdmin={isAdmin}
                             isRestricted={true}
                             link='/admin/add_q'
                             title='Add questions'
                         />
 
-                        <Grid.GridCard
+                        <GridCard
                             isAdmin={isAdmin}
                             isRestricted={true}
                             link='/admin/add_lesson'
@@ -59,7 +58,7 @@ export default function Home({ db }) {
                         {
                             db.map((e) => {
                                 return (
-                                    <Grid.GridCard
+                                    <GridCard
                                         hidden={!e.show}
                                         isDisabled={e.disable}
                                         key={e._id}
@@ -76,7 +75,7 @@ export default function Home({ db }) {
                 </>
                 :
                 <Grid>
-                    <Grid.GridCard
+                    <GridCard
                         link=''
                         onClick={() => signIn()}
                         title='Login to get started'

@@ -5,6 +5,7 @@ import NextLessonButton from './buttons/NextLessonButton'
 import BlueButton from './buttons/BlueButton'
 import Popover from "./features/Popover";
 import MarkdownEditor from "./features/MarkdownEditor";
+import MarkdownDisplay from "./features/MarkdownDisplay/MarkdownDisplay";
 import TextInputQuiz from "./quizzes/TextInputQuiz";
 import MCQuiz from "./quizzes/MCQuiz/";
 import MCorOther from "./quizzes/MCorOther";
@@ -20,6 +21,7 @@ export {
     BlueButton,
     Popover,
     MarkdownEditor,
+    MarkdownDisplay,
     TextInputQuiz,
     MCQuiz,
     MCorOther,

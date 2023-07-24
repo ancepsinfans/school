@@ -7,17 +7,6 @@ import constants from '../styles/constants';
 
 const GlobalStyles = createGlobalStyle`
 
-  @font-face {
-    font-family: 'Vollkorn';
-    src: url('/fonts/Vollkorn/Vollkorn-Italic-VariableFont_wght.ttf') format('truetype');
-    /* Repeat the above line for each TTF font file you want to import */
-  }
-
-    @font-face {
-    font-family: 'Vollkorn';
-    src: url('/fonts/Vollkorn/Vollkorn-VariableFont_wght.ttf') format('truetype');
-    /* Repeat the above line for each TTF font file you want to import */
-  }
 
   :root {
     --accentBlue40: ${constants.accentBlue40};
@@ -94,7 +83,7 @@ html, body {
   height: auto;
 
   background-color: var(--primary80);
-  font-family: 'Vollkorn', serif;
+  ${'' /* font-family: 'Vollkorn', serif; */}
 }
 
 /*

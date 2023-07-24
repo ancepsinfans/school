@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useSession, signIn, signOut } from "next-auth/react"
 import axios from "axios";
 import BlueButton from "../../atomic/buttons/BlueButton";
+import { usePathname } from 'next/navigation'
 
 const NavBarStyled = styled.header`
   height: var(--navHeight);
@@ -38,9 +39,14 @@ width: 50px;
   cursor: pointer;
 `
 
-const NavBar = ({ isProfilePage, isHome }) => {
+const NavBar = () => {
   const { data: session, status } = useSession()
   const [ID, setID] = React.useState('')
+
+  const pathname = usePathname()
+
+  const isHome = pathname === '/'
+  const isProfilePage = pathname.includes('profile')
 
   React.useEffect(() => {
     const getUserId = async () => {
@@ -58,6 +64,10 @@ const NavBar = ({ isProfilePage, isHome }) => {
     }
     getUserId()
   }, [status, session])
+
+  React.useEffect(() => {
+    window.localStorage.setItem('user-id', ID);
+  }, [ID]);
 
   return (
     <NavBarStyled isHome={isHome}>

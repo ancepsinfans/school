@@ -1,15 +1,16 @@
 'use client'
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+
+
 
 function AuthBlock({ children }) {
   const router = useRouter()
-  const { asPath } = router;
-
+  const pathname = usePathname()
   // Check if the current page is the homepage
-  const isHomepage = asPath === '/';
-  const isAbout = asPath === '/about'
+  const isHomepage = pathname === '/';
+  const isAbout = pathname === '/about'
   const session = useSession();
 
 

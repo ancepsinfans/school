@@ -1,10 +1,9 @@
 'use client'
 import React from "react";
 import styled from "styled-components";
-import NavBar from "../NavBar";
-import Footer from '../Footer'
+import NavBar from "../../layout/NavBar";
 import { NextLessonButton } from "../../atomic";
-import Header from '../Head'
+import { usePathname } from 'next/navigation'
 
 const MainContainerStyled = styled.div`
  padding: 0 2rem;
@@ -12,9 +11,9 @@ const MainContainerStyled = styled.div`
 
 const MainContent = styled.main`
   min-height: 85vh;
-  padding: ${props => props.noFlex ? '2.5rem 0' : '4rem 0'};
+  padding: 4rem 0;
   flex: 1;
-  display: ${props => props.noFlex ? 'block' : 'flex'};
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -36,9 +35,11 @@ const Intro = styled.div`
 
 
 function MainContainer({
-  titleText, introText, noFlex, smallTitle, isProfilePage, isHome, isLesson, nextPage, location, children
+  titleText, introText, smallTitle, isLesson, nextPage, location, children
 }) {
+  const pathname = usePathname()
 
+  const isHome = pathname === '/' || pathname.includes('study')
   let ID
 
   if (isLesson) {
@@ -49,13 +50,9 @@ function MainContainer({
 
   return (
     <>
-      <NavBar
-        isHome={isHome}
-        isProfilePage={isProfilePage} />
+      {isHome ? null : <NavBar />}
       <MainContainerStyled>
-        <Header />
-        <MainContent noFlex={noFlex}
-        >
+        <MainContent >
           <Title
             smallTitle={smallTitle}
           >
@@ -74,7 +71,6 @@ function MainContainer({
             :
             null}
         </MainContent>
-        <Footer />
       </MainContainerStyled>
     </>
   );

@@ -1,8 +1,8 @@
-import React from "react";
-import { MainContainer } from "../components/meta";
-import { BlueButton } from "../components/atomic";
+'use client'
+import { MainContainer } from '../components/meta'
+import { BlueButton } from '../components/atomic'
 
-const FourOhFour = () => {
+export default function NotFound() {
     return (
         <MainContainer
             titleText='404'
@@ -16,6 +16,3 @@ const FourOhFour = () => {
         </MainContainer>
     )
 }
-
-export default FourOhFour
-

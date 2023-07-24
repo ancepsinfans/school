@@ -1,0 +1,25 @@
+ .content {
+     margin: 15px 40px;
+ }
+
+ @media (max-width: 768px) {
+     .content {
+         margin: 15px -15px;
+     }
+
+ }
+
+ .content>ul {
+     list-style-position: inside;
+     padding: 10px 0 10px 20px;
+ }
+
+ .content>ol {
+     list-style-position: inside;
+     padding: 10px 0 10px 20px;
+ }
+
+ .content>em {
+     text-decoration: underline 4px var(--accentPurple70);
+     font-style: normal;
+ }

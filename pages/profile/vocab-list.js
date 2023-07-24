@@ -41,7 +41,6 @@ export default function Profile({ ID, vocab, db }) {
                     </ImageNameBox>
                 </>
             }
-            noFlex={false}
         >
             <Grid>
                 {vocab.map(e => {

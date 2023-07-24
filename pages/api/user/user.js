@@ -18,7 +18,7 @@ export default async function handler(req, res) {
                 const query = { email: email };
                 const results = await collection.find(query).toArray();
 
-                res.status(200).send(results[0]._id.toString());
+                res.status(200).send(JSON.stringify(results[0]._id.toString()));
             } catch (error) {
                 console.error('Error executing MongoDB query', error);
                 res.status(500).json({ error: 'Failed to execute the query' });

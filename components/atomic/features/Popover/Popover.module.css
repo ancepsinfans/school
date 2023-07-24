@@ -1,0 +1,114 @@
+ .VocabContent {
+     border-radius: 4px;
+     padding: 6px;
+     color: var(--tooltip-text-color);
+     background: var(--accentPurpleMain);
+     border: 2px solid var(--accentPurple70);
+     font-size: 14px;
+     font-family: sans-serif;
+     line-height: 1.5;
+     max-width: 250px;
+     min-width: fit-content;
+ }
+
+ .VocabContent::before {
+     border: solid transparent;
+     border-width: var(--tooltip-arrow-size);
+     border-top-color: var(--accentPurple70);
+ }
+
+ .PopContent {
+     border-radius: 4px;
+     padding: 6px;
+     color: var(--tooltip-text-color);
+     background: var(--accentRed90);
+     border: 2px solid var(--accentRed75);
+     font-size: 14px;
+     font-family: sans-serif;
+     line-height: 1.5;
+     max-width: 250px;
+     min-width: fit-content;
+ }
+
+ .PopContent::before {
+     border: solid transparent;
+     border-width: var(--tooltip-arrow-size);
+     border-top-color: var(--accentRed75);
+ }
+
+ .VocabArrow {
+     fill: var(--accentPurple70);
+ }
+
+ .PopArrow {
+     fill: var(--accentRed75);
+ }
+
+ .VocabChild {
+     -webkit-text-decoration: underline wavy 1.5px var(--accentPurple70) !important;
+     text-decoration: underline wavy 1.5px var(--accentPurple70) !important;
+     background: none;
+     border: none;
+ }
+
+ .PopChild {
+     -webkit-text-decoration: underline wavy 1.5px var(--accentRed75) !important;
+     text-decoration: underline wavy 1.5px var(--accentRed75) !important;
+     background: none;
+     border: none;
+ }
+
+ @media (max-width: 768px) {
+     .VocabChild {
+
+         color: var(--accentPurple70) !important;
+         -webkit-text-decoration: none !important;
+         text-decoration: none !important;
+     }
+
+     .PopChild {
+
+         color: var(--accentRed75) !important;
+         -webkit-text-decoration: none !important;
+         text-decoration: none !important;
+     }
+ }
+
+
+ @keyframes pressed {
+     from {
+         background-color: var(--accentPurple75);
+         border: solid 1px var(--accentPurple70);
+     }
+
+     to {
+         background-color: var(--accentPurple85);
+         border: solid 1px var(--accentPurple75)
+     }
+ }
+
+ .add {
+     border-radius: 50%;
+     border: solid 1px var(--accentPurple75);
+     height: 20px;
+     width: 20px;
+     display: inline-flex;
+     justify-content: center;
+     align-items: center;
+     background-color: var(--accentPurple85);
+
+ }
+
+ .add:hover,
+ .add:focus {
+     background-color: var(--accentPurple80);
+     border: solid 1px var(--accentPurple70)
+ }
+
+ .add:active {
+     background-color: var(--accentPurple75);
+     border: solid 1px var(--accentPurple70);
+     box-shadow:
+         0.5px 1px 1px hsl(200deg 95% 33% / 0.7);
+     transition: .2s ease-in;
+ }

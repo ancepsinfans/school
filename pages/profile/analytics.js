@@ -16,9 +16,9 @@ const ImageNameBox = styled.div`
 
 const Stats = styled.div`
   display: flex;
+  width: 50vw;
   justify-content: center;
   flex-direction: column;
-  max-width: 50vh;
   margin: 5px auto;
   padding: 2vh;
   border: 2px solid var(--blackMain);
@@ -111,8 +111,8 @@ export default function Profile({ ID, paths, studentInfo }) {
             </ImageNameBox>
           </>
         }
-        noFlex={true}
       >
+
 
         <Stats>
           <SubHeading>Answers Statistics</SubHeading>
@@ -164,6 +164,7 @@ export default function Profile({ ID, paths, studentInfo }) {
               )
             })}</ul>
         </Stats>
+
 
       </MainContainer>
     </>
