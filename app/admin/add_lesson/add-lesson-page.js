@@ -1,27 +1,17 @@
+'use client'
 import React from "react";
-import sphereSender from "../../models/spheres/sphereHelper";
-import styled from "styled-components";
-import { MainContainer } from "../../components/meta";
+import sphereSender from "../../../models/spheres/sphereHelper";
+import { MainContainer } from "../../../components/meta";
 import { useRouter } from "next/navigation";
-import { fetchDBStructure, getAnyName, hasElement, slugify } from "../../middleware";
+import { getAnyName, hasElement, slugify } from "../../../middleware";
 import { useImmer } from "use-immer";
-import { TextInput, SelectWithTextInput, SubmitButton, SelectInput, MarkdownEditor, NumberPicker, Multiselect } from "../../components/atomic";
-import { FlexWrapper } from "../../components/wrappers";
+import { TextInput, SelectWithTextInput, SubmitButton, SelectInput, MarkdownEditor, NumberPicker, Multiselect } from "../../../components/atomic";
+import { FlexWrapper } from "../../../components/wrappers";
+import styles from './AddLesson.module.css'
+import Title from '../../../components/layout/Title'
 
-const Input = styled.form`
-    padding: 5px 5px;
-    margin: 0%;
-    text-align: center;
-`
 
-const Field = styled.fieldset`
-    border: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-`
-
-const AddDesc = ({ db }) => {
+export default function AddDesc({ db }) {
     const INIT = {
         sphere: '',
         course: '',
@@ -90,24 +80,23 @@ readability: xxx
     }
 
     return (
-        <MainContainer
-            titleText={"Lesson structure"}
-            smallTitle={true}
-        >
-
-            <Input onSubmit={e => {
-                e.preventDefault();
-                sphereSender(
-                    data,
-                    !hasElement(db, data)
-                );
-                updateData((draft) => { draft = INIT })
-                setTimeout(() => {
-                    router.reload();
-                }, 500);
-            }}>
+        <>
+            <Title smallTitle={true}>Lesson structure</Title>
+            <form
+                className={styles.form}
+                onSubmit={e => {
+                    e.preventDefault();
+                    sphereSender(
+                        data,
+                        !hasElement(db, data)
+                    );
+                    updateData((draft) => { draft = INIT })
+                    setTimeout(() => {
+                        router.reload();
+                    }, 500);
+                }}>
                 <FlexWrapper minHeight="300px">
-                    <Field >
+                    <fieldset className={styles.field} >
                         <SelectWithTextInput
                             style={{ width: '215px' }}
                             condition={!data.sphereWriteIn}
@@ -167,7 +156,7 @@ readability: xxx
                             label={'Course'}
                         />
 
-                        <Field style={{ flexDirection: 'row' }}>
+                        <fieldset className={styles.field} style={{ flexDirection: 'row' }}>
 
                             <NumberPicker
                                 disabled={!data.course}
@@ -209,17 +198,17 @@ readability: xxx
                             />
 
 
-                        </Field>
+                        </fieldset>
 
-                    </Field>
+                    </fieldset>
 
-                    <Field style={{ maxWidth: '150px' }}>
+                    <fieldset className={styles.field} style={{ maxWidth: '150px' }}>
 
-                        <Field>
+                        <fieldset className={styles.field} >
                             <h3>Slug</h3>
                             <p>DB: {getAnyName(db, { sphere: slugify(data.sphere), course: slugify(data.course), lesson: slugify(data.lesson, data.number) }, level)?.slug}</p>
-                        </Field>
-                        <Field>
+                        </fieldset>
+                        <fieldset className={styles.field} >
                             <TextInput
                                 value={data.desc}
                                 onChange={
@@ -230,11 +219,11 @@ readability: xxx
 
                             />
                             <p>Currently: {getAnyName(db, { sphere: slugify(data.sphere), course: slugify(data.course), lesson: slugify(data.lesson, data.number) }, level)?.description}</p>
-                        </Field>
+                        </fieldset>
 
-                    </Field>
+                    </fieldset>
 
-                    <Field>
+                    <fieldset className={styles.field} >
 
                         <SelectInput
                             disabled={level !== 1}
@@ -280,7 +269,7 @@ readability: xxx
                             }
                             label='Course linear'
                         />
-                    </Field>
+                    </fieldset>
                 </FlexWrapper>
                 <Multiselect
                     disabled={!data.lesson}
@@ -310,22 +299,10 @@ readability: xxx
                     Submit
                 </SubmitButton>
 
-            </Input>
+            </form>
 
-        </MainContainer>
+        </>
     );
 };
 
 
-export default AddDesc
-
-export const getServerSideProps = async () => {
-
-    const dbData = await fetchDBStructure({})
-
-    return {
-        props: {
-            db: dbData,
-        }
-    }
-};

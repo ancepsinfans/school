@@ -1,3 +1,5 @@
+
+'use client'
 import React from "react";
 import progressSender from '../../../../models/users/progressHelper'
 import ButtonMechanics from "../ButtonMechanics";

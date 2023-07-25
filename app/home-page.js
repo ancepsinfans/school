@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
-import { Grid, GridCard, MainContainer } from '../components/meta'
+import { Grid, GridCard } from '../components/meta'
+import { Title, Intro } from '../components/layout'
 import constants from '../styles/constants'
 import { signIn, useSession } from 'next-auth/react'
-import { fetchDBStructure } from '../middleware';
 
 
 export default function Home({ db }) {
@@ -16,24 +16,18 @@ export default function Home({ db }) {
         )
 
     return (
-        <MainContainer
-            navType='home'
-            titleText={
-                <>
-                    Welcome to <span style={{ color: constants.accentRedMain }}>school!</span>
-                </>
-            }
-            introText={
+
+        <>
+            <Title>
+                Welcome to <span style={{ color: constants.accentRedMain }}>school!</span>
+            </Title>
+            <Intro>
                 <>
                     <p>Knowledge should be accessible.</p>
                     <p>Here you'll find a collection of interesting things.</p>
                     <p>The topics will vary, but the through-line is that these things are meant to spark curiosity.</p>
                 </>
-            }
-        >
-
-
-
+            </Intro>
             {user ?
                 <>
                     <Grid>
@@ -83,19 +77,8 @@ export default function Home({ db }) {
                     />
                 </Grid>
             }
-
-        </MainContainer>
+        </>
+        // </MainContainer>
     )
 }
-
-export const getServerSideProps = async (ctx) => {
-    const db = await fetchDBStructure({})
-
-
-    return {
-        props: {
-            db: db,
-        }
-    }
-};
 

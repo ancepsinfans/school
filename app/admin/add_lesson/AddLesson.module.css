@@ -1,0 +1,12 @@
+.form {
+    padding: 5px 5px;
+    margin: 0%;
+    text-align: center;
+}
+
+.field {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

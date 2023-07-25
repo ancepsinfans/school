@@ -25,6 +25,7 @@
     "babel-plugin-transform-remove-imports": "^1.7.0",
     "immer": "^10.0.2",
     "mongodb": "^5.6.0",
+    "mongodb-client-encryption": "^2.9.0",
     "mongoose": "^7.3.1",
     "next": "^13.4.12",
     "next-auth": "^4.22.1",

@@ -1,13 +1,8 @@
 import Home from "./home-page";
 import { fetchDBStructure } from "../middleware";
 
-async function getDatabase() {
-    const db = await fetchDBStructure({})
-    return db
-}
-
 export default async function Page() {
-    const db = await getDatabase()
+    const db = await fetchDBStructure({})
     return <Home db={db} />
 }
 

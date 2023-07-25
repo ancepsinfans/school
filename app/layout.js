@@ -3,7 +3,7 @@ import UserSessionProvider from '../components/providers/UserSessionProvider/Use
 
 import StyledComponentsRegistry from '../middleware/styleRegistry'
 import { Vollkorn } from 'next/font/google'
-import { Footer, NavBar } from '../components/layout'
+import { Footer, NavBar, MainContainer } from '../components/layout'
 
 const vollkorn = Vollkorn({
     subsets: ['latin'],
@@ -18,6 +18,7 @@ export const metadata = {
 
 export default function RootLayout({
     children,
+    params
 }) {
     return (
         <html lang="en" className={vollkorn.className}>
@@ -26,7 +27,9 @@ export default function RootLayout({
                     <AuthBlock>
                         <StyledComponentsRegistry>
                             <NavBar />
-                            {children}
+                            <MainContainer>
+                                {children}
+                            </MainContainer>
                             <Footer />
                         </StyledComponentsRegistry>
                     </AuthBlock>

@@ -1,11 +1,12 @@
 
 import React from "react";
-import { MainContainer } from '../../../../../components/meta'
 import { serialize } from 'next-mdx-remote/serialize';
 import { getAnyName, fetchDBStructure, fetchQuestions } from "../../../../../middleware";
 import styles from './Lesson.module.css'
 import Link from "next/link";
-import { Popover, MCQuiz, MCorOther, TextInputQuiz, MarkdownDisplay } from "../../../../../components/atomic";
+import { Popover, MCQuiz, MCorOther, TextInputQuiz, MarkdownDisplay, NextLessonButton } from "../../../../../components/atomic";
+import { Intro, Title } from '../../../../../components/layout'
+
 
 
 export default async function SpherePage({ params, searchParams }) {
@@ -32,15 +33,16 @@ export default async function SpherePage({ params, searchParams }) {
         a: Link,
     }
     return (
-        <MainContainer
-            smallTitle={true}
-            titleText={source.frontmatter.title}
-            introText={source.frontmatter.intro}
-            isLesson={true}
 
-            nextPage={nextPage}
-            location={{ sphere: params.sphere, course: params.course, lesson: params.lesson }}
-        >
+
+        <>
+
+            <Title smallTitle>
+                {source.frontmatter.title}
+            </Title>
+            <Intro>
+                {source.frontmatter.intro}
+            </Intro>
             <div className={styles.content}>
                 <MarkdownDisplay
                     params={params}
@@ -50,6 +52,11 @@ export default async function SpherePage({ params, searchParams }) {
                     components={components}
                 />
             </div>
-        </MainContainer>
+            <NextLessonButton
+                link={"/study" + nextPage.link}
+                text={nextPage.name}
+                user={searchParams.ID}
+                location={{ sphere: params.sphere, course: params.course, lesson: params.lesson }} />
+        </>
     )
 }

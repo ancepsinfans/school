@@ -1,0 +1,26 @@
+.image {
+    display: inline-flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+}
+
+
+.stats {
+    display: flex;
+    width: 50vw;
+    justify-content: center;
+    flex-direction: column;
+    margin: 5px auto;
+    padding: 2vh;
+    border: 2px solid var(--blackMain);
+}
+
+.list {
+    list-style-position: inside;
+}
+
+.subheading {
+    text-decoration: underline;
+    padding-bottom: 5px;
+}
