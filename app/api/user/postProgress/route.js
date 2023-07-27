@@ -1,5 +1,6 @@
-import { ifDocExists, connectDB } from "../../../middleware";
-import { StudentSchema, StudentProgress } from "../../../models/users/User";
+import { ifDocExists, connectDB } from "../../../../middleware";
+import { StudentSchema, StudentProgress } from "../../../../models/users/User";
+import { NextResponse } from "next/server";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
@@ -10,11 +11,14 @@ const handler = async (req, res) => {
             lesson: location.lesson
         })
         const result = ifDocExists(user, 'progress', progressUpdate, StudentSchema, res)
-        return result
+        return NextResponse.json(result, { status: 200 })
 
     } else {
-        res.status(422).send('method not supported')
+        return NextResponse.json('method not supported', { status: 422 })
+
     }
 }
 
-export default connectDB(handler)
+const wrappedHandler = connectDB(handler)
+
+export { wrappedHandler as POST }

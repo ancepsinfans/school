@@ -1,6 +1,7 @@
-import { connectDB } from "../../../middleware";
-import Question from "../../../models/questions/Questions";
+import { connectDB } from "../../../../middleware";
+import Question from "../../../../models/questions/Questions";
 import { ObjectId } from "mongodb";
+import { NextResponse } from "next/server";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
@@ -16,14 +17,16 @@ const handler = async (req, res) => {
                 lesson: req.body.lesson
             })
             var questioncreated = await question.save()
-            return res.status(200).send(questioncreated)
+            return NextResponse.json(questioncreated, { status: 200 })
+
         } catch (error) {
-            return res.status(500).send(error.message)
+            return NextResponse.json(error.message, { status: 500 })
+
         }
 
     } else if (req.method === 'GET') {
-        const {sphere, id} = req.query
-       
+        const { sphere, id } = req.query
+
         try {
 
             let qs
@@ -36,14 +39,13 @@ const handler = async (req, res) => {
             } else {
                 qs = await Question.find({ _id: new ObjectId(id) })
             }
-            return res.status(200).json({ success: true, data: qs })
+            return NextResponse.json({ success: true, data: qs }, { status: 200 })
         } catch (error) {
-
-            return res.status(500).send(error.message)
+            return NextResponse.json(error.message, { status: 500 })
         }
     } else {
-        res.status(422).send('method not supported')
+        return NextResponse.json('method not supported', { status: 422 })
     }
 }
-
-export default connectDB(handler)
+const wrappedHandler = connectDB(handler)
+export { wrappedHandler as POST, wrappedHandler as GET }

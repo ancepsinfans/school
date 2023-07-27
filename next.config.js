@@ -30,6 +30,7 @@ const nextConfig = {
   env: {
     mongodburl: process.env.MONGODB_URI
   },
+
   async headers() {
     return [
       {

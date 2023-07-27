@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
+import { NextResponse } from "next/server";
 
-export default async function handler(req, res) {
+export async function GET(req) {
     const isTrue = (v) => {
         return v === 'true'
     }
@@ -17,11 +18,12 @@ export default async function handler(req, res) {
                 const collection = client.db('school').collection('users');
                 const query = { email: email };
                 const results = await collection.find(query).toArray();
+                return NextResponse.json(results[0]._id.toString(), { status: 200 })
 
-                res.status(200).send(JSON.stringify(results[0]._id.toString()));
             } catch (error) {
                 console.error('Error executing MongoDB query', error);
-                res.status(500).json({ error: 'Failed to execute the query' });
+                return NextResponse.json('failed to execute the query', { status: 500 })
+
             } finally {
                 await client.close(); // Close the MongoDB connection
             }
@@ -50,8 +52,8 @@ export default async function handler(req, res) {
                 results = null
             }
 
+            return NextResponse.json(results, { status: 200 })
 
-            res.status(200).send(results);
 
         } else if (!!req.query.vocab) {
             await client.connect(); // Connect to the MongoDB server
@@ -87,7 +89,7 @@ export default async function handler(req, res) {
                 console.log({ error })
 
             }
-            res.status(200).send(results);
+            return NextResponse.json(results, { status: 200 })
         } else if (Object.keys(req.query).includes('ID')) {
 
             await client.connect(); // Connect to the MongoDB server
@@ -107,7 +109,7 @@ export default async function handler(req, res) {
 
             const results = await collection.find(query, { projection: projection }).toArray();
 
-            res.status(200).send(results[0]);
+            return NextResponse.json(results[0], { status: 200 })
 
         }
     }

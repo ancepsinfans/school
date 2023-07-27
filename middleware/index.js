@@ -1,4 +1,3 @@
-import fetchLessonPage from './fetchers/fetchLessonPage'
 import fetchQuestions from './fetchers/fetchQuestions'
 import fetchDBStructure from './fetchers/fetchDBStructure'
 import fetchUser from './fetchers/fetchUser'
@@ -9,7 +8,6 @@ import connectDB from './mongodb'
 import slugify from './slugify'
 
 export {
-    fetchLessonPage,
     fetchQuestions,
     fetchDBStructure,
     fetchUser,

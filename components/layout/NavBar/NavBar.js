@@ -70,7 +70,7 @@ const NavBar = () => {
   }, [ID]);
 
   return (
-    <NavBarStyled isHome={isHome}>
+    <NavBarStyled>
       <Back>
         <Link href={isHome ? '/about' : '/'}>
           {isHome ? 'About' : 'School'}

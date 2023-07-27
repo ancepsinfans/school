@@ -1,8 +1,9 @@
 import { getServerSession } from "next-auth/next"
-import { authOptions } from "./auth/[...nextauth]"
+import { authOptions } from "../auth/[...nextauth]/route"
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default async (req, res) => {
+export async function GET(req) {
+    console.log({ req })
     const session = await getServerSession(req, res, authOptions)
 
     if (session) {
