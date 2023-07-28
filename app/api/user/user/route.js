@@ -8,10 +8,12 @@ export async function GET(req) {
     const client = new MongoClient(process.env.MONGODB_URI)
 
     if (req.method === "GET") {
+        const { searchParams } = new URL(req.url);
+        const params = Object.fromEntries(searchParams);
 
-        if (Object.keys(req.query).includes('email')) {
+        if (Object.keys(params).includes('email')) {
 
-            const email = req.query.email
+            const email = params.email
             try {
                 await client.connect(); // Connect to the MongoDB server
 
@@ -28,17 +30,17 @@ export async function GET(req) {
                 await client.close(); // Close the MongoDB connection
             }
 
-        } else if (!!req.query.distinct) {
+        } else if (!!params.distinct) {
 
             await client.connect(); // Connect to the MongoDB server
             const collection = client.db('school').collection('students');
 
             // setting up a query object and pruning invalid values
-            const query = { user: req.query.ID, 'progress.sphere': req.query.sphere, 'progress.course': req.query.course };
+            const query = { user: params.ID, 'progress.sphere': params.sphere, 'progress.course': params.course };
             Object.keys(query).forEach((k) => query[k] == undefined && delete query[k])
 
             // setting up the projection object and only keeping false values
-            const projection = { feedback: isTrue(req.query.feedback), progress: isTrue(req.query.progress), answers: isTrue(req.query.answers), vocab: isTrue(req.query.vocab) }
+            const projection = { feedback: isTrue(params.feedback), progress: isTrue(params.progress), answers: isTrue(params.answers), vocab: isTrue(params.vocab) }
             Object.keys(projection).map(e => {
                 if (projection[e]) {
                     delete projection[e]
@@ -46,7 +48,7 @@ export async function GET(req) {
             })
             let results
             try {
-                results = await collection.distinct(req.query.distinct, query, { projection: projection });
+                results = await collection.distinct(params.distinct, query, { projection: projection });
             } catch (error) {
                 console.log({ error })
                 results = null
@@ -55,7 +57,7 @@ export async function GET(req) {
             return NextResponse.json(results, { status: 200 })
 
 
-        } else if (!!req.query.vocab) {
+        } else if (!!params.vocab) {
             await client.connect(); // Connect to the MongoDB server
             const collection = client.db('school').collection('students');
 
@@ -65,7 +67,7 @@ export async function GET(req) {
                 const documents = await collection.aggregate([
                     {
                         $match: {
-                            user: req.query.ID
+                            user: params.ID
                         }
                     },
                     {
@@ -90,17 +92,17 @@ export async function GET(req) {
 
             }
             return NextResponse.json(results, { status: 200 })
-        } else if (Object.keys(req.query).includes('ID')) {
+        } else if (Object.keys(params).includes('ID')) {
 
             await client.connect(); // Connect to the MongoDB server
             const collection = client.db('school').collection('students');
 
             // setting up a query object and pruning invalid values
-            const query = { user: req.query.ID, 'progress.sphere': req.query.sphere, 'progress.course': req.query.course };
+            const query = { user: params.ID, 'progress.sphere': params.sphere, 'progress.course': params.course };
             Object.keys(query).forEach((k) => query[k] == undefined && delete query[k])
 
             // setting up the projection object and only keeping false values
-            const projection = { feedback: isTrue(req.query.feedback), progress: isTrue(req.query.progress), answers: isTrue(req.query.answers), vocab: isTrue(req.query.vocab) }
+            const projection = { feedback: isTrue(params.feedback), progress: isTrue(params.progress), answers: isTrue(params.answers), vocab: isTrue(params.vocab) }
             Object.keys(projection).map(e => {
                 if (projection[e]) {
                     delete projection[e]

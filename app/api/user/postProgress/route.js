@@ -4,7 +4,9 @@ import { NextResponse } from "next/server";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
-        const { user, location } = req.body
+        const body = await req.json()
+        const { user, location } = body
+
         const progressUpdate = new StudentProgress({
             sphere: location.sphere,
             course: location.course,

@@ -5,16 +5,18 @@ import { NextResponse } from "next/server";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
+        const body = await req.json()
+
         try {
             var question = new Question({
-                desc: req.body.desc,
-                options: req.body.options,
-                correct: req.body.correct,
-                sphere: req.body.sphere,
-                good: req.body.good,
-                bad: req.body.bad,
-                course: req.body.course,
-                lesson: req.body.lesson
+                desc: body.desc,
+                options: body.options,
+                correct: body.correct,
+                sphere: body.sphere,
+                good: body.good,
+                bad: body.bad,
+                course: body.course,
+                lesson: body.lesson
             })
             var questioncreated = await question.save()
             return NextResponse.json(questioncreated, { status: 200 })
@@ -25,7 +27,9 @@ const handler = async (req, res) => {
         }
 
     } else if (req.method === 'GET') {
-        const { sphere, id } = req.query
+        const { searchParams } = new URL(req.url);
+        const params = Object.fromEntries(searchParams);
+        const { sphere, id } = params
 
         try {
 

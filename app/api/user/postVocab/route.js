@@ -4,7 +4,9 @@ import { NextResponse } from "next/server";
 
 const handler = async (req, res) => {
     if (req.method === 'POST') {
-        const { user, term, sphere, course, lesson } = req.body
+        const body = await req.json()
+
+        const { user, term, sphere, course, lesson } = body
 
         const vocabUpdate = new StudentVocab({
             sphere: sphere,

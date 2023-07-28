@@ -10,6 +10,7 @@ export default async function SpherePage({ params }) {
     const db = await fetchDBStructure({ sphere: params.sphere })
 
     const { user } = await getServerSession(authOptions)
+
     const ID = await fetch(process.env.BASE_URL + `/api/user/user?email=${user.email}`).then((response) => {
         return response.json().then((data) => {
             return data;
@@ -17,6 +18,7 @@ export default async function SpherePage({ params }) {
             console.log(err);
         })
     });
+    console.log({ ID })
 
     return (
         <>

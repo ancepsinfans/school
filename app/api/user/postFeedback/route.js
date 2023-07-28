@@ -4,7 +4,9 @@ import { NextResponse } from "next/server";
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
-    const { user, answer, sphere, course, id, lesson } = req.body
+    const body = await req.json()
+
+    const { user, answer, sphere, course, id, lesson } = body
     try {
       const feedback = new StudentFeedback({
         answer: answer,
