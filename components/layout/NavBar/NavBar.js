@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { useSession, signIn, signOut } from "next-auth/react"
-import axios from "axios";
 import BlueButton from "../../atomic/buttons/BlueButton";
 import { usePathname } from 'next/navigation'
 
@@ -50,20 +49,26 @@ const NavBar = () => {
 
   React.useEffect(() => {
     const getUserId = async () => {
-      async function getEnv() {
-        const response = await fetch('/api/admin/env');
-        const { url } = await response.json();
-        return url;
+      if (status !== 'authenticated') {
+        return;
       }
-      const url = await getEnv()
-      const { data } = await axios.get(`${url}/api/user/user`, { params: { email: session.user.email } })
-      setID(data)
-    }
-    if (status !== "authenticated") {
-      return
-    }
-    getUserId()
-  }, [status, session])
+
+      try {
+        const envResponse = await fetch('/api/admin/env');
+        const { url } = await envResponse.json();
+
+        const userDataResponse = await fetch(`${url}/api/user/user?email=${encodeURIComponent(session.user.email)}`);
+        const { data } = await userDataResponse.json();
+
+        setID(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    getUserId();
+  }, [status, session]);
+
 
   React.useEffect(() => {
     window.localStorage.setItem('user-id', ID);

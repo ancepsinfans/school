@@ -1,14 +1,25 @@
-import axios from 'axios'
-
 async function progressSender(user, location) {
+    try {
+        const payload = {
+            user: user,
+            location: location,
+        };
 
+        const response = await fetch('/api/user/postProgress', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        });
 
-    const payload = {
-        user: user,
-        location: location
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
     }
-    const response = await axios.post(`/api/user/postProgress`, payload)
-
 }
 
-export default progressSender
+export default progressSender;

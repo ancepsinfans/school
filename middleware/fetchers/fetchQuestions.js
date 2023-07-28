@@ -1,20 +1,23 @@
-import axios from 'axios'
-
-
-export default async function fetchQuestions(options=null) {
-    let params ={}
-    if (!!options) {
-        params = {...options}
-
-    }
+export default async function fetchQuestions(options = null) {
     try {
-        const response = await axios.get(`${process.env.BASE_URL}/api/lesson/questions`, {params: params});
-        const qs = response.data.data;
-        return qs
+        let url = `${process.env.BASE_URL}/api/lesson/questions`;
+
+        if (options !== null) {
+            const urlParams = new URLSearchParams(options);
+            url = `${url}?${urlParams.toString()}`;
+        }
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        const qs = data.data;
+        return qs;
     } catch (error) {
-        console.error('Error fetching lesson page:');
+        console.error('Error fetching lesson page:', error);
+        throw error;
     }
-
-
 }
-
