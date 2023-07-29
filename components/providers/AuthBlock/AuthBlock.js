@@ -15,7 +15,7 @@ function AuthBlock({ children }) {
   if (!isHomepage && !isAbout) {
     if (session.status === 'unauthenticated') {
       // If the user is not authenticated, redirect to the login page
-      router.replace('/');
+      router.replace('/login');
       return null;
     }
   }

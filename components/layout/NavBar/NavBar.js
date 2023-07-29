@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation'
 import styles from './NavBar.module.css'
 
 
-
 const NavBar = () => {
   const { data: session, status } = useSession()
   const [ID, setID] = React.useState('')
@@ -18,7 +17,7 @@ const NavBar = () => {
   const isProfilePage = pathname.includes('profile')
 
   React.useEffect(() => {
-    console.log('first')
+
     const getUserId = async () => {
       if (status !== 'authenticated') {
         return;

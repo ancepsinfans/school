@@ -5,6 +5,7 @@ import Title from './Title'
 import Intro from "./Intro";
 import Grid from "./Grid";
 import GridCard from './GridCard'
+import AdminTools from "./AdminTools/AdminTools";
 
 export {
     Footer,
@@ -13,6 +14,7 @@ export {
     Title,
     Intro,
     Grid,
-    GridCard
+    GridCard,
+    AdminTools,
 }
 
