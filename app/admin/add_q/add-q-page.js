@@ -1,9 +1,9 @@
 'use client'
 import React from "react";
-import questionSender from "../../../models/questions/helpers";
+import questionSender from "@/models/questions/helpers";
 import { useImmer } from "use-immer";
-import { fetchDBStructure } from "../../../middleware";
-import { SelectInput, TextInput, SubmitButton } from "../../../components/atomic";
+import { fetchDBStructure } from "@/middleware";
+import { SelectInput, TextInput, SubmitButton } from "@/components/atomic";
 import styles from './AddQ.module.css'
 
 

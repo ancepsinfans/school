@@ -1,7 +1,6 @@
 import React from "react";
-import { MainContainer, Grid, GridCard } from '../../../../components/meta'
-import { fetchDBStructure, fetchUser } from "../../../../middleware";
-import { Intro, Title } from '../../../../components/layout'
+import { fetchDBStructure, fetchUser } from "@/middleware";
+import { Intro, Title, Grid, GridCard } from '@/components/layout'
 
 
 export default async function SpherePage({ params, searchParams }) {
@@ -17,7 +16,6 @@ export default async function SpherePage({ params, searchParams }) {
     }
 
     const completedLessons = await fetchUser({ distinct: 'progress.lesson', ID: searchParams.ID, sphere: params.sphere, course: params.course })
-
     return (
         <>
 

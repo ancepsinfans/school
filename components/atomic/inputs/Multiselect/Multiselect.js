@@ -1,13 +1,9 @@
 'use client'
-
 import React from 'react';
 import { useImmer } from 'use-immer';
-import { FlexWrapper } from '../../../wrappers';
-
+import { FlexWrapper } from '@/components/wrappers';
 
 function Multiselect({ options, onChange, disabled, label }) {
-
-
   const [selectedOptions, setSelectedOptions] = useImmer([]);
 
   const handleOptionToggle = (option) => {
@@ -43,7 +39,7 @@ function Multiselect({ options, onChange, disabled, label }) {
           ))
         }
 
-      </FlexWrapper >
+      </FlexWrapper>
 
     </>
   );

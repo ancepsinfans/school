@@ -1,0 +1,21 @@
+.question {
+    padding: 5px 5px;
+    margin: 0%;
+    text-align: center;
+}
+
+.answer {
+    width: 35%;
+    border: 1px solid var(--blackMain);
+    border-radius: 12px;
+    color: var(--blackMain);
+    border-radius: 5px;
+    margin: 5px;
+    height: 25px;
+}
+
+.answer:hover {
+    border: none;
+    width: calc(35% + 2px);
+    height: calc(25px + 0px);
+}

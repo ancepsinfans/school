@@ -1,9 +1,8 @@
 'use client'
-import { Grid, GridCard } from '../../components/meta'
 import React from 'react';
 import Image from 'next/image';
 import styles from './Profile.module.css'
-import { Title } from '../../components/layout';
+import { Title, Grid, GridCard } from '@/components/layout';
 
 
 export default function Profile({ ID, user }) {

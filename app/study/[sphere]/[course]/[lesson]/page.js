@@ -1,11 +1,11 @@
 
 import React from "react";
 import { serialize } from 'next-mdx-remote/serialize';
-import { getAnyName, fetchDBStructure, fetchQuestions } from "../../../../../middleware";
+import { getAnyName, fetchDBStructure, fetchQuestions } from "@/middleware";
 import styles from './Lesson.module.css'
 import Link from "next/link";
-import { Popover, MCQuiz, MCorOther, TextInputQuiz, MarkdownDisplay, NextLessonButton } from "../../../../../components/atomic";
-import { Intro, Title } from '../../../../../components/layout'
+import { Popover, MCQuiz, MCorOther, TextInputQuiz, MarkdownDisplay, NextLessonButton } from "@/components/atomic";
+import { Intro, Title } from '@/components/layout'
 
 
 

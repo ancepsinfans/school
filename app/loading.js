@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Title, Intro } from "../components/layout"
+import { Title, Intro } from "@/components/layout"
 
 export default function Loading() {
     return (

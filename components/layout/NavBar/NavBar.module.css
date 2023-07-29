@@ -1,0 +1,34 @@
+  .container {
+      height: var(--navHeight);
+      width: 100%;
+      background: var(--primaryMain);
+      border-bottom: 3px solid var(--accentBlue40);
+      align-items: center;
+      display: flex;
+      position: sticky;
+      justify-content: space-around;
+      left: 0;
+      z-index: 2;
+      top: 0;
+      transition: height .3s ease-out;
+  }
+
+
+  .username {
+      text-decoration: none;
+      color: var(--blackMain);
+      font-weight: 500;
+      font-size: large;
+      padding: 5px;
+      cursor: pointer;
+  }
+
+
+  .back {
+
+      width: 50px;
+      text-decoration: none;
+      font-size: x-large;
+      font-weight: 700;
+      cursor: pointer;
+  }

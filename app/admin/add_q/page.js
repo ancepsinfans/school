@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchDBStructure } from "../../../middleware";
+import { fetchDBStructure } from "@/middleware";
 import AddQ from "./add-q-page";
 
 export default async function Page() {

@@ -2,7 +2,7 @@
 import React from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
 import { ServerStyleSheet, StyleSheetManager, createGlobalStyle } from 'styled-components';
-import constants from '../styles/constants';
+import constants from '@/styles/constants';
 
 
 const GlobalStyles = createGlobalStyle`

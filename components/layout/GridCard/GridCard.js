@@ -1,8 +1,8 @@
 'use client'
 import React from "react";
-import Link from "next/link";
-import { FlexWrapper } from "../../wrappers";
 import styles from './GridCard.module.css'
+import Link from "next/link";
+import { FlexWrapper } from "@/components/wrappers";
 
 
 const GridCard = ({ link, isAdmin = false, title, description, isRestricted = false, isDisabled = false, onClick, hidden = false, completed = false, lessonDetails }) => {

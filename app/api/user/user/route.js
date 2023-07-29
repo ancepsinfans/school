@@ -19,6 +19,7 @@ export async function GET(req) {
                 const query = { email: email };
                 const results = await collection.find(query).toArray();
                 const ID = results[0]._id.toString()
+
                 return NextResponse.json(ID, { status: 200 })
 
             } catch (error) {
@@ -30,7 +31,6 @@ export async function GET(req) {
             }
 
         } else if (!!params.distinct) {
-
             await client.connect(); // Connect to the MongoDB server
             const collection = client.db('school').collection('students');
 

@@ -1,16 +1,11 @@
-'use client'
 import React from 'react';
-import styled from 'styled-components';
-
-const Flex = styled.div`
-    display: flex;
-    padding-top: 50px;
-`
 
 function FlexWrapper({ minHeight = '10px', direction = 'row', justifyContent = 'space-evenly', alignItems = 'center', children }) {
   return (
-    <Flex
+    <div
       style={{
+        display: 'flex',
+        paddingTop: '50px',
         minHeight: `${minHeight}`,
         flexDirection: `${direction}`,
         justifyContent: `${justifyContent}`,
@@ -18,7 +13,7 @@ function FlexWrapper({ minHeight = '10px', direction = 'row', justifyContent = '
       }}
     >
       {children}
-    </Flex>
+    </div>
   );
 }
 

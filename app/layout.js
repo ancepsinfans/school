@@ -1,9 +1,7 @@
-import { AuthBlock } from '../components/meta'
-import UserSessionProvider from '../components/providers/UserSessionProvider/UserSessionProvider'
-
-import StyledComponentsRegistry from '../middleware/styleRegistry'
+import { AuthBlock, UserSessionProvider } from '@/components/providers'
+import StyledComponentsRegistry from '@/middleware/styleRegistry'
 import { Vollkorn } from 'next/font/google'
-import { Footer, NavBar, MainContainer } from '../components/layout'
+import { Footer, NavBar, MainContainer } from '@/components/layout'
 
 const vollkorn = Vollkorn({
     subsets: ['latin'],

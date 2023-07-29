@@ -4,7 +4,7 @@ async function progressSender(user, location) {
             user: user,
             location: location,
         };
-
+        console.log({ payload })
         const response = await fetch('/api/user/postProgress', {
             method: 'POST',
             headers: {
@@ -12,7 +12,7 @@ async function progressSender(user, location) {
             },
             body: JSON.stringify(payload),
         });
-
+        console.log({ response })
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

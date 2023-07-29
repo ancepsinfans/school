@@ -1,0 +1,85 @@
+.edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(to left,
+            hsl(251deg, 67%, 50%) 0%,
+            hsl(251deg, 67%, 70%) 8%,
+            hsl(251deg, 67%, 70%) 92%,
+            hsl(251deg, 67%, 50%) 100%);
+}
+
+.shadow.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+    transition:
+        transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.shadow.shadow:hover {
+    transform: translateY(4px);
+    transition:
+        transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.shadow.shadow:active {
+    transform: translateY(1px);
+    transition: transform 34ms;
+}
+
+.pushable.pushable {
+
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+    font-size: 4px !important;
+}
+
+.pushable:hover {
+    filter: brightness(105%);
+}
+
+.pushable:focus:not(:focus-visible) {
+    outline: none;
+}
+
+
+
+.front.front {
+    display: block;
+    position: relative;
+    padding: 5px 15px;
+    border-radius: 12px;
+    border: 1.5px solid var(--accentPurple70);
+    font-size: 1.1rem;
+    color: var(--blackMain);
+    background: var(--accentPurple80);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.front.front:hover {
+    transform: translateY(-6px);
+    transition:
+        transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.front.front:active {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+}

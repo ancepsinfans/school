@@ -8,7 +8,6 @@ import gemoji from '@bytemd/plugin-gemoji'
 import { Editor } from '@bytemd/react'
 
 
-
 const MarkdownEditor = ({ value, change }) => {
 
   return (

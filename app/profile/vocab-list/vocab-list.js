@@ -1,10 +1,9 @@
 'use client'
 import React from 'react';
 import Image from 'next/image';
-import { Grid, GridCard } from '../../../components/meta'
-import { getCourseName, getLessonName, getSphereName, fetchDBStructure, fetchUser } from '../../../middleware';
+import { getCourseName, getLessonName, getSphereName } from '@/middleware';
 import styles from './Vocab.module.css'
-import { Title } from '../../../components/layout';
+import { Title, Grid, GridCard } from '@/components/layout';
 
 
 

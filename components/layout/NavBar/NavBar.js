@@ -1,42 +1,12 @@
 'use client'
 import React from "react";
 import Link from "next/link";
-import styled from "styled-components";
 import { useSession, signIn, signOut } from "next-auth/react"
-import BlueButton from "../../atomic/buttons/BlueButton";
+import { BlueButton } from "@/components/atomic";
 import { usePathname } from 'next/navigation'
+import styles from './NavBar.module.css'
 
-const NavBarStyled = styled.header`
-  height: var(--navHeight);
-  width: 100%;
-  background: var(--primaryMain);
-  border-bottom: 3px solid var(--accentBlue40);
-  align-items: center;
-  display: flex;
-  position: sticky;
-  justify-content: space-around;
-  left: 0;
-  z-index: 2;
-  top: 0;
-  transition: height .3s ease-out;
-`
 
-const UserName = styled.a`
-  text-decoration: none;
-  color: var(--blackMain);
-  font-weight: 500;
-  font-size: large;
-  padding: 5px;
-  cursor: pointer;
-`
-
-const Back = styled.div`
-width: 50px;
-  text-decoration: none;
-  font-size: x-large;
-  font-weight: 700;
-  cursor: pointer;
-`
 
 const NavBar = () => {
   const { data: session, status } = useSession()
@@ -48,15 +18,14 @@ const NavBar = () => {
   const isProfilePage = pathname.includes('profile')
 
   React.useEffect(() => {
+    console.log('first')
     const getUserId = async () => {
       if (status !== 'authenticated') {
         return;
       }
       try {
-
         const response = await fetch('/api/admin/env');
         const url = await response.json();
-
         const userDataResponse = await fetch(`${url}/api/user/user?email=${session.user.email}`);
         const fetchedID = await userDataResponse.json();
         setID(fetchedID);
@@ -65,24 +34,26 @@ const NavBar = () => {
       }
     };
 
-    getUserId();
-  }, [status, session]);
+    const storedID = window.localStorage.getItem('user-id')
 
-
-  React.useEffect(() => {
-    window.localStorage.setItem('user-id', ID);
-  }, [ID]);
+    if (!storedID) {
+      getUserId();
+      window.localStorage.setItem('user-id', ID);
+    } else {
+      setID(storedID)
+    }
+  }, [ID, status, session]);
 
   return (
-    <NavBarStyled>
-      <Back>
+    <header className={styles.container}>
+      <div className={styles.back}>
         <Link href={isHome ? '/about' : '/'}>
           {isHome ? 'About' : 'School'}
         </Link>
-      </Back>
+      </div>
 
       <Link href={`/profile?ID=${ID}`} legacyBehavior>
-        <UserName>{isProfilePage ? 'Profile' : `${!!session?.user.name ? session.user.name : 'Profile'}`}</UserName>
+        <a className={styles.username}>{isProfilePage ? 'Profile' : `${!!session?.user.name ? session.user.name : 'Profile'}`}</a>
       </Link>
 
       <div>
@@ -92,7 +63,7 @@ const NavBar = () => {
           {!!session ? 'Logout' : 'Login'}
         </BlueButton>
       </div>
-    </NavBarStyled>
+    </header>
   );
 }
 

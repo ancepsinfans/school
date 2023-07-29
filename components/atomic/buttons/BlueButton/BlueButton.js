@@ -1,38 +1,17 @@
 'use client'
 import React from "react";
-import styled from "styled-components";
-
-
-const Login = styled.button`
-& {
-  text-decoration-line: none;
-  font-size: 1.25rem;
-  color: var(--blackMain);
-  padding: 5px;
-  border-radius: 12px;
-  background-color: var(--accentBlue60);
-  border: 1px solid var(--accentBlue40);
-  transition: .75s;
-  cursor: pointer;
-}
-
-&:hover {
-  background-color: var(--accentBlue50);
-  border: 1px solid var(--blackMain);
-  transition: .5s;
-  text-align: center;
-}
-`
+import styles from './BlueButton.module.css'
 
 const BlueButton = ({ id, onClick, children }) => {
 
   return (
     <div id={id}>
-      <Login
+      <button
+        className={styles.blueButton}
         onClick={onClick}
       >
         {children}
-      </Login>
+      </button>
     </div>
   )
 

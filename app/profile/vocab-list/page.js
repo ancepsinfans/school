@@ -1,7 +1,7 @@
 import Vocab from './vocab-list';
-import { fetchUser, fetchDBStructure } from '../../../middleware';
+import { fetchUser, fetchDBStructure } from '@/middleware';
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../../app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/api/auth/[...nextauth]/route";
 
 export default async function Page({ searchParams }) {
     const studentInfo = await fetchUser({ ID: searchParams.ID, vocab: 'true' })

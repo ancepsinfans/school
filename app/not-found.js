@@ -1,6 +1,6 @@
 'use client'
-import { BlueButton } from '../components/atomic'
-import { Title, Intro } from '../components/layout'
+import { BlueButton } from '@/components/atomic'
+import { Title, Intro } from '@/components/layout'
 
 export default function NotFound() {
     return (

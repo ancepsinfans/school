@@ -2,8 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './Footer.module.css'
 
-
-
 function Footer() {
   return (
     <footer className={styles.footer}>

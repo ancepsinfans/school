@@ -1,8 +1,7 @@
 'use client'
 import React from 'react'
-import { Grid, GridCard } from '../components/meta'
-import { Title, Intro } from '../components/layout'
-import constants from '../styles/constants'
+import { Title, Intro, Grid, GridCard } from '@/components/layout'
+import constants from '@/styles/constants'
 import { signIn, useSession } from 'next-auth/react'
 
 

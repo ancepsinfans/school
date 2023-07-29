@@ -1,5 +1,5 @@
-import { ifDocExists, connectDB } from "../../../../middleware";
-import { StudentFeedback, StudentSchema } from "../../../../models/users/User";
+import { ifDocExists, connectDB } from "@/middleware";
+import { StudentFeedback, StudentSchema } from "@/models/users/User";
 import { NextResponse } from "next/server";
 
 const handler = async (req, res) => {

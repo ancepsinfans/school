@@ -1,2 +1,2 @@
-export * from './ButtonWrapper';
-export { default } from './ButtonWrapper';
+export * from './CopyButton';
+export { default } from './CopyButton';

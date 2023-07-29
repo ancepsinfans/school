@@ -1,32 +1,10 @@
 'use client'
 import React from "react";
-import constants from '../../../../styles/constants'
-import answerSender from '../../../../models/users/answerHelper'
-import styled from "styled-components";
+import constants from '@/styles/constants'
+import answerSender from '@/models/users/answerHelper'
 import { useImmer } from "use-immer";
+import styles from './MCQuiz.module.css'
 
-const Question = styled.div`
-  padding: 5px 5px;
-  margin: 0%;
-  text-align: center;
-`
-const AnswerButton = styled.button`
-& {
-  width: 35%;
-  border: 1px solid var(--blackMain);
-  border-radius: 12px;
-  color: var(--blackMain);
-  border-radius: 5px;
-  margin: 5px;
-  height: 25px;
-}
-
-&:hover {
-  border: none;
-  width: calc(35% + 2px);
-  height: calc(25px + 0px);
-}
-`
 
 const MCQuiz = ({ question, user }) => {
   const INIT = {
@@ -48,14 +26,14 @@ const MCQuiz = ({ question, user }) => {
 
 
   return (
-    <Question>
+    <div className={styles.question}>
       <h2>{question.desc}</h2>
       <ol>
         {question.options.map((ans, i) => {
 
           return (
             <li key={`${i}_${ans}`} style={{ listStyle: 'none', width: '500px' }}>
-              <AnswerButton
+              <button className={styles.answer}
                 key={i}
                 style={{ backgroundColor: data.color[i] }}
                 onClick={() => {
@@ -74,14 +52,14 @@ const MCQuiz = ({ question, user }) => {
                 }}
               >
                 {ans}
-              </AnswerButton>
+              </button>
             </li>
           )
         })}
       </ol>
       <span>{renderFeedback(data.answer)}</span>
       <br />
-    </Question>
+    </div>
   )
 }
 

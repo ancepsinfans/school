@@ -1,14 +1,13 @@
 'use client'
 import React from "react";
-import sphereSender from "../../../models/spheres/sphereHelper";
-import { MainContainer } from "../../../components/meta";
+import sphereSender from "@/models/spheres/sphereHelper";
 import { useRouter } from "next/navigation";
-import { getAnyName, hasElement, slugify } from "../../../middleware";
+import { getAnyName, hasElement, slugify } from "@/middleware";
 import { useImmer } from "use-immer";
-import { TextInput, SelectWithTextInput, SubmitButton, SelectInput, MarkdownEditor, NumberPicker, Multiselect } from "../../../components/atomic";
-import { FlexWrapper } from "../../../components/wrappers";
+import { TextInput, SelectWithTextInput, SubmitButton, SelectInput, MarkdownEditor, NumberPicker, Multiselect } from "@/components/atomic";
+import { FlexWrapper } from "@/components/wrappers";
 import styles from './AddLesson.module.css'
-import Title from '../../../components/layout/Title'
+import { Title } from '@/components/layout'
 
 
 export default function AddDesc({ db }) {

@@ -1,7 +1,7 @@
 'use client'
-import constants from '../../../styles/constants';
+import constants from '@/styles/constants';
 import React from 'react';
-import { Title } from '../../../components/layout';
+import { Title } from '@/components/layout';
 import Image from 'next/image';
 import styles from './Analytics.module.css'
 

@@ -1,10 +1,9 @@
 
 import React from "react";
-import { Grid, GridCard } from '../../../components/meta'
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
-import { fetchDBStructure } from "../../../middleware";
-import { Intro, Title } from '../../../components/layout'
+import { authOptions } from "@/api/auth/[...nextauth]/route";
+import { fetchDBStructure } from "@/middleware";
+import { Intro, Title, Grid, GridCard } from '@/components/layout'
 
 export default async function SpherePage({ params }) {
     const db = await fetchDBStructure({ sphere: params.sphere })

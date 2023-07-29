@@ -1,14 +1,13 @@
 import React from "react";
-import { MainContainer } from '../../components/meta'
 import Image from "next/image";
-import CopyButton from "../../components/atomic/buttons/CopyButton/CopyButton";
-
+import { CopyButton } from "@/components/atomic";
+import { Title } from "@/components/layout";
 const About = () => {
 
     return (
-        <MainContainer
-            titleText='About me'
-        >
+        <  >
+            <Title>About me</Title>
+
             <h2>Hi! This is me, Zach.</h2>
             <Image
                 width={200}
@@ -26,7 +25,7 @@ const About = () => {
                     alt=""
                     src='/images/lnqr.png' />
             </CopyButton>
-        </MainContainer>
+        </>
     )
 }
 

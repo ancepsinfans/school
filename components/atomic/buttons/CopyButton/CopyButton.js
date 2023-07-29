@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import { useClipboard } from '../../../../middleware/hooks'
+import { useClipboard } from '@/middleware/hooks'
 
 
 function CopyButton({ onClick, text, children }) {

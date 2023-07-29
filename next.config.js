@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const path = require('path')
 const withPlugins = require('next-compose-plugins')
 const removeImports = require('next-remove-imports')()
 
@@ -17,6 +18,19 @@ const nextConfig = {
   experimental: { esmExternals: 'loose' },
   compiler: {
     styledComponents: true
+  },
+  webpack: (config,
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname),
+      '@/components': path.resolve(__dirname, 'components'),
+      '@/middleware': path.resolve(__dirname, 'middleware'),
+      '@/styles': path.resolve(__dirname, 'styles'),
+      '@/models': path.resolve(__dirname, 'models'),
+      '@/api': path.resolve(__dirname, 'app/api'),
+    }
+    return config
   },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   images: {

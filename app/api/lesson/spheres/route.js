@@ -1,5 +1,5 @@
-import { connectDB, slugify } from "../../../../middleware";
-import { SphereSchema, LessonSchema, CourseSchema } from "../../../../models/spheres/Spheres";
+import { connectDB, slugify } from "@/middleware";
+import { SphereSchema, LessonSchema, CourseSchema } from "@/models/spheres/Spheres";
 import { NextResponse } from "next/server";
 
 

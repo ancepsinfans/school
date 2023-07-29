@@ -1,5 +1,5 @@
-import { connectDB } from "../../../../middleware";
-import Question from "../../../../models/questions/Questions";
+import { connectDB } from "@/middleware";
+import Question from "@/models/questions/Questions";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 

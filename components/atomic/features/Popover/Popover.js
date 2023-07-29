@@ -1,7 +1,7 @@
 'use client'
 import React from "react";
 import * as Pop from '@radix-ui/react-popover'
-import vocabSender from "../../../../models/users/vocabHelper";
+import vocabSender from "@/models/users/vocabHelper";
 import styles from './Popover.module.css'
 
 

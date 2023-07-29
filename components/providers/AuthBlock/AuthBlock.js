@@ -3,8 +3,6 @@ import React from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
-
-
 function AuthBlock({ children }) {
   const router = useRouter()
   const pathname = usePathname()
@@ -12,7 +10,6 @@ function AuthBlock({ children }) {
   const isHomepage = pathname === '/';
   const isAbout = pathname === '/about'
   const session = useSession();
-
 
   // Check session on every render, except for the homepage
   if (!isHomepage && !isAbout) {
