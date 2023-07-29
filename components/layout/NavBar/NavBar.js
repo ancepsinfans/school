@@ -52,15 +52,14 @@ const NavBar = () => {
       if (status !== 'authenticated') {
         return;
       }
-
       try {
-        const envResponse = await fetch('/api/admin/env');
-        const { url } = await envResponse.json();
 
-        const userDataResponse = await fetch(`${url}/api/user/user?email=${encodeURIComponent(session.user.email)}`);
-        const { data } = await userDataResponse.json();
+        const response = await fetch('/api/admin/env');
+        const url = await response.json();
 
-        setID(data);
+        const userDataResponse = await fetch(`${url}/api/user/user?email=${session.user.email}`);
+        const fetchedID = await userDataResponse.json();
+        setID(fetchedID);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

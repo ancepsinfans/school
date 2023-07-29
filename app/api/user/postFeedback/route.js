@@ -16,7 +16,7 @@ const handler = async (req, res) => {
         lesson: lesson,
       })
 
-      const result = ifDocExists(user, 'feedback', feedback, StudentSchema, res)
+      const result = ifDocExists(user, 'feedback', feedback, StudentSchema)
       return NextResponse.json(result, { status: 200 })
 
     } catch (error) {

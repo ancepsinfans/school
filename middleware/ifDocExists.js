@@ -1,5 +1,5 @@
 
-export default async function ifDocExists(user, type, update, schema, res) {
+export default async function ifDocExists(user, type, update, schema) {
     const docExists = await schema.findOne({ user: user })
 
     if (!!docExists) {
@@ -15,9 +15,10 @@ export default async function ifDocExists(user, type, update, schema, res) {
 
             doc[type].push(update)
             doc.save()
-            return res.status(200).send(doc)
+            return { status: 200 }
+
         } catch (error) {
-            return res.status(500).send(error.message)
+            return { status: 500 }
         }
     } else {
         try {
@@ -31,9 +32,11 @@ export default async function ifDocExists(user, type, update, schema, res) {
 
             newStudent[type].push(update)
             newStudent.save()
-            return res.status(200).send(newStudent)
+            return { status: 200 }
+
         } catch (error) {
-            return res.status(500).send(error.message)
+            return { status: 500 }
         }
+
     }
 }

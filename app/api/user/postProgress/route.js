@@ -12,7 +12,7 @@ const handler = async (req, res) => {
             course: location.course,
             lesson: location.lesson
         })
-        const result = ifDocExists(user, 'progress', progressUpdate, StudentSchema, res)
+        const result = ifDocExists(user, 'progress', progressUpdate, StudentSchema)
         return NextResponse.json(result, { status: 200 })
 
     } else {

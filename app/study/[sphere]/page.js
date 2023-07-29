@@ -18,7 +18,6 @@ export default async function SpherePage({ params }) {
             console.log(err);
         })
     });
-    console.log({ ID })
 
     return (
         <>

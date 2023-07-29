@@ -10,9 +10,7 @@ export async function GET(req) {
     if (req.method === "GET") {
         const { searchParams } = new URL(req.url);
         const params = Object.fromEntries(searchParams);
-
         if (Object.keys(params).includes('email')) {
-
             const email = params.email
             try {
                 await client.connect(); // Connect to the MongoDB server
@@ -20,7 +18,8 @@ export async function GET(req) {
                 const collection = client.db('school').collection('users');
                 const query = { email: email };
                 const results = await collection.find(query).toArray();
-                return NextResponse.json(results[0]._id.toString(), { status: 200 })
+                const ID = results[0]._id.toString()
+                return NextResponse.json(ID, { status: 200 })
 
             } catch (error) {
                 console.error('Error executing MongoDB query', error);

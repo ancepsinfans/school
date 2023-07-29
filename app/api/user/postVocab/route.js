@@ -14,7 +14,7 @@ const handler = async (req, res) => {
             lesson: lesson,
             term: term
         })
-        const result = ifDocExists(user, 'vocab', vocabUpdate, StudentSchema, res)
+        const result = ifDocExists(user, 'vocab', vocabUpdate, StudentSchema)
         return NextResponse.json(result, { status: 200 })
 
     } else {
