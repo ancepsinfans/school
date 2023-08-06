@@ -6,10 +6,10 @@
     height: 100%;
     border-radius: 12px;
     background: linear-gradient(to left,
-            hsl(251deg, 67%, 50%) 0%,
-            hsl(251deg, 67%, 70%) 8%,
-            hsl(251deg, 67%, 70%) 92%,
-            hsl(251deg, 67%, 50%) 100%);
+            var(--blueDark) 0%,
+            var(--blueAccent) 8%,
+            var(--blueAccent) 92%,
+            var(--blueDark) 100%);
 }
 
 .shadow.shadow {
@@ -64,10 +64,10 @@
     position: relative;
     padding: 5px 15px;
     border-radius: 12px;
-    border: 1.5px solid var(--accentPurple70);
+    border: 1.5px solid var(--blueAccent);
     font-size: 1.1rem;
     color: var(--blackMain);
-    background: var(--accentPurple80);
+    background: var(--blueMain);
     will-change: transform;
     transform: translateY(-4px);
     transition: transform 600ms cubic-bezier(.3, .7, .4, 1);

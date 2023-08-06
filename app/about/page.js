@@ -2,8 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { CopyButton } from "@/components/atomic";
 import { Title } from "@/components/layout";
-const About = () => {
 
+const About = () => {
     return (
         <  >
             <Title>About me</Title>

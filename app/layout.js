@@ -1,4 +1,4 @@
-import { AuthBlock, UserSessionProvider } from '@/components/providers'
+import { AuthBlock, IdProvider, UserSessionProvider } from '@/components/providers'
 import StyledComponentsRegistry from '@/middleware/styleRegistry'
 import { Vollkorn } from 'next/font/google'
 import { Footer, NavBar, MainContainer } from '@/components/layout'
@@ -23,13 +23,15 @@ export default function RootLayout({
             <body>
                 <UserSessionProvider>
                     <AuthBlock>
-                        <StyledComponentsRegistry>
-                            <NavBar />
-                            <MainContainer>
-                                {children}
-                            </MainContainer>
-                            <Footer />
-                        </StyledComponentsRegistry>
+                        <IdProvider>
+                            <StyledComponentsRegistry>
+                                <NavBar />
+                                <MainContainer>
+                                    {children}
+                                </MainContainer>
+                                <Footer />
+                            </StyledComponentsRegistry>
+                        </IdProvider>
                     </AuthBlock>
                 </UserSessionProvider>
             </body>

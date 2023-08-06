@@ -4,15 +4,14 @@
     color: var(--blackMain);
     padding: 5px;
     border-radius: 12px;
-    background-color: var(--accentBlue60);
-    border: 1px solid var(--accentBlue40);
+    background-color: var(--blueLight);
+    border: none;
     transition: .75s;
     cursor: pointer;
 }
 
 .blueButton:hover {
-    background-color: var(--accentBlue50);
-    border: 1px solid var(--blackMain);
+    background-color: var(--blue40);
     transition: .5s;
     text-align: center;
 }

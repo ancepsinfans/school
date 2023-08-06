@@ -1,13 +1,12 @@
-import { fetchDBStructure } from "@/middleware";
 import { Title, Intro, Grid, GridCard, AdminTools } from '@/components/layout'
-import constants from '@/styles/constants'
+import { fetchDBStructure } from '../middleware'
 
 export default async function Page() {
     const db = await fetchDBStructure({})
     return (
         <>
             <Title>
-                Welcome to <span style={{ color: constants.accentRedMain }}>school!</span>
+                Welcome to <span className="school" >school</span>!
             </Title>
             <Intro>
                 <>
@@ -33,7 +32,7 @@ export default async function Page() {
                         )
                     })
                 }
-            </Grid >
+            </Grid>
 
         </>
     )

@@ -15,7 +15,7 @@ const GridCard = ({ link, isAdmin = false, title, description, isRestricted = fa
           hidden={hidden ? hidden : undefined}
         >
           <h2>{title}</h2>
-          <p style={{ padding: '0' }}>{description}</p>
+          <p className={styles.description}>{description}</p>
           <FlexWrapper direction="row" justifyContent="space-between">
             {lessonDetails}
             <div>{completed ? "✅" : null}</div>

@@ -44,7 +44,7 @@ const TextInputQuiz = ({ question, user }) => {
       />
 
       <button className={styles.answer}
-        style={{ backgroundColor: constants.primaryMain }}
+        style={{ backgroundColor: constants.blueLight }}
       >
         Check
       </button>

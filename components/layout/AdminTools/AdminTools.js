@@ -35,7 +35,7 @@ function AdminTools() {
         />
 
       </Grid>
-      <hr style={{ backgroundColor: constants.blackMain, margin: '5px', borderStyle: 'solid', width: '100%' }} hidden={!isAdmin} />
+      <hr style={{ margin: '5px', borderStyle: 'solid', width: '100%' }} hidden={!isAdmin} />
     </>
   );
 }

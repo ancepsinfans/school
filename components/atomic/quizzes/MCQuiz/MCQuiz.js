@@ -8,7 +8,7 @@ import styles from './MCQuiz.module.css'
 
 const MCQuiz = ({ question, user }) => {
   const INIT = {
-    color: new Array(question.options.length).fill(constants.primaryMain),
+    color: new Array(question.options.length).fill(constants.blueLight),
     answer: '',
     attempts: 0
   }

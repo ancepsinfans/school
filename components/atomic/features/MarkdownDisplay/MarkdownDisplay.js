@@ -1,8 +1,11 @@
 'use client'
 import React from 'react';
 import { MDXRemote } from 'next-mdx-remote';
+import { useParams } from 'next/navigation';
 
-function MarkdownDisplay({ params, searchParams, components, source, qs }) {
+function MarkdownDisplay({ ID, components, source, qs }) {
+  const params = useParams()
+
   return (
     <MDXRemote
       {...source}
@@ -11,7 +14,7 @@ function MarkdownDisplay({ params, searchParams, components, source, qs }) {
         sphere: params.sphere,
         course: params.course,
         lesson: params.lesson,
-        user: searchParams.ID,
+        user: ID,
         qs: qs
       }}
       components={components}

@@ -6,12 +6,40 @@ import styles from './Lesson.module.css'
 import Link from "next/link";
 import { Popover, MCQuiz, MCorOther, TextInputQuiz, MarkdownDisplay, NextLessonButton } from "@/components/atomic";
 import { Intro, Title } from '@/components/layout'
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/api/auth/[...nextauth]/route";
 
 
 
-export default async function SpherePage({ params, searchParams }) {
+export async function generateStaticParams() {
+    const dbd = await fetchDBStructure({})
+    const temp = dbd.map(
+        sphere => {
+            return sphere.courses.map(course => {
 
+                return course.lessons.map(lesson => {
+                    return {
+                        sphere: sphere.slug,
+                        course: course.slug,
+                        lesson: lesson.slug
+                    }
+                })
+            })
+        }
+    )
+    return temp[0][0]
+
+}
+
+export default async function SpherePage({ params }) {
+
+
+
+    const session = await getServerSession(authOptions)
+    const response = await fetch(`${process.env.BASE_URL}/api/user/user?email=${session.user.email}`);
+    const ID = await response.json();
     const db = await fetchDBStructure({ sphere: params.sphere, course: params.course })
+
     const thisLesson = getAnyName(db, { sphere: params.sphere, course: params.course, lesson: params.lesson }, 3)
 
     const source = await serialize(thisLesson.text, { parseFrontmatter: true })
@@ -21,7 +49,7 @@ export default async function SpherePage({ params, searchParams }) {
     const qs = await fetchQuestions({ sphere: params.sphere, course: params.course, lesson: params.lesson })
     const nextLessonName = source.frontmatter.next !== "" ? nextLesson.lesson : "Complete!"
 
-    const link = source.frontmatter.next !== "" ? `/${params.sphere}/${params.course}/${source.frontmatter.next}?ID=${searchParams.ID}` : `/${params.sphere}/${params.course}?ID=${searchParams.ID}`
+    const link = source.frontmatter.next !== "" ? `/${params.sphere}/${params.course}/${source.frontmatter.next}` : `/${params.sphere}/${params.course}`
 
     const nextPage = { name: nextLessonName, link: link }
 
@@ -45,8 +73,7 @@ export default async function SpherePage({ params, searchParams }) {
             </Intro>
             <div className={styles.content}>
                 <MarkdownDisplay
-                    params={params}
-                    searchParams={searchParams}
+                    ID={ID}
                     qs={qs}
                     source={source}
                     components={components}
@@ -55,8 +82,8 @@ export default async function SpherePage({ params, searchParams }) {
             <NextLessonButton
                 link={"/study" + nextPage.link}
                 text={nextPage.name}
-                user={searchParams.ID}
-                location={{ sphere: params.sphere, course: params.course, lesson: params.lesson }} />
+                user={ID}
+            />
         </>
     )
 }

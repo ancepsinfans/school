@@ -1,22 +1,18 @@
 
 import React from "react";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/api/auth/[...nextauth]/route";
 import { fetchDBStructure } from "@/middleware";
 import { Intro, Title, Grid, GridCard } from '@/components/layout'
 
+export async function generateStaticParams() {
+    const dbd = await fetchDBStructure({})
+    return dbd.map((sphere) => ({
+        sphere: sphere.slug
+    }))
+
+}
+
 export default async function SpherePage({ params }) {
     const db = await fetchDBStructure({ sphere: params.sphere })
-
-    const { user } = await getServerSession(authOptions)
-
-    const ID = await fetch(process.env.BASE_URL + `/api/user/user?email=${user.email}`).then((response) => {
-        return response.json().then((data) => {
-            return data;
-        }).catch((err) => {
-            console.log(err);
-        })
-    });
 
     return (
         <>
@@ -30,7 +26,7 @@ export default async function SpherePage({ params }) {
                             <GridCard
                                 key={e._id}
                                 isDisabled={!e.lessons.length}
-                                link={`/study/${db[0].slug}/${e.slug}?ID=${ID}`}
+                                link={`/study/${db[0].slug}/${e.slug}`}
                                 title={e.course}
                                 description={e.description}
                             />

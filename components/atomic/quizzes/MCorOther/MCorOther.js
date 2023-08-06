@@ -11,7 +11,7 @@ const MCorOther = ({ user, options, desc, path, id, withOther }) => {
     otherValue: '',
     isSumbitted: false,
     response: [],
-    color: new Array(options.length).fill(constants.primaryMain)
+    color: new Array(options.length).fill(constants.blueLight)
   }
   const [data, updateData] = useImmer(INIT)
   const concatID = path.join('/') + '_' + id
@@ -31,7 +31,7 @@ const MCorOther = ({ user, options, desc, path, id, withOther }) => {
                   onClick={() => {
                     updateData((draft) => {
                       draft.response = [...data.response, ans]
-                      draft.color[i] = constants.accentBrown65
+                      draft.color[i] = constants.orangeMain
                     })
                   }}
                 >

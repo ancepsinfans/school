@@ -42,18 +42,18 @@ function getLessonName(db, e, obj = false, prop = 'slug') {
 
 }
 
-function getAnyName(db, e, level) {
+function getAnyName(db, e, level, obj = true) {
 
     let val
     switch (level) {
         case 1:
-            val = getSphereName(db, e, true)
+            val = getSphereName(db, e, obj)
             break
         case 2:
-            val = getCourseName(db, e, true)
+            val = getCourseName(db, e, obj)
             break
         case 3:
-            val = getLessonName(db, e, true)
+            val = getLessonName(db, e, obj)
             break
         default:
             val = ''

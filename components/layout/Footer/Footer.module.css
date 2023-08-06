@@ -2,7 +2,7 @@
       display: flex;
       flex: 1;
       padding: 2rem 0;
-      border-top: 1px solid var(--accentBlueMain);
+      border-top: 1px solid var(--blueDark);
       justify-content: center;
       align-items: center;
   }
@@ -16,5 +16,5 @@
 
   .Vercel {
       height: 1em;
-      marginLeft: 0.5rem;
+      margin-left: 0.5rem;
   }

@@ -27,7 +27,7 @@
     border-radius: 5px;
     margin: 5px;
     height: 25px;
-    background-color: var(--primaryMain);
+    background-color: var(--blueLight);
 }
 
 .otherButton:hover {
@@ -70,5 +70,5 @@
 }
 
 .selected {
-    background-color: var(--accentBrown65)
+    background-color: var(--orangeMain)
 }

@@ -31,6 +31,3 @@ export default async function fetchDBStructure(params) {
 
 
 
-
-
-
