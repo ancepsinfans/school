@@ -13,14 +13,19 @@
     flex-direction: column;
     margin: 5px auto;
     padding: 2vh;
-    border: 2px solid var(--blackMain);
+    border: 3px solid var(--black60);
 }
 
 .list {
     list-style-position: inside;
 }
 
+.parent li::marker {
+    color: var(--black80);
+}
+
 .subheading {
-    text-decoration: underline;
+    text-decoration: underline solid var(--black60);
     padding-bottom: 5px;
+
 }

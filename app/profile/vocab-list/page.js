@@ -32,7 +32,7 @@ export default async function Page({ searchParams }) {
                             link={`/study/${e.sphere}/${e.course}/${e.lesson}?ID=${searchParams.ID}`}
                             title={e.term.term}
                             description={e.term.definition}
-                            lessonDetails={<aside style={{ color: 'var(--black40)' }}>{`${sphereName} > ${courseName} > ${lessonName}`}</aside>}
+                            lessonDetails={<aside >{`${sphereName} > ${courseName} > ${lessonName}`}</aside>}
                         />
 
                     );

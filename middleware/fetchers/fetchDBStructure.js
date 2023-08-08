@@ -1,4 +1,6 @@
-export default async function fetchDBStructure(params) {
+import React from "react";
+
+const fetchDBStructure = React.cache(async (params) => {
     const BASE_URL = process.env.BASE_URL
     let dbData
 
@@ -27,7 +29,8 @@ export default async function fetchDBStructure(params) {
     return dbData;
 }
 
+)
 
 
 
-
+export default fetchDBStructure

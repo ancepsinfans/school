@@ -1,15 +1,11 @@
 
 import React from "react";
 import { serialize } from 'next-mdx-remote/serialize';
-import { getAnyName, fetchDBStructure, fetchQuestions } from "@/middleware";
+import { getAnyName, fetchDBStructure, fetchQuestions, deslugify } from "@/middleware";
 import styles from './Lesson.module.css'
 import Link from "next/link";
 import { Popover, MCQuiz, MCorOther, TextInputQuiz, MarkdownDisplay, NextLessonButton } from "@/components/atomic";
 import { Intro, Title } from '@/components/layout'
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/api/auth/[...nextauth]/route";
-
-
 
 export async function generateStaticParams() {
     const dbd = await fetchDBStructure({})
@@ -27,27 +23,33 @@ export async function generateStaticParams() {
             })
         }
     )
+
     return temp[0][0]
 
 }
 
+export async function generateMetadata({ params }) {
+    const db = await fetchDBStructure({})
+    const currentDB = getAnyName(db, params, 3)
+
+    return {
+        title: `${currentDB.lesson}`
+    }
+}
+
 export default async function SpherePage({ params }) {
 
+    const fullDB = await fetchDBStructure({})
+    const thisLesson = getAnyName(fullDB, params, 3, false, 'text')
 
+    const source = await serialize(thisLesson, { parseFrontmatter: true })
 
-    const session = await getServerSession(authOptions)
-    const response = await fetch(`${process.env.BASE_URL}/api/user/user?email=${session.user.email}`);
-    const ID = await response.json();
-    const db = await fetchDBStructure({ sphere: params.sphere, course: params.course })
-
-    const thisLesson = getAnyName(db, { sphere: params.sphere, course: params.course, lesson: params.lesson }, 3)
-
-    const source = await serialize(thisLesson.text, { parseFrontmatter: true })
-
-    const nextLesson = getAnyName(db, { sphere: params.sphere, course: params.course, lesson: source.frontmatter.next }, 3)
 
     const qs = await fetchQuestions({ sphere: params.sphere, course: params.course, lesson: params.lesson })
-    const nextLessonName = source.frontmatter.next !== "" ? nextLesson.lesson : "Complete!"
+
+    const nextLessonName = source.frontmatter.next !== ""
+        ? getAnyName(fullDB, { sphere: params.sphere, course: params.course, lesson: source.frontmatter.next }, 3, false, 'lesson')
+        : "Complete!"
 
     const link = source.frontmatter.next !== "" ? `/${params.sphere}/${params.course}/${source.frontmatter.next}` : `/${params.sphere}/${params.course}`
 
@@ -73,7 +75,6 @@ export default async function SpherePage({ params }) {
             </Intro>
             <div className={styles.content}>
                 <MarkdownDisplay
-                    ID={ID}
                     qs={qs}
                     source={source}
                     components={components}
@@ -82,7 +83,6 @@ export default async function SpherePage({ params }) {
             <NextLessonButton
                 link={"/study" + nextPage.link}
                 text={nextPage.name}
-                user={ID}
             />
         </>
     )

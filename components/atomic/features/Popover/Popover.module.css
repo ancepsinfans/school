@@ -22,7 +22,7 @@
      padding: 6px;
      color: var(--tooltip-text-color);
      background: var(--redLight);
-     border: 2px solid var(--redDark);
+     border: 2px solid var(--redMain);
      font-size: 14px;
      font-family: sans-serif;
      line-height: 1.5;
@@ -33,7 +33,7 @@
  .PopContent::before {
      border: solid transparent;
      border-width: var(--tooltip-arrow-size);
-     border-top-color: var(--redDark);
+     border-top-color: var(--redMain);
  }
 
  .VocabArrow {
@@ -41,7 +41,7 @@
  }
 
  .PopArrow {
-     fill: var(--redDark);
+     fill: var(--redMain);
  }
 
  .VocabChild {
@@ -68,7 +68,7 @@
 
      .PopChild {
 
-         color: var(--redDark) !important;
+         color: var(--redMain) !important;
          -webkit-text-decoration: none !important;
          text-decoration: none !important;
      }
@@ -77,21 +77,21 @@
 
  @keyframes pressed {
      from {
-         background-color: var(--blue40);
+         background-color: var(--blueLight);
          border: solid 1px var(--blueAccent);
      }
 
      to {
-         background-color: var(--blueLight);
-         border: solid 1px var(--blue40)
+         background-color: var(--blue30);
+         border: solid 1px var(--blueAccent)
      }
  }
 
  .add {
      border-radius: 50%;
-     border: solid 1px var(--blue40);
+     border: solid 1px var(--blueAccent);
      height: 20px;
-     width: 20px;
+     min-width: 20px;
      display: inline-flex;
      justify-content: center;
      align-items: center;
@@ -101,12 +101,11 @@
 
  .add:hover,
  .add:focus {
-     background-color: var(--blueLight);
      border: solid 1px var(--blueAccent)
  }
 
  .add:active {
-     background-color: var(--blue40);
+     background-color: var(--blue30);
      border: solid 1px var(--blueAccent);
      box-shadow:
          0.5px 1px 1px hsl(200deg 95% 33% / 0.7);

@@ -1,10 +1,10 @@
 import React from "react";
-import { fetchDBStructure, lessonCompleted, lessonDisabled } from "@/middleware";
+import { fetchDBStructure, lessonCompleted, lessonDisabled, deslugify, getAnyName } from "@/middleware";
 import { Intro, Title, Grid, GridCard } from '@/components/layout'
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/api/auth/[...nextauth]/route";
+import Link from "next/link";
 
-// export const dynamic = 'force-static'
 export async function generateStaticParams() {
     const dbd = await fetchDBStructure({})
     const text = dbd.map(
@@ -22,21 +22,21 @@ export async function generateStaticParams() {
 
 }
 
+export async function generateMetadata({ params }) {
+    const db = await fetchDBStructure({})
+    const currentDB = getAnyName(db, params, 2)
+
+    return {
+        title: `${currentDB.course}`
+    }
+}
+
 export default async function SpherePage({ params }) {
     const session = await getServerSession(authOptions)
     const response = await fetch(`${process.env.BASE_URL}/api/user/user?email=${session.user.email}`);
     const ID = await response.json();
-
-    const db = await fetchDBStructure({
-        sphere: params.sphere,
-        course: params.course
-    })
-
-    let currentDB
-    const currentSphere = db.find((i) => i.slug === params.sphere)
-    if (currentSphere.courses.some(item => item.slug === params.course)) {
-        currentDB = currentSphere.courses.find((i) => i.slug === params.course)
-    }
+    const db = await fetchDBStructure({})
+    const currentDB = getAnyName(db, params, 2)
 
     return (
         <>
@@ -45,12 +45,14 @@ export default async function SpherePage({ params }) {
                 {currentDB.course}
             </Title>
             <Intro>
-                <>
+                <div>
+                    <p>
                     {currentDB.description}
-                    <br />
-                    <br />
-                    Back to the <a href={`/study/${params.sphere}`}>{db[0].sphere} page</a>
-                </>
+                    </p>
+                    <p>
+                        Back to the <Link href={`/study/${params.sphere}`}>{db[0].sphere} page</Link>
+                    </p>
+                </div>
             </Intro>
 
             <Grid>

@@ -1,6 +1,6 @@
 
 import React from "react";
-import { fetchDBStructure } from "@/middleware";
+import { fetchDBStructure, getAnyName } from "@/middleware";
 import { Intro, Title, Grid, GridCard } from '@/components/layout'
 
 export async function generateStaticParams() {
@@ -11,22 +11,31 @@ export async function generateStaticParams() {
 
 }
 
+export async function generateMetadata({ params }) {
+    const db = await fetchDBStructure({})
+    const currentDB = getAnyName(db, params, 1)
+    return {
+        title: `${currentDB.sphere}`
+    }
+}
+
 export default async function SpherePage({ params }) {
-    const db = await fetchDBStructure({ sphere: params.sphere })
+    const fullDD = await fetchDBStructure({})
+    const db = getAnyName(fullDD, params, 1)
 
     return (
         <>
 
-            <Title>{db[0].sphere}</Title>
-            <Intro>{db[0].description}</Intro>
+            <Title>{db.sphere}</Title>
+            <Intro>{db.description}</Intro>
             <Grid>
                 {
-                    db[0].courses.map(e => {
+                    db.courses.map(e => {
                         return (
                             <GridCard
                                 key={e._id}
                                 isDisabled={!e.lessons.length}
-                                link={`/study/${db[0].slug}/${e.slug}`}
+                                link={`/study/${db.slug}/${e.slug}`}
                                 title={e.course}
                                 description={e.description}
                             />

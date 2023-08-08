@@ -84,12 +84,12 @@ export default async function Page({ searchParams }) {
                 <p>Total questions answered: {questionsAnswered.size}</p>
                 <p>Total attempts: {totalAttempts}</p>
                 <p>Percent correct: {(numCorrect / totalAttempts * 100).toFixed(2)}%</p>
-                <hr style={{ backgroundColor: constants.blackMain, margin: '5px', borderStyle: 'solid' }} />
-                <ul>{Object.entries(questionTypes).map(([key, value], idx) => {
+                <hr style={{ margin: '5px', borderStyle: 'solid' }} />
+                <ul className={styles.parent}>{Object.entries(questionTypes).map(([key, value], idx) => {
                     const properName = paths.find(i => i.slug === key)?.sphere
                     return (
                         <li className={styles.list} key={idx}>{properName ? properName : key}
-                            <ul style={{ padding: '0 20px' }}>
+                            <ul className={styles.parent} style={{ padding: '0 20px' }}>
 
                                 <li className={styles.list} key={`${idx}_1`}>{(questionTypes[key]['correct'] / questionTypes[key]['total_attempts'] * 100).toFixed(1)}% correct</li>
                             </ul>
@@ -102,14 +102,14 @@ export default async function Page({ searchParams }) {
             <div className={styles.stats}>
                 <h3 className={styles.subheading}>Progress</h3>
                 {/* add support for unopened spheres? */}
-                <ul>
+                <ul className={styles.parent}>
                     {Object.entries(spheresPageCount).map(([key, value], i) => {
                         const properName = paths.find(i => i.slug === key).sphere
 
                         return (
                             <li className={styles.list} key={i}>
                                 {properName ? properName : key}
-                                <ul style={{ padding: '0 20px' }}>
+                                <ul className={styles.parent} style={{ padding: '0 20px' }}>
                                     {Object.entries(value).map(([k, v], j) => {
                                         const course = paths
                                             .find(({ slug }) => slug === key)

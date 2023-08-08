@@ -6,6 +6,7 @@ import hasElement from './booleans/hasElement'
 import ifDocExists from './booleans/ifDocExists'
 import connectDB from './mongodb'
 import slugify from './slugify'
+import { deslugify } from './deslugify'
 import lessonCompleted from './booleans/lessonCompleted'
 import lessonDisabled from './booleans/lessonDisabled'
 
@@ -21,6 +22,7 @@ export {
     ifDocExists,
     connectDB,
     slugify,
+    deslugify,
     lessonCompleted,
     lessonDisabled,
 }

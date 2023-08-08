@@ -5,7 +5,6 @@ function FlexWrapper({ minHeight = '10px', direction = 'row', justifyContent = '
     <div
       style={{
         display: 'flex',
-        paddingTop: '50px',
         minHeight: `${minHeight}`,
         flexDirection: `${direction}`,
         justifyContent: `${justifyContent}`,

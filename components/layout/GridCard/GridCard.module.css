@@ -1,5 +1,4 @@
 .card {
-
     margin: 1rem;
     background-color: var(--blueMain);
     padding: 1.5rem;
@@ -57,12 +56,12 @@
 
 .card h2 {
     margin: 0 0 1rem 0;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
 }
 
 .card p {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1.5;
 }
 
@@ -71,4 +70,5 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    color: var(--black90);
 }

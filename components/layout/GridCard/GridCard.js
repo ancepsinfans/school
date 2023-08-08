@@ -14,12 +14,21 @@ const GridCard = ({ link, isAdmin = false, title, description, isRestricted = fa
         <div className={`${styles.card} ${isDisabled ? styles.disabled : null}`}
           hidden={hidden ? hidden : undefined}
         >
+          <FlexWrapper direction="column" alignItems="stretch" minHeight="204px">
+            <div style={{ flex: '1' }} >
+
           <h2>{title}</h2>
           <p className={styles.description}>{description}</p>
-          <FlexWrapper direction="row" justifyContent="space-between">
+
+            </div>
+            <FlexWrapper direction="row" justifyContent="space-between" alignItems="flex-end" style={{ flex: '1' }}>
+
             {lessonDetails}
+
             <div>{completed ? "✅" : null}</div>
           </FlexWrapper>
+          </FlexWrapper>
+
         </div>
       </Type>
     </div>

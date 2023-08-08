@@ -3,4 +3,9 @@
     font-size: 1.25rem;
     max-width: 850px;
     text-align: center;
+    color: var(--black90);
+}
+
+.intro div p, .intro {
+    font-size: 22px;
 }

@@ -9,11 +9,11 @@ export default async function Page() {
                 Welcome to <span className="school" >school</span>!
             </Title>
             <Intro>
-                <>
+                <div>
                     <p>Knowledge should be accessible.</p>
                     <p>Here you'll find a collection of interesting things.</p>
                     <p>The topics will vary, but the through-line is that these things are meant to spark curiosity.</p>
-                </>
+                </div>
             </Intro>
             <AdminTools />
 

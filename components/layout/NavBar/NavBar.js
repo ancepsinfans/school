@@ -20,15 +20,18 @@ const NavBar = () => {
 
   return (
     <header className={styles.container}>
-      <div className={styles.back}>
-        <Link href={isHome ? '/about' : '/'}>
+
+      <BlueButton>
+        <Link className={styles.back} href={isHome ? '/about' : '/'}>
           {isHome ? 'About' : 'School'}
         </Link>
-      </div>
+      </BlueButton>
 
-      <Link href={`/profile?ID=${id}`} legacyBehavior>
-        <a className={styles.username}>{isProfilePage ? 'Profile' : `${!!session?.user.name ? session.user.name : 'Profile'}`}</a>
+      <BlueButton>
+        <Link className={styles.username} href={`/profile?ID=${id}`} >
+          {isProfilePage ? 'Profile' : `${!!session?.user.name ? session.user.name : 'Profile'}`}
       </Link>
+      </BlueButton>
 
       <div>
         <BlueButton

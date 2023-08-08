@@ -2,9 +2,11 @@
 import React from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import { useParams } from 'next/navigation';
+import { IdContext } from '@/components/providers/IdProvider';
 
-function MarkdownDisplay({ ID, components, source, qs }) {
+function MarkdownDisplay({ components, source, qs }) {
   const params = useParams()
+  const { id } = React.useContext(IdContext)
 
   return (
     <MDXRemote
@@ -14,7 +16,7 @@ function MarkdownDisplay({ ID, components, source, qs }) {
         sphere: params.sphere,
         course: params.course,
         lesson: params.lesson,
-        user: ID,
+        user: id,
         qs: qs
       }}
       components={components}
