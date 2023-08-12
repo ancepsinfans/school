@@ -1,6 +1,5 @@
-import styled from 'styled-components';
+'use client'
 import React from 'react';
-import constants from '../../../../styles/constants'
 import ButtonMechanics from '../ButtonMechanics';
 
 

@@ -1,0 +1,113 @@
+ .VocabContent {
+     border-radius: 4px;
+     padding: 6px;
+     color: var(--tooltip-text-color);
+     background: var(--blueMain);
+     border: 2px solid var(--blueAccent);
+     font-size: 14px;
+     font-family: sans-serif;
+     line-height: 1.5;
+     max-width: 250px;
+     min-width: fit-content;
+ }
+
+ .VocabContent::before {
+     border: solid transparent;
+     border-width: var(--tooltip-arrow-size);
+     border-top-color: var(--blueAccent);
+ }
+
+ .PopContent {
+     border-radius: 4px;
+     padding: 6px;
+     color: var(--tooltip-text-color);
+     background: var(--redLight);
+     border: 2px solid var(--redMain);
+     font-size: 14px;
+     font-family: sans-serif;
+     line-height: 1.5;
+     max-width: 250px;
+     min-width: fit-content;
+ }
+
+ .PopContent::before {
+     border: solid transparent;
+     border-width: var(--tooltip-arrow-size);
+     border-top-color: var(--redMain);
+ }
+
+ .VocabArrow {
+     fill: var(--blueAccent);
+ }
+
+ .PopArrow {
+     fill: var(--redMain);
+ }
+
+ .VocabChild {
+     -webkit-text-decoration: underline solid 3.5px var(--blueAccent) !important;
+     text-decoration: underline solid 3.5px var(--blueAccent) !important;
+     background: none;
+     border: none;
+ }
+
+ .PopChild {
+     -webkit-text-decoration: underline solid 3.5px var(--redMain) !important;
+     text-decoration: underline solid 3.5px var(--redMain) !important;
+     background: none;
+     border: none;
+ }
+
+ @media (max-width: 768px) {
+     .VocabChild {
+
+         color: var(--blueAccent) !important;
+         -webkit-text-decoration: none !important;
+         text-decoration: none !important;
+     }
+
+     .PopChild {
+
+         color: var(--redMain) !important;
+         -webkit-text-decoration: none !important;
+         text-decoration: none !important;
+     }
+ }
+
+
+ @keyframes pressed {
+     from {
+         background-color: var(--blueLight);
+         border: solid 1px var(--blueAccent);
+     }
+
+     to {
+         background-color: var(--blue30);
+         border: solid 1px var(--blueAccent)
+     }
+ }
+
+ .add {
+     border-radius: 50%;
+     border: solid 1px var(--blueAccent);
+     height: 20px;
+     min-width: 20px;
+     display: inline-flex;
+     justify-content: center;
+     align-items: center;
+     background-color: var(--blueLight);
+
+ }
+
+ .add:hover,
+ .add:focus {
+     border: solid 1px var(--blueAccent)
+ }
+
+ .add:active {
+     background-color: var(--blue30);
+     border: solid 1px var(--blueAccent);
+     box-shadow:
+         0.5px 1px 1px hsl(200deg 95% 33% / 0.7);
+     transition: .2s ease-in;
+ }

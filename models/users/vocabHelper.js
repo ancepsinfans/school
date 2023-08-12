@@ -1,18 +1,30 @@
-import axios from 'axios'
-
 async function vocabSender(user, term, location) {
-    let sphere, course, lesson
-    [sphere, course, lesson] = location
+    try {
+        const [sphere, course, lesson] = location;
 
-    const payload = {
-        user: user,
-        term: term,
-        sphere: sphere,
-        course: course,
-        lesson: lesson,
+        const payload = {
+            user: user,
+            term: term,
+            sphere: sphere,
+            course: course,
+            lesson: lesson,
+        };
+
+        const response = await fetch('/api/user/postVocab', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
     }
-    const response = await axios.post(`/api/user/postVocab`, payload)
-
 }
 
-export default vocabSender
+export default vocabSender;

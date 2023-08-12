@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import SelectInput from '../SelectInput';
 import TextInput from '../TextInput';

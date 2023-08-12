@@ -1,0 +1,18 @@
+.blueButton {
+    text-decoration-line: none;
+    font-size: 1.25rem;
+    color: var(--blackMain);
+    padding: 5px;
+    border-radius: 12px;
+    background-color: var(--blueMain);
+    border: none;
+    transition: .75s;
+    cursor: pointer;
+}
+
+.blueButton:hover {
+    background-color: var(--blueLight);
+    border: var(--black30);
+    transition: .5s;
+    text-align: center;
+}

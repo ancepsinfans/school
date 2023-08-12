@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import 'bytemd/dist/index.css'
 import gfm from '@bytemd/plugin-gfm'
@@ -5,7 +6,6 @@ import breaks from '@bytemd/plugin-breaks'
 import frontmatter from '@bytemd/plugin-frontmatter'
 import gemoji from '@bytemd/plugin-gemoji'
 import { Editor } from '@bytemd/react'
-
 
 
 const MarkdownEditor = ({ value, change }) => {

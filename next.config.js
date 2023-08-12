@@ -1,4 +1,5 @@
-	/** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfig} */
+const path = require('path')
 const withPlugins = require('next-compose-plugins')
 const removeImports = require('next-remove-imports')()
 
@@ -14,7 +15,23 @@ const withMDX = require('@next/mdx')({
 
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {esmExternals: 'loose'},
+  experimental: { esmExternals: 'loose' },
+  compiler: {
+    styledComponents: true
+  },
+  webpack: (config,
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname),
+      '@/components': path.resolve(__dirname, 'components'),
+      '@/middleware': path.resolve(__dirname, 'middleware'),
+      '@/styles': path.resolve(__dirname, 'styles'),
+      '@/models': path.resolve(__dirname, 'models'),
+      '@/api': path.resolve(__dirname, 'app/api'),
+    }
+    return config
+  },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   images: {
     domains: [
@@ -27,16 +44,17 @@ const nextConfig = {
   env: {
     mongodburl: process.env.MONGODB_URI
   },
+
   async headers() {
     return [
       {
         source: '/:path*',
         headers: [
-  {
-    key: 'Access-Control-Allow-Origin',
-    value: "*"
-  }
-]
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: "*"
+          }
+        ]
       }
     ]
   }
@@ -44,6 +62,6 @@ const nextConfig = {
 }
 
 module.exports = withPlugins(
-	[[removeImports], [withMDX]],
-	nextConfig
+  [[removeImports], [withMDX]],
+  nextConfig
 )

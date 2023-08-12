@@ -50,7 +50,11 @@ const SphereModel = mongoose.model('Sphere', sphereSchema);
 
 
 function getFolderStructure(folderPath) {
-    const folderContents = fs.readdirSync(folderPath);
+    try {
+        const folderContents = fs.readdirSync(folderPath);
+    } catch (error) {
+        return undefined
+    }
     const folderObject = {};
 
     const files = [];
@@ -95,6 +99,9 @@ function transformFileName(fileName, level) {
 }
 // Async function to perform the queries and retrieve the matching document
 async function checkAndProcessDocuments() {
+    if (folderStructure === undefined) {
+        return null
+    }
     for (const sphere of Object.keys(folderStructure)) {
         const { lesson: transformedSphere } = transformFileName(sphere, 1);
 

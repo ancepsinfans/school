@@ -1,17 +1,29 @@
-import axios from 'axios'
-
 async function feedbackSender(user, answer, id, path) {
+    try {
+        const payload = {
+            user: user,
+            answer: answer,
+            id: id,
+            sphere: path[0],
+            course: path[1],
+            lesson: path[2],
+        };
 
-    const payload = {
-        user: user,
-        answer: answer,
-        id: id,
-        sphere: path[0],
-        course: path[1],
-        lesson: path[2],
+        const response = await fetch('/api/user/postFeedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
     }
-    const response = await axios.post(`/api/user/postFeedback`, payload)
-
 }
 
-export default feedbackSender
+export default feedbackSender;

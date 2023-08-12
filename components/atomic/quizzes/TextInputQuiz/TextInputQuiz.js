@@ -1,31 +1,9 @@
+'use client'
 import React from "react";
-import constants from "../../../../styles/constants";
-import answerSender from '../../../../models/users/answerHelper'
-import styled from "styled-components";
-import TextInput from "../../inputs/TextInput";
-
-const Question = styled.form`
-  padding: 5px 5px;
-  margin: 0%;
-  text-align: center;
-`
-const AnswerButton = styled.button`
-& {
-  width: 35%;
-  border: 1px solid var(--blackMain);
-  border-radius: 12px;
-  color: var(--blackMain);
-  border-radius: 5px;
-  margin: 5px;
-  height: 25px;
-}
-
-&:hover {
-  border: none;
-  width: calc(35% + 2px);
-  height: calc(25px + 0px);
-}
-`
+import constants from "@/styles/constants";
+import answerSender from '@/models/users/answerHelper'
+import { TextInput } from '@/components/atomic'
+import styles from './TextInputQuiz.module.css'
 
 const TextInputQuiz = ({ question, user }) => {
 
@@ -44,7 +22,7 @@ const TextInputQuiz = ({ question, user }) => {
   }
 
   return (
-    <Question
+    <form className={styles.question}
       onSubmit={e => {
         e.preventDefault();
         setShowFeedback(true)
@@ -65,15 +43,15 @@ const TextInputQuiz = ({ question, user }) => {
         label={question.desc}
       />
 
-      <AnswerButton
-        style={{ backgroundColor: constants.primaryMain }}
+      <button className={styles.answer}
+        style={{ backgroundColor: constants.blueLight }}
       >
         Check
-      </AnswerButton>
+      </button>
       <br />
       <span>{(showFeedback ? renderFeedback(value) : null)}</span>
       <br />
-    </Question>
+    </form>
   );
 };
 
