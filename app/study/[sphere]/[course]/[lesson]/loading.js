@@ -1,15 +1,14 @@
 import React from "react";
 import { Title, Intro } from "@/components/layout";
-import { deslugify } from "@/middleware/deslugify";
 import styles from './Lesson.module.css'
 import { MarkdownDisplay, NextLessonButton } from "@/components/atomic";
 
-export default function LessonLoading({ params }) {
+export default function LessonLoading() {
     return (
 
         <>
             <Title smallTitle>
-                {deslugify(params.lesson)}
+                Title goes here
             </Title>
             <Intro>
                 alskdfoiafe
@@ -20,7 +19,7 @@ export default function LessonLoading({ params }) {
                 />
             </div>
             <NextLessonButton
-                link={"/"}
+                link="/"
                 text='Next'
             />
         </>

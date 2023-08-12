@@ -1,14 +1,13 @@
 import React from "react";
 import { Title, Intro, Grid, GridCard } from "@/components/layout";
 import Link from "next/link";
-import { deslugify } from "@/middleware/deslugify";
 
-export default function CourseLoading({ params }) {
+export default function CourseLoading() {
     return (
         <>
 
             <Title >
-                {deslugify(params.course)}
+                Title goes here
             </Title>
             <Intro>
                 <div>
@@ -16,13 +15,13 @@ export default function CourseLoading({ params }) {
                         Lorem Ipsum
                     </p>
                     <p>
-                        Back to the <Link href={`/study/${params.sphere}`}>{deslugify(params.sphere)} page</Link>
+                        Back to the <Link href={`/`}>previous page</Link>
                     </p>
                 </div>
             </Intro>
             <Grid>
                 <GridCard
-                    link={`/study/${params.sphere}/${params.course}`}
+                    link={`/`}
                     title='Loading...'
                     description='give me a second'
                     isDisabled={true} />
