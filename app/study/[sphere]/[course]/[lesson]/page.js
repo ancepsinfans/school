@@ -8,7 +8,6 @@ import { Popover, MCQuiz, MCorOther, TextInputQuiz, MarkdownDisplay, NextLessonB
 import { Intro, Title } from '@/components/layout'
 
 export const dynamic = 'force-dynamic';
-
 export async function generateStaticParams() {
     const dbd = await fetchDBStructure({})
     const temp = dbd.map(
@@ -27,16 +26,8 @@ export async function generateStaticParams() {
     )
     console.log(temp[0][0])
     return temp[0][0]
-    // return [
-    //     { sphere: 'esl', course: 'short-fiction', lesson: '01-introduction' },
-    //     { sphere: 'esl', course: 'short-fiction', lesson: '02-the-enormous-radio' },
-    //     { sphere: 'esl', course: 'short-fiction', lesson: '03-roy-spivey' },
-    //     { sphere: 'esl', course: 'short-fiction', lesson: '04-the-school' },
-    //     { sphere: 'esl', course: 'short-fiction', lesson: '05-leg' }
-    // ]
 
 }
-
 export async function generateMetadata({ params }) {
     const db = await fetchDBStructure({})
     const currentDB = getAnyName(db, params, 3)
@@ -46,24 +37,18 @@ export async function generateMetadata({ params }) {
     }
 }
 
+
 export default async function SpherePage({ params }) {
 
     const fullDB = await fetchDBStructure({})
     const thisLesson = getAnyName(fullDB, params, 3, false, 'text')
-
     const source = await serialize(thisLesson, { parseFrontmatter: true })
-
-
     const qs = await fetchQuestions({ sphere: params.sphere, course: params.course, lesson: params.lesson })
-
     const nextLessonName = source.frontmatter.next !== ""
         ? getAnyName(fullDB, { sphere: params.sphere, course: params.course, lesson: source.frontmatter.next }, 3, false, 'lesson')
         : "Complete!"
-
     const link = source.frontmatter.next !== "" ? `/${params.sphere}/${params.course}/${source.frontmatter.next}` : `/${params.sphere}/${params.course}`
-
     const nextPage = { name: nextLessonName, link: link }
-
     const components = {
         MCQ: MCQuiz,
         TextI: TextInputQuiz,
@@ -71,6 +56,8 @@ export default async function SpherePage({ params }) {
         Feed: MCorOther,
         a: Link,
     }
+
+
     return (
 
 
