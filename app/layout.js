@@ -14,10 +14,10 @@ export const metadata = {
     icons: { icon: { url: '/favicon.ico' } }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
-    params
 }) {
+
     return (
         <html lang="en" className={vollkorn.className}>
             <body>

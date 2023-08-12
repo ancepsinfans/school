@@ -1,10 +1,11 @@
 import React from "react";
-import { fetchDBStructure, lessonCompleted, lessonDisabled, deslugify, getAnyName } from "@/middleware";
+import { lessonCompleted, lessonDisabled, fetchDBStructure, getAnyName } from "@/middleware";
 import { Intro, Title, Grid, GridCard } from '@/components/layout'
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/api/auth/[...nextauth]/route";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
 export async function generateStaticParams() {
     const dbd = await fetchDBStructure({})
     const text = dbd.map(
@@ -17,7 +18,6 @@ export async function generateStaticParams() {
             })
         }
     )
-
     return text[0]
 
 }

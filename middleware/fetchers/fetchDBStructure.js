@@ -2,6 +2,7 @@ import React from "react";
 
 const fetchDBStructure = React.cache(async (params) => {
     const BASE_URL = process.env.BASE_URL
+
     let dbData
 
     // Create a URLSearchParams object from the params object (if params exist)
@@ -13,7 +14,7 @@ const fetchDBStructure = React.cache(async (params) => {
     try {
 
         const response = await fetch(url)
-        dbData = response.data;
+
         // Check if the request was successful (status code 2xx)
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -21,8 +22,9 @@ const fetchDBStructure = React.cache(async (params) => {
 
         // Parse the JSON response (if params exist)
         dbData = params ? await response.json() : null;
+
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Oops Error:', error);
         throw error;
     }
 

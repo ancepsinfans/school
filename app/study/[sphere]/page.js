@@ -1,8 +1,9 @@
 
 import React from "react";
-import { fetchDBStructure, getAnyName } from "@/middleware";
+import { getAnyName, fetchDBStructure } from "@/middleware";
 import { Intro, Title, Grid, GridCard } from '@/components/layout'
 
+export const dynamic = 'force-dynamic';
 export async function generateStaticParams() {
     const dbd = await fetchDBStructure({})
     return dbd.map((sphere) => ({

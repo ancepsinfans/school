@@ -90,6 +90,7 @@ const GlobalStyles = createGlobalStyle`
 html, body {
   height: auto;
   background-color: var(--whiteMain);
+
 }
 
 /*

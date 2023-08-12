@@ -1,11 +1,13 @@
 
 import React from "react";
 import { serialize } from 'next-mdx-remote/serialize';
-import { getAnyName, fetchDBStructure, fetchQuestions, deslugify } from "@/middleware";
+import { getAnyName, fetchQuestions, fetchDBStructure } from "@/middleware";
 import styles from './Lesson.module.css'
 import Link from "next/link";
 import { Popover, MCQuiz, MCorOther, TextInputQuiz, MarkdownDisplay, NextLessonButton } from "@/components/atomic";
 import { Intro, Title } from '@/components/layout'
+
+export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
     const dbd = await fetchDBStructure({})
@@ -23,8 +25,15 @@ export async function generateStaticParams() {
             })
         }
     )
-
+    console.log(temp[0][0])
     return temp[0][0]
+    // return [
+    //     { sphere: 'esl', course: 'short-fiction', lesson: '01-introduction' },
+    //     { sphere: 'esl', course: 'short-fiction', lesson: '02-the-enormous-radio' },
+    //     { sphere: 'esl', course: 'short-fiction', lesson: '03-roy-spivey' },
+    //     { sphere: 'esl', course: 'short-fiction', lesson: '04-the-school' },
+    //     { sphere: 'esl', course: 'short-fiction', lesson: '05-leg' }
+    // ]
 
 }
 
